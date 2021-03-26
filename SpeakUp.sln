@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakUp", "SpeakUp\SpeakUp.csproj", "{58CE567C-E9D7-493C-B020-FC77AB3B0518}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "About", "About", "{0087F4F5-D90F-47EA-8B97-D896F818AC38}"
+	ProjectSection(SolutionItems) = preProject
+		About\About.xml = About\About.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58CE567C-E9D7-493C-B020-FC77AB3B0518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58CE567C-E9D7-493C-B020-FC77AB3B0518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58CE567C-E9D7-493C-B020-FC77AB3B0518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58CE567C-E9D7-493C-B020-FC77AB3B0518}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99CB006F-17A5-4459-B31D-0AFD174F0687}
+	EndGlobalSection
+EndGlobal

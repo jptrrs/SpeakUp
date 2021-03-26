@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>SpeakUp</name>
+	<author>jptrrs</author>
+  <supportedVersions>
+    <li>1.2</li>
+  </supportedVersions>
+  <packageId>JPT.speakup</packageId>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>UnlimitedHugs.HugsLib</packageId>
+      <displayName>HugsLib</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>Jaxe.Bubbles</packageId>
+      <displayName>Interaction Bubbles</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/1516158345</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+  </loadAfter>
+
+  <description>
+Description here
+  </description>
+	<url>https://steamcommunity.com/id/jptrrs/myworkshopfiles/?appid=294100</url>
+</ModMetaData>
