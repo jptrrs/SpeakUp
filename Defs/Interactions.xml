@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <InteractionDef>
+    <defName>Test</defName>
+    <label>test</label>
+    <workerClass>InteractionWorker_Chitchat</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
+    <initiatorThought>Chitchat</initiatorThought>
+    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
+    <initiatorXpGainAmount>4</initiatorXpGainAmount>
+    <recipientThought>Chitchat</recipientThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->My mood is [INITIATOR_mood].</li>
+        <li>r_logentry->A thought: [INITIATOR_thought].</li>
+        <li>r_logentry->I am [INITIATOR_trait].</li>
+        <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
+        <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
+        <li>r_logentry->Your mood: [RECIPIENT_mood].</li>
+        <li>r_logentry->Your thought: [RECIPIENT_thought].</li>
+        <li>r_logentry->You are [RECIPIENT_trait].</li>
+        <li>r_logentry->Your best skill is [RECIPIENT_bestSkill].</li>
+        <li>r_logentry->Your worst skill is [RECIPIENT_worstSkill].</li>
+        <li>r_logentry->The weather is [WEATHER].</li>
+        <li>r_logentry->Good [TIME].</li>
+        <li>r_logentry->That's a pretty [NEAREST_art].</li>
+        <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+</Defs>

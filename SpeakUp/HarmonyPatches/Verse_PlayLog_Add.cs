@@ -9,9 +9,10 @@ namespace SpeakUp
     {
         private static void Postfix(LogEntry entry)
         {
-            if (!Pawn_InteractionsTracker_InteractionsTrackerTick.running)
+            if (!Pawn_InteractionsTracker_InteractionsTrackerTick.running && entry is PlayLogEntry_Interaction playLogEntry)
             {
-                DialogManager.Ensue((PlayLogEntry_Interaction)entry);
+                Log.Message($"Ensuing from {entry}.");
+                DialogManager.Ensue(playLogEntry);
             }
         }
     }

@@ -55,13 +55,22 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExtraGrammarUtility.cs" />
     <Compile Include="DialogManager.cs" />
     <None Include="HarmonyPatcher.cs" />
+    <Compile Include="HarmonyPatches\Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Pawn_InteractionsTracker_InteractionsTrackerTick.cs" />
+    <Compile Include="HarmonyPatches\GrammarResolver_Resolve.cs" />
+    <Compile Include="HarmonyPatches\GrammarResolver_RandomPossiblyResolvableEntry.cs" />
+    <Compile Include="HarmonyPatches\PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.cs" />
     <Compile Include="HarmonyPatches\Verse_PlayLog_Add.cs" />
+    <None Include="LanguageHelpers\Pronoums.cs" />
+    <None Include="LanguageHelpers\Verbs.cs" />
+    <None Include="LanguageHelpers\Verb_ToBe.cs" />
     <Compile Include="ModBaseSpeakUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.cs" />
+    <Compile Include="TalkDefOf.cs" />
     <Compile Include="Statement.cs" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -334,5 +343,6 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "About", "About", "{0087F4F5
 		About\About.xml = About\About.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Defs", "Defs", "{980CD61D-00BA-4CEF-BAF2-BC242626AF4A}"
+	ProjectSection(SolutionItems) = preProject
+		Defs\Interactions.xml = Defs\Interactions.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Languages", "Languages", "{44FB9FCB-DAC2-46D8-AA56-E9730B179230}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English", "English", "{CB9C27DA-39EB-49FC-8ED1-DB42C19297AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keyed", "Keyed", "{98EDB076-9C5C-4DCB-861E-A6E670F1C40B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CB9C27DA-39EB-49FC-8ED1-DB42C19297AF} = {44FB9FCB-DAC2-46D8-AA56-E9730B179230}
+		{98EDB076-9C5C-4DCB-861E-A6E670F1C40B} = {CB9C27DA-39EB-49FC-8ED1-DB42C19297AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99CB006F-17A5-4459-B31D-0AFD174F0687}

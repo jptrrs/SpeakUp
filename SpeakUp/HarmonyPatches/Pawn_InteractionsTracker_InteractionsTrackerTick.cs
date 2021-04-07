@@ -19,7 +19,6 @@ namespace SpeakUp
                 var statement = DialogManager.Scheduled.Where(x => x.Timing <= tick && x.Emitter == ___pawn).FirstOrDefault();
                 if (statement != null)
                 {
-                    //Log.Message($"{___pawn} is replying");
                     running = true;
                     var intDef = statement.IntDef;
                     intDef.ignoreTimeSinceLastInteraction = true; //temporary, bc RW limit is 120 ticks
