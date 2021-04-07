@@ -40,10 +40,10 @@ namespace SpeakUp
             //string my = person.GetPronoum(pawn.gender).Possessive();
 
             //mood
-            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevelPercentage.ToString());
+            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToStringByStyle(ToStringStyle.PercentZero));
 
             //pensamento (aleatório)
-            yield return new Rule_String(symbol + "thought", pawn.needs.mood.thoughts.memories.Memories.RandomElement().LabelCapSocial);
+            yield return new Rule_String(symbol + "thought", pawn.needs.mood.thoughts.memories.Memories.Where(x => x.CurStage != null && x.CurStage.description != null).RandomElement().CurStage.description);
 
             //trait (aleatório)
             yield return new Rule_String(symbol + "trait", pawn.story.traits.allTraits.RandomElement().Label);
