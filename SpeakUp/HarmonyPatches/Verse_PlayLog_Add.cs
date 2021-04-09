@@ -11,7 +11,7 @@ namespace SpeakUp
         {
             if (!Pawn_InteractionsTracker_InteractionsTrackerTick.running && entry is PlayLogEntry_Interaction playLogEntry)
             {
-                Log.Message($"Ensuing from {entry}.");
+                //Log.Message($"Ensuing from {entry}.");
                 DialogManager.Ensue(playLogEntry);
             }
         }

@@ -9,11 +9,11 @@ namespace SpeakUp
     [HarmonyPatch(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith))]
     public static class Pawn_InteractionsTracker_TryInteractWith
     {
-        public static void Postfix(Pawn recipient, ref InteractionDef intDef)
+        public static void Prefix(Pawn recipient, ref InteractionDef intDef)
         {
             if (intDef == InteractionDefOf.Chitchat)
             {
-                Log.Warning($"replacing {intDef}");
+                // Log.Warning($"replacing {intDef}");
                 intDef = TalkDefOf.Test;
             }
         }

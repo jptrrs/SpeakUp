@@ -20,6 +20,11 @@ namespace SpeakUp
             return (a > b) ? A : B;
         };
 
+        private static Func<SkillRecord, SkillRecord, SkillRecord> AccessHighestPassion = (A, B) =>
+        {
+            return (A.passion >= B.passion) ? A : B;
+        };
+
         private static Func<SkillRecord, SkillRecord, SkillRecord> AccessWorstSkill = (A, B) =>
         {
             int a = A.levelInt;
@@ -53,6 +58,9 @@ namespace SpeakUp
 
             //worst skill
             yield return new Rule_String(symbol + "worstSkill", pawn.skills.skills.Aggregate(AccessWorstSkill).def.skillLabel);
+
+            //higher passion
+            yield return new Rule_String(symbol + "higherPassion", pawn.skills.skills.Aggregate(AccessHighestPassion).def.skillLabel);        
         }
 
         public static IEnumerable<Rule> Rules(Pawn initiator, Pawn recipient)
@@ -81,6 +89,7 @@ namespace SpeakUp
 				if (thing != null) yield return new Rule_String($"NEAREST_{group.ToString().ToLower()}", $"{thing.def.label}");
 			}
 		}
+
 		private static string DayPeriod(Pawn p)
 		{
 			int hour = GenLocalDate.HourInteger(p);
