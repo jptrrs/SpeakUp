@@ -1,6 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <InteractionDef>
+
+  <!--HOW TO CREATE DIALOGS USING RULESTRINGS
+  
+  - Activate "Log Grammar Resolution" on the Development Mode View Settings (3rd icon at the top) and grab the log entry when a pawn says something to see a list of all possible parameters for that type of interaction (with the mod, both "Constants" and "Custom Rules" are available).
+  
+  - For a pawn talk, each <li> is a possible thing to say. It might be assembled with parameters from that list or replaced with wildcards loaded from a subsequent <li>. Like this:
+  
+    <li>somewildcard(constraint1,constraint2)->Something to say [PARAMETER] about [wildcard]</li>
+    <li>wildcard(constraint3)->subject to say case constraint3 is true.</li>
+    <li>wildcard->subject to say without any constraints. </li>
+    
+  - For pawn talk, always start with "r_logentry->something"
+  
+  - constraints are optional commands that regulate if that line is used or not. They can be:
+    (p=x): determines the probability the line is shown, with x being a whole number. 0 means no-show, 10 is a very high probability.
+    (tag): ?
+    (requiredTag): ?
+    (debug): triggers an error with the resolution trace on the Debug log. Good for debugging.
+    (parameter==x): restricts that line to be shown only if the paramter satisfies the condition, with x being the required value.
+    
+  - The operators used on a comparsion might be "==" (equal to), "!=" (different from), ">" (greater than), "<" (lower than), ">=" (greater or equal) or "<="(lesser of equal). EXCEPT the "<" character must be replaced by "&lt;" so the XML reader doesn't freak out. 
+    
+  - Without a constraint to say otherwise, the line will be selected randomly. Therefore, unless you're going for variety, add constraints to your lines. Example:
+  
+    <li>r_logentry(WEATHER==rain)->[rainTalk]</li>
+    <li>raintalk(INITIATOR_trait==Pluviophile)->I love this rain!</li>
+    <li>raintalk(INITIATOR_trait!=Pluviophile)->Damn this rain!</li>
+    
+    END OF INSTRUCTIONS-->
+
+    <InteractionDef>
     <defName>Test</defName>
     <label>test</label>
     <workerClass>InteractionWorker_Chitchat</workerClass>
@@ -11,47 +41,33 @@
     <recipientThought>Chitchat</recipientThought>
     <logRulesInitiator>
       <rulesStrings>
-        <li>r_logentry->My mood is [INITIATOR_mood].</li>
+        <!--<li>r_logentry->My mood is [INITIATOR_mood].</li>-->
         <li>r_logentry->[INITIATOR_thought]</li>
-        <li>r_logentry->I am [INITIATOR_trait].</li>
+        <!--<li>r_logentry->I am [INITIATOR_trait].</li>
         <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
         <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
         <li>r_logentry->My passion is [INITIATOR_higherPassion].</li>
-        <li>r_logentry->Your mood: [RECIPIENT_mood].</li>
+        <li>r_logentry->Your mood: [RECIPIENT_mood].</li>-->
         <!--<li>r_logentry->Your thought: [RECIPIENT_thought].</li>--> <!--Sem telepatia!-->
-        <li>r_logentry->You are [RECIPIENT_trait].</li>
+        <!--<li>r_logentry->You are [RECIPIENT_trait].</li>
         <li>r_logentry->Your best skill is [RECIPIENT_bestSkill].</li>
         <li>r_logentry->Your worst skill is [RECIPIENT_worstSkill].</li>
         <li>r_logentry->Your passion is [RECIPIENT_higherPassion].</li>
         <li>r_logentry->The weather is [WEATHER].</li>
         <li>r_logentry->Good [TIME].</li>
         <li>r_logentry->That's a pretty [NEAREST_art].</li>
-        <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
+        <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>-->
+        
+        <!--<li>r_logentry(INITIATOR_pronoun==he)->I'm a boy</li>
+        <li>r_logentry(INITIATOR_pronoun==she)->I'm a girl.</li>-->
 
-  <InteractionDef>
-    <defName>Chuva</defName>
-    <label>test</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry->[DiálogoChuva].</li>
-        <li>DiálogoChuva(circunstancia=chovendo)->[respostachuva]</li>
-        <li>respostachuva(RECIPIENT_bestSkill==Plant)->Tá bom pra plantar hoje!</li>
-        <li>respostachuva->Puxa que chuva</li>
+        <li>r_logentry(INITIATOR_mood>0.7)->My mood is very high!</li>
+        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7)->My mood is high!</li>
+        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->My mood is low!</li>
+        <li>r_logentry(INITIATOR_mood&lt;0.3)->My mood is very low!</li>
+        
       </rulesStrings>
     </logRulesInitiator>
   </InteractionDef>
-  
-  
-  
-  
-  <dialogo>
-    <circunstancia>
-      <chovendo>Puxa, que chuva!</chovendo>
-    </circunstancia>
-  </dialogo>
-  
   
 </Defs>

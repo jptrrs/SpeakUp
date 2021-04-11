@@ -45,13 +45,21 @@ namespace SpeakUp
             //string my = person.GetPronoum(pawn.gender).Possessive();
 
             //mood
-            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToStringByStyle(ToStringStyle.PercentZero));
+            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToString()/*.ToStringByStyle(ToStringStyle.PercentZero)*/);
 
-            //pensamento (aleatório)
-            yield return new Rule_String(symbol + "thought", pawn.needs.mood.thoughts.memories.Memories.Where(x => x.CurStage != null && x.CurStage.description != null).RandomElement().CurStage.description);
+            //pensamentos
+            List<Thought> thoughts = new List<Thought>();
+            pawn.needs.mood.thoughts.GetAllMoodThoughts(thoughts);
+            foreach (var thought in thoughts.Where(x => x.CurStage != null && x.CurStage.description != null))
+            {
+                yield return new Rule_String(symbol + "thought", thought.CurStage.description);
+            }
 
-            //trait (aleatório)
-            yield return new Rule_String(symbol + "trait", pawn.story.traits.allTraits.RandomElement().Label);
+            //traits
+            foreach (var trait in pawn.story.traits.allTraits)
+            {
+                yield return new Rule_String(symbol + "trait", trait.Label);
+            }
 
             //best skill
             yield return new Rule_String(symbol + "bestSkill", pawn.skills.skills.Aggregate(AccessHighestSkill).def.skillLabel);

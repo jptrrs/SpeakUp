@@ -11,6 +11,7 @@ namespace SpeakUp
         {
             var harmony = new Harmony("SpeakUp");
             harmony.PatchAll();
+            harmony.DEBUG;
         }
     }
 }

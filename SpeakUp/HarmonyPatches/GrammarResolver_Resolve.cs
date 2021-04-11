@@ -10,7 +10,7 @@ namespace SpeakUp
     [HarmonyPatch(typeof(GrammarResolver), nameof(GrammarResolver.Resolve))]
     class GrammarResolver_Resolve
     {
-        private static FieldInfo constantsInfo = AccessTools.Field(typeof(GrammarRequest), "constants");
+        //private static FieldInfo constantsInfo = AccessTools.Field(typeof(GrammarRequest), "constants");
         private static FieldInfo rulesInfo = AccessTools.Field(typeof(GrammarRequest), "rules");
 
         public static void Prefix(object __instance, string rootKeyword, GrammarRequest request)

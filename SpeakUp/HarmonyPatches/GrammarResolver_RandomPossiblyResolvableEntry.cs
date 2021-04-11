@@ -1,22 +1,47 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 using Verse;
 using Verse.Grammar;
 
 namespace SpeakUp
 {
-    //Warning for invalid keywords found.
+    //Exposes the rules for future use and warning for invalid keywords found.
     [HarmonyPatch(typeof(GrammarResolver), nameof(GrammarResolver.RandomPossiblyResolvableEntry))]
-    class GrammarResolver_RandomPossiblyResolvableEntry
+    public class GrammarResolver_RandomPossiblyResolvableEntry
     {
-        public static void Prefix(string keyword, Dictionary<string, string> constants, Dictionary<string, List<GrammarResolver.RuleEntry>> ___rules)
+        public static List<string> CurrentRules;
+        public static Dictionary<string, string> CurrentRulesDic = new Dictionary<string, string>();
+        private static FieldInfo outputInfo = AccessTools.Field(typeof(Rule_String), nameof(Rule_String.output));
+
+        public static void Prefix(string keyword, Dictionary<string, string> constants, List<string> extraTags, List<string> resolvedTags, Dictionary<string, List<GrammarResolver.RuleEntry>> ___rules, ref GrammarResolver.RuleEntry __result)
         {
             if (___rules.TryGetValue(keyword, null).NullOrEmpty())
             {
-                Log.Warning($"RandomPossiblyResolvableEntry found bad value for {keyword}.");// \n" +
-                    //$"Constants are: {constants.ToStringSafeEnumerable()}\n" +
-                    //$"Rules are : {___rules.ToStringSafeEnumerable()}\n");
+                Log.Warning($"RandomPossiblyResolvableEntry found bad value for {keyword}.\n" +
+                            $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
+                            $"Rules are : {___rules.Values.ToStringSafeEnumerable()}\n");
             }
+            if (keyword == "r_logentry")
+            {
+                CurrentRules = ___rules.Keys.ToList();
+                foreach (Rule_String rule in ___rules.Values.SelectMany(x => x).Where(x => x.rule is Rule_String).Select(x => x.rule))
+                {
+                    if (!CurrentRulesDic.ContainsKey(keyword))
+                    {
+                        CurrentRulesDic.SetOrAdd(rule.keyword, (string)outputInfo.GetValue(rule));
+                    }
+                }
+                //Log.Message($"DEBUG {___rules.Values.SelectMany(x=>x).Select(x => x.rule.keyword).ToStringSafeEnumerable()}");
+            }
+        }
+
+        public static void Postfix()
+        {
+            if (!CurrentRules.NullOrEmpty()) CurrentRules.Clear();
+            if (!CurrentRulesDic.EnumerableNullOrEmpty()) CurrentRulesDic.Clear();
         }
     }
 }

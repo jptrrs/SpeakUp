@@ -63,6 +63,7 @@
     <Compile Include="HarmonyPatches\GrammarResolver_Resolve.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_RandomPossiblyResolvableEntry.cs" />
     <Compile Include="HarmonyPatches\PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.cs" />
+    <Compile Include="HarmonyPatches\Test.cs" />
     <Compile Include="HarmonyPatches\Verse_PlayLog_Add.cs" />
     <None Include="LanguageHelpers\Pronoums.cs" />
     <None Include="LanguageHelpers\Verbs.cs" />
@@ -94,6 +95,7 @@
       <HintPath>..\..\818773962\Assemblies\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
