@@ -18,12 +18,15 @@ namespace SpeakUp
 
         public static void Prefix(string keyword, Dictionary<string, string> constants, List<string> extraTags, List<string> resolvedTags, Dictionary<string, List<GrammarResolver.RuleEntry>> ___rules, ref GrammarResolver.RuleEntry __result)
         {
-            if (___rules.TryGetValue(keyword, null).NullOrEmpty())
+            //Warning to catch invalid keywords.
+            if (keyword == "r_logentry" && ___rules.TryGetValue(keyword, null).NullOrEmpty())
             {
                 Log.Warning($"RandomPossiblyResolvableEntry found bad value for {keyword}.\n" +
                             $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
                             $"Rules are : {___rules.Values.ToStringSafeEnumerable()}\n");
             }
+
+            //Expose current rules to be used later to check constraints.
             if (keyword == "r_logentry")
             {
                 CurrentRules = ___rules.Keys.ToList();
@@ -38,8 +41,9 @@ namespace SpeakUp
             }
         }
 
-        public static void Postfix()
+        public static void Postfix(GrammarResolver.RuleEntry __result, string keyword, Dictionary<string, string> constants, List<string> extraTags, List<string> resolvedTags)
         {
+            //reset exposed rules cache
             if (!CurrentRules.NullOrEmpty()) CurrentRules.Clear();
             if (!CurrentRulesDic.EnumerableNullOrEmpty()) CurrentRulesDic.Clear();
         }

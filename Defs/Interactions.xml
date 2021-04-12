@@ -3,7 +3,7 @@
 
   <!--HOW TO CREATE DIALOGS USING RULESTRINGS
   
-  - Activate "Log Grammar Resolution" on the Development Mode View Settings (3rd icon at the top) and grab the log entry when a pawn says something to see a list of all possible parameters for that type of interaction (with the mod, both "Constants" and "Custom Rules" are available).
+  - Activate "Log Grammar Resolution" on the Development Mode View Settings (3rd icon at the top) and grab the log entry when a pawn says something to see a list of all possible parameters for that type of interaction (with this mod, both "Constants" and "Custom Rules" are available).
   
   - For a pawn talk, each <li> is a possible thing to say. It might be assembled with parameters from that list or replaced with wildcards loaded from a subsequent <li>. Like this:
   
@@ -14,13 +14,13 @@
   - For pawn talk, always start with "r_logentry->something"
   
   - constraints are optional commands that regulate if that line is used or not. They can be:
-    (p=x): determines the probability the line is shown, with x being a whole number. 0 means no-show, 10 is a very high probability.
-    (tag): ?
-    (requiredTag): ?
-    (debug): triggers an error with the resolution trace on the Debug log. Good for debugging.
-    (parameter==x): restricts that line to be shown only if the paramter satisfies the condition, with x being the required value.
+    (p=x): Determines the probability the line is shown, with x being a whole number. 0 means no-show, 10 is a very high probability.
+    (tag=x): Estabilishes a criteria to be used selecting lines down the line, with x being any word. If the tag matches the defName for another InteractionDef, that will be used to make a reply. 
+    (requiredTag=x): Restricts the line to be used only when invoked by another line with that tag.
+    (debug): Triggers an error with the resolution trace on the Debug log. Good for debugging.
+    (parameter==x): Restricts that line to be used only if the parameter satisfies the condition, with x being the required value.
     
-  - The operators used on a comparsion might be "==" (equal to), "!=" (different from), ">" (greater than), "<" (lower than), ">=" (greater or equal) or "<="(lesser of equal). EXCEPT the "<" character must be replaced by "&lt;" so the XML reader doesn't freak out. 
+  - The operators used on a comparsion might be "==" (equal to), "!=" (different from), ">" (greater than), "<" (lower than), ">=" (greater or equal) or "<="(lower of equal). EXCEPT the "<" character must be replaced by "&lt;" so the XML reader doesn't freak out. 
     
   - Without a constraint to say otherwise, the line will be selected randomly. Therefore, unless you're going for variety, add constraints to your lines. Example:
   
@@ -30,19 +30,22 @@
     
     END OF INSTRUCTIONS-->
 
-    <InteractionDef>
-    <defName>Test</defName>
-    <label>test</label>
+  <InteractionDef Name="SpeakUpInteraction" Abstract="True">
     <workerClass>InteractionWorker_Chitchat</workerClass>
     <symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
     <initiatorThought>Chitchat</initiatorThought>
     <initiatorXpGainSkill>Social</initiatorXpGainSkill>
     <initiatorXpGainAmount>4</initiatorXpGainAmount>
     <recipientThought>Chitchat</recipientThought>
+  </InteractionDef>
+  
+  <InteractionDef ParentName="SpeakUpInteraction">
+    <defName>Test</defName>
+    <label>test</label>
     <logRulesInitiator>
       <rulesStrings>
-        <!--<li>r_logentry->My mood is [INITIATOR_mood].</li>-->
-        <li>r_logentry->[INITIATOR_thought]</li>
+        <li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
+        
         <!--<li>r_logentry->I am [INITIATOR_trait].</li>
         <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
         <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
@@ -54,20 +57,38 @@
         <li>r_logentry->Your worst skill is [RECIPIENT_worstSkill].</li>
         <li>r_logentry->Your passion is [RECIPIENT_higherPassion].</li>
         <li>r_logentry->The weather is [WEATHER].</li>
-        <li>r_logentry->Good [TIME].</li>
         <li>r_logentry->That's a pretty [NEAREST_art].</li>
         <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>-->
-        
-        <!--<li>r_logentry(INITIATOR_pronoun==he)->I'm a boy</li>
-        <li>r_logentry(INITIATOR_pronoun==she)->I'm a girl.</li>-->
+                
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
 
-        <li>r_logentry(INITIATOR_mood>0.7)->My mood is very high!</li>
-        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7)->My mood is high!</li>
-        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->My mood is low!</li>
-        <li>r_logentry(INITIATOR_mood&lt;0.3)->My mood is very low!</li>
-        
+  <InteractionDef ParentName="SpeakUpInteraction">
+    <defName>Salute</defName>
+    <label>reply to salute</label>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(INITIATOR_mood>0.7)->You too! Ain't this a lovely [DAYPERIOD]?</li>
+        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->Good [DAYPERIOD], how are you?</li>
+        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->Humpf!</li>
+        <li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>      
       </rulesStrings>
     </logRulesInitiator>
   </InteractionDef>
   
+  <InteractionDef ParentName="SpeakUpInteraction">
+    <defName>HowAreYou</defName>
+    <label>reply to How are you?</label>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(INITIATOR_mood>0.7,tag=HowAreYou)->I'm feeling great! What about you?</li>
+        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->I'm Fine. What about you?</li>
+        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->Could be better!</li>
+        <li>r_logentry(INITIATOR_mood&lt;0.3)->I hate my life!</li>      
+        <li>r_logentry->[INITIATOR_thought]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
 </Defs>

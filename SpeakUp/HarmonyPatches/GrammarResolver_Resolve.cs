@@ -10,17 +10,19 @@ namespace SpeakUp
     [HarmonyPatch(typeof(GrammarResolver), nameof(GrammarResolver.Resolve))]
     class GrammarResolver_Resolve
     {
-        //private static FieldInfo constantsInfo = AccessTools.Field(typeof(GrammarRequest), "constants");
         private static FieldInfo rulesInfo = AccessTools.Field(typeof(GrammarRequest), "rules");
 
         public static void Prefix(object __instance, string rootKeyword, GrammarRequest request)
         {
-            if (/*__instance is PlayLogEntry_Interaction entry && */rootKeyword == "r_logentry")
+            if (rootKeyword == "r_logentry")
             {
                 var initiator = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastInitiator;
                 var recipient = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastRecipient;
                 List<Rule> rules = (List<Rule>)rulesInfo.GetValue(request);
-                rules.AddRange(ExtraGrammarUtility.Rules(initiator, recipient));
+                if (initiator.RaceProps.Humanlike)
+                {
+                    rules.AddRange(ExtraGrammarUtility.ExtraRules(initiator, recipient));
+                }
             }
         }
     }

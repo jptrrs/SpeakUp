@@ -39,6 +39,34 @@ namespace SpeakUp
 
         public enum dayPeriod { morning, afternoon, evening, night }
 
+        public static IEnumerable<Rule> ExtraRules(Pawn initiator, Pawn recipient)
+        {
+            string initPrefix = "INITIATOR_", reciPrefix = "RECIPIENT_";
+
+            foreach (var rule in ExtraRulesForPawn(initPrefix, initiator/*, person.firstSingular*/))
+            {
+                yield return rule;
+            }
+            foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient/*, person.secondSingular*/))
+            {
+                yield return rule;
+            }
+
+            //clima
+            yield return new Rule_String("WEATHER", initiator.Map.weatherManager.CurWeatherPerceived.label);
+
+            //hora
+            yield return new Rule_String("HOUR", GenLocalDate.HourInteger(initiator).ToString());
+            yield return new Rule_String("DAYPERIOD", DayPeriod(initiator));
+
+            //arte ou planta por perto
+            foreach (var group in subjects)
+            {
+                var thing = GenClosest.ClosestThing_Global(initiator.Position, initiator.Map.listerThings.ThingsInGroup(group), lookRadius);
+                if (thing != null) yield return new Rule_String($"NEAREST_{group.ToString().ToLower()}", $"{thing.def.label}");
+            }
+        }
+
         public static IEnumerable<Rule> ExtraRulesForPawn(string symbol, Pawn pawn)
         {
             //string Iam = Verb_ToBe.Conjugate(person, pawn.gender);
@@ -70,33 +98,6 @@ namespace SpeakUp
             //higher passion
             yield return new Rule_String(symbol + "higherPassion", pawn.skills.skills.Aggregate(AccessHighestPassion).def.skillLabel);        
         }
-
-        public static IEnumerable<Rule> Rules(Pawn initiator, Pawn recipient)
-        {
-			string initPrefix = "INITIATOR_", reciPrefix = "RECIPIENT_";
-
-			foreach (var rule in ExtraRulesForPawn(initPrefix, initiator/*, person.firstSingular*/))
-			{
-				yield return rule;
-			}
-			foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient/*, person.secondSingular*/))
-			{
-				yield return rule;
-			}
-
-			//clima
-			yield return new Rule_String("WEATHER", initiator.Map.weatherManager.CurWeatherPerceived.label);
-
-			//hora 
-			yield return new Rule_String("TIME", DayPeriod(initiator));
-
-			//arte ou planta por perto
-			foreach (var group in subjects)
-            {
-				var thing = GenClosest.ClosestThing_Global(initiator.Position, initiator.Map.listerThings.ThingsInGroup(group), lookRadius);
-				if (thing != null) yield return new Rule_String($"NEAREST_{group.ToString().ToLower()}", $"{thing.def.label}");
-			}
-		}
 
 		private static string DayPeriod(Pawn p)
 		{

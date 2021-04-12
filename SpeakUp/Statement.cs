@@ -10,14 +10,19 @@ namespace SpeakUp
             Reciever;
 
         public InteractionDef IntDef;
-        public int Timing;
+        public Talk Talk;
+        public int 
+            Timing,
+            Iteration;
 
-        public Statement(Pawn emitter, Pawn recipient, int timing, InteractionDef intDef)
+        public Statement(Pawn emitter, Pawn recipient, int timing, InteractionDef intDef, Talk talk, int iteration)
         {
             Emitter = emitter;
             Reciever = recipient;
             Timing = timing;
             IntDef = intDef;
+            Talk = talk;
+            Iteration = iteration;
         }
     }
 }
