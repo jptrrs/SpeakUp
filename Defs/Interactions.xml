@@ -11,12 +11,14 @@
     <li>wildcard(constraint3)->subject to say case constraint3 is true.</li>
     <li>wildcard->subject to say without any constraints. </li>
     
+  - The text is case-sensitive: wildcards must be all in lowercase.
+    
   - For pawn talk, always start with "r_logentry->something"
   
-  - constraints are optional commands that regulate if that line is used or not. They can be:
+  - Constraints are optional commands that regulate if that line is used or not. They can be:
     (p=x): Determines the probability the line is shown, with x being a whole number. 0 means no-show, 10 is a very high probability.
     (tag=x): Estabilishes a criteria to be used selecting lines down the line, with x being any word. If the tag matches the defName for another InteractionDef, that will be used to make a reply. 
-    (requiredTag=x): Restricts the line to be used only when invoked by another line with that tag.
+    (requiredTag=x): Restricts the line to be used only when invoked by another line with that tag within the same InteractionDef.
     (debug): Triggers an error with the resolution trace on the Debug log. Good for debugging.
     (parameter==x): Restricts that line to be used only if the parameter satisfies the condition, with x being the required value.
     
@@ -44,6 +46,13 @@
     <label>test</label>
     <logRulesInitiator>
       <rulesStrings>
+
+        <li>r_logentry(RECIPIENT_mood>=0.7)->[rec_highmood]</li>
+
+        <li>rec_highmood(INITIATOR_mood>=0.7)->[RECIPIENT_nameDef], our life is just great, right?</li>
+        <li>rec_highmood(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I wish I had [RECIPIENT_nameDef]'s radiant smile on my face!</li>
+        <li>rec_highmood(INITIATOR_mood&lt;0.3)->Hey [RECIPIENT_nameDef], could you take your bloody happiness elsewhere?!</li>
+        
         <li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
         
         <!--<li>r_logentry->I am [INITIATOR_trait].</li>
@@ -83,7 +92,7 @@
     <logRulesInitiator>
       <rulesStrings>
         <li>r_logentry(INITIATOR_mood>0.7,tag=HowAreYou)->I'm feeling great! What about you?</li>
-        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->I'm Fine. What about you?</li>
+        <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->I'm fine. What about you?</li>
         <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->Could be better!</li>
         <li>r_logentry(INITIATOR_mood&lt;0.3)->I hate my life!</li>      
         <li>r_logentry->[INITIATOR_thought]</li>

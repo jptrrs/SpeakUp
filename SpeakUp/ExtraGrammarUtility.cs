@@ -80,6 +80,7 @@ namespace SpeakUp
             pawn.needs.mood.thoughts.GetAllMoodThoughts(thoughts);
             foreach (var thought in thoughts.Where(x => x.CurStage != null && x.CurStage.description != null))
             {
+                yield return new Rule_String(symbol + "thoughtDefName", thought.def.defName);
                 yield return new Rule_String(symbol + "thought", thought.CurStage.description);
             }
 
