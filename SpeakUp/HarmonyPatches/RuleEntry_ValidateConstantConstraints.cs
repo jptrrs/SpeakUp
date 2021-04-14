@@ -15,7 +15,7 @@ namespace SpeakUp
             if (!__result)
             {
                 ___constantConstraintsChecked = false;
-                __result = DoubleCheckConstraints(__instance, GrammarResolver_RandomPossiblyResolvableEntry.CurrentRulesDic);
+                __result = DoubleCheckConstraints(__instance, GrammarResolver_RandomPossiblyResolvableEntry.CurrentRules);
             }
         }
 

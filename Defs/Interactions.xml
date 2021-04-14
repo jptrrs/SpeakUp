@@ -41,10 +41,10 @@
     <label>reply to salute</label>
     <logRulesInitiator>
       <rulesStrings>
-        <li>r_logentry(INITIATOR_mood>0.7)->You too! Ain't this a lovely [DAYPERIOD]?</li>
+        <li>r_logentry(INITIATOR_mood>0.7,tag=HowAreYou)->You too! Ain't this a lovely [DAYPERIOD]?</li>
         <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->Good [DAYPERIOD], how are you?</li>
-        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->Humpf!</li>
-        <li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>      
+        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5,tag=HowAreYou)->Humpf!</li>
+        <li>r_logentry(INITIATOR_mood&lt;0.3,tag=HowAreYou)->There's nothing good about it!</li>      
       </rulesStrings>
     </logRulesInitiator>
   </InteractionDef>
@@ -56,9 +56,9 @@
       <rulesStrings>
         <li>r_logentry(INITIATOR_mood>0.7,tag=HowAreYou)->I'm feeling great! What about you?</li>
         <li>r_logentry(INITIATOR_mood>0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->I'm fine. What about you?</li>
-        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5)->Could be better!</li>
-        <li>r_logentry(INITIATOR_mood&lt;0.3)->I hate my life!</li>      
-        <li>r_logentry->[INITIATOR_thought]</li>
+        <li>r_logentry(INITIATOR_mood>0.3,INITIATOR_mood&lt;0.5,tag=HowAreYou)->Could be better!</li>
+        <li>r_logentry(INITIATOR_mood&lt;0.3,tag=HowAreYou)->I hate my life!</li>      
+        <li>r_logentry(tag=HowAreYou)->[INITIATOR_thought]</li>
       </rulesStrings>
     </logRulesInitiator>
   </InteractionDef>

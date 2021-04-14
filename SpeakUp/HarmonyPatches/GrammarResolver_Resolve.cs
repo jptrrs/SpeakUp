@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
-using Verse;
 using Verse.Grammar;
 
 namespace SpeakUp
@@ -16,12 +15,10 @@ namespace SpeakUp
         {
             if (rootKeyword == "r_logentry")
             {
-                var initiator = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastInitiator;
-                var recipient = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastRecipient;
                 List<Rule> rules = (List<Rule>)rulesInfo.GetValue(request);
-                if (initiator.RaceProps.Humanlike)
+                if (DialogManager.Initiator.RaceProps?.Humanlike == true) //Restricted to humanlike, for now.
                 {
-                    rules.AddRange(ExtraGrammarUtility.ExtraRules(initiator, recipient));
+                    rules.AddRange(ExtraGrammarUtility.ExtraRules(DialogManager.Initiator, DialogManager.Recipient));
                 }
             }
         }

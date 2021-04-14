@@ -3,21 +3,25 @@ using Verse;
 
 namespace SpeakUp
 {
+    using static DialogManager;
     //Cleans up expired talks
     [HarmonyPatch(typeof(TickManager), "DoSingleTick")]
     internal static class TickManager_DoSingleTick
     {
         private static int 
-            lastCleanTick = 0,
+            lastCleaned = 0,
             cleanInterval = 60; //60 = 1 second.
 
         private static void Postfix()
         {
-            var num = lastCleanTick + cleanInterval;
-            if (num < GenTicks.TicksGame)
+            if (!CurrentTalks.NullOrEmpty())
             {
-                DialogManager.CleanUp();
-                lastCleanTick = GenTicks.TicksGame;
+                var num = lastCleaned + cleanInterval;
+                if (num < GenTicks.TicksGame)
+                {
+                    CleanUp();
+                    lastCleaned = GenTicks.TicksGame;
+                }
             }
         }
     }

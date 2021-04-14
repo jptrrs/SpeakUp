@@ -1,13 +1,9 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace SpeakUp
 {
+    using static DialogManager;
     public class Talk
     {
         public static int count => ModBaseSpeakUp.LinesPerConversation;
@@ -18,15 +14,13 @@ namespace SpeakUp
             expireTick = 0;
         public int remainingReplies => ModBaseSpeakUp.LinesPerConversation - latestReplyCount;
 
-        public string Tag;
-        public Pawn Initiator, Recipient;
+        public Pawn nextInitiator, nextRecipient;
 
         public Talk(string tag)
         {
-            Tag = tag;
-            Initiator = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastInitiator;
-            Recipient = PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.lastRecipient;
-            Reply();
+            nextInitiator = Initiator;
+            nextRecipient = Recipient;
+            Reply(tag);
         }
 
         public void MakeReply(InteractionDef intDef)
@@ -35,24 +29,24 @@ namespace SpeakUp
             expireTick = time + 1;
             latestReplyCount += 1;
             SwapRoles();
-            DialogManager.Scheduled.Add(new Statement(Initiator, Recipient, time, intDef, this, latestReplyCount));
+            DialogManager.Scheduled.Add(new Statement(nextInitiator, nextRecipient, time, intDef, this, latestReplyCount));
         }
 
-        public void Reply()
+        public void Reply(string tag)
         {
             if (remainingReplies > 0)
             {
-                InteractionDef intDef = DefDatabase<InteractionDef>.GetNamed(Tag);
+                InteractionDef intDef = DefDatabase<InteractionDef>.GetNamed(tag);
                 if (intDef != null) MakeReply(intDef);
-                else Log.Warning($"[SpeakUp] {Initiator} talked about {Tag}, but there isn't an appropriate interactionDef to respond.");
+                else Log.Warning($"[SpeakUp] {nextInitiator} talked about {tag}, but there isn't an appropriate interactionDef to respond.");
             }
         }
 
         private void SwapRoles()
         {
-            Pawn swapped = Initiator;
-            Initiator = Recipient;
-            Recipient = swapped;
+            Pawn swapped = nextInitiator;
+            nextInitiator = nextRecipient;
+            nextRecipient = swapped;
         }
     }
 }
