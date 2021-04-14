@@ -11,11 +11,13 @@ namespace SpeakUp
     {
         public static void Prefix(Pawn recipient, ref InteractionDef intDef)
         {
-            if (intDef == InteractionDefOf.Chitchat)
-            {
-                // Log.Warning($"replacing {intDef}");
-                intDef = TalkDefOf.Test;
-            }
+            Log.Message($"interacting with {intDef.defName}");
+
+            //if (intDef == InteractionDefOf.Chitchat)
+            //{
+            //    // Log.Warning($"replacing {intDef}");
+            //    intDef = TalkDefOf.Test;
+            //}
         }
     }
 }

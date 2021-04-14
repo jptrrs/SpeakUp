@@ -32,48 +32,11 @@
     
     END OF INSTRUCTIONS-->
 
-  <InteractionDef Name="SpeakUpInteraction" Abstract="True">
-    <workerClass>InteractionWorker_Chitchat</workerClass>
-    <symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
-    <initiatorThought>Chitchat</initiatorThought>
-    <initiatorXpGainSkill>Social</initiatorXpGainSkill>
-    <initiatorXpGainAmount>4</initiatorXpGainAmount>
-    <recipientThought>Chitchat</recipientThought>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpInteraction">
-    <defName>Test</defName>
-    <label>test</label>
-    <logRulesInitiator>
-      <rulesStrings>
-
-        <li>r_logentry(RECIPIENT_mood>=0.7)->[rec_highmood]</li>
-
-        <li>rec_highmood(INITIATOR_mood>=0.7)->[RECIPIENT_nameDef], our life is just great, right?</li>
-        <li>rec_highmood(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I wish I had [RECIPIENT_nameDef]'s radiant smile on my face!</li>
-        <li>rec_highmood(INITIATOR_mood&lt;0.3)->Hey [RECIPIENT_nameDef], could you take your bloody happiness elsewhere?!</li>
-        
-        <li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
-        
-        <!--<li>r_logentry->I am [INITIATOR_trait].</li>
-        <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
-        <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
-        <li>r_logentry->My passion is [INITIATOR_higherPassion].</li>
-        <li>r_logentry->Your mood: [RECIPIENT_mood].</li>-->
-        <!--<li>r_logentry->Your thought: [RECIPIENT_thought].</li>--> <!--Sem telepatia!-->
-        <!--<li>r_logentry->You are [RECIPIENT_trait].</li>
-        <li>r_logentry->Your best skill is [RECIPIENT_bestSkill].</li>
-        <li>r_logentry->Your worst skill is [RECIPIENT_worstSkill].</li>
-        <li>r_logentry->Your passion is [RECIPIENT_higherPassion].</li>
-        <li>r_logentry->The weather is [WEATHER].</li>
-        <li>r_logentry->That's a pretty [NEAREST_art].</li>
-        <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>-->
-                
-      </rulesStrings>
-    </logRulesInitiator>
+  <InteractionDef Name="SpeakUpReply" Abstract="True">
+    <symbol>Things/Mote/SpeechSymbols/Speech</symbol>
   </InteractionDef>
 
-  <InteractionDef ParentName="SpeakUpInteraction">
+  <InteractionDef ParentName="SpeakUpReply">
     <defName>Salute</defName>
     <label>reply to salute</label>
     <logRulesInitiator>
@@ -86,7 +49,7 @@
     </logRulesInitiator>
   </InteractionDef>
   
-  <InteractionDef ParentName="SpeakUpInteraction">
+  <InteractionDef ParentName="SpeakUpReply">
     <defName>HowAreYou</defName>
     <label>reply to How are you?</label>
     <logRulesInitiator>

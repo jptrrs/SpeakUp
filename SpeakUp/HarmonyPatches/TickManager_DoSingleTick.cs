@@ -9,7 +9,7 @@ namespace SpeakUp
     {
         private static int 
             lastCleanTick = 0,
-            cleanInterval = 40; //60 = 1 second.
+            cleanInterval = 60; //60 = 1 second.
 
         private static void Postfix()
         {
