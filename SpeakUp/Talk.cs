@@ -34,7 +34,7 @@ namespace SpeakUp
 
         public void Reply(string tag)
         {
-            if (remainingReplies > 0)
+            if (remainingReplies > 0 && Initiator.GetRegion() == Recipient.GetRegion())
             {
                 InteractionDef intDef = DefDatabase<InteractionDef>.GetNamed(tag);
                 if (intDef != null) MakeReply(intDef);

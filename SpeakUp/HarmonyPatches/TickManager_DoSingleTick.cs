@@ -4,6 +4,7 @@ using Verse;
 namespace SpeakUp
 {
     using static DialogManager;
+
     //Cleans up expired talks
     [HarmonyPatch(typeof(TickManager), "DoSingleTick")]
     internal static class TickManager_DoSingleTick

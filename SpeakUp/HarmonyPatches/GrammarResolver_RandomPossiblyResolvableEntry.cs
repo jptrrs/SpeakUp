@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Verse;
 using Verse.Grammar;
 
@@ -20,7 +19,7 @@ namespace SpeakUp
             //Warning to catch invalid keywords.
             if (keyword == "r_logentry" && ___rules.TryGetValue(keyword, null).NullOrEmpty())
             {
-                Log.Warning($"[SpeakUp] Bad value found for \"{keyword}\".\n" +
+                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"\n" +
                             $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
                             $"Rules are: {___rules.Values.ToStringSafeEnumerable()}\n");
             }
