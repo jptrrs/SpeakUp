@@ -65,9 +65,6 @@
     <Compile Include="HarmonyPatches\PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.cs" />
     <Compile Include="HarmonyPatches\RuleEntry_ValidateConstantConstraints.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_TryResolveRecursive.cs" />
-    <None Include="LanguageHelpers\Pronoums.cs" />
-    <None Include="LanguageHelpers\Verbs.cs" />
-    <None Include="LanguageHelpers\Verb_ToBe.cs" />
     <Compile Include="HarmonyPatches\TickManager_DoSingleTick.cs" />
     <Compile Include="ModBaseSpeakUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

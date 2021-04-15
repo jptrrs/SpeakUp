@@ -2,14 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 using Verse.Grammar;
 
 namespace SpeakUp
 {
-	//using static Pronoums;
 	public static class ExtraGrammarUtility
 	{
         private static Func<SkillRecord, SkillRecord, SkillRecord> AccessHighestSkill = (A, B) =>
@@ -69,9 +66,6 @@ namespace SpeakUp
 
         public static IEnumerable<Rule> ExtraRulesForPawn(string symbol, Pawn pawn)
         {
-            //string Iam = Verb_ToBe.Conjugate(person, pawn.gender);
-            //string my = person.GetPronoum(pawn.gender).Possessive();
-
             //mood
             yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToString()/*.ToStringByStyle(ToStringStyle.PercentZero)*/);
 
