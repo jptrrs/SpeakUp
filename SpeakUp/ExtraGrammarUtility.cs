@@ -40,23 +40,30 @@ namespace SpeakUp
         {
             string initPrefix = "INITIATOR_", reciPrefix = "RECIPIENT_";
 
-            foreach (var rule in ExtraRulesForPawn(initPrefix, initiator/*, person.firstSingular*/))
+            //pawn parameters
+            foreach (var rule in ExtraRulesForPawn(initPrefix, initiator, recipient))
             {
                 yield return rule;
             }
-            foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient/*, person.secondSingular*/))
+            foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient, initiator))
             {
                 yield return rule;
             }
 
-            //clima
+            //climate
             yield return new Rule_String("WEATHER", initiator.Map.weatherManager.CurWeatherPerceived.label);
 
-            //hora
+            //time
             yield return new Rule_String("HOUR", GenLocalDate.HourInteger(initiator).ToString());
             yield return new Rule_String("DAYPERIOD", DayPeriod(initiator));
 
-            //arte ou planta por perto
+            //temperature
+            yield return new Rule_String("TEMPERATURE", GenTemperature.GetTemperatureForCell(initiator.Position, initiator.Map).ToString());
+
+            //outdoor?
+            yield return new Rule_String("OUTDOOR?", initiator.Position.UsesOutdoorTemperature(initiator.Map).ToStringYesNo());
+
+            //nearest things
             foreach (var group in subjects)
             {
                 var thing = GenClosest.ClosestThing_Global(initiator.Position, initiator.Map.listerThings.ThingsInGroup(group), lookRadius);
@@ -64,19 +71,26 @@ namespace SpeakUp
             }
         }
 
-        public static IEnumerable<Rule> ExtraRulesForPawn(string symbol, Pawn pawn)
+        public static IEnumerable<Rule> ExtraRulesForPawn(string symbol, Pawn pawn, Pawn other)
         {
-            //mood
-            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToString()/*.ToStringByStyle(ToStringStyle.PercentZero)*/);
+            //THE PAWN'S MINDSTATE:
 
-            //pensamentos
+            //mood
+            yield return new Rule_String(symbol + "mood", pawn.needs.mood.CurLevel.ToString());
+
+            //thoughts
             List<Thought> thoughts = new List<Thought>();
             pawn.needs.mood.thoughts.GetAllMoodThoughts(thoughts);
             foreach (var thought in thoughts.Where(x => x.CurStage != null && x.CurStage.description != null))
             {
                 yield return new Rule_String(symbol + "thoughtDefName", thought.def.defName);
-                yield return new Rule_String(symbol + "thought", thought.CurStage.description);
+                yield return new Rule_String(symbol + "thoughtText", thought.CurStage.description);
             }
+
+            //opinion
+            yield return new Rule_String(symbol + "opinion", pawn.relations.OpinionOf(other).ToString());
+
+            //THE PAWN'S BIO:
 
             //traits
             foreach (var trait in pawn.story.traits.allTraits)
@@ -91,10 +105,19 @@ namespace SpeakUp
             yield return new Rule_String(symbol + "worstSkill", pawn.skills.skills.Aggregate(AccessWorstSkill).def.skillLabel);
 
             //higher passion
-            yield return new Rule_String(symbol + "higherPassion", pawn.skills.skills.Aggregate(AccessHighestPassion).def.skillLabel);        
+            yield return new Rule_String(symbol + "higherPassion", pawn.skills.skills.Aggregate(AccessHighestPassion).def.skillLabel);
+
+            //OTHER PAWN SITUATIONS
+
+            //current activity
+            yield return new Rule_String(symbol + "jobDefName", pawn.CurJob.def.defName);
+            yield return new Rule_String(symbol + "jobText", pawn.CurJob.GetReport(pawn));
+
+            //seated?
+            yield return new Rule_String(symbol + "seated?", Seated(pawn).ToStringYesNo());
         }
 
-		private static string DayPeriod(Pawn p)
+        private static string DayPeriod(Pawn p)
 		{
 			int hour = GenLocalDate.HourInteger(p);
 			if (hour >= 5 && hour < 12) return dayPeriod.morning.ToString();
@@ -102,5 +125,11 @@ namespace SpeakUp
 			if (hour >= 18 && hour < 24) return dayPeriod.evening.ToString();
 			else return dayPeriod.night.ToString();
 		}
-	}
+
+        private static bool Seated(Pawn p)
+        {
+            Building edifice = p.Position.GetEdifice(p.Map);
+            return edifice != null && edifice.def.category == ThingCategory.Building && edifice.def.building.isSittable;
+        }
+    }
 }
