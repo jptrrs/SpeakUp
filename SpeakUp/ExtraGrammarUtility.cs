@@ -107,6 +107,13 @@ namespace SpeakUp
             //higher passion
             yield return new Rule_String(symbol + "higherPassion", pawn.skills.skills.Aggregate(AccessHighestPassion).def.skillLabel);
 
+            //all skills
+            foreach (var skill in pawn.skills.skills)
+            {
+                yield return new Rule_String(symbol + skill.def.label + "_level", skill.levelInt.ToString());
+                yield return new Rule_String(symbol + skill.def.label + "_passion", skill.passion.ToString());
+            }
+
             //OTHER PAWN SITUATIONS
 
             //current activity

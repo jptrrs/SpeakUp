@@ -70,7 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.cs" />
     <Compile Include="Talk.cs" />
-    <None Include="TalkDefOf.cs" />
     <Compile Include="Statement.cs" />
     <None Include="packages.config" />
   </ItemGroup>
