@@ -61,7 +61,7 @@ namespace SpeakUp
             yield return new Rule_String("TEMPERATURE", GenTemperature.GetTemperatureForCell(initiator.Position, initiator.Map).ToString());
 
             //outdoor?
-            yield return new Rule_String("OUTDOOR?", initiator.Position.UsesOutdoorTemperature(initiator.Map).ToStringYesNo());
+            yield return new Rule_String("OUTDOOR", initiator.Position.UsesOutdoorTemperature(initiator.Map).ToStringYesNo());
 
             //nearest things
             foreach (var group in subjects)
@@ -121,7 +121,7 @@ namespace SpeakUp
             yield return new Rule_String(symbol + "jobText", pawn.CurJob.GetReport(pawn));
 
             //seated?
-            yield return new Rule_String(symbol + "seated?", Seated(pawn).ToStringYesNo());
+            yield return new Rule_String(symbol + "seated", Seated(pawn).ToStringYesNo());
         }
 
         private static string DayPeriod(Pawn p)
