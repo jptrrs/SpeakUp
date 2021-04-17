@@ -61,7 +61,7 @@ namespace SpeakUp
             yield return new Rule_String("TEMPERATURE", GenTemperature.GetTemperatureForCell(initiator.Position, initiator.Map).ToString());
 
             //outdoor?
-            yield return new Rule_String("OUTDOOR", initiator.Position.UsesOutdoorTemperature(initiator.Map).ToStringYesNo());
+            yield return new Rule_String("OUTDOORS", initiator.Position.UsesOutdoorTemperature(initiator.Map).ToStringYesNo());
 
             //nearest things
             foreach (var group in subjects)

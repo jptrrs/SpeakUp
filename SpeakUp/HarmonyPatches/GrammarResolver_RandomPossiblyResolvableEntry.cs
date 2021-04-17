@@ -16,16 +16,8 @@ namespace SpeakUp
 
         public static void Prefix(string keyword, Dictionary<string, string> constants, List<string> extraTags, List<string> resolvedTags, Dictionary<string, List<GrammarResolver.RuleEntry>> ___rules, ref GrammarResolver.RuleEntry __result)
         {
-            //Warning to catch invalid keywords.
-            if (keyword == "r_logentry" && ___rules.TryGetValue(keyword, null).NullOrEmpty())
-            {
-                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"\n" +
-                            $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
-                            $"Rules are: {___rules.Values.ToStringSafeEnumerable()}\n");
-            }
-
             //Expose current rules to be used later to check constraints.
-            if (keyword == "r_logentry")
+            if (!___rules.TryGetValue(keyword, null).NullOrEmpty())
             {
                 foreach (Rule_String rule in ___rules.Values.SelectMany(x => x).Where(x => x.rule is Rule_String).Select(x => x.rule))
                 {
@@ -34,6 +26,15 @@ namespace SpeakUp
                         CurrentRules.SetOrAdd(rule.keyword, (string)outputInfo.GetValue(rule));
                     }
                 }
+                return;
+            }
+
+            //Warning to catch invalid keywords.
+            if (GenScene.InPlayScene)
+            {
+                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"\n" +
+                            $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
+                            $"Rules are: {___rules.Values.ToStringSafeEnumerable()}\n");
             }
         }
 

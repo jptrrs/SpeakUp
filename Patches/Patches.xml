@@ -6,7 +6,10 @@
     <value>
       
       <rulesStrings>
-        <li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
+        <li>r_logentry(WEATHER==clear)->[weatherclear]</li>
+        <li>weatherclear(INITIATOR_mood>=0.5)->I feel good!</li>
+        <li>weatherclear(INITIATOR_mood&lt;=0.5)->Too bright!</li>
+        <!--<li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>-->
         <!--<li>r_logentry->I am [INITIATOR_trait].</li>
         <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
         <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
