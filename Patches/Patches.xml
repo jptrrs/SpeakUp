@@ -6,23 +6,104 @@
     <value>
       
       <rulesStrings>
-        <li>r_logentry(WEATHER==clear)->[weatherclear]</li>
-        <li>weatherclear(INITIATOR_mood>=0.5)->I feel good!</li>
-        <li>weatherclear(INITIATOR_mood&lt;=0.5)->Too bright!</li>
-        <!--<li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>-->
-        <!--<li>r_logentry->I am [INITIATOR_trait].</li>
-        <li>r_logentry->My best skill is [INITIATOR_bestSkill].</li>
-        <li>r_logentry->My worst skill is [INITIATOR_worstSkill].</li>
-        <li>r_logentry->My passion is [INITIATOR_higherPassion].</li>
-        <li>r_logentry->Your mood: [RECIPIENT_mood].</li>-->
-        <!--<li>r_logentry->Your thought: [RECIPIENT_thought].</li>-->
-        <!--<li>r_logentry->You are [RECIPIENT_trait].</li>
-        <li>r_logentry->Your best skill is [RECIPIENT_bestSkill].</li>
-        <li>r_logentry->Your worst skill is [RECIPIENT_worstSkill].</li>
-        <li>r_logentry->Your passion is [RECIPIENT_higherPassion].</li>
-        <li>r_logentry->The weather is [WEATHER].</li>
+        <!--Weather - Clear-->
+		<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
+		<li>weather_clear(OUTDOORS==Yes,INITIATOR_mood>=0.5,tag=WeatherClearOutdoor)->Being [outdoors] with such a [nice] weather is [wonderful], [agree]?</li>
+		
+		<li>nice->pleasant</li> 
+		<li>nice->nice</li>
+		<li>nice->wonderful</li>
+		<li>nice->fair</li>
+		<li>nice->fine</li>
+		
+		<li>wonderful->great</li>
+		<li>wonderful->just great</li>
+		<li>wonderful->wonderful</li>
+		
+		<li>outdoors->outdoors</li>
+		<li>outdoors->in the open</li>
+		<li>outdoors->outside</li>
+		
+		<li>agree->isn't it</li>
+		<li>agree->right</li>
+		<li>agree->don't you agree</li>
+		
+		
+		<!--Weather - Fog-->
+		<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
+		
+			<!--Trait - Too smart-->
+			<li>weather_fog(INITIATOR_trait==too smart,tag=WeatherFogToosmart)->[fog_fact]</li>
+			<li>fog_fact(INITIATOR_intellectual_level>=10)->Fog is a visible aerosol consisting of tiny water droplets or ice crystals suspended in the air at or near the planet's surface.</li>
+			<li>fog_fact(INITIATOR_intellectual_level>=7)->Fog is sometimes considered a type of low-lying cloud usually resembling stratus.</li>
+			<li>fog_fact(INITIATOR_intellectual_level>=5)->Fog is heavily influenced by nearby bodies of water, topography and wind conditions.</li>
+			<li>fog_fact->Fog is known to show up when water vapor, or water in its gaseous form, condenses.</li>
+			<!--Trait - Wimp-->
+			<li>weather_fog(INITIATOR_trait==wimp,tag=WeatherFogWimp)->I'm [scared]... what if some [horrible] [monster] suddenly comes out of this [eerie] [mist]?</li>
+				<li>scared->so scared</li>
+				<li>scared->scared stiff</li>
+				<li>scared->scared witless</li>
+				<li>scared->shaking like a leaf</li>
+				<li>scared->terrified</li>
+				<li>scared->worried</li>
+	
+				<li>horrible->terrible</li>
+				<li>horrible->horrible</li>
+				<li>horrible->unholy</li>
+				<li>horrible->ugly</li>
+				<li>horrible->fearsome</li>
+				<li>horrible->frightening</li>
+				<li>horrible->ghastly</li>
+				<li>horrible->ghoulish</li>
+		
+				<li>monster->monster</li>
+				<li>monster->beast</li>
+				<li>monster->fiend</li>
+				<li>monster->abomination</li>
+				<li>monster->creature</li>
+				<li>monster->ghost</li>
+				<li>monster->alien</li>
+				
+				<li>eerie->strange</li>
+				<li>eerie->eerie</li>
+				<li>eerie->otherworldy</li>
+				<li>eerie->unearthly</li>
+				<li>eerie->spooky</li>
+				
+				<li>mist->mist</li>
+				<li>mist->fog</li>
+		
+			<!--Outdoors-->
+			<li>weather_fog(OUTDOORS==Yes,tag=WeatherFogOutdoors)->[weather_fog_outdoors]</li>
+			
+				<!--Mood-->
+				<li>weather_fog_outdoors(INITIATOR_mood>=0.5)->It's pretty foggy out here.</li>
+				<li>weather_fog_outdoors(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->This fog won't let me see a damn thing.</li>
+				<li>weather_fog_outdoors(INITIATOR_mood&lt;0.3)->Blasted fog! Can't see a bloody thing out here!</li>
+		
+			<!--Recipient's hunting skill-->
+			<li>weather_fog(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this fog means no hunting for you today?</li>
+        
+		
+		<!--TESTING-->
+		
+		<li>r_logentry->[INITIATOR_jobDefName]</li>
+		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
+        
+		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
+		<li>r_logentry->I truly love [INITIATOR_higherPassion]!</li>
+        <li>r_logentry->[INITIATOR_thought]</li>
+        <li>r_logentry->I'm really good at [INITIATOR_bestSkill].</li>
+        <li>r_logentry->I suck at [INITIATOR_worstSkill].</li>
+        <li>r_logentry->Hey [RECIPIENT_nameDef], I know you're [RECIPIENT_trait].</li>
+        <li>r_logentry->Hey [RECIPIENT_nameDef], I think you're really good at [RECIPIENT_bestSkill].</li>
+        <li>r_logentry->Hey [RECIPIENT_nameDef], I think you suck at [RECIPIENT_worstSkill].</li>
         <li>r_logentry->That's a pretty [NEAREST_art].</li>
-        <li>r_logentry->I wonder what that [NEAREST_plant] is good for.</li>-->
+        <li>r_logentry->Look at that beautiful [NEAREST_plant]!</li>
+		<li>r_logentry->The weather is [WEATHER].</li>
+		<li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>-->
+		
+		
       </rulesStrings>
       
     </value>
