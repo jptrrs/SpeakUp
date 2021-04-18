@@ -16,6 +16,8 @@ namespace SpeakUp
 
         public Pawn nextInitiator, nextRecipient;
 
+        private string tagToContinue = "continue";
+
         public Talk(string tag)
         {
             nextInitiator = Initiator;
@@ -23,21 +25,22 @@ namespace SpeakUp
             Reply(tag);
         }
 
-        public void MakeReply(InteractionDef intDef)
+        public void MakeReply(InteractionDef intDef, bool swap = true)
         {
             var time = GenTicks.TicksGame + interval;
             expireTick = time + 1;
             latestReplyCount += 1;
-            SwapRoles();
-            DialogManager.Scheduled.Add(new Statement(nextInitiator, nextRecipient, time, intDef, this, latestReplyCount));
+            if (swap) SwapRoles();
+            Scheduled.Add(new Statement(nextInitiator, nextRecipient, time, intDef, this, latestReplyCount));
         }
 
         public void Reply(string tag)
         {
             if (remainingReplies > 0 && Initiator.GetRegion() == Recipient.GetRegion())
             {
-                InteractionDef intDef = DefDatabase<InteractionDef>.GetNamed(tag);
-                if (intDef != null) MakeReply(intDef);
+                bool continuing = tag == tagToContinue;
+                InteractionDef intDef = continuing ? lastInteractionDef : DefDatabase<InteractionDef>.GetNamed(tag, false);
+                if (intDef != null) MakeReply(intDef, !continuing);
                 else Log.Warning($"[SpeakUp] {nextInitiator} talked about {tag}, but there isn't an appropriate interactionDef to respond.");
             }
         }

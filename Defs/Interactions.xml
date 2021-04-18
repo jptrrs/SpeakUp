@@ -62,5 +62,17 @@
       </rulesStrings>
     </logRulesInitiator>
   </InteractionDef>
-
+  
+  <InteractionDef ParentName="SpeakUpReply">
+    <defName>repeated</defName>
+    <label>not a reply</label>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(p=10,tag=continue)->I like to talk!</li>
+        <li>r_logentry(tag=continue)->I'm still talking</li>
+        <li>r_logentry(tag=continue)->I speak again.</li>
+        <li>r_logentry(tag=continue)->I speak once more.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
 </Defs>

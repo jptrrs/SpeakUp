@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -9,6 +10,7 @@ namespace SpeakUp
         public static List<Statement> Scheduled = new List<Statement>();
         public static List<Talk> CurrentTalks = new List<Talk>();
         public static Pawn Initiator, Recipient;
+        public static InteractionDef lastInteractionDef;
 
         public static void Ensue(List<string> tags)
         {

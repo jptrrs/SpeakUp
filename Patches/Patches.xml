@@ -7,7 +7,7 @@
       
       <rulesStrings>
         <!--Weather - Clear-->
-		<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
+		<!--<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
 		<li>weather_clear(OUTDOORS==Yes,INITIATOR_mood>=0.5,tag=WeatherClearOutdoor)->Being [outdoors] with such a [nice] weather is [wonderful], [agree]?</li>
 		
 		<li>nice->pleasant</li> 
@@ -26,19 +26,19 @@
 		
 		<li>agree->isn't it</li>
 		<li>agree->right</li>
-		<li>agree->don't you agree</li>
+		<li>agree->don't you agree</li>-->
 		
 		
 		<!--Weather - Fog-->
-		<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
+		<!--<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
 		
-			<!--Trait - Too smart-->
+			--><!--Trait - Too smart--><!--
 			<li>weather_fog(INITIATOR_trait==too smart,tag=WeatherFogToosmart)->[fog_fact]</li>
 			<li>fog_fact(INITIATOR_intellectual_level>=10)->Fog is a visible aerosol consisting of tiny water droplets or ice crystals suspended in the air at or near the planet's surface.</li>
 			<li>fog_fact(INITIATOR_intellectual_level>=7)->Fog is sometimes considered a type of low-lying cloud usually resembling stratus.</li>
 			<li>fog_fact(INITIATOR_intellectual_level>=5)->Fog is heavily influenced by nearby bodies of water, topography and wind conditions.</li>
 			<li>fog_fact->Fog is known to show up when water vapor, or water in its gaseous form, condenses.</li>
-			<!--Trait - Wimp-->
+			--><!--Trait - Wimp--><!--
 			<li>weather_fog(INITIATOR_trait==wimp,tag=WeatherFogWimp)->I'm [scared]... what if some [horrible] [monster] suddenly comes out of this [eerie] [mist]?</li>
 				<li>scared->so scared</li>
 				<li>scared->scared stiff</li>
@@ -73,21 +73,21 @@
 				<li>mist->mist</li>
 				<li>mist->fog</li>
 		
-			<!--Outdoors-->
+			--><!--Outdoors--><!--
 			<li>weather_fog(OUTDOORS==Yes,tag=WeatherFogOutdoors)->[weather_fog_outdoors]</li>
 			
-				<!--Mood-->
+				--><!--Mood--><!--
 				<li>weather_fog_outdoors(INITIATOR_mood>=0.5)->It's pretty foggy out here.</li>
 				<li>weather_fog_outdoors(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->This fog won't let me see a damn thing.</li>
 				<li>weather_fog_outdoors(INITIATOR_mood&lt;0.3)->Blasted fog! Can't see a bloody thing out here!</li>
 		
-			<!--Recipient's hunting skill-->
-			<li>weather_fog(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this fog means no hunting for you today?</li>
+			--><!--Recipient's hunting skill--><!--
+			<li>weather_fog(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this fog means no hunting for you today?</li>-->
         
 		
 		<!--TESTING-->
 		
-		<li>r_logentry->[INITIATOR_jobDefName]</li>
+		<li>r_logentry(tag=repeated)->Talk to me!</li>
 		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
         
 		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
