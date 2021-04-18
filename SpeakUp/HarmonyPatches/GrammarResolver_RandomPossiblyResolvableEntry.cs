@@ -30,11 +30,9 @@ namespace SpeakUp
             }
 
             //Warning to catch invalid keywords.
-            if (GenScene.InPlayScene)
+            if (Current.ProgramState == ProgramState.Playing)
             {
-                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"\n" +
-                            $"Constants are: {constants.ToStringSafeEnumerable()}\n" +
-                            $"Rules are: {___rules.Values.ToStringSafeEnumerable()}\n");
+                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"");
             }
         }
 
