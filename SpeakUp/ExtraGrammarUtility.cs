@@ -36,18 +36,24 @@ namespace SpeakUp
 
         public enum dayPeriod { morning, afternoon, evening, night }
 
-        public static IEnumerable<Rule> ExtraRules(Pawn initiator, Pawn recipient)
+        public static IEnumerable<Rule> ExtraRules()
         {
-            string initPrefix = "INITIATOR_", reciPrefix = "RECIPIENT_";
+            Pawn initiator = DialogManager.Initiator;
+            if (initiator == null) yield break;
 
             //pawn parameters
-            foreach (var rule in ExtraRulesForPawn(initPrefix, initiator, recipient))
+            if (PawnCheck())
             {
-                yield return rule;
-            }
-            foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient, initiator))
-            {
-                yield return rule;
+                Pawn recipient = DialogManager.Recipient;
+                string initPrefix = "INITIATOR_", reciPrefix = "RECIPIENT_";
+                foreach (var rule in ExtraRulesForPawn(initPrefix, initiator, recipient))
+                {
+                    yield return rule;
+                }
+                foreach (var rule in ExtraRulesForPawn(reciPrefix, recipient, initiator))
+                {
+                    yield return rule;
+                }
             }
 
             //climate
@@ -122,6 +128,7 @@ namespace SpeakUp
 
             //seated?
             yield return new Rule_String(symbol + "seated", Seated(pawn).ToStringYesNo());
+
         }
 
         private static string DayPeriod(Pawn p)
@@ -132,6 +139,17 @@ namespace SpeakUp
 			if (hour >= 18 && hour < 24) return dayPeriod.evening.ToString();
 			else return dayPeriod.night.ToString();
 		}
+
+        private static bool PawnCheck()
+        {
+            return
+                DialogManager.Initiator != null &&
+                DialogManager.Recipient != null &&
+
+                //Restricted to humanlike, for now:
+                DialogManager.Initiator.RaceProps?.Humanlike == true &&
+                DialogManager.Recipient.RaceProps?.Humanlike == true;
+        }
 
         private static bool Seated(Pawn p)
         {

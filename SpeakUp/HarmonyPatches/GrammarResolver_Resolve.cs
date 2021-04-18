@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
+using Verse;
 using Verse.Grammar;
 
 namespace SpeakUp
@@ -16,9 +17,9 @@ namespace SpeakUp
             if (rootKeyword == "r_logentry")
             {
                 List<Rule> rules = (List<Rule>)rulesInfo.GetValue(request);
-                if (DialogManager.Initiator.RaceProps?.Humanlike == true) //Restricted to humanlike, for now.
+                if (!rules.NullOrEmpty())
                 {
-                    rules.AddRange(ExtraGrammarUtility.ExtraRules(DialogManager.Initiator, DialogManager.Recipient));
+                    rules.AddRange(ExtraGrammarUtility.ExtraRules());
                 }
             }
         }

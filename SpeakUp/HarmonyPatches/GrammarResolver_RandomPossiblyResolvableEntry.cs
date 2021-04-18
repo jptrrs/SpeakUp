@@ -30,9 +30,9 @@ namespace SpeakUp
             }
 
             //Warning to catch invalid keywords.
-            if (Current.ProgramState == ProgramState.Playing)
+            if (Prefs.LogVerbose && Current.ProgramState == ProgramState.Playing)
             {
-                Log.Error($"[SpeakUp] Bad value found for \"{keyword}\"");
+                Log.Warning($"[SpeakUp] Bad value found for \"{keyword}\". Could be a typo!");
             }
         }
 
