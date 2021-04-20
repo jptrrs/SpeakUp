@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
-  <!--HOW TO CREATE DIALOGS USING RULESTRINGS
+	<!--HOW TO CREATE DIALOGS USING RULESTRINGS
   
   - Activate "Log Grammar Resolution" on the Development Mode View Settings (3rd icon at the top) and grab the log entry when a pawn says something to see a list of all possible parameters for that type of interaction (with this mod, both "Constants" and "Custom Rules" are available).
   
@@ -31,146 +30,150 @@
     <li>raintalk(INITIATOR_trait!=Pluviophile)->Damn this rain!</li>
     
     END OF INSTRUCTIONS-->
+	<InteractionDef Name="SpeakUpReply" Abstract="True">
+		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Salute</defName>
+		<label>reply to salute</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_mood>=0.7)->Good [DAYPERIOD] to you too, [RECIPIENT_nameDef]! [ask]</li>
+				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->Good [DAYPERIOD]. [ask]</li>
+				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Hmpf!</li>
+				<li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>
+				<li>ask(tag=WeatherAnswer)->Isn't it a lovely [DAYPERIOD]?</li>
+				<li>ask(tag=HowAreYou)->How are you?</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>HowAreYou</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_mood>=0.7,INITIATOR_opinion>=5,tag=HowAreYou2)->I'm feeling great! What about you?</li>
+				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7,INITIATOR_opinion>=5,tag=HowAreYou2)->I'm fine. What about you?</li>
+				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Could be better!</li>
+				<li>r_logentry(INITIATOR_mood&lt;0.3)->I hate my life!</li>
+				<li>r_logentry->[INITIATOR_thoughtText]</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>HowAreYou2</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_mood>=0.7,INITIATOR_opinion>=-15)->I'm feeling great!</li>
+				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7,INITIATOR_opinion>=-15)->I'm fine.</li>
+				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5,INITIATOR_opinion>=-15)->Could be better!</li>
+				<li>r_logentry(INITIATOR_mood&lt;0.3,INITIATOR_opinion>=-15)->I hate my life!</li>
+				<li>r_logentry(INITIATOR_opinion>=-15)->[INITIATOR_thoughtText]</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>HuntWithFog</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->You're right [RECIPIENT_nameDef], no hunting for me today. Too bad.</li>
+				<li>r_logentry(INITIATOR_shooting_level>=5,INITIATOR_animals_level>=5)->[RECIPIENT_nameDef], a skilled hunter like me doesn't need to wait for the perfect weather to hunt.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Eh, [RECIPIENT_nameDef] - you're right.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedBeauty</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->You're right, this place stinks!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherClear</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Yes [RECIPIENT_nameDef], a clear sky is always an inspiring sight.</li>
+				<li>r_logentry(INITIATOR_opinion>=15)->You're right, [RECIPIENT_nameDef].</li>
+				<li>r_logentry(INITIATOR_opinion&lt;=0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherFogOutdoors</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(DAYPERIOD==morning)->At least we have some sunlight to help us see through.</li>
+				<li>r_logentry(DAYPERIOD==morning)->With some luck, daylight should soon get rid of this fog.</li>
+				<li>r_logentry(DAYPERIOD==afternoon)->Let's hope this fog ends before evening - it's really getting difficult to see things.</li>
+				<li>r_logentry(DAYPERIOD==evening)->I can't see much either, I'm afraid.</li>
+				<li>r_logentry(DAYPERIOD==night)->Foggy nights are perfect for trouble - maybe we should get back inside?</li>
+				<li>r_logentry(INITIATOR_trait==pyromaniac)->I heard that bonfires help to dissipate fog.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherFogToosmart</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==too smart)->Correct, yet I do believe you wouldn't be able to determine its type. Well, I can: it's a [fog_type] fog.</li>
+				<li>fog_type(DAYPERIOD==evening)->radiation</li>
+				<li>fog_type(DAYPERIOD==night)->ground</li>
+				<li>fog_type->freezing</li>
+				<li>fog_type->frontal</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed the correct definition of fog.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait - fog is... what!?</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting.</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherFogWimp</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion&lt;10)->Come on, [RECIPIENT_nameDef] - stop being such a sissy! It's just fog!</li>
+				<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion>=15)->Don't worry, [RECIPIENT_nameDef] - if that happens, I'll just smash it out of existence!</li>
+				<li>r_logentry(INITIATOR_trait==wimp)->You're right, [RECIPIENT_nameDef] - this fog scares the hell out of me too!</li>
+				<li>r_logentry(INITIATOR_trait==wimp,INITIATOR_opinion>=15)->In that case, my dear [RECIPIENT_nameDef], we'll just make a run for it!</li>
+				<li>r_logentry(INITIATOR_opinion&lt;10)->[RECIPIENT_nameDef], don't be such a crybaby! It's fog - just fog!</li>
+				<li>r_logentry(INITIATOR_opinion>=15)->No need to be afraid, [RECIPIENT_nameDef]. It's just normal fog.</li>
+				<li>r_logentry->This fog could actually hide some danger, [RECIPIENT_nameDef] - especially at night...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 
-  <InteractionDef Name="SpeakUpReply" Abstract="True">
-    <symbol>Things/Mote/SpeechSymbols/Speech</symbol>
-  </InteractionDef>
-
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>Salute</defName>
-    <label>reply to salute</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry(INITIATOR_mood>=0.7)->Good [DAYPERIOD] to you too, [RECIPIENT_nameDef]! [ask]</li>
-        <li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->Good [DAYPERIOD]. [ask]</li>
-        <li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Hmpf!</li>
-        <li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>      
-		
-		<li>ask(tag=WeatherAnswer)->Isn't it a lovely [DAYPERIOD]?</li>
-		<li>ask(tag=HowAreYou)->How are you?</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>HowAreYou</defName>
-    <label>reply to How are you?</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry(INITIATOR_mood>=0.7,tag=HowAreYou)->I'm feeling great! What about you?</li>
-        <li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7,tag=HowAreYou)->I'm fine. What about you?</li>
-        <li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Could be better!</li>
-        <li>r_logentry(INITIATOR_mood&lt;0.3)->I hate my life!</li>      
-        <li>r_logentry->[INITIATOR_thought]</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>WeatherAnswer</defName>
-    <label>reply to Isn't it a lovely DAYPERIOD</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry(WEATHER==clear)->It is indeed!</li>
-		<li>r_logentry(WEATHER==clear)->Yes, a clear sky is always a good sight!</li>
-        <li>r_logentry(WEATHER==fog)->Well, this fog isn't helping. But if you say so...</li>
-		<li>r_logentry(WEATHER==rain)->With this rain? I doubt it!</li>
-		<li>r_logentry(WEATHER==rainy thunderstorm)->Why, yes [RECIPIENT_nameDef]! Perfect for getting hit by a lightning!</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>WeatherClearOutdoor</defName>
-    <label>reply to root</label>
-    <logRulesInitiator>
-      <rulesStrings>
-		<li>r_logentry(DAYPERIOD==morning)->Ahhh, breathing the crisp morning air, feeling the sun on your skin... it's just great!</li>
-		<li>r_logentry(DAYPERIOD==afternoon)->Sunny afternoons always make me smile.</li>
-		<li>r_logentry(DAYPERIOD==evening)->Yes, the evening landscape is really a pleasant sight in this weather.</li>
-		<li>r_logentry(DAYPERIOD==night)->Look up at that starry sky, it's so beautiful!</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>WeatherFogOutdoors</defName>
-    <label>reply to root</label>
-    <logRulesInitiator>
-      <rulesStrings>
-		<li>r_logentry(DAYPERIOD==morning)->At least we have some sunlight to help us see through.</li>
-		<li>r_logentry(DAYPERIOD==morning)->With some luck, daylight should get rid of it soon.</li>
-		<li>r_logentry(DAYPERIOD==afternoon)->Let's hope this fog ends before evening - it's really getting difficult to see things.</li>
-		<li>r_logentry(DAYPERIOD==evening)->I can't see much either, I'm afraid.</li>
-		<li>r_logentry(DAYPERIOD==night)->Foggy nights are perfect for trouble - maybe we should get back inside?</li>
-		<li>r_logentry(INITIATOR_trait==pyromaniac)->I heard that bonfires help to dissipate fog.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>WeatherFogToosmart</defName>
-    <label>reply to root</label>
-    <logRulesInitiator>
-      <rulesStrings>
-		<li>r_logentry(INITIATOR_trait==too smart)->Correct, yet I do believe you wouldn't be able to determine its type. Well, I can: it's a [fog_type] fog.</li>
-		<li>fog_type(DAYPERIOD==evening)->radiation</li>
-		<li>fog_type(DAYPERIOD==night)->ground</li>
-		<li>fog_type->freezing</li>
-		<li>fog_type->frontal</li>
-		
-		<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed the correct definition of fog.</li>
-		<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
-		<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
-		<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait - fog is... what!?</li>
-		
-		<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting.</li>
-		<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
-		
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>WeatherFogWimp</defName>
-    <label>reply to root</label>
-    <logRulesInitiator>
-      <rulesStrings>
-		<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion&lt;10)->Come on, [RECIPIENT_nameDef] - stop being such a sissy! It's just fog!</li>
-		<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion>=15)->Don't worry, [RECIPIENT_nameDef] - if that happens, I'll just smash it out of existence!</li>
-		
-		<li>r_logentry(INITIATOR_trait==wimp)->You're right, [RECIPIENT_nameDef] - this fog scares the hell out of me too!</li>
-		<li>r_logentry(INITIATOR_trait==wimp,INITIATOR_opinion>=15)->In that case, my dear [RECIPIENT_nameDef], we'll just make a run for it!</li>
-		
-		<li>r_logentry(INITIATOR_opinion&lt;10)->[RECIPIENT_nameDef], don't be such a crybaby! It's fog - just fog!</li>
-		<li>r_logentry(INITIATOR_opinion>=15)->No need to be afraid, [RECIPIENT_nameDef]. It's just normal fog.</li>
-		<li>r_logentry->This fog could actually hide some danger, [RECIPIENT_nameDef] - especially at night...</li>
-		
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>HuntWithFog</defName>
-    <label>reply to root</label>
-    <logRulesInitiator>
-      <rulesStrings>
-		<li>r_logentry->You're right [RECIPIENT_nameDef], no hunting for me today. Too bad.</li>
-		<li>r_logentry(INITIATOR_shooting_level>=5,INITIATOR_animals_level>=5)->[RECIPIENT_nameDef], a skilled hunter like me doesn't need to wait for the perfect weather to hunt.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-  
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>repeated</defName>
-    <label>not a reply</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry(p=10,tag=continue)->I like to talk!</li>
-        <li>r_logentry(tag=continue)->I'm still talking</li>
-        <li>r_logentry(tag=continue)->I speak again.</li>
-        <li>r_logentry(tag=continue)->I speak once more.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
+	
+	<!--ABANDONWARE
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherClearOutdoors</defName>
+		<label>reply to root</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(DAYPERIOD==morning)->Ahhh, breathing the crisp morning air, feeling the sun on your skin... it's just great!</li>
+				<li>r_logentry(DAYPERIOD==afternoon)->Sunny afternoons always make me smile.</li>
+				<li>r_logentry(DAYPERIOD==evening)->Yes, the evening landscape is really a pleasant sight in this weather.</li>
+				<li>r_logentry(DAYPERIOD==night)->Look up at that starry sky, it's so beautiful!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	-->
 </Defs>
