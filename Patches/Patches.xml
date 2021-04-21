@@ -3,9 +3,13 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
-			<rulesStrings>
-				<!--Thought-->
-					<!--AteWithoutTable-->
+      <rulesStrings>
+        <li>r_logentry(INITIATOR_gender==Male)->Sou um belo rapaz. [INITIATOR_pronoun]</li>
+        <li>r_logentry(INITIATOR_gender==Female)->Sou uma gentil moça. [INITIATOR_pronoun]</li>
+      </rulesStrings>
+			<!--<rulesStrings>
+				--><!--Thought--><!--
+					--><!--AteWithoutTable--><!--
 					<li>r_logentry(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable)->[thought_atewotable]</li>
 					<li>thought_atewotable->[INITIATOR_thoughtText]</li>
 					<li>thought_atewotable->It'd be nice getting a new table. Eating off the ground is not nice.</li>
@@ -13,18 +17,18 @@
 					<li>thought_atewotable(INITIATOR_construction_level>=4)->I could build a new table. We [surely] need one.</li>
 					<li>thought_atewotable(INITIATOR_construction_passion==Minor)->I think I'll build a new table next.</li>
 					<li>thought_atewotable(INITIATOR_construction_passion==Major)->We do need a new table and I'll be all too happy to build a new one!</li>
-					<!--EnvironmentDark-->
-					<!--Expectations-->
-					<!--MoodOffsetTorturedArtist-->
-					<!--NeedBeauty [INCOMPLETO!precisa cuidar do LABEL]***DEBUG***
+					--><!--EnvironmentDark--><!--
+					--><!--Expectations--><!--
+					--><!--MoodOffsetTorturedArtist--><!--
+					--><!--NeedBeauty [INCOMPLETO!precisa cuidar do LABEL]***DEBUG***
 					<li>r_logentry(INITIATOR_thoughtDefName==NeedBeauty,tag=ReactToThought_NeedBeauty)->[thought_needbeauty]</li>
-					<li>thought_needbeauty->[INITIATOR_thoughtText]</li>-->
-					<!--NeedComfort-->
-					<!--NeedJoy-->
-					<!--NeedRoomSize-->
-					<!--NewColonyOptimism-->
-					<!--Sick-->
-					<!--SleepDisturbed-->
+					<li>thought_needbeauty->[INITIATOR_thoughtText]</li>--><!--
+					--><!--NeedComfort--><!--
+					--><!--NeedJoy--><!--
+					--><!--NeedRoomSize--><!--
+					--><!--NewColonyOptimism--><!--
+					--><!--Sick--><!--
+					--><!--SleepDisturbed--><!--
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed]</li>
 					<li>thought_sleepdisturbed->[INITIATOR_thoughtText]</li>
 					<li>thought_sleepdisturbed->I was woke up by somebody walking near my bed. I wish I could sleep in a private room.</li>					
@@ -32,8 +36,8 @@
 					<li>thought_sleepdisturbed(INITIATOR_construction_level>=4)->Considering how bad I sleep by sharing rooms with others, I could plan and build my own private room.</li>
 					<li>thought_sleepdisturbed(INITIATOR_construction_passion==Minor)->Since room sharing won't let me sleep right, I'll plan and build my own private room next.</li>
 					<li>thought_sleepdisturbed(INITIATOR_construction_passion==Major)->Why share my room with others, when I can plan and build my own private room? I'll get it done in no time!</li>		
-					<!--SleptInBarracks-->
-					<!--SleptInCold-->
+					--><!--SleptInBarracks--><!--
+					--><!--SleptInCold--><!--
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold,tag=ReactToThought_SleptInCold)->[thought_sleptincold]</li>
 					<li>thought_sleptincold->[INITIATOR_thoughtText]</li>
 					<li>thought_sleptincold->We should find some way to heat our rooms - last time I woke up, I felt numb and very cold.</li>
@@ -41,7 +45,7 @@
 					<li>thought_sleptincold(INITIATOR_construction_level>=5)->I could build a new heat source. We [surely] need one.</li>
 					<li>thought_sleptincold(INITIATOR_construction_passion==Minor)->I think I'll build a new heat source next.</li>
 					<li>thought_sleptincold(INITIATOR_construction_passion==Major)->We do need a new heat source and I'll be all too happy to build a new one!</li>
-					<!--SleptOnGround-->
+					--><!--SleptOnGround--><!--
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptOnGround,tag=ReactToThought_SleptOnGround)->[thought_sleptonground]</li>
 					<li>thought_sleptonground->[INITIATOR_thoughtText]</li>
 					<li>thought_sleptonground->It'd be nice getting a bed. Sleeping on the ground is [humiliating].</li>
@@ -49,8 +53,8 @@
 					<li>thought_sleptonground(INITIATOR_construction_level>=4)->I could build a new bed. We [surely] need one.</li>
 					<li>thought_sleptonground(INITIATOR_construction_passion==Minor)->I think I'll build a new bed next.</li>
 					<li>thought_sleptonground(INITIATOR_construction_passion==Major)->We do need a new bed and I'll be all too happy to build a new one!</li>
-					<!--SleptOutside-->
-				<!--Thought/Mood***DEBUG***
+					--><!--SleptOutside--><!--
+				--><!--Thought/Mood***DEBUG***
 				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [whatsup]</li>
 				<li>whatsup->What's up?</li>
 				<li>whatsup->What's on your mind?</li>
@@ -61,51 +65,51 @@
 				<li>whatsup(RECIPIENT_mood&lt;0.5;)->Are you OK?</li>
 				<li>whatsup(RECIPIENT_mood&lt;0.5;)->What's the matter?</li>
 				<li>whatsup(RECIPIENT_mood>=0.8;)->What's that smile about?</li>
-				<li>whatsup(RECIPIENT_mood>=0.8;)->Why the happy face?</li>-->
-				<!--Weather==Clear-->
+				<li>whatsup(RECIPIENT_mood>=0.8;)->Why the happy face?</li>--><!--
+				--><!--Weather==Clear--><!--
 				<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
-					<!--Good temperature for humans-->
+					--><!--Good temperature for humans--><!--
 					<li>weather_clear(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_clear_goodtemp]</li>
-						<!--Indoors-->
+						--><!--Indoors--><!--
 						<li>weather_clear_goodtemp(OUTDOORS==No,tag=WeatherClearGoodtempIndoors)->[weather_clear_goodtemp_indoors]</li>
 						<li>weather_clear_goodtemp_indoors->The weather outside is [nice].</li>
-						<!--Outdoors-->
+						--><!--Outdoors--><!--
 						<li>weather_clear_goodtemp(OUTDOORS==Yes,tag=WeatherClearGoodtempOutdoors)->[weather_clear_goodtemp_outdoors]</li>
 						<li>weather_clear_goodtemp_outdoors->Such a [nice] weather... let's hope it stays so.</li>
 						<li>weather_clear_goodtemp_outdoors->It certainly helps to have such a [nice] weather.</li>
 						<li>weather_clear_goodtemp_outdoors->This [nice] weather is good for our morale.</li>
-							<!--Initiator mood-->
+							--><!--Initiator mood--><!--
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.7)->What a [nice] weather we're having!</li>
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood&lt;=0.4)->The weather is [nice], at least.</li>
-				<!--Weather==Fog-->
+				--><!--Weather==Fog--><!--
 				<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
-					<!--Recipient's hunting skill-->
+					--><!--Recipient's hunting skill--><!--
 					<li>weather_fog(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this fog means no hunting for you today?</li>
-					<!--Good temperature for humans-->
+					--><!--Good temperature for humans--><!--
 					<li>weather_fog(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_fog_goodtemp]</li>
-						<!--Trait==Too smart-->
+						--><!--Trait==Too smart--><!--
 						<li>weather_fog_goodtemp(INITIATOR_trait==too smart,tag=WeatherFogToosmart)->[fog_fact]</li>
 						<li>fog_fact(INITIATOR_intellectual_level>=10)->Fog is a visible aerosol consisting of tiny water droplets or ice crystals suspended in the air at or near the planet's surface.</li>
 						<li>fog_fact(INITIATOR_intellectual_level>=7)->Fog is sometimes considered a type of low-lying cloud usually resembling stratus.</li>
 						<li>fog_fact(INITIATOR_intellectual_level>=5)->Fog is heavily influenced by nearby bodies of water, topography and wind conditions.</li>
 						<li>fog_fact->Fog is known to show up when water vapor, or water in its gaseous form, condenses.</li>
-						<!--Trait==Wimp-->
+						--><!--Trait==Wimp--><!--
 						<li>weather_fog_goodtemp(INITIATOR_trait==wimp,tag=WeatherFogWimp)->I'm [scared]... what if some [horrible] [monster] suddenly comes out of this [eerie] [mist]?</li>
-						<!--Outdoors-->
+						--><!--Outdoors--><!--
 						<li>weather_fog_goodtemp(OUTDOORS==Yes,tag=WeatherFogGoodtempOutdoors)->[weather_fog_goodtemp_outdoors]</li>
-							<!--Initiator mood-->
+							--><!--Initiator mood--><!--
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.5)->It's pretty foggy out here.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->This fog won't let me see a damn thing.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood&lt;0.3)->Blasted fog! Can't see a bloody thing out here!</li>
 							
-				<!--Dictionary wildcards-->
-				<!--eerie-->
+				--><!--Dictionary wildcards--><!--
+				--><!--eerie--><!--
 				<li>eerie->strange</li>
 				<li>eerie->eerie</li>
 				<li>eerie->otherworldy</li>
 				<li>eerie->unearthly</li>
 				<li>eerie->spooky</li>
-				<!--horrible-->
+				--><!--horrible--><!--
 				<li>horrible->terrible</li>
 				<li>horrible->horrible</li>
 				<li>horrible->unholy</li>
@@ -114,7 +118,7 @@
 				<li>horrible->frightening</li>
 				<li>horrible->ghastly</li>
 				<li>horrible->ghoulish</li>
-				<!--humiliating-->
+				--><!--humiliating--><!--
 				<li>humiliating->humiliating</li>
 				<li>humiliating->demeaning</li>
 				<li>humiliating->embarassing</li>
@@ -123,10 +127,10 @@
 				<li>humiliating(INITIATOR_intellectual_level>=10)->discomfiting</li>
 				<li>humiliating(INITIATOR_intellectual_level>=10)->disgraceful</li>
 				<li>humiliating(INITIATOR_intellectual_level>=15)->ignominous</li>
-				<!--mist-->
+				--><!--mist--><!--
 				<li>mist->mist</li>
 				<li>mist->fog</li>				
-				<!--monster-->
+				--><!--monster--><!--
 				<li>monster->monster</li>
 				<li>monster->beast</li>
 				<li>monster->fiend</li>
@@ -134,21 +138,21 @@
 				<li>monster->creature</li>
 				<li>monster->ghost</li>
 				<li>monster->alien</li>				
-				<!--nice (weather)-->
+				--><!--nice (weather)--><!--
 				<li>nice->nice</li>
 				<li>nice->good</li>
 				<li>nice->pleasant</li>
 				<li>nice->wonderful</li>
 				<li>nice->fair</li>
 				<li>nice->fine</li>
-				<!--scared-->
+				--><!--scared--><!--
 				<li>scared->so scared</li>
 				<li>scared->scared stiff</li>
 				<li>scared->scared witless</li>
 				<li>scared->shaking like a leaf</li>
 				<li>scared->terrified</li>
 				<li>scared->worried</li>
-				<!--surely-->
+				--><!--surely--><!--
 				<li>surely->surely</li>
 				<li>surely->certainly</li>
 				<li>surely->obviously</li>
@@ -157,14 +161,14 @@
 				<li>surely(INITIATOR_intellectual_level>=10)->unquestionably</li>
 				<li>surely(INITIATOR_trait==too smart)->undeniably</li>
 				
-				<!--TESTING
+				--><!--TESTING
 				<li>r_logentry->[INITIATOR_jobDefName]</li>
 				<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
 				<li>r_logentry(INITIATOR_gender!=Male)->Sou uma gentil moça.</li>
-				<li>r_logentry(tag=ReactToThought)->[INITIATOR_thoughtDefName]</li>-->
+				<li>r_logentry(tag=ReactToThought)->[INITIATOR_thoughtDefName]</li>--><!--
 					
-		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
-		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
+		--><!--<li>r_logentry->I am [INITIATOR_trait].</li>--><!--
+		--><!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
 		<li>r_logentry->I truly love [INITIATOR_higherPassion]!</li>
         <li>r_logentry->I'm really good at [INITIATOR_bestSkill].</li>
         <li>r_logentry->I suck at [INITIATOR_worstSkill].</li>
@@ -172,17 +176,17 @@
         <li>r_logentry->Hey [RECIPIENT_nameDef], I think you're really good at [RECIPIENT_bestSkill].</li>
         <li>r_logentry->Hey [RECIPIENT_nameDef], I think you suck at [RECIPIENT_worstSkill].</li>
         <li>r_logentry->That's a pretty [NEAREST_art].</li>
-        <li>r_logentry->Look at that beautiful [NEAREST_plant]!</li>-->
+        <li>r_logentry->Look at that beautiful [NEAREST_plant]!</li>--><!--
 		
-		<!--ABANDONWARE-->
-		<!--
+		--><!--ABANDONWARE--><!--
+		--><!--
 		<li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
 		<li>r_logentry(INITIATOR_opinion>=10)->I like you!</li>
 		<li>r_logentry(INITIATOR_opinion&lt;-10)->I dislike you!</li>
 		<li>r_logentry(INITIATOR_opinion>=-10,INITIATOR_opinion&lt;10)->You are nothing to me.</li>
-		-->
-					<!--Outdoors-->
-					<!--<li>weather_clear(OUTDOORS==Yes,INITIATOR_trait!=undergrounder,RECIPIENT_trait!=undergrounder,tag=WeatherClearOutdoors)->[weather_clear_outdoors]</li>
+		--><!--
+					--><!--Outdoors--><!--
+					--><!--<li>weather_clear(OUTDOORS==Yes,INITIATOR_trait!=undergrounder,RECIPIENT_trait!=undergrounder,tag=WeatherClearOutdoors)->[weather_clear_outdoors]</li>
 					<li>weather_clear_outdoors(INITIATOR_mood>=0.5)->Being [outdoors] with such a [nice] weather is [wonderful], [agree]?</li>
 					<li>weather_clear_outdoors->Do you enjoy being [outdoors]?</li>
 					<li>nice->pleasant</li>
@@ -199,8 +203,8 @@
 					<li>agree->isn't it</li>
 					<li>agree->right</li>
 					<li>agree->don't you agree</li>
-		-->
-			</rulesStrings>
+		--><!--
+			</rulesStrings>-->
 		</value>
 	</Operation>
 </Patch>
