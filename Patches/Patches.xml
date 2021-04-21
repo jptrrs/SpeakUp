@@ -200,7 +200,9 @@
 					<li>agree->right</li>
 					<li>agree->don't you agree</li>
 		-->
-			</rulesStrings>
+        <li>r_logentry(priority=0)->Me dá alguma coisa pra falar, Sérgio!</li>
+
+      </rulesStrings>
 		</value>
 	</Operation>
 </Patch>
