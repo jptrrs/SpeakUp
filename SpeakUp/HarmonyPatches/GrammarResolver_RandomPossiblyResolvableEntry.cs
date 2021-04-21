@@ -11,7 +11,7 @@ namespace SpeakUp
     [HarmonyPatch(typeof(GrammarResolver), nameof(GrammarResolver.RandomPossiblyResolvableEntry))]
     public class GrammarResolver_RandomPossiblyResolvableEntry
     {
-        public static Dictionary<string, string> CurrentRules = new Dictionary<string, string>();
+        public static List<KeyValuePair<string, string>> CurrentRules = new List<KeyValuePair<string, string>>();
         private static FieldInfo outputInfo = AccessTools.Field(typeof(Rule_String), nameof(Rule_String.output));
 
         public static void Prefix(string keyword, Dictionary<string, string> constants, List<string> extraTags, List<string> resolvedTags, Dictionary<string, List<GrammarResolver.RuleEntry>> ___rules, ref GrammarResolver.RuleEntry __result)
@@ -21,10 +21,7 @@ namespace SpeakUp
             {
                 foreach (Rule_String rule in ___rules.Values.SelectMany(x => x).Where(x => x.rule is Rule_String).Select(x => x.rule))
                 {
-                    if (!CurrentRules.ContainsKey(keyword))
-                    {
-                        CurrentRules.SetOrAdd(rule.keyword, (string)outputInfo.GetValue(rule));
-                    }
+                    CurrentRules.Add(new KeyValuePair<string, string>(rule.keyword, (string)outputInfo.GetValue(rule)));
                 }
                 return;
             }

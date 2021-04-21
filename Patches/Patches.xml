@@ -4,8 +4,10 @@
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
       <rulesStrings>
-        <li>r_logentry(INITIATOR_gender==Male)->Sou um belo rapaz. [INITIATOR_pronoun]</li>
-        <li>r_logentry(INITIATOR_gender==Female)->Sou uma gentil moça. [INITIATOR_pronoun]</li>
+        <li>r_logentry(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable)->Ate without table.</li>
+        <li>r_logentry(INITIATOR_thoughtDefName!=AteWithoutTable,tag=ReactToThought_AteWithoutTable)->Cool about tables.</li>
+        <!--<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
+        <li>r_logentry(INITIATOR_gender!=Male)->Sou uma gentil moça.</li>-->
       </rulesStrings>
 			<!--<rulesStrings>
 				--><!--Thought--><!--
