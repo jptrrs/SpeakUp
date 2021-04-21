@@ -87,12 +87,18 @@ namespace SpeakUp
             //thoughts
             List<Thought> thoughts = new List<Thought>();
             pawn.needs.mood.thoughts.GetAllMoodThoughts(thoughts);
-            foreach (var thought in thoughts.Where(x => x.CurStage != null && x.CurStage.description != null))
+            List<string> texts = new List<string>(); 
+            foreach (var thought in thoughts)
             {
                 yield return new Rule_String(symbol + "thoughtDefName", thought.def.defName);
-                yield return new Rule_String(symbol + "thoughtLabel", thought.CurStage.label);
+                if (thought.CurStage != null)
+                {
+                    yield return new Rule_String(symbol + "thoughtLabel", thought.CurStage.label);
+                    if (!thought.CurStage.description.NullOrEmpty()) texts.Add(thought.CurStage.description);
+                }
                 yield return new Rule_String(symbol + "thoughtText", thought.CurStage.description);
             }
+            yield return new Rule_String(symbol + "thoughtText", texts.RandomElement());
 
             //opinion
             yield return new Rule_String(symbol + "opinion", pawn.relations.OpinionOf(other).ToString());
