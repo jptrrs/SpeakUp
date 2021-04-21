@@ -90,6 +90,7 @@ namespace SpeakUp
             foreach (var thought in thoughts.Where(x => x.CurStage != null && x.CurStage.description != null))
             {
                 yield return new Rule_String(symbol + "thoughtDefName", thought.def.defName);
+                yield return new Rule_String(symbol + "thoughtLabel", thought.CurStage.label);
                 yield return new Rule_String(symbol + "thoughtText", thought.CurStage.description);
             }
 
