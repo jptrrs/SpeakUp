@@ -50,7 +50,7 @@
 					<li>thought_sleptonground(INITIATOR_construction_passion==Minor)->I think I'll build a new bed next.</li>
 					<li>thought_sleptonground(INITIATOR_construction_passion==Major)->We do need a new bed and I'll be all too happy to build a new one!</li>
 					<!--SleptOutside-->
-				<!--Thought/Mood***DEBUG***
+				<!--Thought/Mood***DISATTIVATO PER TEST***
 				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [whatsup]</li>
 				<li>whatsup->What's up?</li>
 				<li>whatsup->What's on your mind?</li>
@@ -97,7 +97,13 @@
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.5)->It's pretty foggy out here.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->This fog won't let me see a damn thing.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood&lt;0.3)->Blasted fog! Can't see a bloody thing out here!</li>
-							
+				<!--Weather==Rain-->
+				<li>r_logentry(WEATHER==rain)->[weather_rain]</li>
+					<!--Good temperature for humans-->
+					<li>weather_rain(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_rain_goodtemp]</li>
+						<!--Indoors-->
+						<li>weather_rain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
+						<li>weather_rain_goodtemp_indoors->It's raining.</li>
 				<!--Dictionary wildcards-->
 				<!--eerie-->
 				<li>eerie->strange</li>

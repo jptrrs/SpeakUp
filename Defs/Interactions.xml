@@ -170,6 +170,7 @@
 				<li>annoying->infuriating</li>
 				<li>annoying->maddening</li>
 				<li>annoying->bothersome</li>
+				<li>annoying->unacceptable</li>
 				<li>for_you->.</li>
 				<li>for_you(INITIATOR_opinion>=0)-> for you.</li>
 				<li>for_you(INITIATOR_opinion>=0,INITIATOR_mood>=0.5)-> for you!</li>
@@ -304,7 +305,30 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>WeatherRainGoodtempIndoors</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->I hope I won't have to go outside.</li>
+				<li>r_logentry(INITIATOR_trait==depressive)->Rain pouring into my soul, drowning any chance of happiness.</li>
+				<li>r_logentry(INITIATOR_trait==gourmand)->I hope this humidity won't set back the cooking and ruin our next meals.</li>
+				<li>r_logentry(INITIATOR_trait==night owl)->The sound of rain is so calming, especially at night.</li>
+				<li>r_logentry(INITIATOR_trait==nudist)->If we could just drop the need for clothes, we could just get out there and enjoy the gentle drops on our skin.</li>
+				<li>r_logentry(INITIATOR_trait==pyromaniac)->I just don't like rain.</li>
+				<li>r_logentry(INITIATOR_trait==pyromaniac)->Hope it stops soon - I prefer dry weather.</li>
+				<li>r_logentry(INITIATOR_trait==undergrounder)->It's so good being inside!</li>
+				<li>r_logentry(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to go outside and catch a cold or something.</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Luckily we're inside, all set and cozy.</li>
+				<li>r_logentry(TEMPERATURE>26)->It's so hot in here I'd rather drench myself out there to cool down!</li>
+				<li>r_logentry(INITIATOR_plants_level>=5)->A gentle rain like this is great for the plants out there.</li>
+				<li>r_logentry(INITIATOR_plants_level>=5)->Good - I won't have to water the fields myself.</li>
+				<li>r_logentry(INITIATOR_plants_passion==Minor)->Nature's blessing for all the thirsty plants.</li>
+				<li>r_logentry(INITIATOR_plants_passion==Major)->That's just perfect for the fields!</li>					
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	
 	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
