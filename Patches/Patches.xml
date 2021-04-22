@@ -7,12 +7,15 @@
 				<!--Thought-->
 					<!--AteWithoutTable-->
 					<li>r_logentry(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable)->[thought_atewotable]</li>
-					<li>thought_atewotable->[INITIATOR_thoughtText]</li>
-					<li>thought_atewotable->It'd be nice getting a new table. Eating off the ground is not nice.</li>
-					<li>thought_atewotable->We surely don't have enough tables around here.</li>
-					<li>thought_atewotable(INITIATOR_construction_level>=4)->I could build a new table. We [surely] need one.</li>
-					<li>thought_atewotable(INITIATOR_construction_passion==Minor)->I think I'll build a new table next.</li>
-					<li>thought_atewotable(INITIATOR_construction_passion==Major)->We do need a new table and I'll be all too happy to build a new one!</li>
+						<!--Initiator is not skilled in construction-->
+						<li>thought_atewotable(INITIATOR_construction_level&lt;4)->[thought_atewotable_construction_unskilled]</li>
+						<li>thought_atewotable_construction_unskilled->We [surely] don't have enough tables around here. [try_ask_for_construction]</li>
+						<li>thought_atewotable_construction_unskilled->Eating off the ground is [annoying]. It'd be nice getting a new table. [try_ask_for_construction]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_atewotable(INITIATOR_construction_level>=4)->[thought_atewotable_construction_skilled]</li>
+						<li>thought_atewotable_construction_skilled->I could build a new table. We [surely] lack one.</li>
+						<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll build a new table next. We don't have enough.</li>
+						<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a new table - we [surely] lack one!</li>
 					<!--EnvironmentDark-->
 					<!--Expectations-->
 					<!--MoodOffsetTorturedArtist-->
@@ -26,29 +29,38 @@
 					<!--Sick-->
 					<!--SleepDisturbed-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed]</li>
-					<li>thought_sleepdisturbed->[INITIATOR_thoughtText]</li>
-					<li>thought_sleepdisturbed->I was woke up by somebody walking near my bed. I wish I could sleep in a private room.</li>					
-					<li>thought_sleepdisturbed->Somebody made a loud noise and woke me up while I was having a [nice] dream.</li>
-					<li>thought_sleepdisturbed(INITIATOR_construction_level>=4)->Considering how bad I sleep by sharing rooms with others, I could plan and build my own private room.</li>
-					<li>thought_sleepdisturbed(INITIATOR_construction_passion==Minor)->Since room sharing won't let me sleep right, I'll plan and build my own private room next.</li>
-					<li>thought_sleepdisturbed(INITIATOR_construction_passion==Major)->Why share my room with others, when I can plan and build my own private room? I'll get it done in no time!</li>		
+						<!--Initiator is not skilled in construction-->
+						<li>thought_sleepdisturbed(INITIATOR_construction_level&lt;4)->[thought_sleepdisturbed_construction_unskilled]</li>
+						<li>thought_sleepdisturbed_construction_unskilled->I was woke up by somebody walking near my bed. I wish I could sleep in a private room. [try_ask_for_construction]</li>
+						<li>thought_sleepdisturbed_construction_unskilled->Somebody entered my room while I was having a [nice] dream and woke me up. I wish I had my own private room. [try_ask_for_construction]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_sleepdisturbed(INITIATOR_construction_level>=4)->[thought_sleepdisturbed_construction_skilled]</li>
+						<li>thought_sleepdisturbed_construction_skilled->Sharing rooms with others is [annoying]. I could plan and build my own private room.</li>
+						<li>thought_sleepdisturbed_construction_skilled(INITIATOR_construction_passion==Minor)->Room sharing won't let me sleep well. I'm eager to plan and build my own room to fix that.</li>
+						<li>thought_sleepdisturbed_construction_skilled(INITIATOR_construction_passion==Major)->Room sharing is [annoying]! Why share my room when I can plan and build my own?</li>
 					<!--SleptInBarracks-->
 					<!--SleptInCold-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold,tag=ReactToThought_SleptInCold)->[thought_sleptincold]</li>
-					<li>thought_sleptincold->[INITIATOR_thoughtText]</li>
-					<li>thought_sleptincold->We should find some way to heat our rooms - last time I woke up, I felt numb and very cold.</li>
-					<li>thought_sleptincold->We surely don't have enough heating around here.</li>
-					<li>thought_sleptincold(INITIATOR_construction_level>=5)->I could build a new heat source. We [surely] need one.</li>
-					<li>thought_sleptincold(INITIATOR_construction_passion==Minor)->I think I'll build a new heat source next.</li>
-					<li>thought_sleptincold(INITIATOR_construction_passion==Major)->We do need a new heat source and I'll be all too happy to build a new one!</li>
+						<!--Initiator is not skilled in construction-->
+						<li>thought_sleptincold(INITIATOR_construction_level&lt;4)->[thought_sleptincold_construction_unskilled]</li>
+						<li>thought_sleptincold_construction_unskilled->I slept in a cold room. I wish it had a proper heat source. [try_ask_for_construction]</li>
+						<li>thought_sleptincold_construction_unskilled->The room I slept in was cold and numbing. It [surely] lacks a proper heat source. [try_ask_for_construction]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_sleptincold(INITIATOR_construction_level>=4)->[thought_sleptincold_construction_skilled]</li>
+						<li>thought_sleptincold_construction_skilled->I slept in a cold room. I could [surely] improve it with a new heat source.</li>
+						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Minor)->I slept in the cold. That's [annoying] - and I'm eager to build a heat source to fix that.</li>
+						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Major)->The room I slept in needs more heating - and I'd love to build a heat source to fix that!</li>					
 					<!--SleptOnGround-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptOnGround,tag=ReactToThought_SleptOnGround)->[thought_sleptonground]</li>
-					<li>thought_sleptonground->[INITIATOR_thoughtText]</li>
-					<li>thought_sleptonground->It'd be nice getting a bed. Sleeping on the ground is [humiliating].</li>
-					<li>thought_sleptonground->We surely don't have enough beds around here.</li>
-					<li>thought_sleptonground(INITIATOR_construction_level>=4)->I could build a new bed. We [surely] need one.</li>
-					<li>thought_sleptonground(INITIATOR_construction_passion==Minor)->I think I'll build a new bed next.</li>
-					<li>thought_sleptonground(INITIATOR_construction_passion==Major)->We do need a new bed and I'll be all too happy to build a new one!</li>
+						<!--Initiator is not skilled in construction-->
+						<li>thought_sleptonground(INITIATOR_construction_level&lt;4)->[thought_sleptonground_construction_unskilled]</li>
+						<li>thought_sleptonground_construction_unskilled->We [surely] don't have enough beds around here. [try_ask_for_construction]</li>
+						<li>thought_sleptonground_construction_unskilled->Sleeping on the ground is [humiliating]. It'd be nice getting a bed. [try_ask_for_construction]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_sleptonground(INITIATOR_construction_level>=4)->[thought_sleptonground_construction_skilled]</li>
+						<li>thought_sleptonground_construction_skilled->I could build a new bed. We [surely] lack one.</li>
+						<li>thought_sleptonground_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll build a new bed next. We don't have enough.</li>
+						<li>thought_sleptonground_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a new bed - we [surely] lack one!</li>
 					<!--SleptOutside-->
 				<!--Thought/Mood***DISATTIVATO PER TEST***
 				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [whatsup]</li>
@@ -71,12 +83,12 @@
 						<li>weather_clear_goodtemp_indoors->The weather outside is [nice].</li>
 						<!--Outdoors-->
 						<li>weather_clear_goodtemp(OUTDOORS==Yes,tag=WeatherClearGoodtempOutdoors)->[weather_clear_goodtemp_outdoors]</li>
-						<li>weather_clear_goodtemp_outdoors->Such a [nice] weather... let's hope it stays so.</li>
 						<li>weather_clear_goodtemp_outdoors->It certainly helps to have such a [nice] weather.</li>
 						<li>weather_clear_goodtemp_outdoors->This [nice] weather is good for our morale.</li>
 							<!--Initiator mood-->
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.7)->What a [nice] weather we're having!</li>
-							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood&lt;=0.4)->The weather is [nice], at least.</li>
+							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.5)->Such a [nice] [DAYPERIOD]!</li>
+							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood&lt;0.5)->The weather is [nice], at least.</li>
 				<!--Weather==Fog-->
 				<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
 					<!--Recipient's hunting skill-->
@@ -104,14 +116,23 @@
 						<!--Indoors-->
 						<li>weather_rain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
 						<li>weather_rain_goodtemp_indoors->It's raining.</li>
-				<!--Dictionary wildcards-->
+						
+				<!--WILDCARDS: dictionary-->
+				<!--annoying-->
+				<li>annoying->bad</li>
+				<li>annoying->very bad</li>
+				<li>annoying->irritating</li>
+				<li>annoying->infuriating</li>
+				<li>annoying->maddening</li>
+				<li>annoying->bothersome</li>
+				<li>annoying->not nice</li>
 				<!--eerie-->
 				<li>eerie->strange</li>
 				<li>eerie->eerie</li>
 				<li>eerie->otherworldy</li>
 				<li>eerie->unearthly</li>
 				<li>eerie->spooky</li>
-				<!--horrible-->
+				<!--horrible (monster)-->
 				<li>horrible->terrible</li>
 				<li>horrible->horrible</li>
 				<li>horrible->unholy</li>
@@ -163,12 +184,18 @@
 				<li>surely(INITIATOR_intellectual_level>=10)->unquestionably</li>
 				<li>surely(INITIATOR_trait==too smart)->undeniably</li>
 				
-				<!--TESTING
-				<li>r_logentry->[INITIATOR_jobDefName]</li>
-				<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
-				<li>r_logentry(INITIATOR_gender!=Male)->Sou uma gentil moça.</li>
-				<li>r_logentry(tag=ReactToThought)->[INITIATOR_thoughtDefName]</li>-->
-					
+				<!--WILDCARDS: common sentences-->
+				<!--try to ask for construction (check recipient construction skill)-->
+				<li>try_ask_for_construction(RECIPIENT_construction_level&lt;4)-></li>
+				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion>=0)->Could you please build one?</li>
+				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;0)->Why won't you build one?!</li>
+				
+		<!--TESTING
+		<li>r_logentry->[INITIATOR_jobDefName]</li>
+		<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
+		<li>r_logentry(INITIATOR_gender!=Male)->Sou uma gentil moça.</li>
+		<li>r_logentry(tag=ReactToThought)->[INITIATOR_thoughtDefName]</li>-->
+		
 		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
 		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
 		<li>r_logentry->I truly love [INITIATOR_higherPassion]!</li>
@@ -206,9 +233,7 @@
 					<li>agree->right</li>
 					<li>agree->don't you agree</li>
 		-->
-        <li>r_logentry(priority=0)->Me dá alguma coisa pra falar, Sérgio!</li>
-
-      </rulesStrings>
+			</rulesStrings>
 		</value>
 	</Operation>
 </Patch>
