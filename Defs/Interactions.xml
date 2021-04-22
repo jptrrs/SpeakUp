@@ -34,20 +34,6 @@
 		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
-		<defName>Salute</defName>
-		<label>reply to salute</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(INITIATOR_mood>=0.7)->Good [DAYPERIOD] to you too, [RECIPIENT_nameDef]! [ask]</li>
-				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->Good [DAYPERIOD]. [ask]</li>
-				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Hmpf!</li>
-				<li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>
-				<li>ask(tag=WeatherAnswer)->Isn't it a lovely [DAYPERIOD]?</li>
-				<li>ask(tag=HowAreYou)->How are you?</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
 		<defName>HowAreYou</defName>
 		<label>ensue</label>
 		<logRulesInitiator>
@@ -85,84 +71,22 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
-		<defName>ReactToThought</defName>
-		<label>ensue</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(INITIATOR_opinion&lt;0)->Yeah, [RECIPIENT_nameDef] - now shut up please.</li>
-				<li>r_logentry(INITIATOR_opinion>=0)->You're right, [RECIPIENT_nameDef]!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_AteWithoutTable</defName>
 		<label>ensue</label>
 		<logRulesInitiator>
 			<rulesStrings>
+				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<li>r_logentry(INITIATOR_opinion>=0)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-				<li>r_logentry(INITIATOR_construction_level>=4)->Well, I could build a new table[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Minor)->I'll be happy to build a new one[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Major)->I'd love to build a new one[for_you]</li>
-				<li>r_logentry(RECIPIENT_construction_level>=4)->Yes, you could build a new nice one.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Minor)->You enjoy building stuff, right? So build one.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Major)->Great! Have fun and knock yourself out!</li>
-				<!--WILDCARDS-->
-				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
-				<li>annoying->irritating</li>
-				<li>annoying->infuriating</li>
-				<li>annoying->maddening</li>
-				<li>annoying->bothersome</li>				
-				<li>for_you->.</li>
-				<li>for_you(INITIATOR_opinion>=0)-> for you.</li>
-				<li>for_you(INITIATOR_opinion>=0,INITIATOR_mood>=0.5)-> for you!</li>
-				<li>for_you(RECIPIENT_construction_level>=4)-> as well.</li>
-				<li>for_you(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;-5)-> as well - and I bet mine would be nicer.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>ReactToThought_SleepDisturbed</defName>
-		<label>ensue</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<li>r_logentry(INITIATOR_opinion>=0)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-				<li>r_logentry(INITIATOR_construction_level>=4)->Well, I could plan and build a new private room[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Minor)->I'll be happy to plan build a new private room[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Major)->I'd love to plan and build a new private room[for_you]</li>
-				<li>r_logentry(RECIPIENT_construction_level>=4)->Yes, you could build a new nice private room for yourself.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Minor)->You enjoy building stuff, right? So go ahead, plan build one!</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Major)->Great! Have fun and knock yourself out!</li>
-				<!--WILDCARDS-->
-				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
-				<li>annoying->irritating</li>
-				<li>annoying->infuriating</li>
-				<li>annoying->maddening</li>
-				<li>annoying->bothersome</li>
-				<li>for_you->.</li>
-				<li>for_you(INITIATOR_opinion>=0)-> just for you.</li>
-				<li>for_you(INITIATOR_opinion>=0,INITIATOR_mood>=0.5)-> just for you!</li>
-				<li>for_you(RECIPIENT_construction_level>=4)-> as well.</li>
-				<li>for_you(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;-5)-> as well - and I bet mine would be nicer.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>ReactToThought_SleptInCold</defName>
-		<label>ensue</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<li>r_logentry(INITIATOR_opinion>=0)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-				<li>r_logentry(INITIATOR_construction_level>=5)->Well, I could build a new heat source[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Minor)->I'll be happy to build a new heat source[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Major)->I'd love to build a new heat source[for_you]</li>
-				<li>r_logentry(RECIPIENT_construction_level>=5)->Yes, you could build a new nice new heat source yourself.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Minor)->You enjoy building stuff, right? So build one.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Major)->Great! Have fun and knock yourself out!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Initiator not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [annoying]. We should get a new one.</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
+					<!--Initiator skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could build a new table for you.</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
 				<li>annoying->very bad</li>
@@ -171,11 +95,65 @@
 				<li>annoying->maddening</li>
 				<li>annoying->bothersome</li>
 				<li>annoying->unacceptable</li>
-				<li>for_you->.</li>
-				<li>for_you(INITIATOR_opinion>=0)-> for you.</li>
-				<li>for_you(INITIATOR_opinion>=0,INITIATOR_mood>=0.5)-> for you!</li>
-				<li>for_you(RECIPIENT_construction_level>=5)-> as well.</li>
-				<li>for_you(RECIPIENT_construction_level>=5,INITIATOR_opinion&lt;-5)-> as well - and I bet mine would be more efficient.</li>
+				<li>annoying->not nice</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_SleepDisturbed</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Initiator not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [annoying]. You deserve a private room.</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
+					<!--Initiator skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could plan and build a private room for you.</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+				<!--WILDCARDS-->
+				<li>annoying->bad</li>
+				<li>annoying->very bad</li>
+				<li>annoying->irritating</li>
+				<li>annoying->infuriating</li>
+				<li>annoying->maddening</li>
+				<li>annoying->bothersome</li>
+				<li>annoying->unacceptable</li>
+				<li>annoying->not nice</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_SleptInCold</defName>
+		<label>ensue</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Initiator not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
+					<!--Initiator skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could build a new heat source for you.</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+				<!--WILDCARDS-->
+				<li>annoying->bad</li>
+				<li>annoying->very bad</li>
+				<li>annoying->irritating</li>
+				<li>annoying->infuriating</li>
+				<li>annoying->maddening</li>
+				<li>annoying->bothersome</li>
+				<li>annoying->unacceptable</li>
+				<li>annoying->not nice</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -184,26 +162,27 @@
 		<label>ensue</label>
 		<logRulesInitiator>
 			<rulesStrings>
+				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<li>r_logentry(INITIATOR_opinion>=0)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-				<li>r_logentry(INITIATOR_construction_level>=4)->Well, I could build a new bed[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Minor)->I'll be happy to build a new one[for_you]</li>
-				<li>r_logentry(INITIATOR_construction_passion==Major)->I'd love to build a new one[for_you]</li>
-				<li>r_logentry(RECIPIENT_construction_level>=4)->Yes, you could build a new nice one.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Minor)->You enjoy building stuff, right? So build one.</li>
-				<li>r_logentry(RECIPIENT_construction_passion==Major)->Great! Have fun and knock yourself out!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Initiator not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [humiliating].</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
+					<!--Initiator skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could build a new bed for you.</li>
+					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
 				<!--WILDCARDS-->
-				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
-				<li>annoying->irritating</li>
-				<li>annoying->infuriating</li>
-				<li>annoying->maddening</li>
-				<li>annoying->bothersome</li>
-				<li>for_you->.</li>
-				<li>for_you(INITIATOR_opinion>=0)-> for you.</li>
-				<li>for_you(INITIATOR_opinion>=0,INITIATOR_mood>=0.5)-> for you!</li>
-				<li>for_you(RECIPIENT_construction_level>=4)-> as well.</li>
-				<li>for_you(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;-5)-> as well - and I bet mine would be nicer.</li>
+				<li>humiliating->humiliating</li>
+				<li>humiliating->demeaning</li>
+				<li>humiliating->embarassing</li>
+				<li>humiliating->mortifying</li>
+				<li>humiliating(INITIATOR_intellectual_level>=5)->undignified</li>
+				<li>humiliating(INITIATOR_intellectual_level>=10)->discomfiting</li>
+				<li>humiliating(INITIATOR_intellectual_level>=10)->disgraceful</li>
+				<li>humiliating(INITIATOR_intellectual_level>=15)->ignominous</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -217,6 +196,8 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+
+<!-- W E A T H E R -->	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>WeatherClearGoodtempIndoors</defName>
 		<label>ensue</label>
@@ -241,16 +222,16 @@
 		<label>ensue</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->Yes. [temperature]</li>
+				<li>r_logentry->Yes, [RECIPIENT_nameDef]. [temperature]</li>
 				<li>r_logentry(INITIATOR_opinion>=15)->You're right, [RECIPIENT_nameDef]. [temperature]</li>
 				<li>r_logentry(INITIATOR_opinion&lt;0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
-				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->Very hot, but still enjoyable.</li>
-				<li>temperature(TEMPERATURE>26,TEMPERATURE&lt;=30)->A warm, sunny weather is a blessing!</li>
-				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - perfect!</li>
-				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A bit chilly, but still nice.</li>
+				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->It's a very hot [DAYPERIOD], but it's still enjoyable.</li>
+				<li>temperature(TEMPERATURE>26,TEMPERATURE&lt;=30)->A warm, clear [DAYPERIOD] is a blessing!</li>
+				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - a perfect [DAYPERIOD]!</li>
+				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A bit chilly, but a nice [DAYPERIOD] still.</li>
 				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->This cold is almost numbing[plants]</li>
 				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->It's freezing[plants]</li>
-				<li>plants(INITIATOR_plants_level&lt;5)->, but at least we have a nice blue sky.</li>
+				<li>plants(INITIATOR_plants_level&lt;5)->, but at least we have a nice clear sky.</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->, but it's still enjoyable.</li>
 				<li>plants(INITIATOR_plants_level>=5)->! That's actually terrible for plants in the open - they will almost freeze.</li>
 				<li>plants(INITIATOR_plants_level>=5)-> - in fact that's bad: plants will grow much slower.</li>
@@ -302,6 +283,11 @@
 				<li>r_logentry(INITIATOR_opinion&lt;10)->[RECIPIENT_nameDef], don't be such a crybaby! It's fog - just fog!</li>
 				<li>r_logentry(INITIATOR_opinion>=15)->No need to be afraid, [RECIPIENT_nameDef]. It's just normal fog.</li>
 				<li>r_logentry->This fog could actually hide some danger, [RECIPIENT_nameDef] - especially at night...</li>
+				<li>r_logentry->Once I heard a story where [story]</li>
+				<li>story->long dead bodies shambled through the fog to feast on the living.</li>
+				<li>story->people got forever trapped in the fog and slowly starved to death.</li>
+				<li>story->an intelligent and evil fog tricked people into entering it - and then sucked their souls.</li>
+				<li>story->a mysterious fog suddenly transported you to an alien strange world...</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -343,5 +329,19 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Salute</defName>
+		<label>reply to salute</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_mood>=0.7)->Good [DAYPERIOD] to you too, [RECIPIENT_nameDef]! [ask]</li>
+				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->Good [DAYPERIOD]. [ask]</li>
+				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Hmpf!</li>
+				<li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>
+				<li>ask(tag=WeatherAnswer)->Isn't it a lovely [DAYPERIOD]?</li>
+				<li>ask(tag=HowAreYou)->How are you?</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	-->
 </Defs>
