@@ -4,52 +4,149 @@
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
 			<rulesStrings>
+		
 				<!--Thought-->
-					<!--AteWithoutTable-->
-					<li>r_logentry(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable)->[thought_atewotable]</li>
-						<!--Initiator is not skilled in construction-->
-						<li>thought_atewotable(INITIATOR_construction_level&lt;4)->[thought_atewotable_construction_unskilled]</li>
-						<li>thought_atewotable_construction_unskilled->We [surely] don't have enough tables around here. [try_ask_for_construction]</li>
-						<li>thought_atewotable_construction_unskilled->Eating off the ground is [annoying]. It'd be nice getting a new table. [try_ask_for_construction]</li>
-						<!--Initiator is skilled in construction-->
-						<li>thought_atewotable(INITIATOR_construction_level>=4)->[thought_atewotable_construction_skilled]</li>
-						<li>thought_atewotable_construction_skilled->I could build a new table. We [surely] lack one.</li>
-						<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll build a new table next. We don't have enough.</li>
-						<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a new table - we [surely] lack one!</li>
+					<!--AteWithoutTable // AteInImpressiveDiningRoom-->
+					<li>r_logentry->[thought_diningroom]</li>
+						<!--AteInImpressiveDiningRoom-->
+						<li>thought_diningroom(INITIATOR_thoughtDefName==AteInImpressiveDiningRoom,tag=ReactToThought_DiningRoom,priority=2)->[thought_diningroom_good]</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->I ate my meal in a [proper] dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==slightly impressive dining room)->I ate my meal in a slightly impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==somewhat impressive dining room)->I ate my meal in an impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==very impressive dining room)->I ate my meal in a very impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==extremely impressive dining room)->I ate my meal in an extremely impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==unbelievably impressive dining room)->I ate my meal in an unbelievably impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==wondrously impressive dining room)->I ate my meal in a wonderful dining room. I could stay there forever.</li>
+						<!--AteWithoutTable-->
+						<li>thought_diningroom(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable,priority=1)->[thought_atewotable]</li>
+							<!--Initiator is not skilled in construction-->
+							<li>thought_atewotable(INITIATOR_construction_level&lt;4)->[thought_atewotable_construction_unskilled]</li>
+							<li>thought_atewotable_construction_unskilled->We [surely] don't have enough [proper] dining areas. [try_ask_for_construction]</li>
+							<li>thought_atewotable_construction_unskilled->It'd be nice having enough [proper] dining areas. I had to eat off the ground - and that's [annoying]. [try_ask_for_construction]</li>
+							<!--Initiator is skilled in construction-->
+							<li>thought_atewotable(INITIATOR_construction_level>=4)->[thought_atewotable_construction_skilled]</li>
+							<li>thought_atewotable_construction_skilled->I could plan and build a [proper] dining area. We [surely] lack one.</li>
+							<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll plan and build a [proper] dining area next. We [surely] lack one.</li>
+							<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a [proper] dining area - we [surely] lack one!</li>
+						<!--Decent dining room-->
+						<li>thought_diningroom(tag=ReactToThought_AteWithoutTable)->Last time I had a meal, the dining area wasn't very nice - and that's a bit [annoying]. [try_ask_for_construction]</li>
+					<!--EnvironmentCold-->
 					<!--EnvironmentDark-->
+					<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentDark,tag=ReactToThought_EnvironmentDark)->[thought_environmentdark]</li>
+						<!--Special trait - undergrounder-->
+						<li>thought_environmentdark(INITIATOR_trait==undergrounder,priority=1)->[thought_environmentdark_undergrounder]</li>
+							<!--OUTDOORS-->
+							<li>thought_environmentdark_undergrounder(OUTDOORS==No)->Indoors... no light... totally relaxing.</li>
+						    <li>thought_environmentdark_undergrounder(OUTDOORS==Yes)->This darkness puts my mind at ease, as it protected me.</li>
+						<!--Special traits - night owl -->
+						<li>thought_environmentdark(INITIATOR_trait==night owl,priority=1)->I really like this darkness - it's so relaxing...</li>
+						<!--Other traits-->
+						<li>thought_environmentdark->It's dark - [extra]</li>
+						<!--WILDCARDS-->
+						<li>extra->and I don't like it.</li>
+						<li>extra->I must walk slower to avoid tripping into something.</li>
+						<li>extra->I can't see well enough to do my job properly.</li>
+						<li>extra(INITIATOR_trait==pyromaniac)->we could put up more wall torches around here.</li>
+						<li>extra(INITIATOR_trait==depressive)->just like each and every day of my life.</li>
+					<!--EnvironmentHot-->
 					<!--Expectations-->
 					<!--MoodOffsetTorturedArtist-->
-					<!--NeedBeauty [INCOMPLETO!precisa cuidar do LABEL]***DEBUG***
-					<li>r_logentry(INITIATOR_thoughtDefName==NeedBeauty,tag=ReactToThought_NeedBeauty)->[thought_needbeauty]</li>
-					<li>thought_needbeauty->[INITIATOR_thoughtText]</li>-->
+					<!--NeedBeauty-->
+						<!-- hideous -->
+						<li>r_logentry(INITIATOR_thoughtLabel==hideous environment,tag=ReactToThought_NeedBeauty_hideous)->[thought_needbeauty_hideous]</li>
+						<li>thought_needbeauty_hideous->This place is unbearably grotesque. I can't look at this any more.</li>
+						<li>thought_needbeauty_hideous(INITIATOR_trait==depressive)->This place is a perfect depiction of our future - bleak and dreary.</li>
+						<li>thought_needbeauty_hideous(INITIATOR_trait==pyromaniac)->This place is so totally dismal we could burn it down to ashes - and even so, it would look better!</li>
+						<!-- ugly -->
+						<li>r_logentry(INITIATOR_thoughtLabel==ugly environment,tag=ReactToThought_NeedBeauty_ugly)->[thought_needbeauty_ugly]</li>
+						<li>thought_needbeauty_ugly->This place is really ugly. I wish I didn't have to look at this any more.</li>
+						<li>thought_needbeauty_ugly(INITIATOR_trait==depressive)->It's ugly here... but then again - it's OK: it's the best I'll ever get in this life, I'm sure.</li>
+						<li>thought_needbeauty_ugly(INITIATOR_trait==pyromaniac)->This place is hopelessly awful. Let's burn it down and build a better one from scratch!</li>
+						<!-- unsightly -->
+						<li>r_logentry(INITIATOR_thoughtLabel==unsightly environment,tag=ReactToThought_NeedBeauty_unsightly)->[thought_needbeauty_unsightly]</li>
+						<li>thought_needbeauty_unsightly->This place is kind of unsightly. I wish I didn't have to look at all this.</li>
+						<!-- pretty -->
+						<li>r_logentry(INITIATOR_thoughtLabel==pretty environment,tag=ReactToThought_NeedBeauty_pretty)->[thought_needbeauty_pretty]</li>
+						<li>thought_needbeauty_pretty->This place looks nice.</li>
+						<!-- beautiful -->
+						<li>r_logentry(INITIATOR_thoughtLabel==beautiful environment,tag=ReactToThought_NeedBeauty_beautiful)->[thought_needbeauty_beautiful]</li>
+						<li>thought_needbeauty_pretty->I really like this place. It's beautiful.</li>
+						<!-- gorgeous -->
+						<li>r_logentry(INITIATOR_thoughtLabel==gorgeous environment,tag=ReactToThought_NeedBeauty_gorgeous)->[thought_needbeauty_gorgeous]</li>
+						<li>thought_needbeauty_gorgeous->This place is truly beautiful. It lifts me up and makes me love life!</li>
+						<li>thought_needbeauty_gorgeous->This place is a dream come true. I'm so happy to be here!</li>
+						<li>thought_needbeauty_gorgeous(INITIATOR_artistic>=5)->This place looks like a true masterwork of fine arts!</li>
 					<!--NeedComfort-->
+					<!--NeedFood-->
+						<!-- hungry -->
+						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
+						<li>thought_needfood_hungry0->I'm really hungry.</li>
+						<li>thought_needfood_hungry0->I'm feeling peckish.</li>
+						<li>thought_needfood_hungry0->I could eat [animal_large]!</li>
+						<li>thought_needfood_hungry0->I'm starving!</li>
+						<li>thought_needfood_hungry0->I'm ravenous!</li>
+						<li>thought_needfood_hungry0->I'm famished!</li>
+						<li>thought_needfood_hungry0->I'm dying for something to eat!</li>
+						<!-- ravenously hungry -->
+						<li>r_logentry(INITIATOR_thoughtLabel==ravenously hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry1]</li>
+						<li>thought_needfood_hungry1->These hunger pangs are hard to ignore.</li>
+						<!-- malnourished -->
+						<li>r_logentry(INITIATOR_thoughtLabel==malnourished,tag=ReactToThought_NeedFood)->[thought_needfood_hungry2]</li>
+						<li>thought_needfood_hungry2->It's been so long since I ate. I'm all fuzzy and it's hard to focus.</li>
+						<!-- badly malnourished -->
+						<li>r_logentry(INITIATOR_thoughtLabel==badly malnourished,tag=ReactToThought_NeedFood)->[thought_needfood_hungry3]</li>
+						<li>thought_needfood_hungry3->I can feel my body wasting away... I'd eat almost anything to stop the pain...</li>
+						<!-- starving -->
+						<li>r_logentry(INITIATOR_thoughtLabel==starving,tag=ReactToThought_NeedFood)->[thought_needfood_hungry4]</li>
+						<li>thought_needfood_hungry4->I can barely think about anything but food. I need food. Now.</li>
+						<!-- advanced starvation -->
+						<li>r_logentry(INITIATOR_thoughtLabel==advanced starvation,tag=ReactToThought_NeedFood)->[thought_needfood_hungry5]</li>
+						<li>thought_needfood_hungry5->I can barely move or think about anything but food. I feel so weak...</li>
+						<!-- extreme starvation -->
+						<li>r_logentry(INITIATOR_thoughtLabel==extreme starvation,tag=ReactToThought_NeedFood)->[thought_needfood_hungry6]</li>
+						<li>thought_needfood_hungry6->Food... food... anything... please...</li>
 					<!--NeedJoy-->
 					<!--NeedRoomSize-->
 					<!--NewColonyOptimism-->
 					<!--Sick-->
 					<!--SleepDisturbed-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed]</li>
-						<!--Initiator is not skilled in construction-->
-						<li>thought_sleepdisturbed(INITIATOR_construction_level&lt;4)->[thought_sleepdisturbed_construction_unskilled]</li>
-						<li>thought_sleepdisturbed_construction_unskilled->I was woke up by somebody walking near my bed. I wish I could sleep in a private room. [try_ask_for_construction]</li>
-						<li>thought_sleepdisturbed_construction_unskilled->Somebody entered my room while I was having a [nice] dream and woke me up. I wish I had my own private room. [try_ask_for_construction]</li>
-						<!--Initiator is skilled in construction-->
-						<li>thought_sleepdisturbed(INITIATOR_construction_level>=4)->[thought_sleepdisturbed_construction_skilled]</li>
-						<li>thought_sleepdisturbed_construction_skilled->Sharing rooms with others is [annoying]. I could plan and build my own private room.</li>
-						<li>thought_sleepdisturbed_construction_skilled(INITIATOR_construction_passion==Minor)->Room sharing won't let me sleep well. I'm eager to plan and build my own room to fix that.</li>
-						<li>thought_sleepdisturbed_construction_skilled(INITIATOR_construction_passion==Major)->Room sharing is [annoying]! Why share my room when I can plan and build my own?</li>
+					<li>thought_sleepdisturbed->I was woke up by somebody walking near my bed. That's a bit [annoying].</li>
+					<li>thought_sleepdisturbed->Somebody entered my room while I was having a [nice] dream and woke me up. Can you believe that!?</li>
 					<!--SleptInBarracks-->
+					<li>r_logentry(tag=ReactToThought_SleptInBarracks)->[thought_sleptinbarracks]</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==awful barrack)->Not only I must share my room - it's also a [ugly] one!</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==dull barrack)->My room is slightly [ugly]! And I must share it with other people, too!</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==mediocre barrack)->I share my room with others - I can accept that. But... couldn't it be a nicer one at least?</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==decent barrack)->My room is nice enough, but I find it a bit [annoying] sharing a sleeping space.</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==slightly impressive barrack)->My room is quite nice. Unfortunately, I have to share it with others.</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==impressive barrack)->My room is very nice. If only I didn't have to share it with others...</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==very impressive barrack)->My room is very impressive. I don't even mind sharing it!</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==extremely impressive barrack)->My room is so extremely impressive that sharing it doesn't even bother me!</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==unbelievably impressive barrack)->I can't believe how nice is my shared room!</li>
+					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==wondrously impressive barrack)->My shared room is just a dream come true!</li>
 					<!--SleptInCold-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold,tag=ReactToThought_SleptInCold)->[thought_sleptincold]</li>
 						<!--Initiator is not skilled in construction-->
-						<li>thought_sleptincold(INITIATOR_construction_level&lt;4)->[thought_sleptincold_construction_unskilled]</li>
-						<li>thought_sleptincold_construction_unskilled->I slept in a cold room. I wish it had a proper heat source. [try_ask_for_construction]</li>
-						<li>thought_sleptincold_construction_unskilled->The room I slept in was cold and numbing. It [surely] lacks a proper heat source. [try_ask_for_construction]</li>
+						<li>thought_sleptincold(INITIATOR_construction_level&lt;5)->[thought_sleptincold_construction_unskilled]</li>
+						<li>thought_sleptincold_construction_unskilled->I slept in the cold. I wish there was a proper heat source. [try_ask_for_construction5]</li>
+						<li>thought_sleptincold_construction_unskilled->I couldn't sleep well - the cold wouldn't let me. If only I had a proper heat source... [try_ask_for_construction5]</li>
 						<!--Initiator is skilled in construction-->
-						<li>thought_sleptincold(INITIATOR_construction_level>=4)->[thought_sleptincold_construction_skilled]</li>
-						<li>thought_sleptincold_construction_skilled->I slept in a cold room. I could [surely] improve it with a new heat source.</li>
-						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Minor)->I slept in the cold. That's [annoying] - and I'm eager to build a heat source to fix that.</li>
-						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Major)->The room I slept in needs more heating - and I'd love to build a heat source to fix that!</li>					
+						<li>thought_sleptincold(INITIATOR_construction_level>=5)->[thought_sleptincold_construction_skilled]</li>
+						<li>thought_sleptincold_construction_skilled->I slept in the cold. I could [surely] [fix] this with a new heat source.</li>
+						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Minor)->I slept in the cold. That's [annoying] - and I'm eager to build a heat source to [fix] that.</li>
+						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Major)->The room I slept in needs more heating - and I'd love to build a heat source to [fix] that!</li>					
+					<!--SleptInHeat-->
+					<li>r_logentry(INITIATOR_thoughtDefName==SleptInHeat,tag=ReactToThought_SleptInHeat)->[thought_sleptinheat]</li>
+						<!--Initiator is not skilled in construction-->
+						<li>thought_sleptinheat(INITIATOR_construction_level&lt;5)->[thought_sleptinheat_construction_unskilled]</li>
+						<li>thought_sleptinheat_construction_unskilled->I had to sleep in unbearable heat. I wish there was some cooler. [try_ask_for_construction5]</li>
+						<li>thought_sleptinheat_construction_unskilled->I couldn't sleep well - the heat wouldn't let me. If only I had some cooler... [try_ask_for_construction5]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_sleptinheat(INITIATOR_construction_level>=5)->[thought_sleptinheat_construction_skilled]</li>
+						<li>thought_sleptinheat_construction_skilled->I slept in unbearable heat. I could [surely] [fix] this with a new cooler.</li>
+						<li>thought_sleptinheat_construction_skilled(INITIATOR_construction_passion==Minor)->I slept in unbearable heat. That's [annoying] - and I'm eager to build a cooler to [fix] that.</li>
+						<li>thought_sleptincold_construction_skilled(INITIATOR_construction_passion==Major)->The room I slept in needs more cooling - and I'd love to build a cooler to [fix] that!</li>					
 					<!--SleptOnGround-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptOnGround,tag=ReactToThought_SleptOnGround)->[thought_sleptonground]</li>
 						<!--Initiator is not skilled in construction-->
@@ -62,18 +159,80 @@
 						<li>thought_sleptonground_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll build a new bed next. We don't have enough.</li>
 						<li>thought_sleptonground_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a new bed - we [surely] lack one!</li>
 					<!--SleptOutside-->
-				<!--Thought/Mood***DISATTIVATO PER TEST***
-				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [whatsup]</li>
-				<li>whatsup->What's up?</li>
-				<li>whatsup->What's on your mind?</li>
-				<li>whatsup->How are things?</li>
-				<li>whatsup->How have you been?</li>
-				<li>whatsup->How's life?</li>
-				<li>whatsup->How are you getting along?</li>
-				<li>whatsup(RECIPIENT_mood&lt;0.5;)->Are you OK?</li>
-				<li>whatsup(RECIPIENT_mood&lt;0.5;)->What's the matter?</li>
-				<li>whatsup(RECIPIENT_mood>=0.8;)->What's that smile about?</li>
-				<li>whatsup(RECIPIENT_mood>=0.8;)->Why the happy face?</li>-->
+					<li>r_logentry(INITIATOR_thoughtDefName==SleptOutside,tag=ReactToThought_SleptOutside)->[thought_sleptoutside]</li>
+						<!--Initiator is not skilled in construction-->
+						<li>thought_sleptoutside(INITIATOR_construction_level&lt;4)->[thought_sleptoutside_construction_unskilled]</li>
+						<li>thought_sleptoutside_construction_unskilled->I had to sleep [outdoors] - [humiliating]! We [surely] need some more rooms around here! [try_ask_for_construction]</li>
+						<li>thought_sleptoutside_construction_unskilled->It's [humiliating]: I don't even get a proper roof for me to sleep under! [try_ask_for_construction]</li>
+						<!--Initiator is skilled in construction-->
+						<li>thought_sleptoutside(INITIATOR_construction_level>=4)->[thought_sleptoutside_construction_skilled]</li>
+						<li>thought_sleptoutside_construction_skilled->I could build a new room for me to sleep in. I [surely] lack one.</li>
+						<li>thought_sleptoutside_construction_skilled(INITIATOR_construction_passion==Minor)->I need to build a room for me to sleep in - I can't go on sleeping [outdoors]!</li>
+						<li>thought_sleptoutside_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a room for me to sleep in - sleeping [outdoors] is [surely] [humiliating]!</li>					
+				<!--Thought (Recipient)-->
+				<li>r_logentry(INITIATOR_opinion>=0,tag=WhatsUp)->So, [RECIPIENT_nameDef] - [whatsup]</li>
+				<li>whatsup(INITIATOR_intellectual_level&lt;5)->wassup?</li>
+				<li>whatsup(INITIATOR_intellectual_level&lt;3)->sup?</li>
+				<li>whatsup(INITIATOR_intellectual_level&lt;5)->what's popping?</li>
+				<li>whatsup(INITIATOR_intellectual_level&lt;5)->what's cracking?</li>
+				<li>whatsup->what's up?</li>
+				<li>whatsup->what's going on?</li>
+				<li>whatsup->what's on your mind?</li>
+				<li>whatsup->what's new?</li>
+				
+				<!--===MOOD===-->
+				<!--Mood (Recipient)-->
+				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [howareyou]</li>
+				<li>howareyou->How are you?</li>
+				<li>howareyou->How are things?</li>
+				<li>howareyou->How have you been?</li>
+				<li>howareyou->How's life?</li>
+				<li>howareyou->How are you getting along?</li>
+				<li>howareyou(RECIPIENT_mood&lt;0.5;)->Are you OK?</li>
+				
+				<!--===TRAITS===-->
+					<!--Psychically sensitive-->
+					<!--Good visions-->
+					<li>r_logentry(INITIATOR_trait==psychically sensitive)->[trait_psy_sensitive]</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [PersonJob] visiting a [AdjectiveFriendly] [Community].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [PersonJob] admiring a [nice] [TerrainFeature] from afar.</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [Color] [Animal] in a [AdjectiveLarge] [TreeType] forest.</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [Animal] eating [Vegetable]s.</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [Community] of [AdjectiveFriendly] [Color] [Animal]s.</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about [Quantity_adjphrase] [PersonJob]s who were [VerbFriendly] in a [AdjectiveFriendly] [Community].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveLarge] [Animal] saving a [AdjectiveAngsty] [Community] from a [AdjectiveBadass] [Enemy].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [PersonJob] wearing a [AdjectiveAny] [Color] [Apparel].</li>
+					<!--Visions-->
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveLarge] [AnimalGroup] of [Animal]s in a [TreeType] forest.</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [Animal]-shaped clouds over a [AdjectiveAny] [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [Color] [Animal] and a [Color] [Animal] competing for the same [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveBadass] [Enemy] struggling against a [AdjectiveBadass] [Enemy].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveAny] [Apparel] dancing in the wind over a [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a group of [PersonJob]s visiting a [Community] to buy [AdjectiveAny] [Apparel]s.</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [PersonJob] arguing with a [PersonJob] about a [AdjectiveAny] [Weapon].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a group of [PersonJob]s visiting a [Community] to buy [AdjectiveAny] [Weapon]s.</li>
+					<!--Bad visions-->
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [AdjectiveBadass] [Enemy] with a [AdjectiveBadass] [Weapon] covered in [Gore].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about [Quantity_adjphrase] [AdjectiveBadass] [Enemy]s - and one of them wielded a [AdjectiveLarge] [AdjectiveBadass] [Weapon].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [AdjectiveAngsty] [PersonJob] running from a [AdjectiveBadass] [Enemy].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [AdjectiveBadass] [Mechanoid] chasing a group of [PersonJob]s into a [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about [AdjectiveBadass] [Mechanoid]s mercilessly destroying a [AdjectiveFriendly] [Community].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [AdjectiveAngsty] [Community] near a [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [AdjectiveAngsty] [PersonJob] near a [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVisionBad)->[vision_start] about a [Enemy]-shaped clouds over a [AdjectiveAngsty] [TerrainFeature].</li>
+					
+					<li>vision_start->I just had a [vision_adj] vision</li>
+						<li>vision_adj->peculiar</li>
+						<li>vision_adj->startling</li>
+						<li>vision_adj->strange</li>
+						<li>vision_adj->fading</li>
+						<li>vision_adj->fleeting</li>
+						<li>vision_adj->sudden</li>
+						<li>vision_adj->momentary</li>
+						<li>vision_adj->colorful</li>
+						<li>vision_adj->clear</li>
+						<li>vision_adj->sudden</li>
+				<!--===WEATHER===-->
 				<!--Weather==Clear-->
 				<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
 					<!--Good temperature for humans-->
@@ -84,11 +243,15 @@
 						<!--Outdoors-->
 						<li>weather_clear_goodtemp(OUTDOORS==Yes,tag=WeatherClearGoodtempOutdoors)->[weather_clear_goodtemp_outdoors]</li>
 						<li>weather_clear_goodtemp_outdoors->It certainly helps to have such a [nice] weather.</li>
-						<li>weather_clear_goodtemp_outdoors->This [nice] weather is good for our morale.</li>
+						<li>weather_clear_goodtemp_outdoors->This [nice] weather is good for us.</li>
 							<!--Initiator mood-->
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.7)->What a [nice] weather we're having!</li>
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.5)->Such a [nice] [DAYPERIOD]!</li>
 							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood&lt;0.5)->The weather is [nice], at least.</li>
+					<!--Extreme cold for humans-->
+					<li>weather_clear(TEMPERATURE&lt;-10)->[weather_toocold]</li>
+					<!--Extreme heat for humans-->
+					<li>weather_clear(TEMPERATURE>35)->[weather_toohot]</li>
 				<!--Weather==Fog-->
 				<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
 					<!--Recipient's hunting skill-->
@@ -109,6 +272,10 @@
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.5)->It's pretty foggy out here.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->This fog won't let me see a damn thing.</li>
 							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood&lt;0.3)->Blasted fog! Can't see a bloody thing out here!</li>
+					<!--Extreme cold for humans-->
+					<li>weather_clear(TEMPERATURE&lt;-10)->[weather_toocold]</li>
+					<!--Extreme heat for humans-->
+					<li>weather_clear(TEMPERATURE>35)->[weather_toohot]</li>				
 				<!--Weather==Rain-->
 				<li>r_logentry(WEATHER==rain)->[weather_rain]</li>
 					<!--Good temperature for humans-->
@@ -116,22 +283,38 @@
 						<!--Indoors-->
 						<li>weather_rain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
 						<li>weather_rain_goodtemp_indoors->It's raining.</li>
-						
+					<!--Extreme cold for humans-->
+					<li>weather_clear(TEMPERATURE&lt;-10)->[weather_toocold]</li>
+					<!--Extreme heat for humans-->
+					<li>weather_clear(TEMPERATURE>35)->[weather_toohot]</li>
 				<!--WILDCARDS: dictionary-->
+				<!--animal - large-->
+				<li>animal_large->a horse</li>
+				<li>animal_large->a muffalo</li>
+				<li>animal_large->an elephant</li>
 				<!--annoying-->
+				<li>annoying->annoying</li>
 				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
 				<li>annoying->irritating</li>
 				<li>annoying->infuriating</li>
 				<li>annoying->maddening</li>
 				<li>annoying->bothersome</li>
-				<li>annoying->not nice</li>
+				<li>annoying(INITIATOR_intellectual_level>=5)->exasperating</li>
 				<!--eerie-->
 				<li>eerie->strange</li>
 				<li>eerie->eerie</li>
 				<li>eerie->otherworldy</li>
 				<li>eerie->unearthly</li>
 				<li>eerie->spooky</li>
+				<!--fix (verb, metaphoric)-->
+				<li>fix->fix</li>
+				<li>fix->manage</li>
+				<li>fix->handle</li>
+				<li>fix->deal with</li>
+				<li>fix->see to</li>
+				<li>fix->take care of</li>
+				<li>fix(INITIATOR_intellectual_level>=5)->remedy</li>
+				<li>fix(INITIATOR_intellectual_level>=10)->rectify</li>
 				<!--horrible (monster)-->
 				<li>horrible->terrible</li>
 				<li>horrible->horrible</li>
@@ -168,6 +351,17 @@
 				<li>nice->wonderful</li>
 				<li>nice->fair</li>
 				<li>nice->fine</li>
+				<!--outdoors-->
+				<li>outdoors->outdoors</li>
+				<li>outdoors->in the open</li>
+				<li>outdoors->outside</li>
+				<!--proper-->
+				<li>proper->fitting</li>
+				<li>proper->suitable</li>
+				<li>proper->regular</li>
+				<li>proper->decent</li>
+				<li>proper(INITIATOR_intellectual_level>=5)->conventional</li>
+				<li>proper(INITIATOR_intellectual_level>=5)->orthodox</li>
 				<!--scared-->
 				<li>scared->so scared</li>
 				<li>scared->scared stiff</li>
@@ -182,14 +376,43 @@
 				<li>surely->clearly</li>
 				<li>surely->definitely</li>
 				<li>surely(INITIATOR_intellectual_level>=10)->unquestionably</li>
-				<li>surely(INITIATOR_trait==too smart)->undeniably</li>
+				<li>surely(INITIATOR_intellectual_level>=5)->undeniably</li>
+				<!--ugly-->
+				<li>ugly->ugly</li>
+				<li>ugly->hideous</li>
+				<li>ugly->horrible</li>
+				<li>ugly->frightful</li>
+				<li>ugly->grisly</li>
+				<li>ugly->gruesome</li>
+				<li>ugly->grim</li>
+				<li>ugly(INITIATOR_intellectual_level>=5)->repugnant</li>
+				<li>ugly(INITIATOR_intellectual_level>=5)->vile</li>
+				<li>ugly(INITIATOR_intellectual_level>=5)->grotesque</li>				
 				
 				<!--WILDCARDS: common sentences-->
 				<!--try to ask for construction (check recipient construction skill)-->
 				<li>try_ask_for_construction(RECIPIENT_construction_level&lt;4)-></li>
-				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion>=0)->Could you please build one?</li>
-				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;0)->Why won't you build one?!</li>
-				
+				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion>=0)->Could you please build one, [RECIPIENT_nameDef]?</li>
+				<li>try_ask_for_construction(RECIPIENT_construction_level>=4,INITIATOR_opinion&lt;0)->Why won't you build one, [RECIPIENT_nameDef]?!</li>
+				<li>try_ask_for_construction5(RECIPIENT_construction_level&lt;5)-></li>
+				<li>try_ask_for_construction5(RECIPIENT_construction_level>=5,INITIATOR_opinion>=0)->Could you please build one?</li>
+				<li>try_ask_for_construction5(RECIPIENT_construction_level>=5,INITIATOR_opinion&lt;0)->Why won't you build one?!</li>
+				<!--Extreme cold felt-->
+				<!--Clothes are not enough ***DEBUG: needs reaction***-->
+				<li>weather_toocold(INITIATOR_thoughtLabel==chilly)->**TO DO**</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==cold)->**TO DO**</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==numbing cold)->**TO DO**</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==absolutely freezing)->**TO DO**</li>								
+				<!--Clothes may be enough-->
+				<li>weather_toocold->I hope my gear is warm enough to protect me from this extreme cold!</li>
+				<!--Extreme heat felt-->
+				<!--Clothes are not enough ***DEBUG: needs reaction***-->
+				<li>weather_toohot(INITIATOR_thoughtLabel==sweaty)->**TO DO**</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==hot)->**TO DO**</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==sweltering hot)->**TO DO**</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot)->**TO DO**</li>
+				<!--Clothes may be enough-->					
+				<li>weather_toohot->I hope my gear is good enough to protect me from this scorching heat!</li>
 		<!--TESTING
 		<li>r_logentry->[INITIATOR_jobDefName]</li>
 		<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
@@ -226,9 +449,7 @@
 					<li>wonderful->great</li>
 					<li>wonderful->just great</li>
 					<li>wonderful->wonderful</li>
-					<li>outdoors->outdoors</li>
-					<li>outdoors->in the open</li>
-					<li>outdoors->outside</li>
+
 					<li>agree->isn't it</li>
 					<li>agree->right</li>
 					<li>agree->don't you agree</li>
