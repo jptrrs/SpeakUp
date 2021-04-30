@@ -10,13 +10,13 @@
 					<li>r_logentry->[thought_diningroom]</li>
 						<!--AteInImpressiveDiningRoom-->
 						<li>thought_diningroom(INITIATOR_thoughtDefName==AteInImpressiveDiningRoom,tag=ReactToThought_DiningRoom,priority=2)->[thought_diningroom_good]</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->I ate my meal in a [proper] dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==slightly impressive dining room)->I ate my meal in a slightly impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==somewhat impressive dining room)->I ate my meal in an impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==very impressive dining room)->I ate my meal in a very impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==extremely impressive dining room)->I ate my meal in an extremely impressive dining room. I could stay there forever.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==unbelievably impressive dining room)->I ate my meal in an unbelievably impressive dining room. I could stay there forever.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==wondrously impressive dining room)->I ate my meal in a wonderful dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->I had my last meal in a [proper] dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==slightly impressive dining room)->I had my last meal in a slightly impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==somewhat impressive dining room)->I had my last meal in an impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==very impressive dining room)->I had my last meal in a very impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==extremely impressive dining room)->I had my last meal in an extremely impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==unbelievably impressive dining room)->I had my last meal in an unbelievably impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==wondrously impressive dining room)->I had my last meal in a wonderful dining room. I could stay there forever.</li>
 						<!--AteWithoutTable-->
 						<li>thought_diningroom(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable,priority=1)->[thought_atewotable]</li>
 							<!--Initiator is not skilled in construction-->
@@ -28,9 +28,14 @@
 							<li>thought_atewotable_construction_skilled->I could plan and build a [proper] dining area. We [surely] lack one.</li>
 							<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Minor)->I think I'll plan and build a [proper] dining area next. We [surely] lack one.</li>
 							<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a [proper] dining area - we [surely] lack one!</li>
-						<!--Decent dining room-->
-						<li>thought_diningroom(tag=ReactToThought_AteWithoutTable)->Last time I had a meal, the dining area wasn't very nice - and that's a bit [annoying]. [try_ask_for_construction]</li>
+						<!--Almost decent dining room-->
+						<li>thought_diningroom(tag=ReactToThought_AteWithoutTable)->Last time I had a meal, the dining area wasn't very nice - and that's a bit [annoying].</li>
 					<!--EnvironmentCold-->
+					<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentCold,tag=ReactToThought_EnvironmentCold)->[thought_environmentcold]</li>
+					<li>thought_environmentcold(INITIATOR_thoughtLabel==chilly)->I'm uncomfortably cold.</li>
+					<li>thought_environmentcold(INITIATOR_thoughtLabel==cold)->I'm freezing!</li>
+					<li>thought_environmentcold(INITIATOR_thoughtLabel==numbing cold)->I can't stop shivering. My teeth are chattering.</li>
+					<li>thought_environmentcold(INITIATOR_thoughtLabel==absolutely freezing)->My teeth are chattering so hard I can barely speak.</li>
 					<!--EnvironmentDark-->
 					<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentDark,tag=ReactToThought_EnvironmentDark)->[thought_environmentdark]</li>
 						<!--Special trait - undergrounder-->
@@ -49,7 +54,21 @@
 						<li>extra(INITIATOR_trait==pyromaniac)->we could put up more wall torches around here.</li>
 						<li>extra(INITIATOR_trait==depressive)->just like each and every day of my life.</li>
 					<!--EnvironmentHot-->
+					<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentHot,tag=ReactToThought_EnvironmentHot)->[thought_environmenthot]</li>
+					<li>thought_environmenthot(INITIATOR_thoughtLabel==sweaty)->It's quite hot here.</li>
+					<li>thought_environmenthot(INITIATOR_thoughtLabel==hot)->It's way too hot here!</li>
+					<li>thought_environmenthot(INITIATOR_thoughtLabel==sweltering hot)->I feel like I'm in an oven! I must get somewhere cooler!</li>
+					<li>thought_environmenthot(INITIATOR_thoughtLabel==blistering hot)->This place is searing hot. I think I could die from this heat!</li>
 					<!--Expectations-->
+					<!--JoyActivityInImpressiveRecRoom-->
+					<li>r_logentry(INITIATOR_thoughtDefName==JoyActivityInImpressiveRecRoom,tag=ReactToThought_JoyRoom)->[thought_joyroom]</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==decent rec room)->I think we have a decent rec room.</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==slightly impressive rec room)->I think we have a nice rec room.</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==somewhat impressive rec room)->I think we have a very nice rec room.</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==very impressive rec room)->I think our rec room is quite impressive!</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==extremely impressive rec room)->I think our rec room is extremely impressive!</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==unbelievably impressive rec room)->We're so lucky to have such an unbelievably impressive rec room!</li>
+					<li>thought_joyroom(INITIATOR_thoughtLabel==wondrously impressive rec room)->Our rec room is wondrously impressive! I could stay there forever!</li>
 					<!--MoodOffsetTorturedArtist-->
 					<!--NeedBeauty-->
 						<!-- hideous -->
@@ -125,6 +144,16 @@
 					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==extremely impressive barrack)->My room is so extremely impressive that sharing it doesn't even bother me!</li>
 					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==unbelievably impressive barrack)->I can't believe how nice is my shared room!</li>
 					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==wondrously impressive barrack)->My shared room is just a dream come true!</li>
+					<!--SleptInBedroom-->
+					<li>r_logentry(INITIATOR_thoughtDefName==SleptInBedroom,tag=ReactToThought_Bedroom)->[thought_bedroom] [what_about_yours]</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==awful bedroom)->Luckily, I have my own bedroom. Too bad it's [ugly] as Hell.</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==decent bedroom)->I sleep in a [proper] bedroom.</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==slightly impressive bedroom)->I like my bedroom - it's a nice one.</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==impressive bedroom)->I sleep in an impressive bedroom. It's great!</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==very impressive bedroom)->I sleep in a very impressive bedroom. I just love it!</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==extremely impressive bedroom)->I get to sleep in an extremely impressive bedroom! </li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==unbelievably impressive bedroom)->My bedroom is truly astounding!</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==wondrously impressive bedroom)->Sleeping in my bedroom feels like Heaven. Just wondrous!</li>
 					<!--SleptInCold-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold,tag=ReactToThought_SleptInCold)->[thought_sleptincold]</li>
 						<!--Initiator is not skilled in construction-->
@@ -413,6 +442,8 @@
 				<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot)->**TO DO**</li>
 				<!--Clothes may be enough-->					
 				<li>weather_toohot->I hope my gear is good enough to protect me from this scorching heat!</li>
+				<!--What about yours?-->
+				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
 		<!--TESTING
 		<li>r_logentry->[INITIATOR_jobDefName]</li>
 		<li>r_logentry(INITIATOR_gender!=Female)->Sou um belo rapaz.</li>
