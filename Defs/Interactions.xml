@@ -85,10 +85,40 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->That's nice to hear, [RECIPIENT_nameDef]!</li>
+				<li>good_opinion(INITIATOR_thoughtDefName==AteInImpressiveDiningRoom,priority=2)->Same here, [RECIPIENT_nameDef]! [comment]</li>
+				<li>good_opinion(INITIATOR_thoughtDefName==AteWithoutTable,priority=1)->Really, [RECIPIENT_nameDef]!? Where is this dining room you speak of? [comment]</li>
+				<li>good_opinion->That's nice to hear, [RECIPIENT_nameDef]! [comment]</li>
+				<!--WILDCARDS-->
+				<li>comment-></li>
+				<li>comment(INITIATOR_trait==gourmand)->I look forward to enjoying many fancy meals there!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_EnvironmentCold</defName>
+		<label>environment - cold</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Feeling cold-->
+					<li>good_opinion(INITIATOR_thoughtDefName==EnvironmentCold,priority=1)->[feeling_cold]</li>
+					<li>feeling_cold(INITIATOR_thoughtLabel==chilly)->You're right, [RECIPIENT_nameDef]. I'm uncomfortably cold myself.</li>
+					<li>feeling_cold(INITIATOR_thoughtLabel==cold)->I'm shivering myself, [RECIPIENT_nameDef].</li>
+					<li>feeling_cold(INITIATOR_thoughtLabel==numbing cold)->All I can think of is getting warm, [RECIPIENT_nameDef].</li>
+					<li>feeling_cold(INITIATOR_thoughtLabel==absolutely freezing)->I can't feel my toes and fingers. I urgently need to get warm.</li>
+					<!--Not feeling cold-->
+					<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+				<!-- WILDCARDS -->
+				<li>comment-></li>
+				<li>comment(INITIATOR_social_level>=5)->I'll try to trade in something in exchange for some warmer clothing for you.</li>
+				<li>comment(INITIATOR_crafting_level>=5)->I could try and make some warmer clothing for you.</li>
+				<li>comment(INITIATOR_medical_level>=5)->We must find a way to get you warm - or you might even get a nasty frostbite.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_EnvironmentDark</defName>
 		<label>environment - dark</label>
@@ -117,7 +147,61 @@
 				<li>supposed->expected</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_EnvironmentHot</defName>
+		<label>environment - hot</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Feeling hot-->
+					<li>good_opinion(INITIATOR_thoughtDefName==EnvironmentHot,priority=1)->[feeling_hot]</li>
+					<li>feeling_hot(INITIATOR_thoughtLabel==sweaty)->You're right, [RECIPIENT_nameDef]. I'm sweating myself.</li>
+					<li>feeling_hot(INITIATOR_thoughtLabel==hot)->Ah, [RECIPIENT_nameDef] - if only I could have a breath of cool air...</li>
+					<li>feeling_hot(INITIATOR_thoughtLabel==sweltering hot)->I'm not sure how long I can handle this extreme heat, [RECIPIENT_nameDef].</li>
+					<li>feeling_hot(INITIATOR_thoughtLabel==blistering hot)->This is worse than Hell itself. The air itself is on fire!</li>
+					<!--Not feeling hot-->
+					<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+				<!-- WILDCARDS -->
+				<li>comment-></li>
+				<li>comment(INITIATOR_social_level>=5)->I'll try to trade in something in exchange for some cooler clothing for you.</li>
+				<li>comment(INITIATOR_crafting_level>=5)->I could try and make some cooler clothing for you.</li>
+				<li>comment(INITIATOR_medical_level>=5)->We must find a way to cool you down - or you might even get a nasty heatstroke.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_JoyRoom</defName>
+		<label>rec room</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Good rec room-->
+					<li>good_opinion(INITIATOR_thoughtDefName==JoyActivityInImpressiveRecRoom,priority=1)->[rec_room]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==decent rec room)->I had fun there too, [RECIPIENT_nameDef].</li>
+					<li>rec_room(INITIATOR_thoughtLabel==slightly impressive rec room)->I had a good time there too, [RECIPIENT_nameDef].</li>
+					<li>rec_room(INITIATOR_thoughtLabel==somewhat impressive rec room)->I had a very good time there too, [RECIPIENT_nameDef]. [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==very impressive rec room)->Yes, [RECIPIENT_nameDef]! I had a great time there! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==extremely impressive rec room)->Yes, [RECIPIENT_nameDef]! I truly had great fun there! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==unbelievably impressive rec room)->Yes, [RECIPIENT_nameDef]. It's the coolest ever! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==wondrously impressive rec room)->It's truly a paradise, [RECIPIENT_nameDef] - all decked for maxxing out anyone's fun! [comment2]</li>
+					<!--Absent or bad rec room-->
+					<li>good_opinion->What rec room, [RECIPIENT_nameDef]? [comment]</li>
+				<!-- WILDCARDS -->
+				<li>comment-></li>
+				<li>comment->Do we even have a proper one?</li>
+				<li>comment(INITIATOR_social_level>=5)->If we want to host parties, we need to do much better than what we have now.</li>
+				<li>comment2(INITIATOR_social_level>=5)->And it'll be excellent for hosting our next party!</li>
+				<li>comment(INITIATOR_construction_level>=5)->I'd better build some recreation furniture, if we really want to have one.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>		
 <!--START of Need - Beauty-->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedBeauty_hideous</defName>
@@ -220,7 +304,7 @@
 					<li>good_opinion(INITIATOR_thoughtLabel==hideous environment,priority=1)->What!? Are we speaking of the same place, [RECIPIENT_nameDef]?! This place is totally [ugly]!</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==ugly environment,priority=1)->I don't know where have you been lately, [RECIPIENT_nameDef] - but rest assured: this place is [ugly].</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==unsightly environment,priority=1)->Well, [RECIPIENT_nameDef]... Maybe you're right, but there is a lot of space for improvement, I think.</li>
-					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't believe it's as pretty as you think.</li>
+					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't find it as pretty as you say.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==pretty environment,priority=1)->That's exactly what I think, [RECIPIENT_nameDef]!</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==beautiful environment,priority=1)->I believe it's even better than that, [RECIPIENT_nameDef].</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==gorgeous environment,priority=1)->Well, I personally believe this place is much more - it's simply gorgeous!</li>
@@ -250,7 +334,7 @@
 					<li>good_opinion(INITIATOR_thoughtLabel==hideous environment,priority=1)->What!? Are we speaking of the same place, [RECIPIENT_nameDef]?! This place is totally [ugly]!</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==ugly environment,priority=1)->I don't know where have you been lately, [RECIPIENT_nameDef] - but rest assured: this place is [ugly].</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==unsightly environment,priority=1)->I don't agree with that - this place is actually far from perfection.</li>
-					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't believe it's as nice as you think.</li>
+					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't find it as nice as you say.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==pretty environment,priority=1)->Yes, [RECIPIENT_nameDef] - but I think it still needs some minor improvement.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==beautiful environment,priority=1)->That's exactly what I think, [RECIPIENT_nameDef]!</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==gorgeous environment,priority=1)->Well, I personally believe this place is more than that - it's simply gorgeous!</li>
@@ -280,7 +364,7 @@
 					<li>good_opinion(INITIATOR_thoughtLabel==hideous environment,priority=1)->What!? Are we speaking of the same place, [RECIPIENT_nameDef]?! This place is totally [ugly]!</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==ugly environment,priority=1)->I don't know where have you been lately, [RECIPIENT_nameDef] - but rest assured: this place is [ugly].</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==unsightly environment,priority=1)->I don't agree with that - this place is actually far from perfection.</li>
-					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't believe it's as nice as you think.</li>
+					<li>good_opinion->You might be right, [RECIPIENT_nameDef] - but I don't find it as nice as you say.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==pretty environment,priority=1)->Well, [RECIPIENT_nameDef] - I think it still needs some improvement.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==beautiful environment,priority=1)->Yes, [RECIPIENT_nameDef] - but I think it still needs some minor improvement.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==gorgeous environment,priority=1)->That's exactly what I think, [RECIPIENT_nameDef]!</li>
@@ -402,7 +486,42 @@
 				<li>annoying(INITIATOR_intellectual_level>=10)->inadmissible</li>				
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_Bedroom</defName>
+		<label>bedroom</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Slept on the ground-->
+					<li>good_opinion(INITIATOR_thoughtDefName==SleptOnGround,priority=4)->I don't have a bedroom - in fact, I don't even have a bed!</li>		<!--Slept outside-->
+					<li>good_opinion(INITIATOR_thoughtDefName==SleptOutside,priority=4)->What bedroom!? Last time I slept, it was out in the open!</li>
+					<!--Barracks-->
+					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBarracks,priority=3)->I don't have my own bedroom - I share one with others.</li>
+					<!--Good bedroom-->
+					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBedroom,priority=2)->[bedroom]</li>
+					<li>bedroom(INITIATOR_thoughtLabel==decent bedroom)->I can say mine is decent, [RECIPIENT_nameDef].</li>
+					<li>bedroom(INITIATOR_thoughtLabel==slightly impressive bedroom)->Mine is quite nice, [RECIPIENT_nameDef].</li>
+					<li>bedroom(INITIATOR_thoughtLabel==impressive bedroom)->Mine is impressive, [RECIPIENT_nameDef].</li>
+					<li>bedroom(INITIATOR_thoughtLabel==very impressive bedroom)->Mine is very impressive, [RECIPIENT_nameDef]!</li>
+					<li>bedroom(INITIATOR_thoughtLabel==extremely impressive bedroom)->Mine is extremely impressive, [RECIPIENT_nameDef]!</li>
+					<li>bedroom(INITIATOR_thoughtLabel==unbelievably impressive bedroom)->Mine feels like a piece of Heaven itself, [RECIPIENT_nameDef]!</li>
+					<li>bedroom(INITIATOR_thoughtLabel==wondrously impressive bedroom)->Mine is worthy of an emperor, [RECIPIENT_nameDef]!</li>
+					<!--Dull or mediocre rec room-->
+					<li>good_opinion->Mine? Mine could be... better[construction]</li>
+					<!--Awful bedroom-->
+					<li>good_opinion(INITIATOR_thoughtLabel==awful bedroom,priority=1)->[bedroom_awful]</li>
+					<li>bedroom_awful->Mine is so awful - sometimes I think I'd be better off sleeping in the open.</li>
+					<li>bedroom_awful->I confess mine is awful[construction]</li>
+				<!-- WILDCARDS -->
+				<li>construction(INITIATOR_construction_level>=5,priority=1)->, but I'm planning to improve it myself.</li>
+				<li>construction->.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleptInCold</defName>
 		<label>slept in cold</label>
