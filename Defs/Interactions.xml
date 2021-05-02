@@ -315,6 +315,17 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
+
+  <InteractionDef ParentName="SpeakUpReply">
+		<defName>TiraTeima</defName>
+		<label>tira-teima</label>
+		<logRulesInitiator>
+			<rulesStrings>
+        <li>r_logentry(priority=1,INITIATOR_trait!=undergrounder)->Nao sou undergrounder!</li>
+        <li>r_logentry(priority=0)->Eu sou subterrâneo.</li>
+      </rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	
 	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">

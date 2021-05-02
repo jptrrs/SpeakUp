@@ -96,7 +96,6 @@ namespace SpeakUp
                     yield return new Rule_String(symbol + "thoughtLabel", thought.CurStage.label);
                     if (!thought.CurStage.description.NullOrEmpty()) texts.Add(thought.CurStage.description);
                 }
-                yield return new Rule_String(symbol + "thoughtText", thought.CurStage.description);
             }
             yield return new Rule_String(symbol + "thoughtText", texts.RandomElement());
 
