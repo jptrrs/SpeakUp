@@ -14,15 +14,15 @@ namespace SpeakUp
 
         public static void Ensue(List<string> tags)
         {
-            foreach (string tag in tags)
+            List<string> usedTags = new List<string>();
+            Talk ongoing = CurrentTalks.Where(x => x.nextInitiator == Initiator).FirstOrDefault();
+            var tag = tags.First();
+            if (ongoing == null) CurrentTalks.Add(new Talk(tag));
+            else ongoing.Reply(tag);
+            tags.Remove(tag);
+            if (!tags.NullOrEmpty())
             {
-                Talk ongoing = CurrentTalks.Where(x => x.nextInitiator == Initiator).FirstOrDefault();
-                if(ongoing == null)
-                {
-                    CurrentTalks.Add(new Talk(tag));
-                    return;
-                }
-                ongoing.Reply(tag);
+                Log.Warning($"[SpeakUp] {Initiator} tried to say multiple replies at once! Supressed tags: {tags.ToStringSafeEnumerable()}.");
             }
         }
 
@@ -36,6 +36,7 @@ namespace SpeakUp
             var intDef = statement.IntDef;
             intDef.ignoreTimeSinceLastInteraction = true; //temporary, bc RW limit is 120 ticks
             statement.Emitter.interactions.TryInteractWith(statement.Reciever, statement.IntDef);
+            if (Prefs.LogVerbose) Log.Warning($"[SpeakUp] {statement.Emitter} continues the conversation with reply #{statement.Iteration}");
             Scheduled.Remove(statement);
         }
     }

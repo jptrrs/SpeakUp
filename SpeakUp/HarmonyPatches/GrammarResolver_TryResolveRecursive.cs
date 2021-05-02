@@ -14,7 +14,7 @@ namespace SpeakUp
         {
             if (entry.rule is Rule_String stringRule && !stringRule.tag.NullOrEmpty() && !resolvedTags.Contains(stringRule.tag))
             {
-                //Log.Message($"Resolving rule for {entry.rule.keyword} with {entry.uses} uses");
+                //Log.Message($"Adding tag {stringRule.tag} to {entry.rule.keyword} with {entry.uses} uses");
                 resolvedTags.Add(stringRule.tag);
             }
         }
