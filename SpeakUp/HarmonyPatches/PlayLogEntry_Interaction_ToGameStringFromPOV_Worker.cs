@@ -21,6 +21,7 @@ namespace SpeakUp
         private static void Postfix()
         {
             Initiator = (Recipient = null);
+            RuleEntry_ValidateConstantConstraints.validationFeedback = false;
         }
     }
 }

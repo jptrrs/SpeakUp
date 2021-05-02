@@ -11,6 +11,8 @@ namespace SpeakUp
     [HarmonyPatch(typeof(GrammarResolver.RuleEntry), "ValidateConstantConstraints")]
     public class RuleEntry_ValidateConstantConstraints
     {
+		public static bool validationFeedback = false;
+
 		//NOTE: Tynan called the parameter for this method "constraints", but actually it means "constants".
 		//The real constraints are at rule.constantConstraints. Very confusing!
 
@@ -21,7 +23,7 @@ namespace SpeakUp
 			var actualConstraints = __instance.rule.constantConstraints;
 			if (Current.ProgramState != ProgramState.Playing || actualConstraints.NullOrEmpty() || currentRules.NullOrEmpty()) return true;
 			__result = ValidateRulesConstraints(actualConstraints, currentRules, ref ___constantConstraintsChecked, ref ___constantConstraintsValid);
-			if (Prefs.LogVerbose)
+			if (validationFeedback)
 			{
 				string result = __result ? "success" : "failed";
 				StringBuilder feedback = new StringBuilder();

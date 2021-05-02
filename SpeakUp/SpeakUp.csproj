@@ -62,6 +62,7 @@
     <Compile Include="HarmonyPatches\Pawn_InteractionsTracker_InteractionsTrackerTick.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_Resolve.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_RandomPossiblyResolvableEntry.cs" />
+    <Compile Include="HarmonyPatches\PlayLogEntry_Interaction_ClickedFromPOV.cs" />
     <Compile Include="HarmonyPatches\PlayLogEntry_Interaction_ToGameStringFromPOV_Worker.cs" />
     <Compile Include="HarmonyPatches\RuleEntry_ValidateConstantConstraints.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_TryResolveRecursive.cs" />
