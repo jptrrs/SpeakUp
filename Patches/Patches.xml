@@ -6,6 +6,33 @@
 			<rulesStrings>
 		
 				<!--Thought-->
+					<!--ApparelDamaged-->
+					<li>r_logentry(INITIATOR_thoughtDefName==ApparelDamaged,tag=ReactToThought_ApparelDamaged)->[apparel_damaged]</li>
+					<li>apparel_damaged(INITIATOR_thoughtLabel==ratty apparel)->My outfit is starting to show holes here and there. [apparel_damaged_comment]</li>
+					<li>apparel_damaged(INITIATOR_thoughtLabel==tattered apparel)->My outfit looks like it's about to fall apart. [apparel_damaged_comment]</li>
+						<!--WILDCARDS-->
+						<li>apparel_damaged_comment-></li>
+						<li>apparel_damaged_comment(INITIATOR_social_level>=5)-> That's unacceptable - what would people think about me?</li>
+						<li>apparel_damaged_comment(INITIATOR_crafting_level>=5)-> I'd better craft myself what I need - I can't walk around like this.</li>
+					<!--Ate a special meal-->	
+						<!--AteLavishMeal-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteLavishMeal,tag=ReactToThought_AteMeal)->[meal_lavish]</li>
+						<li>meal_lavish->I'm truly enjoying our meals here - they are abundant, tasty and varied.</li>
+						<!--AteFineMeal-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteFineMeal,tag=ReactToThought_AteMeal)->[meal_fine]</li>
+						<li>meal_fine->I'm enjoying our meals here - they are tasty and varied.</li>
+						<!--AteAwfulMeal-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteAwfulMeal,tag=ReactToThought_AteMeal)->[meal_awful]</li>
+						<li>meal_awful->Our meals here are [disgusting]!</li>
+						<!--AteRawFood-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteRawFood,tag=ReactToThought_AteMeal)->[meal_raw]</li>
+						<li>meal_raw->I had to eat raw food. Can't we have it cooked first?!</li>
+						<!--AteKibble-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteKibble,tag=ReactToThought_AteMeal)->[meal_kibble]</li>
+						<li>meal_kibble->I had to eat animal kibble. It's [humiliating] - I don't get to be human any more.</li>
+						<!--AteCorpse-->
+						<li>r_logentry(INITIATOR_thoughtDefName==AteCorpse,tag=ReactToThought_AteMeal)->[meal_corpse]</li>
+						<li>meal_corpse->I had to eat the raw flesh of a dead, unbutchered creature. That was [humiliating] and [disgusting].</li>
 					<!--AteWithoutTable // AteInImpressiveDiningRoom-->
 					<li>r_logentry->[thought_diningroom]</li>
 						<!--AteInImpressiveDiningRoom-->
@@ -30,6 +57,9 @@
 							<li>thought_atewotable_construction_skilled(INITIATOR_construction_passion==Major)->I'm looking forward to building a [proper] dining area - we [surely] lack one!</li>
 						<!--Almost decent dining room-->
 						<li>thought_diningroom(tag=ReactToThought_AteWithoutTable)->Last time I had a meal, the dining area wasn't very nice - and that's a bit [annoying].</li>
+					<!--DefeatedMechCluster-->
+					<li>r_logentry(INITIATOR_thoughtDefName==DefeatedMechCluster,tag=ReactToThought_DefeatedMechCluster)->[thought_defeatcluster]</li>
+					<li>thought_defeatcluster->That victory against the mech cluster was glorious!</li>
 					<!--EnvironmentCold-->
 					<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentCold,tag=ReactToThought_EnvironmentCold)->[thought_environmentcold]</li>
 					<li>thought_environmentcold(INITIATOR_thoughtLabel==chilly)->I'm uncomfortably cold.</li>
@@ -49,7 +79,7 @@
 						<li>thought_environmentdark->It's dark - [extra]</li>
 						<!--WILDCARDS-->
 						<li>extra->and I don't like it.</li>
-						<li>extra->I must walk slower to avoid tripping into something.</li>
+						<li>extra->I hope I won't trip into something.</li>
 						<li>extra->I can't see well enough to do my job properly.</li>
 						<li>extra(INITIATOR_trait==pyromaniac)->we could put up more wall torches around here.</li>
 						<li>extra(INITIATOR_trait==depressive)->just like each and every day of my life.</li>
@@ -126,8 +156,69 @@
 						<li>thought_needfood_hungry6->Food... food... anything... please...</li>
 					<!--NeedJoy-->
 					<!--NeedRoomSize-->
+					<!--NewColonyHope-->
+					<li>r_logentry(INITIATOR_thoughtDefName==NewColonyHope,tag=ReactToThought_NewColony)->[thought_newcolhope]</li>
+					<li>thought_newcolhope->I'm getting used to this new life, but it's still exciting. I hope this works out...</li>
+						<!--Special cases-->
+						<li>thought_newcolhope(INITIATOR_trait==ascetic)->By humbly observing the planet's behaviour, we shall survive and thrive against all odds.</li>
+						<!--Other cases-->
+						<li>thought_newcolhope(INITIATOR_trait==hard worker)->Our hard work got us safely so far. Let's keep this up, and we'll be allright!</li>
+						<li>thought_newcolhope(INITIATOR_trait==industrious)->Our hard work got us safely so far. Let's keep this up, and we'll be allright!</li>
+						<li>thought_newcolhope(INITIATOR_trait==iron-willed)->We never gave up, and now here we are - strong and ready to face what lies ahead.</li>
+						<li>thought_newcolhope(INITIATOR_trait==optimist)->So far, so good - right? We won past challenges, we shall win the future ones too! </li>
+						<li>thought_newcolhope(INITIATOR_trait==sanguine)->So far, so good - right? We won past challenges, we shall win the future ones too!</li>
+						<li>thought_newcolhope(INITIATOR_trait==steadfast)->We never gave up, and now here we are - strong and ready to face what lies ahead.</li>
+						<li>thought_newcolhope(INITIATOR_trait==tough)->We managed to endure every setback and hardship so far, so we're perfectly ready for the next ones!</li>
 					<!--NewColonyOptimism-->
+					<li>r_logentry(INITIATOR_thoughtDefName==NewColonyOptimism,tag=ReactToThought_NewColony)->[thought_newcolopt]</li>
+					<li>thought_newcolopt->It's a tough situation - but I feel I can handle it.</li>
+						<!--Special cases-->
+						<li>thought_newcolopt(INITIATOR_trait==ascetic)->One might say we are stranded and lost. Yet, I say we are in a motherly wilderness, where we can find our true selves.</li>
+						<!--Other cases-->
+						<li>thought_newcolopt(INITIATOR_trait==fast learner)->We're in a rought spot, but I'm sure we can quickly adapt and work things out.</li>
+						<li>thought_newcolopt(INITIATOR_trait==hard worker)->Ok. Let's put our minds and bodies to work. We can do this!</li>
+						<li>thought_newcolopt(INITIATOR_trait==industrious)->Ok. Let's put our minds and bodies to work. We can do this!</li>
+						<li>thought_newcolopt(INITIATOR_trait==iron-willed)->By sheer willpower, we shall come out of this. Mark my words!</li>
+						<li>thought_newcolopt(INITIATOR_trait==optimist)->This is going to be a great challenge - one we can [surely] win!</li>
+						<li>thought_newcolopt(INITIATOR_trait==sanguine)->This is going to be an exciting challenge - one we'll [surely] win!</li>
+						<li>thought_newcolopt(INITIATOR_trait==steadfast)->By sheer willpower, we will get through this! I'm sure!</li>
+						<li>thought_newcolopt(INITIATOR_trait==tough)->Come what may, nothing can defeat us! Let's do this!</li>
+						<li>thought_newcolopt(INITIATOR_construction_level>=4)->Let's start building the basic buildings - we'll be fine.</li>
+						<li>thought_newcolopt(INITIATOR_medical_level>=4)->If you have any medical issues, I can help. Do not worry - we'll be allright.</li>
+						<li>thought_newcolopt(INITIATOR_plants_level>=5)->I believe we may grow our own food here - and that will [surely] give us a great start!</li>
+						<li>thought_newcolopt(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5)->I believe we may hunt for food here - and that will [surely] give us a great start!</li>
+					<!--ObservedLayingCorpse-->
+					<li>r_logentry(INITIATOR_thoughtDefName==ObservedLayingCorpse,tag=ReactToThought_ObservedLayingCorpse)->[thought_corpse]</li>
+					<li>thought_corpse->[saw_a_body] It was [disturbing].</li>
+					<li>thought_corpse->[saw_a_body] It was [disturbing].</li>
+					<li>thought_corpse(INITIATOR_trait==psychopath,priority=1)->[saw_a_body]</li>
+					<li>thought_corpse(INITIATOR_trait==bloodlust,priority=1)->[saw_a_body]</li>
+					<li>thought_corpse(INITIATOR_trait==cannibal,priority=1)->[saw_a_body]</li>
+					<li>saw_a_body->I saw a dead body laying on the ground.</li>
+					<li>saw_a_body->I saw an unburied body.</li>
+					<!--ObservedLayingRottingCorpse-->
+					<li>r_logentry(INITIATOR_thoughtDefName==ObservedLayingRottingCorpse,tag=ReactToThought_ObservedLayingRottingCorpse)->[thought_rotting_corpse]</li>
+					<li>thought_rotting_corpse->[saw_a_rotting_body] It was [disgusting].</li>
+					<li>thought_rotting_corpse->[saw_a_rotting_body] It was [disgusting].</li>
+					<li>thought_rotting_corpse(INITIATOR_trait==psychopath,priority=1)->[saw_a_rotting_body]</li>
+					<li>thought_rotting_corpse(INITIATOR_trait==bloodlust,priority=1)->[saw_a_rotting_body]</li>
+					<li>thought_rotting_corpse(INITIATOR_trait==cannibal,priority=1)->[saw_a_rotting_body]</li>
+					<li>saw_a_rotting_body->I saw a rotting body laying on the ground.</li>
+					<li>saw_a_rotting_body->I saw an unburied rotting body.</li>					
+					<!--Rescued-->
+					<li>r_logentry(INITIATOR_thoughtDefName==Rescued,tag=ReactToThought_Rescued)->[thought_rescued]</li>
+					<li>thought_rescued->I'm so thankful you guys rescued me. Without your help, I probably wouldn't be here today.</li>
+					<li>thought_rescued->Rescuing me was a true noble and life-saving thing to do. I'll be forever thankful for that.</li>
 					<!--Sick-->
+					<li>r_logentry(INITIATOR_thoughtDefName==Sick,tag=ReactToThought_Sick)->[thought_sick]</li>
+					<li>thought_sick->I'm not... I'm not feeling well...</li>
+					<li>thought_sick->My health could be better...</li>
+					<li>thought_sick->Ugh... will thiss sickness ever go away!?</li>
+					<li>thought_sick(INITIATOR_trait==wimp)->Ah, I'm feeling horrible... I... I might pass out soon!</li>
+					<li>thought_sick(INITIATOR_trait==tortured artist)->Sickness: rich fuel for my creativity, yet painful dagger in the flesh still.</li>
+					<li>thought_sick(INITIATOR_trait==sickly)->Darn, I'm sick again... same old story...</li>
+					<li>thought_sick(INITIATOR_trait==super-immune)->Darn this sickness. I shouldn't even be sick! I never get sick!</li>
+					<li>thought_sick(INITIATOR_trait==transhumanist)->Sick - again! The human body is so weak and flawed...</li>
 					<!--SleepDisturbed-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed]</li>
 					<li>thought_sleepdisturbed->I was woke up by somebody walking near my bed. That's a bit [annoying].</li>
@@ -329,6 +420,22 @@
 				<li>annoying->maddening</li>
 				<li>annoying->bothersome</li>
 				<li>annoying(INITIATOR_intellectual_level>=5)->exasperating</li>
+				<!--disgusting (dead body/meal)-->
+				<li>disgusting->disgusting</li>
+				<li>disgusting->nauseating</li>
+				<li>disgusting->sickening</li>
+				<li>disgusting->gross</li>
+				<li>disgusting(INITIATOR_intellectual_level>=5)->revolting</li>
+				<li>disgusting(INITIATOR_intellectual_level>=10)->repugnant</li>
+				<!--disturbing (dead body)-->
+				<li>disturbing->disturbing</li>
+				<li>disturbing->unsettling</li>
+				<li>disturbing->gut-wrenching</li>
+				<li>disturbing->gross</li>
+				<li>disturbing(INITIATOR_intellectual_level>=5)->perturbing</li>
+				<li>disturbing(INITIATOR_intellectual_level>=5)->disquieting</li>
+				<li>disturbing(INITIATOR_intellectual_level>=10)->abhorrent</li>
+				<li>disturbing(INITIATOR_intellectual_level>=10)->abominable</li>
 				<!--eerie-->
 				<li>eerie->strange</li>
 				<li>eerie->eerie</li>
@@ -428,20 +535,20 @@
 				<li>try_ask_for_construction5(RECIPIENT_construction_level>=5,INITIATOR_opinion&lt;0)->Why won't you build one?!</li>
 				<!--Extreme cold felt-->
 				<!--Clothes are not enough ***DEBUG: needs reaction***-->
-				<li>weather_toocold(INITIATOR_thoughtLabel==chilly)->**TO DO**</li>
-				<li>weather_toocold(INITIATOR_thoughtLabel==cold)->**TO DO**</li>
-				<li>weather_toocold(INITIATOR_thoughtLabel==numbing cold)->**TO DO**</li>
-				<li>weather_toocold(INITIATOR_thoughtLabel==absolutely freezing)->**TO DO**</li>								
+				<li>weather_toocold(INITIATOR_thoughtLabel==chilly,priority=1)->I should get better clothing - I'm almost freezing.</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==cold,priority=1)->I should get better clothing - I'm cold!</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==numbing cold,priority=1)->I should get better clothing - I'm freezing!</li>
+				<li>weather_toocold(INITIATOR_thoughtLabel==absolutely freezing,priority=1)->I should get better clothing - I'm totally numbed by the cold!</li>
 				<!--Clothes may be enough-->
-				<li>weather_toocold->I hope my gear is warm enough to protect me from this extreme cold!</li>
+				<li>weather_toocold->Luckily, my gear is warm enough to protect me from this extreme cold!</li>
 				<!--Extreme heat felt-->
 				<!--Clothes are not enough ***DEBUG: needs reaction***-->
-				<li>weather_toohot(INITIATOR_thoughtLabel==sweaty)->**TO DO**</li>
-				<li>weather_toohot(INITIATOR_thoughtLabel==hot)->**TO DO**</li>
-				<li>weather_toohot(INITIATOR_thoughtLabel==sweltering hot)->**TO DO**</li>
-				<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot)->**TO DO**</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==sweaty,priority=1)->I should get better clothing - I'm sweating.</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==hot,priority=1)->I should get better clothing - I'm very hot!</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==sweltering hot,priority=1)->I should get better clothing - I'm extremely hot!</li>
+				<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot,priority=1)->I should get better clothing - I'm melting!</li>
 				<!--Clothes may be enough-->					
-				<li>weather_toohot->I hope my gear is good enough to protect me from this scorching heat!</li>
+				<li>weather_toohot->Luckily, my gear is good enough to protect me from this scorching heat!</li>
 				<!--What about yours?-->
 				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
 		<!--TESTING
