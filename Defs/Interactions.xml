@@ -47,6 +47,24 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_ApparelDamaged</defName>
+		<label>apparel - damaged</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+				<li>comment-></li>
+				<li>comment(INITIATOR_crafting_level>=5)->I could try and make some new apparel for you.</li>
+				<li>comment(INITIATOR_social_level>=5)->I'll try to trade in something in exchange for some new apparel for you.</li>
+				<li>comment(INITIATOR_thoughtDefName==ApparelDamaged)->Mine is in no good shape either...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_AteWithoutTable</defName>
 		<label>ate without table</label>
@@ -58,7 +76,7 @@
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!--Initiator not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
+					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's a bit [annoying].</li>
 					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build one.</li>
 					<!--Initiator skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
@@ -77,6 +95,102 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_AteMeal</defName>
+		<label>ate meal</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Recipient ate lavish-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteLavishMeal)->[recipient_lavish]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->Me too! [medical_opinion_lavish_1]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->I don't think they're as abundant as you say, but I agree with you! [medical_opinion_lavish_1]</li>
+					<li>recipient_lavish->Really? Mine were plain and ordinary. [medical_opinion_lavish_2]</li>
+					<li>recipient_lavish->Really? Mine were plain plain and ordinary. [cook_opinion]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->What?! I had to eat some disgusting food earlier! [medical_opinion_lavish_2]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->What?! I had to eat some disgusting food earlier! [cook_opinion]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteRawFood,priority=1)->What?! I had to eat some raw food earlier! [medical_opinion_lavish_2]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteRawFood,priority=1)->What?! I had to eat some raw food earlier! [cook_opinion]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteKibble,priority=1)->What?! I had to eat some kibble earlier! [medical_opinion_lavish_2]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteKibble,priority=1)->What?! I had to eat some kibble earlier! [cook_opinion]</li>
+					<li>recipient_lavish(INITIATOR_thoughtDefName==AteCorpse,priority=1)->Are you kidding me?! I had to eat some unbutchered corpse earlier! That was horrible!</li>
+					<!--Recipient ate fine-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteFineMeal)->[recipient_fine]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->And abundant, too! [medical_opinion_fine_1]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->Me too! [medical_opinion_fine_1]</li>
+					<li>recipient_fine->Really? I found them plain and ordinary. [medical_opinion_fine_2]</li>
+					<li>recipient_fine->Really? I found them plain and ordinary. [cook_opinion]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->What?! I had to eat some disgusting food earlier! [medical_opinion_fine_2]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->What?! I had to eat some disgusting food earlier! [cook_opinion]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteRawFood,priority=1)->What?! I had to eat some raw food earlier! [medical_opinion_fine_2]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteRawFood,priority=1)->What?! I had to eat some raw food earlier! [cook_opinion]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteKibble,priority=1)->What?! I had to eat some kibble earlier! [medical_opinion_fine_2]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteKibble,priority=1)->What?! I had to eat some kibble earlier! [cook_opinion]</li>
+					<li>recipient_fine(INITIATOR_thoughtDefName==AteCorpse,priority=1)->Are you kidding me?! I had to eat some unbutchered corpse earlier! That was horrible!</li>
+					<!--Recipient ate awful-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteAwfulMeal)->[recipient_awful]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
+					<li>recipient_awful->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->Me too! [cook_opinion]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteRawFood,priority=1)->Lucky you - I had to eat some raw food earlier! [cook_opinion]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteKibble,priority=1)->Lucky you - I had to eat some kibble earlier! [cook_opinion]</li>
+					<li>recipient_awful(INITIATOR_thoughtDefName==AteCorpse,priority=1)->And I had to eat some unbutchered corpse earlier! That was horrible!</li>
+					<!--Recipient ate raw-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteRawFood)->[recipient_raw] [medical_opinion_raw]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->I'm so sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->I'm so sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_raw->I'm sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteRawFood,priority=1)->Me too! [cook_opinion]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteKibble,priority=1)->Lucky you - I had to eat some kibble earlier! [cook_opinion]</li>
+					<li>recipient_raw(INITIATOR_thoughtDefName==AteCorpse,priority=1)->And I had to eat some unbutchered corpse earlier! That was horrible!</li><!--Recipient ate kibble-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteKibble)->[recipient_kibble]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->I'm so sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->I'm so sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_kibble->I'm sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteRawFood,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]! [cooking_offer]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteKibble,priority=1)->Me too! [cook_opinion]</li>
+					<li>recipient_kibble(INITIATOR_thoughtDefName==AteCorpse,priority=1)->And I had to eat some unbutchered corpse earlier! That was horrible!</li>
+					<!--Recipient ate corpse-->
+					<li>good_opinion(RECIPIENT_thoughtDefName==AteCorpse)->[recipient_corpse] [medical_opinion_corpse]</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)-That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteRawFood,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteKibble,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteCorpse,priority=1)->Me too! That was horrible! Oh my, what have we come to?!</li>
+				<!--WILDCARDS-->
+				<li>medical_opinion_lavish_1-></li>
+				<li>medical_opinion_lavish_1(INITIATOR_medical_level>=5,priority=1)->[although] I think it'd be healthier to eat less lavishly.</li>
+				<li>medical_opinion_lavish_2-></li>
+				<li>medical_opinion_lavish_2(INITIATOR_medical_level>=5,priority=1)->[moreover] I think you'd be healthier if you ate less lavishly.</li>
+				<li>medical_opinion_fine_1-></li>
+				<li>medical_opinion_fine_1(INITIATOR_medical_level>=5,priority=1)->[moreover] our well-balanced, varied diet it's excellent for our health.</li>
+				<li>medical_opinion_fine_2-></li>
+				<li>medical_opinion_fine_2(INITIATOR_medical_level>=5,priority=1)->At least, you're lucky enough to have a well-balanced diet - excellent for your health.</li>
+				<li>medical_opinion_raw-></li>
+				<li>medical_opinion_raw(INITIATOR_medical_level>=5,priority=1)->[moreover] eating raw food is dangerous for your health!</li>
+				<li>medical_opinion_corpse-></li>
+				<li>medical_opinion_corpse(INITIATOR_medical_level>=5,priority=1)->[moreover] it's highly dangerous for your health!</li>
+				<li>cooking_offer(INITIATOR_cooking_level&lt;6)-></li>
+				<li>cooking_offer(INITIATOR_cooking_level>=6)->I'll try and cook something better for you.</li>
+				<li>cook_opinion(INITIATOR_cooking_level&lt;6)->If only I were a better cook...</li>
+				<li>cook_opinion(INITIATOR_cooking_level>=6)->I could cook some better meals!</li>
+				<li>although->Although,</li>
+				<li>although->Yet,</li>
+				<li>although->Nonetheless,</li>
+				<li>although->Even so,</li>
+				<li>moreover->Moreover, </li>
+				<li>moreover->Besides, </li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_DiningRoom</defName>
 		<label>room - dining</label>
 		<logRulesInitiator>
@@ -93,7 +207,30 @@
 				<li>comment(INITIATOR_trait==gourmand)->I look forward to enjoying many fancy meals there!</li>
 			</rulesStrings>
 		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_DefeatedMechCluster</defName>
+		<label>defeated cluster</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion(INITIATOR_trait==body purist,priority=1)->A victory that clearly shows that our human bodies need no cybernetics - they're just perfect the way they are!</li>
+				<li>good_opinion->It was indeed! [comment]</li>
+				<li>comment-></li>
+				<li>comment(INITIATOR_trait==brawler)->We squashed those mechs like bugs!</li>
+				<li>comment(INITIATOR_trait==depressive)->A great, hollow victory - for when they come back with heavier forces, we will get mercilessly destroyed.</li>
+				<li>comment(INITIATOR_trait==hard worker)->But now, we'd better prepare for the next mech attack.</li>
+				<li>comment(INITIATOR_trait==industrious)->But now, we'd better prepare for the next mech attack.</li>
+				<li>comment(INITIATOR_trait==optimist)->I'm sure those things won't come back anytime soon - we're safe!</li>
+				<li>comment(INITIATOR_trait==pessimist)->But I'm sure those things will come back soon with heavier forces.</li>
+				<li>comment(INITIATOR_trait==sanguine)->And this is only one of the many victories awaiting us!</li>
+			</rulesStrings>
+		</logRulesInitiator>
 	</InteractionDef>	
+	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_EnvironmentCold</defName>
 		<label>environment - cold</label>
@@ -159,7 +296,7 @@
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!--Feeling hot-->
 					<li>good_opinion(INITIATOR_thoughtDefName==EnvironmentHot,priority=1)->[feeling_hot]</li>
-					<li>feeling_hot(INITIATOR_thoughtLabel==sweaty)->You're right, [RECIPIENT_nameDef]. I'm sweating myself.</li>
+					<li>feeling_hot(INITIATOR_thoughtLabel==sweaty)->You're right, [RECIPIENT_nameDef]. I'm sweating.</li>
 					<li>feeling_hot(INITIATOR_thoughtLabel==hot)->Ah, [RECIPIENT_nameDef] - if only I could have a breath of cool air...</li>
 					<li>feeling_hot(INITIATOR_thoughtLabel==sweltering hot)->I'm not sure how long I can handle this extreme heat, [RECIPIENT_nameDef].</li>
 					<li>feeling_hot(INITIATOR_thoughtLabel==blistering hot)->This is worse than Hell itself. The air itself is on fire!</li>
@@ -184,13 +321,13 @@
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!--Good rec room-->
 					<li>good_opinion(INITIATOR_thoughtDefName==JoyActivityInImpressiveRecRoom,priority=1)->[rec_room]</li>
-					<li>rec_room(INITIATOR_thoughtLabel==decent rec room)->I had fun there too, [RECIPIENT_nameDef].</li>
-					<li>rec_room(INITIATOR_thoughtLabel==slightly impressive rec room)->I had a good time there too, [RECIPIENT_nameDef].</li>
-					<li>rec_room(INITIATOR_thoughtLabel==somewhat impressive rec room)->I had a very good time there too, [RECIPIENT_nameDef]. [comment2]</li>
-					<li>rec_room(INITIATOR_thoughtLabel==very impressive rec room)->Yes, [RECIPIENT_nameDef]! I had a great time there! [comment2]</li>
-					<li>rec_room(INITIATOR_thoughtLabel==extremely impressive rec room)->Yes, [RECIPIENT_nameDef]! I truly had great fun there! [comment2]</li>
-					<li>rec_room(INITIATOR_thoughtLabel==unbelievably impressive rec room)->Yes, [RECIPIENT_nameDef]. It's the coolest ever! [comment2]</li>
-					<li>rec_room(INITIATOR_thoughtLabel==wondrously impressive rec room)->It's truly a paradise, [RECIPIENT_nameDef] - all decked for maxxing out anyone's fun! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==decent rec room)->Yes, [RECIPIENT_nameDef].</li>
+					<li>rec_room(INITIATOR_thoughtLabel==slightly impressive rec room)->I believe it's enjoyable, [RECIPIENT_nameDef]!</li>
+					<li>rec_room(INITIATOR_thoughtLabel==somewhat impressive rec room)->I believe it's very enjoyable, [RECIPIENT_nameDef]! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==very impressive rec room)->I have loads of fun in it, [RECIPIENT_nameDef]! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==extremely impressive rec room)->I truly have loads of fun in it, [RECIPIENT_nameDef]! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==unbelievably impressive rec room)->It's the coolest ever, [RECIPIENT_nameDef]! [comment2]</li>
+					<li>rec_room(INITIATOR_thoughtLabel==wondrously impressive rec room)->It's a complete Paradise, [RECIPIENT_nameDef] - all decked for maxxing out anyone's fun! [comment2]</li>
 					<!--Absent or bad rec room-->
 					<li>good_opinion->What rec room, [RECIPIENT_nameDef]? [comment]</li>
 				<!-- WILDCARDS -->
@@ -441,7 +578,110 @@
 				<li>animal_large->an elephant</li>
 			</rulesStrings>
 		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NewColony</defName>
+		<label>new colony</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion(INITIATOR_trait==pessimist,priority=1)->I don't know, [RECIPIENT_nameDef]. Probably we'll soon die of starvation or get killed in a raid.</li>
+				<li>good_opinion(INITIATOR_trait==depressive,priority=1)->We're doomed, [RECIPIENT_nameDef]. Doomed... that's all we are.</li>
+				<li>good_opinion(INITIATOR_trait==wimp,priority=1)->Really, [RECIPIENT_nameDef]? This place looks dangerous... I'm scared.</li>
+				<li>good_opinion(INITIATOR_trait==nervous,priority=1)->I... I hope you're right, [RECIPIENT_nameDef]. But I'm... quite cross about our situation here.</li>
+				<li>good_opinion(INITIATOR_trait==volatile,priority=1)->No, [RECIPIENT_nameDef]. You got it all wrong. In fact, we should get ready for the worst.</li>
+				<li>good_opinion(INITIATOR_trait==ascetic,RECIPIENT_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef]. Wise words.</li>
+				<li>good_opinion->[yes], [RECIPIENT_nameDef]! [comment]</li>
+				<!--WILDCARDS-->
+				<li>yes->Yes</li>
+				<li>yes->Well said</li>
+				<li>yes->That's right</li>
+				<li>comment->We can do this!</li>
+				<li>comment->We can make it!</li>
+				<li>comment->It'll be allright!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_ObservedLayingCorpse</defName>
+		<label>saw unburied corpse</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Oh my, [RECIPIENT_nameDef]. [saw_it]I hope someone took care of it already.</li>
+				<li>good_opinion(INITIATOR_trait==pyromaniac)->We should burn it right away!</li>
+				<li>good_opinion(INITIATOR_trait==cannibal)->We should store it in a cold room for... further use.</li>
+				<li>good_opinion(INITIATOR_trait==cannibal,INITIATOR_medical_level>=5)->We should store it in a cold room for further scientific studies.</li>
+				<li>good_opinion(INITIATOR_medical_level>=5)->We should bury or cremate it right away - to avoid health problems.</li>
+				<li>good_opinion(INITIATOR_trait==psychopath,priority=1)->[saw_it]No big deal...</li>
+				<li>good_opinion(INITIATOR_trait==bloodlust)->It's just one more of the many we shall see around here. No big deal.</li>
+				<li>saw_it-></li>
+				<li>saw_it(INITIATOR_thoughtDefName==ObservedLayingCorpse)->I saw it too. </li>
+				<li>saw_it(INITIATOR_thoughtDefName==ObservedLayingRottingCorpse)->I saw worse than that - I saw a rotting one. </li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_ObservedLayingRottingCorpse</defName>
+		<label>saw unburied rotten corpse</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->That's disgusting, [RECIPIENT_nameDef]! [saw_it]I hope someone took care of it already.</li>
+				<li>good_opinion(INITIATOR_trait==pyromaniac)->We should burn it right away!</li>
+				<li>good_opinion(INITIATOR_medical_level>=5)->We should bury or cremate it right away - to avoid health problems.</li>
+				<li>good_opinion(INITIATOR_trait==psychopath,priority=1)->[saw_it]Even for me, that's disgusting.</li>
+				<li>good_opinion(INITIATOR_trait==bloodlust)->It's just one more of the many we shall see around here. No big deal.</li>
+				<li>saw_it-></li>
+				<li>saw_it(INITIATOR_thoughtDefName==ObservedLayingCorpse)->I saw one too - but it wasn't rotting. </li>
+				<li>saw_it(INITIATOR_thoughtDefName==ObservedLayingRottingCorpse)->I saw one too. </li>
+			</rulesStrings>
+		</logRulesInitiator>
 	</InteractionDef>	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_Rescued</defName>
+		<label>rescued</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->You should be thankful indeed, [RECIPIENT_nameDef]. Let's hope rescuing you was worth our while!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->No problem, [RECIPIENT_nameDef]. It was the right thing to do.</li>
+				<li>good_opinion(INITIATOR_trait==kind)->You really don't need to thank us - we just did our duty as good human beings.</li>
+				<li>good_opinion(INITIATOR_trait==psychopath,priority=1)->...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_Sick</defName>
+		<label>sick</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+				<li>comment-></li>
+				<li>comment(INITIATOR_medical_level>=5)->I could give you some medicine to speed up the healing process.</li>
+				<li>comment(INITIATOR_plants_level>=8)->I could prepare for you a potent healing concoction, if you want.</li>
+				<li>comment(INITIATOR_cooking_level>=6)->Eating healthy food might help avoiding that. I could cook something for you.</li>
+				<li>comment(INITIATOR_thoughtDefName==sick)->I'm not in great shape either...</li>
+				<li>comment(INITIATOR_thoughtDefName==transhumanist)->But then again, human body is so vulnerable...</li>
+				<li>comment(INITIATOR_thoughtDefName==sickly)->I know how it feels, I get sick all the time...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleepDisturbed</defName>
 		<label>sleep disturbed</label>
@@ -499,6 +739,11 @@
 					<!--Slept on the ground-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptOnGround,priority=4)->I don't have a bedroom - in fact, I don't even have a bed!</li>		<!--Slept outside-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptOutside,priority=4)->What bedroom!? Last time I slept, it was out in the open!</li>
+					<!--Ascetic-->
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has awful bedroom,priority=4)->Mine is just how I want it to be: very humble and simple.</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has dull bedroom,priority=4)->Mine is just how I want it to be: very humble and simple.</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has mediocre bedroom,priority=4)->Mine is very humble and simple. I like it.</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has impressive bedroom,priority=4)->Mine is unnecessarily pompous and extravagant. I'd rather sleep in a simpler room.</li>
 					<!--Barracks-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBarracks,priority=3)->I don't have my own bedroom - I share one with others.</li>
 					<!--Good bedroom-->
@@ -663,6 +908,12 @@
 				<li>bad_opinion->Mind your business, [RECIPIENT_nameDef]!</li>
 				<li>bad_opinion->None of your business, [RECIPIENT_nameDef]!</li>
 				<li>bad_opinion->...</li>
+				<!-- decent or good opinion, but sick -->
+				<li>r_logentry(INITIATOR_opinion>=-5,INITIATOR_thoughtDefName==sick,priority=1)->[good_opinion_sick]</li>
+				<li>good_opinion_sick(INITIATOR_mood>=0.7)->I'm not feeling well, but I'm sure I'll recover soon! [whataboutyou]</li>
+				<li>good_opinion_sick(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm not feeling well, but I believe I'll recover soon. [whataboutyou]</li>
+				<li>good_opinion_sick(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I'm not feeling well.</li>
+				<li>good_opinion_sick(INITIATOR_mood&lt;0.3)->[furious] And on top of that, I'm sick!</li>				
 				<!-- decent or good opinion -->
 				<li>r_logentry(INITIATOR_opinion>=-5)->[good_opinion]</li>
 				<li>good_opinion(INITIATOR_mood>=0.7)->I'm feeling [great], thank you! [whataboutyou]</li>
@@ -816,7 +1067,7 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<li>r_logentry->Yes, [RECIPIENT_nameDef]. [temperature]</li>
-				<li>r_logentry(INITIATOR_opinion>=15)->You're right, [RECIPIENT_nameDef]. [temperature]</li>
+				<li>r_logentry(INITIATOR_opinion>=5)->You're right, [RECIPIENT_nameDef]. [temperature]</li>
 				<li>r_logentry(INITIATOR_opinion&lt;0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
 				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->It's a very hot [DAYPERIOD], but it's still enjoyable.</li>
 				<li>temperature(TEMPERATURE>26,TEMPERATURE&lt;=30)->A warm, clear [DAYPERIOD] is a blessing!</li>
@@ -908,17 +1159,6 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-
-  <InteractionDef ParentName="SpeakUpReply">
-		<defName>TiraTeima</defName>
-		<label>tira-teima</label>
-		<logRulesInitiator>
-			<rulesStrings>
-        <li>r_logentry(priority=1,INITIATOR_trait!=undergrounder)->Nao sou undergrounder!</li>
-        <li>r_logentry(priority=0)->Eu sou subterrâneo.</li>
-      </rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
 	
 	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
