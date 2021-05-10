@@ -34,7 +34,23 @@
 		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
 	</InteractionDef>
 	
-
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>AsceticWisdom</defName>
+		<label>ascetic - wisdom</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Wow, that was deep.</li>
+				<li>good_opinion(INITIATOR_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef].</li>
+				<li>good_opinion(INITIATOR_trait==greedy,priority=1)->...</li>
+				<li>good_opinion(INITIATOR_trait==jealous,priority=1)->...</li>
+				<li>good_opinion(INITIATOR_trait==gourmand,priority=1)->...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 			
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>HuntWithFog</defName>
@@ -230,7 +246,6 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_EnvironmentCold</defName>
 		<label>environment - cold</label>
@@ -521,6 +536,29 @@
 	</InteractionDef>
 <!--END of Need - Beauty-->
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedComfort</defName>
+		<label>need - comfort</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--recipient is uncomfortable-->
+					<li>good_opinion(RECIPIENT_thoughtLabel==uncomfortable,priority=1)->[recipient_uncomfortable]</li>
+					<li>recipient_uncomfortable(INITIATOR_thoughtLabel==uncomfortable,priority=1)->I totally agree, [RECIPIENT_nameDef]. [comment]</li>
+					<li>recipient_uncomfortable->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+					<!--recipient is comfortable-->
+					<li>good_opinion->[recipient_comfortable]</li>
+					<li>recipient_comfortable(INITIATOR_thoughtLabel==uncomfortable,priority=1)->Really, [RECIPIENT_nameDef]? My aching back doesn't agree with you.</li>
+					<li>recipient_comfortable->Yes, [RECIPIENT_nameDef] - I agree with you!</li>
+				<!--WILDCARDS-->
+				<li>comment-></li>
+				<li>comment(INITIATOR_construction_level>=5,priority=1)->I'll try and build some better furniture for us.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedFood</defName>
 		<label>need - react to hunger</label>
 		<logRulesInitiator>
@@ -576,6 +614,52 @@
 				<li>animal_large->a horse</li>
 				<li>animal_large->a muffalo</li>
 				<li>animal_large->an elephant</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedRest</defName>
+		<label>need - rest</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--initiator is tired too-->
+					<li>good_opinion(INITIATOR_thoughtDefName==NeedRest,priority=1)->[tired]</li>
+					<li>tired(INITIATOR_thoughtLabel==drowsy)->Tell me about it, [RECIPIENT_nameDef]... I'm a little drowsy myself.</li>
+					<li>tired(INITIATOR_thoughtLabel==tired)->Heh, [RECIPIENT_nameDef]... I'm quite tired myself.</li>
+					<li>tired(INITIATOR_thoughtLabel==exhausted)->Aww, [RECIPIENT_nameDef]... my eyelids have lead weights on them. I'm exhausted.</li>
+					<!--initiator is fresh-->
+					<li>good_opinion->[fresh]</li>
+					<li>fresh->Go and have some rest, [RECIPIENT_nameDef] - you deserve it.</li>
+					<li>fresh->Have some rest, [RECIPIENT_nameDef] - I'll try to cover for you.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedSpace</defName>
+		<label>need - roomsize</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--initiator dissatisfied-->
+					<li>good_opinion(INITIATOR_thoughtLabel==confined interior,priority=1)->[dissatisfied]</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==cramped interior,priority=1)->[dissatisfied]</li>
+					<li>dissatisfied(INITIATOR_construction_level>=5)->You're right, [RECIPIENT_nameDef]. I'll do my best to fix that.</li>
+					<li>dissatisfied(INITIATOR_construction_level&lt;5)->You're right, [RECIPIENT_nameDef]. I feel the same.</li>
+					<li>dissatisfied(INITIATOR_construction_level>=5,RECIPIENT_construction_level>=5,priority=1)->Yes, [RECIPIENT_nameDef]. In fact, I will help you with that.</li>
+					<li>dissatisfied(INITIATOR_construction_level&lt;5,RECIPIENT_construction_level>=5,priority=1)->Yes, [RECIPIENT_nameDef]. Please go ahead, we need it!</li>
+					<!--initiator satisfied-->
+					<li>good_opinion->[satisfied1]</li>
+					<li>satisfied1->Well, [RECIPIENT_nameDef] - you could be right but I believe our living spaces are just fine the way they are</li>
+					<!--initiator very satisfied-->
+					<li>good_opinion(INITIATOR_thoughtLabel==spacious interior,priority=1)->[satisfied2]</li>
+					<li>satisfied2->Are you sure, [RECIPIENT_nameDef]? I think our living spaces are quite spacious!</li>						
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
