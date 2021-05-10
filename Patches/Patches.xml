@@ -126,6 +126,21 @@
 						<li>thought_needbeauty_gorgeous->This place is a dream come true. I'm so happy to be here!</li>
 						<li>thought_needbeauty_gorgeous(INITIATOR_artistic>=5)->This place looks like a true masterwork of fine arts!</li>
 					<!--NeedComfort-->
+						<!-- uncomfortable -->
+						<li>r_logentry(INITIATOR_thoughtLabel==uncomfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort1]</li>
+						<li>thought_need_comfort1->My back is aching. Our furniture here is quite lacking.</li>
+						<!-- comfortable -->
+						<li>r_logentry(INITIATOR_thoughtLabel==comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort2]</li>
+						<li>thought_need_comfort2->I'm glad we have comfortable furniture around here.</li>
+						<!-- quite comfortable -->
+						<li>r_logentry(INITIATOR_thoughtLabel==quite comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort3]</li>
+						<li>thought_need_comfort3->I'm so glad we have nice and comfortable furniture around here!</li>
+						<!-- extremely comfortable -->
+						<li>r_logentry(INITIATOR_thoughtLabel==extremely comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort4]</li>
+						<li>thought_need_comfort4->This place is so cushy - we truly have excellent furniture around here!</li>
+						<!-- luxuriantly comfortable -->
+						<li>r_logentry(INITIATOR_thoughtLabel==luxuriantly comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort5]</li>
+						<li>thought_need_comfort5->Our furniture feels like Heaven! So comfy!</li>
 					<!--NeedFood-->
 						<!-- hungry -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
@@ -155,7 +170,29 @@
 						<li>r_logentry(INITIATOR_thoughtLabel==extreme starvation,tag=ReactToThought_NeedFood)->[thought_needfood_hungry6]</li>
 						<li>thought_needfood_hungry6->Food... food... anything... please...</li>
 					<!--NeedJoy-->
+					<!--NeedRest-->
+						<!-- drowsy -->
+						<li>r_logentry(INITIATOR_thoughtLabel==drowsy,tag=ReactToThought_NeedRest)->[thought_need_rest1]</li>
+						<li>thought_need_rest1->I haven't slept in a while. It's hard to keep focus.</li>
+						<!-- tired -->
+						<li>r_logentry(INITIATOR_thoughtLabel==tired,tag=ReactToThought_NeedRest)->[thought_need_rest2]</li>
+						<li>thought_need_rest2->I'm so tired. I just want to lay down and rest for a few minutes...</li>
+						<!-- exhausted -->
+						<li>r_logentry(INITIATOR_thoughtLabel==exhausted,tag=ReactToThought_NeedRest)->[thought_need_rest3]</li>
+						<li>thought_need_rest3->I'm so exhausted I can barely stand. Let me sleep...</li>					
 					<!--NeedRoomSize-->
+						<!-- confined interior -->
+						<li>r_logentry(INITIATOR_thoughtLabel==confined interior,tag=ReactToThought_NeedSpace)->[thought_need_space1]</li>
+						<li>thought_need_space1->Our living spaces are so cramped, it's difficult to breathe! [ask_for_larger_rooms]</li>
+						<li>thought_need_space1(INITIATOR_construction_level>=5,priority=1)->I should build larger living spaces - these ones are way too cramped!</li>
+						<!-- cramped interior -->
+						<li>r_logentry(INITIATOR_thoughtLabel==cramped interior,tag=ReactToThought_NeedSpace)->[thought_need_space2]</li>
+						<li>thought_need_space2->Can't we get larger living spaces? It feels so cramped! [ask_for_larger_rooms]</li>
+						<li>thought_need_space2(INITIATOR_construction_level>=5,priority=1)->I should build larger living spaces - these ones are somewhat cramped.</li>
+						<!-- spacious interior [not implemented] -->
+						<!-- LOCAL WILDCARDS-->
+						<li>ask_for_larger_rooms(RECIPIENT_construction_level&lt;5)-></li>
+						<li>ask_for_larger_rooms(RECIPIENT_construction_level>=5)->Hey, [RECIPIENT_nameDef]! Could you take care of it?</li>
 					<!--NewColonyHope-->
 					<li>r_logentry(INITIATOR_thoughtDefName==NewColonyHope,tag=ReactToThought_NewColony)->[thought_newcolhope]</li>
 					<li>thought_newcolhope->I'm getting used to this new life, but it's still exciting. I hope this works out...</li>
@@ -311,9 +348,15 @@
 				<li>howareyou(RECIPIENT_mood&lt;0.5;)->Are you OK?</li>
 				
 				<!--===TRAITS===-->
-					<!--Psychically sensitive-->
+					<!--Ascetic-->
+					<li>r_logentry(INITIATOR_trait==ascetic,tag=AsceticWisdom)->[trait_ascetic]</li>
+					<li>trait_ascetic->Being truly rich is not about having great possessions - it's about having few wants.</li>
+					<li>trait_ascetic->He who fears death will never do anything worth of a man who is alive.</li>
+					<li>trait_ascetic->You can control your mind — not outside events. Absorb this, and you shall find strength.</li>
+					<!--Psychically sensitive and hipersensitive-->
 					<!--Good visions-->
 					<li>r_logentry(INITIATOR_trait==psychically sensitive)->[trait_psy_sensitive]</li>
+					<li>r_logentry(INITIATOR_trait==psychically hypersensitive)->[trait_psy_sensitive]</li>
 					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [PersonJob] visiting a [AdjectiveFriendly] [Community].</li>
 					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [PersonJob] admiring a [nice] [TerrainFeature] from afar.</li>
 					<li>trait_psy_sensitive(tag=PsyVisionGood)->[vision_start] about a [AdjectiveFriendly] [Color] [Animal] in a [AdjectiveLarge] [TreeType] forest.</li>
@@ -539,7 +582,7 @@
 				<li>weather_toocold(INITIATOR_thoughtLabel==cold,priority=1)->I should get better clothing - I'm cold!</li>
 				<li>weather_toocold(INITIATOR_thoughtLabel==numbing cold,priority=1)->I should get better clothing - I'm freezing!</li>
 				<li>weather_toocold(INITIATOR_thoughtLabel==absolutely freezing,priority=1)->I should get better clothing - I'm totally numbed by the cold!</li>
-				<!--Clothes may be enough-->
+				<!--Clothes are enough-->
 				<li>weather_toocold->Luckily, my gear is warm enough to protect me from this extreme cold!</li>
 				<!--Extreme heat felt-->
 				<!--Clothes are not enough ***DEBUG: needs reaction***-->
@@ -547,7 +590,7 @@
 				<li>weather_toohot(INITIATOR_thoughtLabel==hot,priority=1)->I should get better clothing - I'm very hot!</li>
 				<li>weather_toohot(INITIATOR_thoughtLabel==sweltering hot,priority=1)->I should get better clothing - I'm extremely hot!</li>
 				<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot,priority=1)->I should get better clothing - I'm melting!</li>
-				<!--Clothes may be enough-->					
+				<!--Clothes are enough-->					
 				<li>weather_toohot->Luckily, my gear is good enough to protect me from this scorching heat!</li>
 				<!--What about yours?-->
 				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
