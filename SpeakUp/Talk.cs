@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace SpeakUp
@@ -29,9 +30,16 @@ namespace SpeakUp
         public void MakeReply(InteractionDef intDef, bool swap = true)
         {
             var time = GenTicks.TicksGame + interval;
+            if (swap) SwapRoles();
             expireTick = time + 1;
             latestReplyCount += 1;
-            if (swap) SwapRoles();
+            if (Scheduled.Any(x => x.Emitter == nextInitiator && x.IntDef == intDef && x.Iteration == latestReplyCount))
+            {
+                var talks = Scheduled.Select(x => x.Talk).Distinct().Where(y => y.nextInitiator == nextInitiator || y.nextRecipient == nextInitiator).Count();
+                Log.Error($"[SpeakUp] {nextInitiator} tried to repeat a reply for {intDef} while talking to {nextRecipient}.\n" +
+                    $"{nextInitiator} is participating in {talks} current talks");
+                return;
+            }
             Scheduled.Add(new Statement(nextInitiator, nextRecipient, time, intDef, this, latestReplyCount));
         }
 
