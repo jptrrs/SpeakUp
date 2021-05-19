@@ -551,7 +551,7 @@
 					<!--recipient is comfortable-->
 					<li>good_opinion->[recipient_comfortable]</li>
 					<li>recipient_comfortable(INITIATOR_thoughtLabel==uncomfortable,priority=1)->Really, [RECIPIENT_nameDef]? My aching back doesn't agree with you.</li>
-					<li>recipient_comfortable->Yes, [RECIPIENT_nameDef] - I agree with you!</li>
+					<li>recipient_comfortable->I'm happy for you, [RECIPIENT_nameDef]!</li>
 				<!--WILDCARDS-->
 				<li>comment-></li>
 				<li>comment(INITIATOR_construction_level>=5,priority=1)->I'll try and build some better furniture for us.</li>
@@ -617,6 +617,33 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedJoy</defName>
+		<label>need - react to joy</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!-- recreation-starved -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation-starved,priority=1)->[thought_needjoy_bored0]</li>
+					<li>thought_needjoy_bored0->I really feel like a slave here. All work, no fun.</li>
+					<!-- recreation-deprived -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation-deprived,priority=1)->[thought_needjoy_bored1]</li>
+					<li>thought_needjoy_bored1->Let's face it - you can easily get bored around here</li>
+					<!-- recreation unfulfilled -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation unfulfilled,priority=1)->[thought_needjoy_bored2]</li>
+					<li>thought_needjoy_bored2->I wish I could have more fun around here.</li>
+					<!-- recreation normal -->
+					<li>good_opinion->I believe we can have some fun around here. It's OK.</li>					
+					<!-- recreation satisfied -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation satisfied,priority=1)->I think we have several nice entertainment options around here.</li>
+					<!-- recreation fully satisfied -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation fully satisfied,priority=1)->I think we have lots of excellent entertainment options around here!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedRest</defName>
 		<label>need - rest</label>
@@ -825,8 +852,8 @@
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptOutside,priority=4)->What bedroom!? Last time I slept, it was out in the open!</li>
 					<!--Ascetic-->
 					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has awful bedroom,priority=4)->Mine is just how I want it to be: very humble and simple.</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has dull bedroom,priority=4)->Mine is just how I want it to be: very humble and simple.</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has mediocre bedroom,priority=4)->Mine is very humble and simple. I like it.</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has dull bedroom,priority=4)->Mine is just how I want it to be: humble and simple.</li>
+					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has mediocre bedroom,priority=4)->Mine is simple. I like it.</li>
 					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has impressive bedroom,priority=4)->Mine is unnecessarily pompous and extravagant. I'd rather sleep in a simpler room.</li>
 					<!--Barracks-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBarracks,priority=3)->I don't have my own bedroom - I share one with others.</li>
