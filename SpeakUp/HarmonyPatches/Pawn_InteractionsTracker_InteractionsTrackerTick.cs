@@ -17,7 +17,7 @@ namespace SpeakUp
                 var statements = DialogManager.Scheduled.Where(x => x.Timing <= tick && x.Emitter == ___pawn);
                 if (statements.EnumerableCount() > 1)
                 {
-                    Log.Error($"[SpeakUp] More that one statement scheduled for {___pawn} at the same time!");
+                    Log.Error($"[SpeakUp] More than one statement scheduled for {___pawn} at the same time!");
                 }
                 var statement = statements.FirstOrDefault();
                 if (statement != null) DialogManager.FireStatement(statement);

@@ -15,7 +15,7 @@ namespace SpeakUp
         public static void Ensue(List<string> tags)
         {
             List<string> usedTags = new List<string>();
-            Talk ongoing = CurrentTalks.Where(x => x.nextInitiator == Initiator).FirstOrDefault();
+            Talk ongoing = CurrentTalks.Where(x => x.nextInitiator == Initiator || x.nextRecipient == Initiator).FirstOrDefault();
             var tag = tags.First();
             if (ongoing == null) CurrentTalks.Add(new Talk(tag));
             else ongoing.Reply(tag);
