@@ -15,10 +15,10 @@ namespace SpeakUp
             {
                 var tick = GenTicks.TicksGame;
                 var statements = DialogManager.Scheduled.Where(x => x.Timing <= tick && x.Emitter == ___pawn);
-                if (statements.EnumerableCount() > 1)
-                {
-                    Log.Error($"[SpeakUp] More than one statement scheduled for {___pawn} at the same time!");
-                }
+                //if (statements.EnumerableCount() > 1)
+                //{
+                //    Log.Error($"[SpeakUp] More than one statement scheduled for {___pawn} at the same time!");
+                //}
                 var statement = statements.FirstOrDefault();
                 if (statement != null) DialogManager.FireStatement(statement);
             }
