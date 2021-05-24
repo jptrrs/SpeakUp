@@ -11,7 +11,7 @@ namespace SpeakUp
     [HarmonyPatch(typeof(GrammarResolver.RuleEntry), "ValidateConstantConstraints")]
     public class RuleEntry_ValidateConstantConstraints
     {
-		public static bool validationFeedback = false;
+		//public static bool validationFeedback = false;
 
 		//NOTE: Tynan called the parameter for this method "constraints", but actually it means "constants".
 		//The real constraints are at rule.constantConstraints. Very confusing!
@@ -23,17 +23,18 @@ namespace SpeakUp
 			var actualConstraints = __instance.rule.constantConstraints;
 			if (Current.ProgramState != ProgramState.Playing || actualConstraints.NullOrEmpty() || currentRules.NullOrEmpty()) return true;
 			__result = ValidateRulesConstraints(actualConstraints, currentRules, ref ___constantConstraintsChecked, ref ___constantConstraintsValid);
-			if (validationFeedback)
-			{
-				string result = __result ? "success" : "failed";
-				StringBuilder feedback = new StringBuilder();
-				feedback.Append($"{result.ToUpper()} validating constraints for {__instance.rule.keyword}:");
-				feedback.AppendInNewLine($"{actualConstraints.Select(x => $"\"{x.key} {x.type.ToString().ToLower()} {x.value}\"").ToStringSafeEnumerable()}");
-				feedback.AppendInNewLine($"The rule text is \"{__instance.rule}\".");
-				feedback.AppendInNewLine($"\nChecked against {currentRules.Count()} rules:\n" +
-					$"{(currentRules.EnumerableNullOrEmpty() ? "none" : currentRules.Select(x => $"{x.Key}: {x.Value.ResolveTags()}").ToLineList())}");
-				Log.Message(feedback.ToString());
-			}
+			//if (validationFeedback)
+			//{
+			//	string result = __result ? "success" : "failed";
+			//	StringBuilder feedback = new StringBuilder();
+			//	feedback.Append($"{result.ToUpper()} validating constraints for {__instance.rule.keyword}:");
+			//	feedback.AppendInNewLine($"{actualConstraints.Select(x => $"\"{x.key} {x.type.ToString().ToLower()} {x.value}\"").ToStringSafeEnumerable()}");
+			//	feedback.AppendInNewLine($"The rule text is \"{__instance.rule}\".");
+			//	feedback.AppendInNewLine($"\nChecked against {currentRules.Count()} rules:\n" +
+			//		$"{(currentRules.EnumerableNullOrEmpty() ? "none" : currentRules.Select(x => $"{x.Key}: {x.Value.ResolveTags()}").ToLineList())}");
+			//	Log.Message(feedback.ToString());
+			//	validationFeedback = false;
+			//}
 			return false;
 		}
 

@@ -18,10 +18,11 @@ namespace SpeakUp
             Initiator = ___initiator;
             Recipient = ___recipient;
         }
-        private static void Postfix()
-        {
-            Initiator = (Recipient = null);
-            RuleEntry_ValidateConstantConstraints.validationFeedback = false;
-        }
+
+        //private static void Postfix()
+        //{
+        //    Initiator = (Recipient = null);
+        //    RuleEntry_ValidateConstantConstraints.validationFeedback = false;
+        //}
     }
 }
