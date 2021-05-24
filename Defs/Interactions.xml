@@ -47,6 +47,7 @@
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 				<li>good_opinion->Wow, that was deep.</li>
+				<li>good_opinion->That was heavy, [RECIPIENT_nameDef] - but I dig it.</li>
 				<li>good_opinion(INITIATOR_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef].</li>
 				<li>good_opinion(INITIATOR_trait==greedy,priority=1)->...</li>
 				<li>good_opinion(INITIATOR_trait==jealous,priority=1)->...</li>
@@ -344,6 +345,21 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_ExSlave</defName>
+		<label>freed from slavery</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->You should be thankful indeed, [RECIPIENT_nameDef]. Let's hope rescuing you was worth our while!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->No problem, [RECIPIENT_nameDef]. It was the right thing to do.</li>
+				<li>good_opinion(INITIATOR_trait==kind)->You really don't need to thank us - we just did our duty as good human beings.</li>
+				<li>good_opinion(INITIATOR_trait==psychopath,priority=1)->...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_JoyRoom</defName>
 		<label>rec room</label>
@@ -1352,7 +1368,7 @@
 
 <!-- ============ SLIGHT ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
-		<defName>Slight</defName>
+		<defName>Slight_generic</defName>
 		<label>slight - react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
@@ -1361,7 +1377,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 				<li>bad_opinion->Ah, shut up you [fool]!</li>
 				<!--Good opinion of recipient-->
-				<li>r_logentry->[good_opinion]</li>
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 				<li>good_opinion->Ouch - that hurt, [RECIPIENT_nameDef]!</li>
 				<li>good_opinion->Are you serious, [RECIPIENT_nameDef]! This is so uncalled for!</li>
 				<li>good_opinion->Ouch, [RECIPIENT_nameDef]! What was that for!?</li>
@@ -1387,13 +1403,50 @@
 <!-- ============ INSULT ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Insult_Ancestors</defName>
-		<label>insult - ancestors</label>
+		<label>insult - react to - ancestors</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<li>r_logentry->At least I have ancestors, you human filth!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Insult_generic</defName>
+		<label>insult - react to</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->How dare you, you filthy bastard!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Watch it, [RECIPIENT_nameDef]!</li>
+				<li>good_opinion->You're crossing the line, [RECIPIENT_nameDef]!</li>
+				<li>good_opinion->Damn you, [RECIPIENT_nameDef]! What was that for!?</li>
+				<li>good_opinion->Aww, [RECIPIENT_nameDef]! What was that about!?</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+<!-- ============ KIND WORDS ============ -->
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>KindWords_generic</defName>
+		<label>kind words - react to</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->Thanks, [RECIPIENT_nameDef].</li>
+				<li>bad_opinion->I hope you're not being ironic here, [RECIPIENT_nameDef]. Or else.</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Oh, [RECIPIENT_nameDef]! That's so nice of you - thanks!</li>
+				<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	
 	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
