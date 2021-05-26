@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keyed", "Keyed", "{98EDB076
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patches", "Patches", "{6E73DBF5-44DE-4442-8552-8A314922B540}"
 	ProjectSection(SolutionItems) = preProject
-		Patches\Patches.xml = Patches\Patches.xml
+		Patches\Patches_test.xml = Patches\Patches_test.xml
 	EndProjectSection
 EndProject
 Global

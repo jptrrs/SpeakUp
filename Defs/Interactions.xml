@@ -1446,9 +1446,29 @@
 				<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
-	
-	<!--ABANDONWARE
+	</InteractionDef>
+
+  <InteractionDef ParentName="SpeakUpReply">
+    <defName>Test1</defName>
+    <label>testing case 1</label>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->Reply test 1.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+  <InteractionDef ParentName="SpeakUpReply">
+    <defName>Test2</defName>
+    <label>testing case 2</label>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->Reply test 2.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+  <!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>WeatherClearOutdoors</defName>
 		<label>reply to root</label>
