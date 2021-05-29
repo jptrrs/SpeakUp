@@ -196,7 +196,7 @@
 					<li>recipient_corpse(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
 					<li>recipient_corpse(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
 					<li>recipient_corpse->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
-					<li>recipient_corpse(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)-That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
+					<li>recipient_corpse(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
 					<li>recipient_corpse(INITIATOR_thoughtDefName==AteRawFood,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
 					<li>recipient_corpse(INITIATOR_thoughtDefName==AteKibble,priority=1)->That's disgusting and gross, [RECIPIENT_nameDef]! I hope I won't ever come to that!</li>
 					<li>recipient_corpse(INITIATOR_thoughtDefName==AteCorpse,priority=1)->Me too! That was horrible! Oh my, what have we come to?!</li>
@@ -586,7 +586,7 @@
 					<!--recipient is comfortable-->
 					<li>good_opinion->[recipient_comfortable]</li>
 					<li>recipient_comfortable(INITIATOR_thoughtLabel==uncomfortable,priority=1)->Really, [RECIPIENT_nameDef]? My aching back doesn't agree with you.</li>
-					<li>recipient_comfortable->I'm glad about it, [RECIPIENT_nameDef]!</li>
+					<li>recipient_comfortable->I'm glad about it too, [RECIPIENT_nameDef]!</li>
 				<!--WILDCARDS-->
 				<li>comment-></li>
 				<li>comment(INITIATOR_construction_level>=5,priority=1)->I'll try and build some better furniture for us.</li>
@@ -1446,29 +1446,9 @@
 				<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>
-
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>Test1</defName>
-    <label>testing case 1</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry->Reply test 1.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-
-  <InteractionDef ParentName="SpeakUpReply">
-    <defName>Test2</defName>
-    <label>testing case 2</label>
-    <logRulesInitiator>
-      <rulesStrings>
-        <li>r_logentry->Reply test 2.</li>
-      </rulesStrings>
-    </logRulesInitiator>
-  </InteractionDef>
-
-  <!--ABANDONWARE
+	</InteractionDef>	
+	
+	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>WeatherClearOutdoors</defName>
 		<label>reply to root</label>
