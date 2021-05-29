@@ -76,7 +76,7 @@
 						<li>thought_environmentdark(INITIATOR_trait==undergrounder,priority=1)->[thought_environmentdark_undergrounder]</li>
 							<!--OUTDOORS-->
 							<li>thought_environmentdark_undergrounder(OUTDOORS==No)->Indoors... no light... totally relaxing.</li>
-						    <li>thought_environmentdark_undergrounder(OUTDOORS==Yes)->This darkness puts my mind at ease, as it protected me.</li>
+						    <li>thought_environmentdark_undergrounder(OUTDOORS==Yes)->This darkness puts my mind at ease, as if it protected me.</li>
 						<!--Special traits - night owl -->
 						<li>thought_environmentdark(INITIATOR_trait==night owl,priority=1)->I really like this darkness - it's so relaxing...</li>
 						<!--Other traits-->
@@ -684,10 +684,14 @@
 			<rulesStrings>
 			<!-- initiator's traits -->
 				<!-- abrasive -->
-				<li>r_logentry(tag=Slight_generic),INITIATOR_trait==abrasive)->[initiator_abrasive]</li>
+				<li>r_logentry(tag=Slight_generic,INITIATOR_trait==abrasive)->[initiator_abrasive]</li>
 				<li>initiator_abrasive->Bug off, [RECIPIENT_nameDef]!</li>
 				<li>initiator_abrasive->Get lost, [RECIPIENT_nameDef]!</li>
 			<!-- recipient's traits -->
+				<!-- annoying voice -->
+				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==annoying voice)->[recipient_annoyingvoice]</li>
+				<li>recipient_annoyingvoice->Every time I hear your voice, [RECIPIENT_nameDef], I think we're being assaulted by a screeching beast.</li>
+				<li>recipient_annoyingvoice(INITIATOR_medical_level>=5)->Have you considered vocal cord removal, [RECIPIENT_nameDef]? You might end up being more socially accepted.</li>
 				<!-- kind -->
 				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==kind)->[recipient_kind]</li>
 				<li>recipient_kind->Wake up, [RECIPIENT_nameDef]! Being nice to everyone won't save you from what's out there!</li>
@@ -720,7 +724,7 @@
 			<li>low_skill_major_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Major)->Hey [RECIPIENT_nameDef]! If you plan training your shooting skills, warn us beforehand - we'll evacuate the whole area before you start!</li>
 			<li>low_skill_major_passion(RECIPIENT_melee_level&lt;=5,RECIPIENT_melee_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting [a_weak_animal] for you to spar with - I hope it doesn't hurt you too much!</li>
 			<li>low_skill_major_passion(RECIPIENT_construction_level&lt;=5,RECIPIENT_construction_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting a toy shovel and bucket for you - so you can try to build sturdier sand castles!</li>
-			<li>low_skill_major_passion(RECIPIENT_mining_level&lt;=5,RECIPIENT_mining_passion==Major)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time and our resources!</li>
+			<li>low_skill_major_passion(RECIPIENT_mining_level&lt;=5,RECIPIENT_mining_passion==Major)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time!</li>
 			<li>low_skill_major_passion(RECIPIENT_cooking_level&lt;=5,RECIPIENT_cooking_passion==Major)->Hey, [RECIPIENT_nameDef]! Did you ever realize your cooking skills could lead you to a brilliant assassin's carreer?</li>
 			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_plants_passion==Major)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
 			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_medical_passion==Major)->Hey, [RECIPIENT_nameDef] - why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>			
