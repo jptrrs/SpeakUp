@@ -102,6 +102,7 @@ namespace SpeakUp
             //opinion
             yield return new Rule_String(symbol + "opinion", pawn.relations.OpinionOf(other).ToString());
 
+
             //THE PAWN'S BIO:
 
             //traits
@@ -129,12 +130,14 @@ namespace SpeakUp
             //OTHER PAWN SITUATIONS
 
             //current activity
-            yield return new Rule_String(symbol + "jobDefName", pawn.CurJob.def.defName);
-            yield return new Rule_String(symbol + "jobText", pawn.CurJob.GetReport(pawn));
+            if (pawn.CurJob != null)
+            {
+                yield return new Rule_String(symbol + "jobDefName", pawn.CurJob.def.defName);
+                yield return new Rule_String(symbol + "jobText", pawn.CurJob.GetReport(pawn));
+            }
 
             //seated?
             yield return new Rule_String(symbol + "seated", Seated(pawn).ToStringYesNo());
-
         }
 
         private static string DayPeriod(Pawn p)
