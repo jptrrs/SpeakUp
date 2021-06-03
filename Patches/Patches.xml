@@ -4,6 +4,8 @@
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
 			<rulesStrings>
+				<!-- generic default -->
+				<li>r_logentry(p=0.1,tag=ChitChat_generic)->Hey, [RECIPIENT_nameDef]!</li>
 				<!--Job Texts (recipient)-->
 					<!-- Butchering -->
 					<li>r_logentry(RECIPIENT_jobText==Butchering,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
@@ -41,13 +43,13 @@
 					<li>r_logentry(INITIATOR_faction==PlayerColony)->[thought_diningroom]</li>
 						<!--AteInImpressiveDiningRoom-->
 						<li>thought_diningroom(INITIATOR_thoughtDefName==AteInImpressiveDiningRoom,tag=ReactToThought_DiningRoom,priority=2)->[thought_diningroom_good]</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->I had my last meal in a [proper] dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==slightly impressive dining room)->I had my last meal in a slightly impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==somewhat impressive dining room)->I had my last meal in an impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==very impressive dining room)->I had my last meal in a very impressive dining room.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==extremely impressive dining room)->I had my last meal in an extremely impressive dining room. I could stay there forever.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==unbelievably impressive dining room)->I had my last meal in an unbelievably impressive dining room. I could stay there forever.</li>
-						<li>thought_diningroom_good(INITIATOR_thoughtLabel==wondrously impressive dining room)->I had my last meal in a wonderful dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->Last time I ate, it was in a [proper] dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==slightly impressive dining room)->Last time I ate, it was in a slightly impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==somewhat impressive dining room)->Last time I ate, it was in an impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==very impressive dining room)->Last time I ate, it was in a very impressive dining room.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==extremely impressive dining room)->Last time I ate, it was in an extremely impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==unbelievably impressive dining room)->Last time I ate, it was in an unbelievably impressive dining room. I could stay there forever.</li>
+						<li>thought_diningroom_good(INITIATOR_thoughtLabel==wondrously impressive dining room)->Last time I ate, it was in a wonderful dining room. I could stay there forever.</li>
 						<!--AteWithoutTable-->
 						<li>thought_diningroom(INITIATOR_thoughtDefName==AteWithoutTable,tag=ReactToThought_AteWithoutTable,priority=1)->[thought_atewotable]</li>
 							<!--Initiator is not skilled in construction-->
@@ -150,7 +152,11 @@
 						<li>r_logentry(INITIATOR_thoughtLabel==luxuriantly comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort5]</li>
 						<li>thought_need_comfort5->Our furniture feels like Heaven! So comfy!</li>
 					<!--NeedFood-->
-						<!-- hungry -->
+						<!-- hungry or worse , recipient is a cook -->
+						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=5,tag=ReactToThought_NeedFood_CookRecipient)->[thought_needfood_cookrecipient]</li>
+						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->Damn it, [RECIPIENT_nameDef] - get us some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
+						<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] - can you get us some food already?!</li>
+						<!-- just hungry -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
 						<li>thought_needfood_hungry0->I'm really hungry.</li>
 						<li>thought_needfood_hungry0->I'm feeling peckish.</li>
@@ -282,7 +288,7 @@
 					<!--SleepDisturbed-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed]</li>
 					<li>thought_sleepdisturbed->I was woke up by somebody walking near my bed. That's a bit [annoying].</li>
-					<li>thought_sleepdisturbed->Somebody entered my room while I was having a [nice] dream and woke me up. Can you believe that!?</li>
+					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed,tag=ReactToThought_SleepDisturbed_Dream)->Ugh... I was having such [nice] dream when somebody entered my room and woke me up.</li>
 					<!--SleptInBarracks-->
 					<li>r_logentry(tag=ReactToThought_SleptInBarracks)->[thought_sleptinbarracks]</li>
 					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==awful barrack)->Not only I must share my room - it's also a [ugly] one!</li>
@@ -371,7 +377,7 @@
 				<li>howareyou->How have you been?</li>
 				<li>howareyou->How's life?</li>
 				<li>howareyou->How are you getting along?</li>
-				<li>howareyou(RECIPIENT_mood&lt;0.5;)->Are you OK?</li>
+				<li>howareyou(RECIPIENT_mood&lt;0.5)->Are you OK?</li>
 				
 				<!--===TRAITS===-->
 					<!--Ascetic-->
@@ -628,9 +634,9 @@
 				<!--What about yours?-->
 				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
 		<!--TESTING
-		-->
+		
 		<li>r_logentry->test - [INITIATOR_jobDefName]</li>
-		<li>r_logentry->test - [INITIATOR_thoughtDefName]</li>
+		<li>r_logentry->test - [INITIATOR_thoughtDefName]</li>-->
 		
 		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
 		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
@@ -642,31 +648,6 @@
         <li>r_logentry->Hey [RECIPIENT_nameDef], I think you suck at [RECIPIENT_worstSkill].</li>
         <li>r_logentry->That's a pretty [NEAREST_art].</li>
         <li>r_logentry->Look at that beautiful [NEAREST_plant]!</li>-->
-		
-		<!--ABANDONWARE-->
-		<!--
-		<li>r_logentry(tag=Salute)->Good [DAYPERIOD]!</li>
-		<li>r_logentry(INITIATOR_opinion>=10)->I like you!</li>
-		<li>r_logentry(INITIATOR_opinion&lt;-10)->I dislike you!</li>
-		<li>r_logentry(INITIATOR_opinion>=-10,INITIATOR_opinion&lt;10)->You are nothing to me.</li>
-		-->
-					<!--Outdoors-->
-					<!--<li>weather_clear(OUTDOORS==Yes,INITIATOR_trait!=undergrounder,RECIPIENT_trait!=undergrounder,tag=WeatherClearOutdoors)->[weather_clear_outdoors]</li>
-					<li>weather_clear_outdoors(INITIATOR_mood>=0.5)->Being [outdoors] with such a [nice] weather is [wonderful], [agree]?</li>
-					<li>weather_clear_outdoors->Do you enjoy being [outdoors]?</li>
-					<li>nice->pleasant</li>
-					<li>nice->nice</li>
-					<li>nice->wonderful</li>
-					<li>nice->fair</li>
-					<li>nice->fine</li>
-					<li>wonderful->great</li>
-					<li>wonderful->just great</li>
-					<li>wonderful->wonderful</li>
-
-					<li>agree->isn't it</li>
-					<li>agree->right</li>
-					<li>agree->don't you agree</li>
-		-->
 			</rulesStrings>
 		</value>
 	</Operation>
@@ -682,11 +663,16 @@
 		<xpath>/Defs/InteractionDef[defName = "Slight"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
 			<rulesStrings>
+			<!-- generic -->
+			<li>r_logentry(INITIATOR_opinion&lt;=-50,tag=Slight_generic)->I'm not saying I hate you, but I'd unplug your life support to charge my batteries.</li>
 			<!-- initiator's traits -->
 				<!-- abrasive -->
 				<li>r_logentry(tag=Slight_generic,INITIATOR_trait==abrasive)->[initiator_abrasive]</li>
 				<li>initiator_abrasive->Bug off, [RECIPIENT_nameDef]!</li>
 				<li>initiator_abrasive->Get lost, [RECIPIENT_nameDef]!</li>
+				<!-- too smart -->
+				<li>r_logentry(tag=Slight_generic,INITIATOR_trait==too smart)->[initiator_toosmart]</li>
+				<li>initiator_toosmart->I'd love to have a fair battle of wits with you, [RECIPIENT_nameDef] - but you seem to be totally unarmed.</li>
 			<!-- recipient's traits -->
 				<!-- annoying voice -->
 				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==annoying voice)->[recipient_annoyingvoice]</li>
@@ -701,33 +687,40 @@
 				<li>recipient_kind->All that honey you spit from your mouth, [RECIPIENT_nameDef], is just to coat words of venom and envy!</li>
 				<!-- too smart -->
 				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==too smart)->[recipient_toosmart]</li>
-				<li>recipient_toosmart->If you're going to endlessly flap your mouth about some nerdy stuff, [RECIPIENT_nameDef] - just don't.</li>
+				<li>recipient_toosmart->If you're about to endlessly flap your mouth about some nerdy stuff, [RECIPIENT_nameDef] - just don't.</li>
+				<!-- ugly and staggeringly ugly -->
+				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==ugly)->[recipient_ugly]</li>
+				<li>r_logentry(tag=Slight_generic,RECIPIENT_trait==staggering ugly)->[recipient_ugly]</li>
+				<li>recipient_ugly->There's only one problem with your face, [RECIPIENT_nameDef] - I can see it.</li>				
 			<!-- low skill -->
 			<li>r_logentry(tag=Slight_generic)->[low_skill]</li>
-			<li>low_skill(RECIPIENT_intellectual_level&lt;=3)->Your head has a sole purpose, [RECIPIENT_nameDef] - keeping your ears apart!</li>
-			<li>low_skill(RECIPIENT_social_level&lt;=3)->I'm quite sure a drunken skunk has better social skills than you, [RECIPIENT_nameDef].</li>
+			<li>low_skill(RECIPIENT_intellectual_level&lt;=5)->Your head has a sole purpose, [RECIPIENT_nameDef] - keeping your ears apart!</li>
+			<li>low_skill(RECIPIENT_intellectual_level&lt;=5,RECIPIENT_animals_level>=5)->Go climb a tree, [RECIPIENT_nameDef] - you'll feel more at home there.</li>
+			<li>low_skill(RECIPIENT_social_level&lt;=5)->I'm quite sure a drunken skunk has better social skills than you, [RECIPIENT_nameDef].</li>
 			<!-- low skill with minor passion-->
 			<li>r_logentry(tag=Slight_generic)->[low_skill_minor_passion]</li>
-			<li>low_skill_minor_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Minor)->If our lives depended on your marksmanship, [RECIPIENT_nameDef], we'd all be dead by now.</li>
-			<li>low_skill_minor_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Minor)->Look, [RECIPIENT_nameDef]... if your markmanship is lousy, don't blame the gun - blame who's holding it!</li>
-			<li>low_skill_minor_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Minor)->Hey [RECIPIENT_nameDef]! If you plan training your shooting skills, warn us beforehand - we'll evacuate the whole area before you start!</li>
-			<li>low_skill_minor_passion(RECIPIENT_melee_level&lt;=5,RECIPIENT_melee_passion==Minor)->Hey [RECIPIENT_nameDef]! I'm thinking of getting [a_weak_animal] for you to spar with - I hope it doesn't hurt you too much!</li>
-			<li>low_skill_minor_passion(RECIPIENT_construction_level&lt;=5,RECIPIENT_construction_passion==Minor)->Hey [RECIPIENT_nameDef]! I'm thinking of getting a toy shovel and bucket for you - so you can try to build sturdier sand castles!</li>
-			<li>low_skill_minor_passion(RECIPIENT_mining_level&lt;=5,RECIPIENT_mining_passion==Minor)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time and our resources!</li>
-			<li>low_skill_minor_passion(RECIPIENT_cooking_level&lt;=5,RECIPIENT_cooking_passion==Minor)->Hey, [RECIPIENT_nameDef]! Did you ever realize your cooking skills could lead you to a brilliant assassin's carreer?</li>
-			<li>low_skill_minor_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_plants_passion==Minor)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
-			<li>low_skill_minor_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_medical_passion==Minor)->Hey, [RECIPIENT_nameDef] - why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>
+				<!-- low shooting with minor passion-->
+				<li>low_skill_minor_passion(RECIPIENT_shooting_level&lt;=10,RECIPIENT_shooting_passion==Minor)->[low_shooting_minor_passion]</li>
+				<li>low_shooting_minor_passion->If our lives depended on your marksmanship, [RECIPIENT_nameDef], we'd all be dead by now.</li>
+				<li>low_shooting_minor_passion->Look, [RECIPIENT_nameDef]... if your markmanship is lousy, don't blame the gun - blame who's holding it!</li>
+			<li>low_skill_minor_passion(RECIPIENT_melee_level&lt;=10,RECIPIENT_melee_passion==Minor)->Hey [RECIPIENT_nameDef]! I'm thinking of getting [a_weak_animal] for you to spar with - I hope it doesn't hurt you too much!</li>
+			<li>low_skill_minor_passion(RECIPIENT_construction_level&lt;=10,RECIPIENT_construction_passion==Minor)->Hey [RECIPIENT_nameDef]! I'm thinking of getting a toy shovel and bucket for you - so you can try to build sturdier sand castles!</li>
+			<li>low_skill_minor_passion(RECIPIENT_mining_level&lt;=10,RECIPIENT_mining_passion==Minor)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time and our resources!</li>
+			<li>low_skill_minor_passion(RECIPIENT_cooking_level&lt;=10,RECIPIENT_cooking_passion==Minor)->Hey, [RECIPIENT_nameDef]! You're such a lousy cook, I bet you burn cereal!</li>
+			<li>low_skill_minor_passion(RECIPIENT_plants_level&lt;=10,RECIPIENT_plants_passion==Minor)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
+			<li>low_skill_minor_passion(RECIPIENT_plants_level&lt;=10,RECIPIENT_medical_passion==Minor)->Hey, [RECIPIENT_nameDef] - why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>
 			<!-- low skill with major passion-->
 			<li>r_logentry(tag=Slight_generic)->[low_skill_major_passion]</li>
-			<li>low_skill_major_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Major)->If our lives depended on your marksmanship, [RECIPIENT_nameDef], we'd all be dead by now.</li>
-			<li>low_skill_major_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Major)->Look, [RECIPIENT_nameDef]... if your markmanship is lousy, don't blame the gun - blame who's holding it!</li>
-			<li>low_skill_major_passion(RECIPIENT_shooting_level&lt;=5,RECIPIENT_shooting_passion==Major)->Hey [RECIPIENT_nameDef]! If you plan training your shooting skills, warn us beforehand - we'll evacuate the whole area before you start!</li>
-			<li>low_skill_major_passion(RECIPIENT_melee_level&lt;=5,RECIPIENT_melee_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting [a_weak_animal] for you to spar with - I hope it doesn't hurt you too much!</li>
-			<li>low_skill_major_passion(RECIPIENT_construction_level&lt;=5,RECIPIENT_construction_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting a toy shovel and bucket for you - so you can try to build sturdier sand castles!</li>
-			<li>low_skill_major_passion(RECIPIENT_mining_level&lt;=5,RECIPIENT_mining_passion==Major)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time!</li>
-			<li>low_skill_major_passion(RECIPIENT_cooking_level&lt;=5,RECIPIENT_cooking_passion==Major)->Hey, [RECIPIENT_nameDef]! Did you ever realize your cooking skills could lead you to a brilliant assassin's carreer?</li>
-			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_plants_passion==Major)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
-			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=5,RECIPIENT_medical_passion==Major)->Hey, [RECIPIENT_nameDef] - why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>			
+				<!-- low shooting with major passion-->
+				<li>low_skill_major_passion(RECIPIENT_shooting_level&lt;=10,RECIPIENT_shooting_passion==Major)->[low_shooting_major_passion]</li>
+				<li>low_shooting_major_passion->Why do you insist on training your markmanship, [RECIPIENT_nameDef], if it's clear you can't hit the broad side of a barn?</li>
+				<li>low_shooting_major_passion->Hey [RECIPIENT_nameDef]! If you really plan training your shooting skills, warn us beforehand - we'll evacuate the whole area before you start!</li>
+			<li>low_skill_major_passion(RECIPIENT_melee_level&lt;=10,RECIPIENT_melee_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting [a_weak_animal] for you to spar with - I hope it doesn't hurt you too much!</li>
+			<li>low_skill_major_passion(RECIPIENT_construction_level&lt;=10,RECIPIENT_construction_passion==Major)->Hey [RECIPIENT_nameDef]! I'm thinking of getting a toy shovel and bucket for you - so you can try to build sturdier sand castles!</li>
+			<li>low_skill_major_passion(RECIPIENT_mining_level&lt;=10,RECIPIENT_mining_passion==Major)->Look [RECIPIENT_nameDef], you should stop thinking about mining - it's not your call. Stop wasting your time!</li>
+			<li>low_skill_major_passion(RECIPIENT_cooking_level&lt;=10,RECIPIENT_cooking_passion==Major)->Hey, [RECIPIENT_nameDef]! Did you ever realize your cooking skills could lead you to a brilliant assassin's carreer?</li>
+			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=10,RECIPIENT_plants_passion==Major)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
+			<li>low_skill_major_passion(RECIPIENT_medical_level&lt;=10,RECIPIENT_medical_passion==Major)->Hey, [RECIPIENT_nameDef] - why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>			
 			<!--WILDCARDS-->
 			<li>a_weak_animal->a [adj] bunny</li>
 			<li>a_weak_animal->a [adj] squirrel</li>
@@ -747,10 +740,46 @@
 		<xpath>/Defs/InteractionDef[defName = "Insult"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
 			<rulesStrings>
-			<li>r_logentry(tag=Insult_Ancestors)->Your ancestors' souls be damned!</li>
-			<li>r_logentry(tag=Insult_Ancestors)->Your most beloved ancestors' souls be damned!</li>
-			<li>r_logentry(tag=Insult_Ancestors)->Your eldest ancestors' souls be damned!</li>
-			<li>r_logentry(INITIATOR_trait==bloodlust,tag=Insult_generic)->I wish I could kill you twice!</li>
+			<!-- Ancestors -->
+			<li>r_logentry(tag=Insult_Ancestors)->[insult_ancestors]</li>
+			<li>insult_ancestors->Your ancestors' souls be damned!</li>
+			<li>insult_ancestors->Your most beloved ancestors' souls be damned!</li>
+			<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
+			<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
+			<!-- Ugly and staggering ugly -->
+			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Damn, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
+			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
+			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->You're so ugly, [RECIPIENT_nameDef], that when you walk through a haunted house, you come out with a paycheck.</li>
+			<!-- Initiator - Abrasive -->
+			<li>r_logentry(INITIATOR_trait==abrasive,tag=Insult_generic)->You took so many cocks in your life that if you put a fence around your [intimate_hole] you'll get a neat chicken coop!</li>
+			<li>intimate_hole(RECIPIENT_gender==Female,priority=1)->pussy</li>
+			<li>intimate_hole->asshole</li>
+			<!-- Initiator - Bloodlust -->
+			<li>r_logentry(INITIATOR_trait==bloodlust,tag=Insult_Bloodlust)->I wish I could kill you twice!</li>
+			<!-- Miscellaneous -->
+			<li>r_logentry(RECIPIENT_gender==Male,tag=Insult_generic)->You [bloody] son of a [bitch]!</li>
+			<li>r_logentry(RECIPIENT_gender==Female,tag=Insult_generic)->You [bloody] daughter of a [bitch]!</li>
+			<li>r_logentry(tag=Insult_generic)->You're an award-winning asshole, that's what you are, [RECIPIENT_nameDef]!</li>
+			<li>r_logentry(tag=Insult_generic)->I hope Death finds you earlier than expected!</li>
+			<li>r_logentry(tag=Insult_generic)->The woman who breastfed you be damned!</li>
+			<!--== WILDCARDS ==-->
+			<li>bitch->bitch</li>
+			<li>bitch->fart-hopper</li>
+			<li>bitch->latrine dweller</li>
+			<li>bitch->whore</li>
+			<li>bloody->bloody</li>
+			<li>bloody->blasted</li>
+			<li>bloody->blighted</li>
+			<li>bloody->frigging</li>
+			<li>bloody->fracking</li>
+			<li>bloody->foul</li>
+			<li>bloody->sodding</li>
+			<li>bloody->wretched</li>
+			<li>bloody(INITIATOR_trait==abrasive)->fucking</li>
+			<li>bloody(INITIATOR_intellectual_level>=5)->accursed</li>
+			<li>bloody(INITIATOR_intellectual_level>=10)->despicable</li>
+			<li>bloody(INITIATOR_intellectual_level>=10)->execrable</li>
+			<li>bloody(INITIATOR_intellectual_level>=10)->ill-omened</li>
 			</rulesStrings>
 		</value>
 	</Operation>	
@@ -760,6 +789,7 @@
 		<value>
 			<rulesStrings>
 			<li>r_logentry(tag=KindWords_generic)->You are such a nice person, [RECIPIENT_nameDef]!</li>
+			<li>r_logentry(RECIPIENT_trait==beautiful,tag=KindWords_generic)->The only way somebody could be prettier than you, [RECIPIENT_nameDef], is by using makeup!</li>
 			</rulesStrings>
 		</value>
 	</Operation>	
