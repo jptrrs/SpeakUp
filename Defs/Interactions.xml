@@ -1,40 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<!--HOW TO CREATE DIALOGS USING RULESTRINGS
-  
-  - Activate "Log Grammar Resolution" on the Development Mode View Settings (3rd icon at the top) and grab the log entry when a pawn says something to see a list of all possible parameters for that type of interaction (with this mod, both "Constants" and "Custom Rules" are available).
-  
-  - For a pawn talk, each <li> is a possible thing to say. It might be assembled with parameters from that list or replaced with wildcards loaded from a subsequent <li>. Like this:
-  
-    <li>somewildcard(constraint1,constraint2)->Something to say [PARAMETER] about [wildcard]</li>
-    <li>wildcard(constraint3)->subject to say case constraint3 is true.</li>
-    <li>wildcard->subject to say without any constraints. </li>
-    
-  - The text is case-sensitive: wildcards must be all in lowercase.
-    
-  - For pawn talk, always start with "r_logentry->something"
-  
-  - Constraints are optional commands that regulate if that line is used or not. They can be:
-    (p=x): Determines the probability the line is shown, with x being a whole number. 0 means no-show, 10 is a very high probability.
-    (tag=x): Estabilishes a criteria to be used selecting lines down the line, with x being any word. If the tag matches the defName for another InteractionDef, that will be used to make a reply. 
-    (requiredTag=x): Restricts the line to be used only when invoked by another line with that tag within the same InteractionDef.
-    (debug): Triggers an error with the resolution trace on the Debug log. Good for debugging.
-    (parameter==x): Restricts that line to be used only if the parameter satisfies the condition, with x being the required value.
-    
-  - The operators used on a comparsion might be "==" (equal to), "!=" (different from), ">" (greater than), "<" (lower than), ">=" (greater or equal) or "<="(lower of equal). EXCEPT the "<" character must be replaced by "&lt;" so the XML reader doesn't freak out. 
-    
-  - Without a constraint to say otherwise, the line will be selected randomly. Therefore, unless you're going for variety, add constraints to your lines. Example:
-  
-    <li>r_logentry(WEATHER==rain)->[rainTalk]</li>
-    <li>raintalk(INITIATOR_trait==Pluviophile)->I love this rain!</li>
-    <li>raintalk(INITIATOR_trait!=Pluviophile)->Damn this rain!</li>
-    
-    END OF INSTRUCTIONS-->
-	
 	<InteractionDef Name="SpeakUpReply" Abstract="True">
 		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
 		<initiatorXpGainSkill>Social</initiatorXpGainSkill>
 		<initiatorXpGainAmount>2</initiatorXpGainAmount>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ChitChat_generic</defName>
+		<label>Chitchat generic</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0,tag=ChitChat_generic2)->Yes, [RECIPIENT_nameDef]?</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ChitChat_generic2</defName>
+		<label>Chitchat generic2</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->Nothing - forget it.</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->Mmm... it's nothing - sorry to have bothered you.</li>
+			</rulesStrings>
+		</logRulesInitiator>
 	</InteractionDef>
 	
 	<InteractionDef ParentName="SpeakUpReply">
@@ -56,18 +51,6 @@
 		</logRulesInitiator>
 	</InteractionDef>
 			
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>HuntWithFog</defName>
-		<label>hunting with fog</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->Who knows, [RECIPIENT_nameDef]... If I feel like it, I might give it a try anyway.</li>
-				<li>r_logentry(INITIATOR_shooting_level&lt;5,INITIATOR_animals_level&lt;5)->You're right [RECIPIENT_nameDef], no hunting for me today. Too bad.</li>
-				<li>r_logentry(INITIATOR_shooting_level>=5,INITIATOR_animals_level>=5)->[RECIPIENT_nameDef], a skilled hunter like me doesn't need to wait for the perfect weather to hunt.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	
 <!-- == JOB TEXTS == -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Job_ButcheringSkill</defName>
@@ -653,6 +636,22 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedFood_CookRecipient</defName>
+		<label>need - react to hunger - recipient cook</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->Cook it yourself, [RECIPIENT_nameDef]!</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->For all I care, [RECIPIENT_nameDef], you may starve to death!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--  -->
+					<li>good_opinion->Calm down, [RECIPIENT_nameDef]! As soon I find something to cook, I'll get you a meal!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
+	
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedJoy</defName>
 		<label>need - react to joy</label>
 		<logRulesInitiator>
@@ -842,6 +841,51 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_SleepDisturbed_Dream</defName>
+		<label>sleep disturbed dream</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion(tag=Dream_nice)->Ah, [RECIPIENT_nameDef]. What a pity... what was this dream about?</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Dream_nice</defName>
+		<label>dream - nice</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;-25)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=-25)->[dream]</li>
+				<li>dream->I was in a [AdjectiveFriendly] [Community] - so nice! Everybody was dancing and having fun...</li>
+				<li>dream->I was flying over a beautiful [color][TerrainFeature] - [description1]. They looked so tiny from up there...</li>
+				<li>description1->crowded by [color][AdjectiveFriendly] [PersonJob]s</li>
+				<li>description1->crawling with [color][AdjectiveFriendly] [Animal]s</li>
+				<li>dream->I peacefully walked in a [AdjectiveLarge] [TreeType] forest. So relaxing...</li>
+				<li>dream->I was on a stage performing a standup show for [AdjectiveFriendly] [color][Animals]s - everybody was drinking beer and laughing hard!</li>
+				<li>dream->There was this [AdjectiveFriendly] [PersonJob] who gave me this [color][Apparel] - I wore it, and I instantly felt so happy!</li>
+				<li>dream->I was happily swimming in a pool of [color][Vegetable]s - weird right? But when I ate them, they tasted like [nice_food]!</li>
+				<!--WILDCARDS-->
+				<li>color-></li>
+				<li>color->[Color] </li>
+				<li>nice_food->cupcakes</li>
+				<li>nice_food->fried chicken</li>
+				<li>nice_food->bacon pizza</li>
+				<li>nice_food->doughnuts</li>
+				<li>nice_food->honey</li>
+				<li>nice_food->chocolate</li>
+				<li>nice_food->milkshake</li>
+				<li>nice_food->hamburgers</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
+	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleptInBarracks</defName>
 		<label>slept in a shared room</label>
@@ -1211,8 +1255,8 @@
 				<li>r_logentry(INITIATOR_opinion>=15)->You're right, [RECIPIENT_nameDef]. [temperature]</li>
 				<li>r_logentry(INITIATOR_opinion&lt;0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
 				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->But this scorching sun won't let our rooms cool down. It's too hot in here!</li>
-				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=30)->A sunny weather is a blessing!</li>
-				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A pity sunny weather alone can't warm our rooms - it's quite chilly in here.</li>
+				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=30)->A sunny day is a blessing!</li>
+				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A pity sunny day alone can't warm our rooms - it's quite chilly in here.</li>
 				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->But... it's so cold in here I can't work properly[plants]</li>
 				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->Sunny and freezing[plants]</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->. At least we have a nice crystal blue sky.</li>
@@ -1282,8 +1326,8 @@
 			<rulesStrings>
 				<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion&lt;10)->Come on, [RECIPIENT_nameDef] - stop being such a sissy! It's just fog!</li>
 				<li>r_logentry(INITIATOR_trait==brawler,INITIATOR_opinion>=15)->Don't worry, [RECIPIENT_nameDef] - if that happens, I'll just smash it out of existence!</li>
-				<li>r_logentry(INITIATOR_trait==wimp)->You're right, [RECIPIENT_nameDef] - this fog scares the hell out of me too!</li>
-				<li>r_logentry(INITIATOR_trait==wimp,INITIATOR_opinion>=15)->In that case, my dear [RECIPIENT_nameDef], we'll just make a run for it!</li>
+				<li>r_logentry(INITIATOR_trait==wimp,priority=1)->You're right, [RECIPIENT_nameDef] - this fog scares the hell out of me too!</li>
+				<li>r_logentry(INITIATOR_trait==wimp,INITIATOR_opinion>=15,priority=1)->In that case, my dear [RECIPIENT_nameDef], we'll just make a run for it!</li>
 				<li>r_logentry(INITIATOR_opinion&lt;10)->[RECIPIENT_nameDef], don't be such a crybaby! It's fog - just fog!</li>
 				<li>r_logentry(INITIATOR_opinion>=15)->No need to be afraid, [RECIPIENT_nameDef]. It's just normal fog.</li>
 				<li>r_logentry->This fog could actually hide some danger, [RECIPIENT_nameDef] - especially at night...</li>
@@ -1295,6 +1339,17 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>HuntWithFog</defName>
+		<label>hunting with fog</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Who knows, [RECIPIENT_nameDef]... If I feel like it, I might give it a try anyway.</li>
+				<li>r_logentry(INITIATOR_shooting_level&lt;5,INITIATOR_animals_level&lt;5)->You're right [RECIPIENT_nameDef], no hunting for me today. Too bad.</li>
+				<li>r_logentry(INITIATOR_shooting_level>=5,INITIATOR_animals_level>=5)->[RECIPIENT_nameDef], a skilled hunter like me doesn't need to wait for the perfect weather to hunt.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>WeatherRainGoodtempIndoors</defName>
 		<label>rain - indoors</label>
@@ -1366,6 +1421,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
+
 <!-- ============ SLIGHT ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Slight_generic</defName>
@@ -1376,6 +1432,7 @@
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 				<li>bad_opinion->Ah, shut up you [fool]!</li>
+				<li>bad_opinion->Frankly, my dear [RECIPIENT_nameDef], I don't give a damn about what you think of me!</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 				<li>good_opinion->Ouch - that hurt, [RECIPIENT_nameDef]!</li>
@@ -1406,10 +1463,21 @@
 		<label>insult - react to - ancestors</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->At least I have ancestors, you human filth!</li>
+				<li>r_logentry->At least I have human ancestors, you filthy spawn of worms!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Insult_Bloodlust</defName>
+		<label>insult - react to - bloodlust</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Watch, it [RECIPIENT_nameDef]! You're in for some trouble!</li>
+				<li>r_logentry(INITIATOR_trait=bloodlust,priority=1)->Mark my words, [RECIPIENT_nameDef] - I'll soon comfortably bathe in your blood!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
 	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Insult_generic</defName>
@@ -1419,7 +1487,9 @@
 				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->How dare you, you filthy bastard!</li>
+				<li>bad_opinion->How dare you, [insult]</li>
+				<li>insult->you filthy bastard!</li>
+				<li>insult->you human filth!</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 				<li>good_opinion->Watch it, [RECIPIENT_nameDef]!</li>
