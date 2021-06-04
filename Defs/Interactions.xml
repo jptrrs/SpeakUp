@@ -91,17 +91,37 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;4)->[bad_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;4)->...</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=4)->Yes you could have, [RECIPIENT_nameDef] - now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=4)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;4)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=4)->Hey, [RECIPIENT_nameDef] - you need a table, you build one yourself. I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's a bit [annoying].</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build one.</li>
-					<!--Initiator skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I can take care of this.</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should take care of this as soon as possible.</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;4)->I had planned to build one, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - we could have built one. We won't let this happen again.</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
 				<li>annoying->irritating</li>
@@ -923,7 +943,7 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->My room is none of your business, [RECIPIENT_nameDef].</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!--Slept on the ground-->
@@ -963,20 +983,39 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;5)->[bad_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;5)->...</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=5)->Yes you could have, [RECIPIENT_nameDef] - now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=5)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;5)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->Hey, [RECIPIENT_nameDef] - you need a heat source, you build one yourself. I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;5)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;5)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level>=5)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
-					<!--Initiator skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=5)->[skilled_in_construction]</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level&lt;5)->Yes, [RECIPIENT_nameDef] - I could build a new heat source for you.</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a heat source, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - we could have built a heat source. We won't let this happen again.</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
 				<li>annoying->irritating</li>
 				<li>annoying->infuriating</li>
 				<li>annoying->maddening</li>
@@ -986,26 +1025,46 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleptInHeat</defName>
 		<label>slept in heat</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;5)->[bad_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;5)->...</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=5)->Yes you could have, [RECIPIENT_nameDef] - now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=5)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;5)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->Hey, [RECIPIENT_nameDef] - you need a cooler, you build one yourself. I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;5)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;5)->You're right, [RECIPIENT_nameDef]. That's [annoying].</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level>=5)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
-					<!--Initiator skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=5)->[skilled_in_construction]</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level&lt;5)->Yes, [RECIPIENT_nameDef] - I could build a new cooler for you.</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a cooler, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - we could have built a cooler. We won't let this happen again.</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
-				<li>annoying->very bad</li>
 				<li>annoying->irritating</li>
 				<li>annoying->infuriating</li>
 				<li>annoying->maddening</li>
@@ -1021,55 +1080,95 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;4)->[bad_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;4)->...</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=4)->Yes you could have, [RECIPIENT_nameDef] - now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=4)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;4)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=4)->Hey, [RECIPIENT_nameDef] - you need a bed, you build one yourself. I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [humiliating].</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
-					<!--Initiator skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could build a new bed for you.</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;4)->I had planned to build a bed for you, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - we could have built a bed for you. We won't let this happen again.</li>
 				<!--WILDCARDS-->
-				<li>humiliating->humiliating</li>
-				<li>humiliating->demeaning</li>
-				<li>humiliating->embarassing</li>
-				<li>humiliating->mortifying</li>
-				<li>humiliating(INITIATOR_intellectual_level>=5)->undignified</li>
-				<li>humiliating(INITIATOR_intellectual_level>=10)->discomfiting</li>
-				<li>humiliating(INITIATOR_intellectual_level>=10)->disgraceful</li>
-				<li>humiliating(INITIATOR_intellectual_level>=15)->ignominous</li>
+				<li>annoying->bad</li>
+				<li>annoying->irritating</li>
+				<li>annoying->infuriating</li>
+				<li>annoying->maddening</li>
+				<li>annoying->bothersome</li>
+				<li>annoying->unacceptable</li>
+				<li>annoying->not nice</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	
+	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleptOutside</defName>
 		<label>slept outside</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;4)->[bad_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;4)->...</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=4)->Yes you could have, [RECIPIENT_nameDef] - now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=4)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;4)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=4)->Hey, [RECIPIENT_nameDef] - you need a roofed room, you build one yourself. I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;4)->[unskilled_in_construction]</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level&lt;4)->You're right, [RECIPIENT_nameDef]. That's [humiliating].</li>
-					<li>unskilled_in_construction(RECIPIENT_construction_level>=4)->Yes, [RECIPIENT_nameDef] - please build a new one.</li>
-					<!--Initiator skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=4)->[skilled_in_construction]</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level&lt;4)->Yes, [RECIPIENT_nameDef] - I could build a new room for you.</li>
-					<li>skilled_in_construction(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - one of us should build one as soon as possible.</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=4)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;4)->I had planned to build a roofed room for you, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=4)->You're right [RECIPIENT_nameDef] - we could have built a roofed room for you. We won't let this happen again.</li>
 				<!--WILDCARDS-->
-				<li>humiliating->humiliating</li>
-				<li>humiliating->demeaning</li>
-				<li>humiliating->embarassing</li>
-				<li>humiliating->mortifying</li>
-				<li>humiliating(INITIATOR_intellectual_level>=5)->undignified</li>
-				<li>humiliating(INITIATOR_intellectual_level>=10)->discomfiting</li>
-				<li>humiliating(INITIATOR_intellectual_level>=10)->disgraceful</li>
-				<li>humiliating(INITIATOR_intellectual_level>=15)->ignominous</li>
+				<li>annoying->bad</li>
+				<li>annoying->irritating</li>
+				<li>annoying->infuriating</li>
+				<li>annoying->maddening</li>
+				<li>annoying->bothersome</li>
+				<li>annoying->unacceptable</li>
+				<li>annoying->not nice</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1256,7 +1355,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
 				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->But this scorching sun won't let our rooms cool down. It's too hot in here!</li>
 				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=30)->A sunny day is a blessing!</li>
-				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A pity sunny day alone can't warm our rooms - it's quite chilly in here.</li>
+				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A pity a sunny day alone can't warm our rooms - it's quite chilly in here.</li>
 				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->But... it's so cold in here I can't work properly[plants]</li>
 				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->Sunny and freezing[plants]</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->. At least we have a nice crystal blue sky.</li>
@@ -1278,11 +1377,11 @@
 				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - a perfect [DAYPERIOD]!</li>
 				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A bit chilly, but a nice [DAYPERIOD] still.</li>
 				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->This cold is almost numbing[plants]</li>
-				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->It's freezing[plants]</li>
+				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->But it's freezing[plants]</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->, but at least we have a nice clear sky.</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->, but it's still enjoyable.</li>
 				<li>plants(INITIATOR_plants_level>=5)->! That's actually terrible for plants in the open - they will almost freeze.</li>
-				<li>plants(INITIATOR_plants_level>=5)-> - in fact that's bad: plants will grow much slower.</li>
+				<li>plants(INITIATOR_plants_level>=5)-> - that's bad: plants will grow much slower.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1517,6 +1616,17 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
+	
+	<!--TESTING 
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>test_title</defName>
+		<label>test - title</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Yes, my lord. My knights are waiting for your orders.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>-->
 	
 	<!--ABANDONWARE
 	<InteractionDef ParentName="SpeakUpReply">
