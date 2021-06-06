@@ -23,13 +23,13 @@
 					<!--Ate a special meal-->	
 						<!--AteLavishMeal-->
 						<li>r_logentry(INITIATOR_thoughtDefName==AteLavishMeal,tag=ReactToThought_AteMeal)->[meal_lavish]</li>
-						<li>meal_lavish->I'm truly enjoying our meals here - they are abundant, tasty and varied.</li>
+						<li>meal_lavish->I'm truly enjoying our meals - they are abundant, tasty and varied.</li>
 						<!--AteFineMeal-->
 						<li>r_logentry(INITIATOR_thoughtDefName==AteFineMeal,tag=ReactToThought_AteMeal)->[meal_fine]</li>
-						<li>meal_fine->I'm enjoying our meals here - they are tasty and varied.</li>
+						<li>meal_fine->I'm enjoying our meals - they are tasty and varied.</li>
 						<!--AteAwfulMeal-->
 						<li>r_logentry(INITIATOR_thoughtDefName==AteAwfulMeal,tag=ReactToThought_AteMeal)->[meal_awful]</li>
-						<li>meal_awful->Our meals here are [disgusting]!</li>
+						<li>meal_awful->Our meals are [disgusting]!</li>
 						<!--AteRawFood-->
 						<li>r_logentry(INITIATOR_thoughtDefName==AteRawFood,tag=ReactToThought_AteMeal)->[meal_raw]</li>
 						<li>meal_raw->I had to eat raw food. Can't we have it cooked first?!</li>
@@ -329,9 +329,9 @@
 						<!--Initiator is skilled in construction-->
 						<li>hope_wont_happen_again_heatsource(INITIATOR_construction_level>=5)->[thought_sleptincold_construction_skilled]</li>
 							<!--Recipient is not skilled in construction-->
-							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen - I could've built a heat source.</li>
+							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen - I could've built a [proper] heat source.</li>
 							<!--Recipient is skilled in construction-->
-							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen - we could've built a heat source.</li>					
+							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen - we could've built a [proper] heat source.</li>					
 					<!--SleptInHeat-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInHeat,tag=ReactToThought_SleptInHeat)->[thought_sleptinheat]</li>
 					<li>thought_sleptinheat->[slept_in_heat] [hope_wont_happen_again_cooler]</li>
@@ -414,6 +414,17 @@
 					<li>trait_ascetic->You can control your mind — not outside events. Absorb this, and you shall find strength.</li>
 					<li>trait_ascetic(INITIATOR_animals_passion==Minor)->Observe the [Animal] and its simpler life - there is a lot to learn from it.</li>
 					<li>trait_ascetic(INITIATOR_animals_passion==Major)->Observe the [Animal] and its simpler life - there is a lot to learn from it.</li>
+					<!--Optimist & Sanguine-->
+					<li>r_logentry(INITIATOR_trait==optimist,tag=LuckyFuture)->[lucky_future]</li>
+					<li>r_logentry(INITIATOR_trait==sanguine,tag=LuckyFuture)->[lucky_future]</li>
+					<li>lucky_future(DAYPERIOD==night)->[can_feel_it] today [lucky_day]</li>
+					<li>lucky_future(DAYPERIOD==morning)->[can_feel_it] today [lucky_day]</li>
+					<li>lucky_future(DAYPERIOD==afternoon)->[can_feel_it] tomorrow [lucky_day]</li>
+					<li>lucky_future(DAYPERIOD==evening)->[can_feel_it] tomorrow [lucky_day]</li>
+					<li>can_feel_it->I can feel it -</li>
+					<li>can_feel_it->I have a feeling</li>
+					<li>lucky_day->will be my lucky day!</li>
+					<li>lucky_day->is going to be my lucky day!</li>
 					<!--Psychically sensitive and hipersensitive-->
 					<!--Good visions-->
 					<li>r_logentry(INITIATOR_trait==psychically sensitive)->[trait_psy_sensitive]</li>
@@ -456,6 +467,7 @@
 						<li>vision_adj->colorful</li>
 						<li>vision_adj->clear</li>
 						<li>vision_adj->sudden</li>
+					
 				<!--===WEATHER===-->
 				<!--Weather==Clear-->
 				<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
@@ -508,9 +520,11 @@
 						<li>weather_rain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
 						<li>weather_rain_goodtemp_indoors->Mmm... It's raining.</li>
 						<li>weather_rain_goodtemp_indoors->Look, it's raining.</li>
+						<li>weather_rain_goodtemp_indoors->Can you hear it? It's raining.</li>
 						<!--Outdoors-->
 						<li>weather_rain_goodtemp(OUTDOORS==Yes,tag=WeatherRainGoodtempOutdoors)->[weather_rain_goodtemp_outdoors]</li>
 						<li>weather_rain_goodtemp_outdoors->Maybe we'd better get inside.</li>
+						<li>weather_rain_goodtemp_outdoors(TEMPERATURE&lt;=5,INITIATOR_trait==sickly)->Let's get inside, please - or I'll [surely] catch a cold or worse.</li>
 						<li>weather_rain_goodtemp_outdoors(TEMPERATURE&lt;=5,INITIATOR_trait==wimp)->Let's get inside, please - I'd rather not catch a cold.</li>
 					<!--Extreme cold for humans-->
 					<li>weather_clear(TEMPERATURE&lt;-10)->[weather_toocold]</li>
@@ -679,7 +693,8 @@
 			<initiatorXpGainAmount>2</initiatorXpGainAmount>
 		</value>
 	</Operation>
-	
+
+<!-- === SLIGHT === -->
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName = "Slight"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
@@ -689,7 +704,7 @@
 			<li>r_logentry->The world would be a better place without you.</li>
 			<!-- initiator's traits -->
 				<!-- abrasive -->
-				<li>r_logentry(tag=Slight_generic,INITIATOR_trait==abrasive)->[initiator_abrasive]</li>
+				<li>r_logentry(INITIATOR_trait==abrasive,tag=Slight_generic)->[initiator_abrasive]</li>
 				<li>initiator_abrasive->Bug off, [RECIPIENT_nameDef]!</li>
 				<li>initiator_abrasive->Get lost, [RECIPIENT_nameDef]!</li>
 				<!-- too smart -->
@@ -758,37 +773,55 @@
 		</value>
 	</Operation>
 	
+	
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName = "Insult"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
 			<rulesStrings>
+		<!-- == General == -->			
 			<!-- Ancestors -->
 			<li>r_logentry(tag=Insult_Ancestors)->[insult_ancestors]</li>
 			<li>insult_ancestors->Your ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your most beloved ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
+			<!-- Miscellaneous -->
+			<li>r_logentry(tag=Insult_generic)->You're [insult_adj][asshole], that's what you are, [RECIPIENT_nameDef]!</li>
+			<li>r_logentry(tag=Insult_generic)->I hope Death finds you earlier than expected!</li>
+			<li>r_logentry(INITIATOR_intellectual_level>=5,tag=Insult_generic)->The woman who breastfed you be damned!</li>			
+		<!-- == Recipient's trait/parameter == -->
 			<!-- Ugly and staggering ugly -->
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Damn, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
 			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->You're so ugly, [RECIPIENT_nameDef], that when you walk through a haunted house, you come out with a paycheck.</li>
-			<!-- Initiator - Abrasive -->
+			<!-- Gender -->
+			<li>r_logentry(RECIPIENT_gender==Male,tag=Insult_generic)->You [bloody] son of a [bitch]!</li>
+			<li>r_logentry(RECIPIENT_gender==Female,tag=Insult_generic)->You [bloody] daughter of a [bitch]!</li>
+		<!-- == Initiator's trait == -->
+			<!-- Abrasive -->
 			<li>r_logentry(INITIATOR_trait==abrasive,tag=Insult_generic)->You took so many cocks in your life that if you put a fence around your [intimate_hole] you'll get a neat chicken coop!</li>
 			<li>intimate_hole(RECIPIENT_gender==Female,priority=1)->pussy</li>
 			<li>intimate_hole->asshole</li>
-			<!-- Initiator - Bloodlust -->
-			<li>r_logentry(INITIATOR_trait==bloodlust,tag=Insult_Bloodlust)->I wish I could kill you twice!</li>
-			<!-- Miscellaneous // generic -->
-			<li>r_logentry(RECIPIENT_gender==Male,tag=Insult_generic)->You [bloody] son of a [bitch]!</li>
-			<li>r_logentry(RECIPIENT_gender==Female,tag=Insult_generic)->You [bloody] daughter of a [bitch]!</li>
-			<li>r_logentry(tag=Insult_generic)->You're an award-winning asshole, that's what you are, [RECIPIENT_nameDef]!</li>
-			<li>r_logentry(tag=Insult_generic)->I hope Death finds you earlier than expected!</li>
-			<li>r_logentry(tag=Insult_generic)->The woman who breastfed you be damned!</li>
+			<!-- Bloodlust -->
+			<li>r_logentry(INITIATOR_trait==bloodlust,tag=Insult_generic)->[bloodlust]</li>
+			<li>bloodlust->I wish I could kill you twice!</li>
+			<li>bloodlust->Soon enough your entrails will be a fine addition to my wardrobe!</li>
+			<li>bloodlust->Your dried-up skin will look great on me!</li>
 			<!--== WILDCARDS ==-->
+			<li>asshole->asshole</li>
+			<li>asshole->jerk</li>
+			<li>asshole->arse-wipe</li>
+			<li>asshole->dickhead</li>
+			<li>asshole->prick</li>
+			<li>asshole->bastard</li>
 			<li>bitch->bitch</li>
 			<li>bitch->fart-hopper</li>
 			<li>bitch->latrine dweller</li>
+			<li>bitch->tart</li>
 			<li>bitch->whore</li>
+			<li>bitch->wench</li>
+			<li>bitch(INITIATOR_intellectual_level>=5)->courtesan</li>
+			<li>bitch(INITIATOR_intellectual_level>=10)->woman of ill repute</li>
 			<li>bloody->bloody</li>
 			<li>bloody->blasted</li>
 			<li>bloody->blighted</li>
@@ -802,6 +835,16 @@
 			<li>bloody(INITIATOR_intellectual_level>=10)->despicable</li>
 			<li>bloody(INITIATOR_intellectual_level>=10)->execrable</li>
 			<li>bloody(INITIATOR_intellectual_level>=10)->ill-omened</li>
+			<li>insult_adj-></li>
+			<li>insult_adj->a big </li>
+			<li>insult_adj->a huge </li>
+			<li>insult_adj->a number-one </li>			
+			<li>insult_adj->a top-ranking </li>			
+			<li>insult_adj->an award-winning </li>
+			<li>insult_adj->a state-of-the-art </li>
+			<li>insult_adj->a world-class </li>
+			<li>insult_adj(INITIATOR_intellectual_level>=5)->a cutting-edge </li>
+			<li>insult_adj(INITIATOR_intellectual_level>=10)->a legally acknowledged </li>
 			</rulesStrings>
 		</value>
 	</Operation>	
