@@ -1011,9 +1011,9 @@
 					<!--Initiator is skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a heat source, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a proper heat source, but I got distracted. Sorry, [RECIPIENT_nameDef] - it won't happen again.</li>
 						<!--Recipient is skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - we could have built a heat source. We won't let this happen again.</li>
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] - we could have built a proper heat source. We won't let this happen again.</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
 				<li>annoying->irritating</li>
@@ -1314,6 +1314,31 @@
 
 	<!-- T R A I T S -->
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>LuckyFuture</defName>
+		<label>lucky future</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->...</li>
+				<li>bad_opinion->Lucky? No way - your very presence alone is a bad sign!</li>
+				<li>bad_opinion->I don't know about yours, [RECIPIENT_nameDef] - but mine will be once you're far far away!</li>
+				<li>bad_opinion->Save your useless home-made horoscope for who cares, [RECIPIENT_nameDef].</li>
+				<li>bad_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment_hostile]</li>
+				<li>bad_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment_hostile]</li>
+				<li>anti_comment_hostile->I have a feeling too, [RECIPIENT_nameDef] - that you're going to be proven wrong soon!</li>
+				<li>anti_comment_hostile->Your irrational hopes are as childish as dangerous. Grow up, [RECIPIENT_nameDef] - life isn't a playground!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>				
+				<li>good_opinion->Well, [RECIPIENT_nameDef] - let's hope you're right!</li>
+				<li>good_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment]</li>
+				<li>good_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment]</li>
+				<li>anti_comment->I envy your optimism, [RECIPIENT_nameDef].</li>
+				<li>anti_comment->I know you mean well, [RECIPIENT_nameDef] - but I disagree. We should be ready for the worst.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>PsyVision</defName>
 		<label>Psychic vision</label>
 		<logRulesInitiator>
@@ -1377,7 +1402,7 @@
 				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - a perfect [DAYPERIOD]!</li>
 				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A bit chilly, but a nice [DAYPERIOD] still.</li>
 				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->This cold is almost numbing[plants]</li>
-				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->But it's freezing[plants]</li>
+				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->It's freezing[plants]</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->, but at least we have a nice clear sky.</li>
 				<li>plants(INITIATOR_plants_level&lt;5)->, but it's still enjoyable.</li>
 				<li>plants(INITIATOR_plants_level>=5)->! That's actually terrible for plants in the open - they will almost freeze.</li>
@@ -1466,6 +1491,7 @@
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->I just don't like rain.</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Hope it stops soon - I prefer dry weather.</li>
 				<li>good_opinion(INITIATOR_trait==undergrounder)->It's so good being inside!</li>
+				<li>good_opinion(INITIATOR_trait==sickly,TEMPERATURE&lt;16)->If I go outside, I'm bound to catch a cold or worse.</li>
 				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to go outside and catch a cold or something.</li>
 				<li>good_opinion(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Luckily we're inside, all set and cozy.</li>
 				<li>good_opinion(TEMPERATURE>26)->It's so hot in here I'd rather drench myself out there to cool down!</li>
@@ -1500,7 +1526,8 @@
 				<li>good_opinion(INITIATOR_jobDefName==Skygaze)->[relaxing]</li>
 				<li>good_opinion(INITIATOR_jobDefName==SocialRelax)->[relaxing]</li>
 				<li>good_opinion(INITIATOR_trait==depressive)->Indoors... outdoors... what does it matter... it's all the same bleak life.</li>				
-				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to go outside and catch a cold or something.</li>
+				<li>good_opinion(INITIATOR_trait==sickly,TEMPERATURE&lt;16)->If I stay outside, I'm bound to catch a cold or worse.</li>
+				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to stay outside and catch a cold or something.</li>
 				<li>good_opinion(TEMPERATURE>=30)->Although rain helps cooling down in this hellish heat, I agree with you, [RECIPIENT_nameDef].</li>
 				<li>good_opinion(TEMPERATURE&lt;=5)->I agree with you, [RECIPIENT_nameDef] - it's freezing out here!</li>
 				<!-- WILDCARDS -->
@@ -1568,25 +1595,25 @@
 	</InteractionDef>
 	
 	<InteractionDef ParentName="SpeakUpReply">
-		<defName>Insult_Bloodlust</defName>
-		<label>insult - react to - bloodlust</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->Watch, it [RECIPIENT_nameDef]! You're in for some trouble!</li>
-				<li>r_logentry(INITIATOR_trait=bloodlust,priority=1)->Mark my words, [RECIPIENT_nameDef] - I'll soon comfortably bathe in your blood!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>	
-	
-	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Insult_generic</defName>
 		<label>insult - react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
+				<!-- ascetic -->
+				<li>r_logentry(INITIATOR_trait==ascetic,priority=1)->[ascetic]</li>
+				<li>ascetic->Your worldly, low feelings barely affect me, [RECIPIENT_nameDef] - spare your energies for something wholesome.</li>
+				<li>ascetic->Your words are powerless, as they offend the image of me you have in your head - not me.</li>
+				<li>ascetic->These sour feelings come from unresolved problems you nurture inside yourself. Cleanse them, or be enslaved by them.</li>
+				<!-- kind -->
+				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[kind]</li>
+				<li>kind(RECIPIENT_mood&lt;0.4)->I'm sorry you're so upset, [RECIPIENT_nameDef].</li>
+				<li>kind->If insulting me makes you feel better, I'm always here to help you.</li>
+				<li>kind->I know you really didn't mean to say that, [RECIPIENT_nameDef] - I forgive you.</li>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->How dare you, [insult]</li>
+				<li>bad_opinion->[reaction] [insult]</li>
+				<li>reaction->How dare you,</li>
+				<li>reaction->Keep me out of that thin mouth of yours,</li>
 				<li>insult->you filthy bastard!</li>
 				<li>insult->you human filth!</li>
 				<!--Good opinion of recipient-->
