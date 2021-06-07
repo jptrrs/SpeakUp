@@ -18,7 +18,6 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ChitChat_generic2</defName>
 		<label>Chitchat generic2</label>
@@ -32,6 +31,41 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>CloudWatching</defName>
+		<label>cloudwatching</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Idle-->
+				<li>r_logentry(INITIATOR_jobDefName==GotoWander,priority=1)->[idle]</li>
+				<li>r_logentry(INITIATOR_jobDefName==Ingest,priority=1)->[idle]</li>
+				<li>r_logentry(INITIATOR_jobDefName==Wait_Wander,priority=1)->[idle]</li>
+				<li>r_logentry(INITIATOR_jobDefName==Skygaze,priority=1)->[idle]</li>				
+				<li>r_logentry(INITIATOR_jobDefName==SocialRelax,priority=1)->[idle]</li>
+				<li>r_logentry(INITIATOR_jobDefName==Sow,priority=1)->[idle]</li>
+				<li>r_logentry(INITIATOR_jobDefName==StandAndBeSociallyActive,priority=1)->[idle]</li>
+					<!--Bad opinion of recipient-->
+					<li>idle(INITIATOR_opinion&lt;0)->No it doesn't, [RECIPIENT_nameDef].</li>
+					<li>idle(INITIATOR_opinion&lt;0)->It actually reminds me more of the way I'd rather be right now - far from annoying people like you.</li>
+					<!--Good opinion of recipient-->
+					<li>idle(INITIATOR_opinion>=0)->Yes... wow, you're right - how funny!</li>
+					<li>idle(INITIATOR_opinion>=0)->Mmm... you might be right - but I'd rather say it looks like [a_cloudshape].</li>
+						<li>a_cloudshape->a [Animal]</li>
+						<li>a_cloudshape->a [Apparel]</li>
+						<li>a_cloudshape->a [TreeType]</li>
+						<li>a_cloudshape->a [Vegetable]</li>
+						<li>a_cloudshape->a [Weapon]</li>
+				<!--Busy-->
+				<li>r_logentry->[busy]</li>
+					<!--Bad opinion of recipient-->
+					<li>busy(INITIATOR_opinion&lt;0)->...</li>
+					<!--Good opinion of recipient-->
+					<li>busy(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef] - I'm busy right now.</li>
+					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>				
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>AsceticWisdom</defName>
 		<label>ascetic - wisdom</label>
@@ -113,7 +147,7 @@
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef] - it's [annoying].</li>
 						<!--Recipient is skilled in construction-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
@@ -1005,7 +1039,7 @@
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef] - it's [annoying].</li>
 						<!--Recipient is skilled in construction-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
@@ -1054,7 +1088,7 @@
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef] - it's [annoying].</li>
 						<!--Recipient is skilled in construction-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
@@ -1102,7 +1136,7 @@
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef] - it's [annoying].</li>
 						<!--Recipient is skilled in construction-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
@@ -1152,7 +1186,7 @@
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;4)->[good_opinion_unskilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef]- it's [annoying].</li>
+						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;4)->Let's hope it won't happen again, [RECIPIENT_nameDef] - it's [annoying].</li>
 						<!--Recipient is skilled in construction-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=4)->Don't worry, [RECIPIENT_nameDef] - I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
