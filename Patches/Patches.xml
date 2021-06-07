@@ -6,11 +6,24 @@
 			<rulesStrings>
 				<!-- generic default -->
 				<li>r_logentry(p=0.1,tag=ChitChat_generic)->Hey, [RECIPIENT_nameDef]!</li>
+				<!--Job Texts (initiator)-->
+				<!--Cloudwatching-->
+				<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==morning,tag=CloudWatching)->[cloud_watching]</li>
+				<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==afternoon,tag=CloudWatching)->[cloud_watching]</li>
+				<li>cloud_watching->Look at that cloud! Doesn't it just look like [a_cloudshape]?</li>
+				<li>a_cloudshape->a [Animal]</li>
+				<li>a_cloudshape->a [Apparel]</li>
+				<li>a_cloudshape->a [TreeType]</li>
+				<li>a_cloudshape->a [Vegetable]</li>
+				<li>a_cloudshape->a [Weapon]</li>
 				<!--Job Texts (recipient)-->
-					<!-- Butchering -->
-					<li>r_logentry(RECIPIENT_jobText==Butchering,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
+					<!--Butchering-->
+					<li>r_logentry(priority=4,RECIPIENT_jobText==butchering.,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level>=6)->Well, [RECIPIENT_nameDef] - luckily for us, looks like you know how to properly butcher!</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level&lt;6)->Mmm, [RECIPIENT_nameDef]... looks like you're wasting good meat there...</li>
+					<!--Cooking-->
+					<li>r_logentry(priority=4,RECIPIENT_jobText==cooking simple meal.)->Mmm... smells good, [RECIPIENT_nameDef]!</li>
+				
 				<!--Thoughts-->
 					<!--ApparelDamaged-->
 					<li>r_logentry(INITIATOR_thoughtDefName==ApparelDamaged,tag=ReactToThought_ApparelDamaged)->[apparel_damaged]</li>
@@ -668,10 +681,10 @@
 				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
 		<!--TESTING
 		<li>r_logentry(RECIPIENT_title==janitor)->[RECIPIENT_nameDef]! Go clean my room - now!</li>
-		<li>r_logentry(INITIATOR_title==count,RECIPIENT_title==baron,tag=test_title)->Baron [RECIPIENT_nameDef], we are under attack! Have you rallied your troops?</li>-->
-		<!--
-		<li>r_logentry->test - [INITIATOR_jobDefName]</li>
-		<li>r_logentry->test - [INITIATOR_thoughtDefName]</li>-->
+		<li>r_logentry(INITIATOR_title==count,RECIPIENT_title==baron,tag=test_title)->Baron [RECIPIENT_nameDef], we are under attack! Have you rallied your troops?</li>
+		
+		<li>r_logentry(p=2)->test - [INITIATOR_jobDefName]</li>-->
+		<!--<li>r_logentry->test - [INITIATOR_thoughtDefName]</li>-->
 		
 		<!--<li>r_logentry->I am [INITIATOR_trait].</li>-->
 		<!--<li>r_logentry->Hey [RECIPIENT_nameDef], your love for [RECIPIENT_higherPassion] is inspiring!</li>
@@ -732,7 +745,7 @@
 			<!-- low skill -->
 			<li>r_logentry(tag=Slight_generic)->[low_skill]</li>
 			<li>low_skill(RECIPIENT_intellectual_level&lt;=5)->Your head has a sole purpose, [RECIPIENT_nameDef] - keeping your ears apart!</li>
-			<li>low_skill(RECIPIENT_intellectual_level&lt;=5,RECIPIENT_animals_level>=5)->Go climb a tree, [RECIPIENT_nameDef] - you'll feel more at home there.</li>
+			<li>low_skill(RECIPIENT_intellectual_level&lt;=5,RECIPIENT_animals_level>=5)->Go climb a [TreeType], [RECIPIENT_nameDef] - you'll feel more at home there.</li>
 			<li>low_skill(RECIPIENT_social_level&lt;=5)->I'm quite sure a drunken skunk has better social skills than you, [RECIPIENT_nameDef].</li>
 			<!-- low skill with minor passion-->
 			<li>r_logentry(tag=Slight_generic)->[low_skill_minor_passion]</li>
@@ -786,9 +799,11 @@
 			<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
 			<!-- Miscellaneous -->
-			<li>r_logentry(tag=Insult_generic)->You're [insult_adj][asshole], that's what you are, [RECIPIENT_nameDef]!</li>
-			<li>r_logentry(tag=Insult_generic)->I hope Death finds you earlier than expected!</li>
-			<li>r_logentry(INITIATOR_intellectual_level>=5,tag=Insult_generic)->The woman who breastfed you be damned!</li>			
+			<li>r_logentry(tag=Insult_generic)->[generic]</li>
+			<li>generic->You're [insult_adj][asshole], that's what you are, [RECIPIENT_nameDef]!</li>
+			<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
+			<li>generic->Hey, [RECIPIENT_nameDef] - can you just go die or something?!</li>
+			<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>
 		<!-- == Recipient's trait/parameter == -->
 			<!-- Ugly and staggering ugly -->
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Damn, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
@@ -797,6 +812,11 @@
 			<!-- Gender -->
 			<li>r_logentry(RECIPIENT_gender==Male,tag=Insult_generic)->You [bloody] son of a [bitch]!</li>
 			<li>r_logentry(RECIPIENT_gender==Female,tag=Insult_generic)->You [bloody] daughter of a [bitch]!</li>
+			<!-- Passion -->
+			<li>r_logentry(RECIPIENT_plants_passion==Major,tag=Insult_generic)->[plants_passion]</li>
+			<li>r_logentry(RECIPIENT_plants_passion==Minor,tag=Insult_generic)->[plants_passion]</li>
+			<li>plants_passion->May your rotten body feed the plants you care so much about!</li>
+			<li>plants_passion->Go die in a [TreeType] forest - go feed the trees you care so much about!</li>
 		<!-- == Initiator's trait == -->
 			<!-- Abrasive -->
 			<li>r_logentry(INITIATOR_trait==abrasive,tag=Insult_generic)->You took so many cocks in your life that if you put a fence around your [intimate_hole] you'll get a neat chicken coop!</li>
