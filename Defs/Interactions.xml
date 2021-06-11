@@ -86,7 +86,7 @@
 	</InteractionDef>
 			
 <!-- == JOB TEXTS == -->
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!--butchering skill-->
 		<defName>Job_ButcheringSkill</defName>
 		<label>job - butchering skill</label>
 		<logRulesInitiator>
@@ -100,6 +100,31 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--vomiting-->
+		<defName>Job_Vomiting</defName>
+		<label>job - vomiting</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef]...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--vomiting - help offer-->
+		<defName>Job_Vomiting_help</defName>
+		<label>job - vomiting - help offer</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->It's ok, [RECIPIENT_nameDef] - thanks...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>	
+	
 	
 <!-- == THOUGHTS == -->	
 	<InteractionDef ParentName="SpeakUpReply">
@@ -632,7 +657,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!--need - react to hunger-->
 		<defName>ReactToThought_NeedFood</defName>
 		<label>need - react to hunger</label>
 		<logRulesInitiator>
@@ -691,6 +716,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedFood_CookRecipient</defName>
 		<label>need - react to hunger - recipient cook</label>
@@ -701,8 +727,32 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->For all I care, [RECIPIENT_nameDef], you may starve to death!</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--  -->
-					<li>good_opinion->Calm down, [RECIPIENT_nameDef]! As soon I find something to cook, I'll get you a meal!</li>
+					<!-- Default -->
+					<li>good_opinion->Calm down, [RECIPIENT_nameDef]! As soon I find something to cook, I'll get you a meal!</li>		
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>ReactToThought_NeedFood_RecipientCooking</defName>
+		<label>need - react to hunger - recipient is cooking</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking simple meal.)->[cooking_intro] [cooking_start]some nice food!</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking 4 simple meals.)->[cooking_intro] [cooking_start]some nice food!</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking fine meal.)->[cooking_intro] [cooking_start]a fine meal!</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking 4 fine meals.)->[cooking_intro] [cooking_start]a fine meal!</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking lavish meal.)->[cooking_intro] [cooking_start]a lavish meal!</li>
+					<li>good_opinion(INITIATOR_jobText==Cooking 4 lavish meals.)->[cooking_intro] [cooking_start]a lavish meal!</li>
+					<li>cooking_intro->Be patient, [RECIPIENT_nameDef]!</li>
+					<li>cooking_intro->Keep your pants on, [RECIPIENT_nameDef]!</li>
+					<li>cooking_intro->Hold your horses, [RECIPIENT_nameDef]!</li>
+					<li>cooking_start->Just give me a few more minutes and you'll get </li>
+					<li>cooking_start->I'm on it right now - you'll soon get </li>								
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
@@ -1536,16 +1586,16 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!--Rain - good temperature - indoors-->
 		<defName>WeatherRainGoodtempIndoors</defName>
-		<label>rain - indoors</label>
+		<label>rain - good temperature - indoors</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->I hope I won't have to go outside.</li>
+				<li>good_opinion->I hope I won't need to do any task outside.</li>
 				<li>good_opinion(INITIATOR_trait==depressive)->Rain pouring into my soul, drowning any chance of happiness.</li>
 				<li>good_opinion(INITIATOR_trait==gourmand)->I hope this humidity won't set back the cooking and ruin our next meals.</li>
 				<li>good_opinion(INITIATOR_trait==night owl)->The sound of rain is so calming, especially at night.</li>
@@ -1554,57 +1604,60 @@
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Hope it stops soon - I prefer dry weather.</li>
 				<li>good_opinion(INITIATOR_trait==undergrounder)->It's so good being inside!</li>
 				<li>good_opinion(INITIATOR_trait==sickly,TEMPERATURE&lt;16)->If I go outside, I'm bound to catch a cold or worse.</li>
-				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to go outside and catch a cold or something.</li>
+				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->If I go outside, I'll catch a cold for sure.</li>
+				<li>good_opinion(INITIATOR_thoughtDefName==sick,TEMPERATURE&lt;16)->This cold, wet weather will slow down my healing for sure...</li>
 				<li>good_opinion(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Luckily we're inside, all set and cozy.</li>
-				<li>good_opinion(TEMPERATURE>26)->It's so hot in here I'd rather drench myself out there to cool down!</li>
+				<li>good_opinion(TEMPERATURE>26)->It's so hot in here I'd rather stay out there in the rain to cool down!</li>
 				<li>good_opinion(INITIATOR_plants_level>=5)->A gentle rain like this is great for the plants out there.</li>
-				<li>good_opinion(INITIATOR_plants_level>=5)->Good - I won't have to water the fields myself.</li>
-				<li>good_opinion(INITIATOR_plants_passion==Minor)->Nature's blessing for all the thirsty plants.</li>
-				<li>good_opinion(INITIATOR_plants_passion==Major)->That's just perfect for the fields!</li>					
+				<li>good_opinion(INITIATOR_plants_level>=5)->A gentle rain like this means I won't have to water the fields - good!</li>
+				<li>good_opinion(INITIATOR_plants_passion==Minor)->Rain is Nature's blessing for all the thirsty plants.</li>
+				<li>good_opinion(INITIATOR_plants_passion==Major)->Such a gentle rain is just perfect for the fields!</li>					
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!--Rain - good temperature - outdoors (recipient wants to get inside)-->
 		<defName>WeatherRainGoodtempOutdoors</defName>
-		<label>rain - outdoors</label>
+		<label>rain - good temperature - outdoors</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
-				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->Yes, [RECIPIENT_nameDef]. [comment]</li>
-				<li>good_opinion(INITIATOR_jobDefName==GotoWander)->[wandering].</li>
-				<li>good_opinion(INITIATOR_jobDefName==Wait_Wander)->[wandering].</li>
-				<li>good_opinion(INITIATOR_jobDefName==BuildRoof)->[building].</li>
-				<li>good_opinion(INITIATOR_jobDefName==FinishFrame)->[building].</li>
-				<li>good_opinion(INITIATOR_jobDefName==Clean)->Yes, I'll just finish cleaning here [get_inside]</li>
-				<li>good_opinion(INITIATOR_jobDefName==CutPlant)->Yes, I'll just finish cutting this plant here [get_inside]</li>
-				<li>good_opinion(INITIATOR_jobDefName==Sow)->Yes, I'll just finish sowing the fields here [get_inside]</li>
-				<li>good_opinion(INITIATOR_jobDefName==HaulToContainer)->[hauling]</li>
-				<li>good_opinion(INITIATOR_jobDefName==HaulToCell)->[hauling]</li>
-				<li>good_opinion(INITIATOR_jobDefName==Hunt)->I'll hunt something for us to eat first - [rain_hunt]</li>
-				<li>good_opinion(INITIATOR_jobDefName==Ingest)->Yes, I'll just finish eating this [get_inside]</li>
-				<li>good_opinion(INITIATOR_jobDefName==Skygaze)->[relaxing]</li>
-				<li>good_opinion(INITIATOR_jobDefName==SocialRelax)->[relaxing]</li>
-				<li>good_opinion(INITIATOR_trait==depressive)->Indoors... outdoors... what does it matter... it's all the same bleak life.</li>				
-				<li>good_opinion(INITIATOR_trait==sickly,TEMPERATURE&lt;16)->If I stay outside, I'm bound to catch a cold or worse.</li>
-				<li>good_opinion(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->I wouldn't like to stay outside and catch a cold or something.</li>
-				<li>good_opinion(TEMPERATURE>=30)->Although rain helps cooling down in this hellish heat, I agree with you, [RECIPIENT_nameDef].</li>
-				<li>good_opinion(TEMPERATURE&lt;=5)->I agree with you, [RECIPIENT_nameDef] - it's freezing out here!</li>
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Go on, [RECIPIENT_nameDef]. [comment]</li>
+				<li>comment(INITIATOR_jobDefName==GotoWander)->[wandering]</li>
+				<li>comment(INITIATOR_jobDefName==Wait_Wander)->[wandering]</li>
+				<li>comment(INITIATOR_jobDefName==BuildRoof)->[building]</li>
+				<li>comment(INITIATOR_jobDefName==FinishFrame)->[building]</li>
+				<li>comment(INITIATOR_jobDefName==Clean)->I'll just finish cleaning here [get_inside]</li>
+				<li>comment(INITIATOR_jobDefName==CutPlant)->I'll just finish cutting this plant here [get_inside]</li>
+				<li>comment(INITIATOR_jobDefName==Sow)->I'll just finish sowing the fields here [get_inside]</li>
+				<li>comment(INITIATOR_jobDefName==HaulToContainer)->[hauling]</li>
+				<li>comment(INITIATOR_jobDefName==HaulToCell)->[hauling]</li>
+				<li>comment(INITIATOR_jobDefName==Hunt)->I'll hunt something for us to eat first - [rain_hunt]</li>
+				<li>comment(INITIATOR_jobDefName==Ingest)->I'll just finish eating this [get_inside]</li>
+				<li>comment(INITIATOR_jobDefName==Skygaze)->[relaxing]</li>
+				<li>comment(INITIATOR_jobDefName==SocialRelax)->[relaxing]</li>
+				<li>comment(INITIATOR_trait==depressive)->Indoors... outdoors... what does it matter... it's all the same bleak life...</li>				
+				<li>comment(INITIATOR_trait==sickly,TEMPERATURE&lt;16)->[do_the_same] - I don't want to catch a cold or worse.</li>
+				<li>comment(INITIATOR_trait==wimp,TEMPERATURE&lt;16)->[do_the_same] - I wouldn't like to catch a cold or something.</li>
+				<li>comment(INITIATOR_thoughtDefName==sick,TEMPERATURE&lt;16)->[do_the_same] - I'm sick already and I don't want to get worse.</li>
+				<li>comment(TEMPERATURE>=30)->Although I must say this rain is quite refreshing in this hellish heat!</li>
+				<li>comment(TEMPERATURE&lt;=5)->[do_the_same] - it's freezing out here!</li>
+				<li>comment(INITIATOR_trait==pyromaniac)->[do_the_same] - I just don't like rain.</li>
+				<li>comment(INITIATOR_trait==pyromaniac)->Hope it stops soon - I prefer dry weather.</li>
+				<li>comment(INITIATOR_trait==undergrounder)->[do_the_same] - it's so good being inside!</li>
+				<li>comment-></li>				
 				<!-- WILDCARDS -->
-				<li>building->Yes - let me just finish building this [get_inside]</li>
-				<li>comment->I agree.</li>
-				<li>comment(INITIATOR_trait==pyromaniac)->I just don't like rain. Let's get inside!</li>
-				<li>comment(INITIATOR_trait==pyromaniac)->Hope it stops soon - I prefer dry weather. Let's get inside!</li>
-				<li>comment(INITIATOR_trait==undergrounder)->I fully agree. It's so good being inside!</li>
-				<li>get_inside->and I'll get inside.</li>
-				<li>get_inside->and I'll go back inside.</li>
-				<li>hauling->Yes - I'll just take this where it needs to be [get_inside]</li>
+				<li>building->I'll just finish building this [get_inside]</li>
+				<li>hauling->I'll just take this where it needs to be [get_inside]</li>
 				<li>rain_hunt(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5,priority=1)->this rain shouldn't be a problem for me.</li>
 				<li>rain_hunt->although this rain could make things harder for me.</li>
-				<li>relaxing->Well, maybe... but I'll chill out a bit out here first.</li>
-				<li>wandering->Yes... [RECIPIENT_nameDef]. But I'd rather chill out walking in the rain.</li>
+				<li>relaxing->I'll be chilling out here a bit [get_inside]</li>
+				<li>wandering->I'll take a relaxing stroll in the rain [get_inside]</li>
+				<li>do_the_same->I'll do the same soon enough</li>
+				<li>get_inside->and I'll get inside.</li>
+				<li>get_inside->and I'll go back inside.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1661,6 +1714,9 @@
 		<label>insult - react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
+				<!-- abrasive -->
+				<li>r_logentry(INITIATOR_trait==abrasive,priority=1)->[abrasive]</li>
+				<li>abrasive->Fuck off, [RECIPIENT_nameDef]!</li>
 				<!-- ascetic -->
 				<li>r_logentry(INITIATOR_trait==ascetic,priority=1)->[ascetic]</li>
 				<li>ascetic->Your worldly, low feelings barely affect me, [RECIPIENT_nameDef] - spare your energies for something wholesome.</li>
@@ -1675,11 +1731,14 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 				<li>bad_opinion->[reaction] [insult]</li>
 				<li>reaction->How dare you,</li>
+				<li>reaction->Put a sock in it,</li>
 				<li>reaction->Keep me out of that thin mouth of yours,</li>
 				<li>insult->you filthy bastard!</li>
 				<li>insult->you human filth!</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Who pissed in your cereal, [RECIPIENT_nameDef]?</li>
+				<li>good_opinion->Hey, [RECIPIENT_nameDef] - what did I do to you!?</li>
 				<li>good_opinion->Watch it, [RECIPIENT_nameDef]!</li>
 				<li>good_opinion->You're crossing the line, [RECIPIENT_nameDef]!</li>
 				<li>good_opinion->Damn you, [RECIPIENT_nameDef]! What was that for!?</li>
@@ -1704,7 +1763,47 @@
 				<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
+	</InteractionDef>
+	
+<!-- ============ DEEP TALK ============ -->
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>MeaningOfLife</defName>
+		<label>react - meaning of life</label>
+		<logRulesInitiator>
+			<rulesStrings>
+			<li>r_logentry(p=0.1)->42.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==pessimist)->Everything we do is meaningless. So, why care answering that?</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==depressive)->Nothing we do will be remembered, eventually. So, why care answering that?</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==optimist)->Life is what you make of it - so make it good, today!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==teetotaler)->I don't know its meaning - but I know it should be free of drugs.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==chemical interest)->A nice beer and cigarette!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==chemical fascination)->A line of yayo and some psychite tea!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==industrious)->Working hard to achieve all our goals!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==slothful)->I don't know its meaning - but I know it should be on a comfy couch.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==bloodlust)->Meaning?! I live for the kill - that's meaning enough!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==psychopath)->|||Cackles maniacally|||</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==psychopath)->|||Stares in silence|||</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==abrasive)->Wouldn't you like to know!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==brawler)->I don't know its meaning - but a good fistfight gives meaning to my life!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==masochist)->I don't know its meaning - but a little bit of pain always makes my life worth living.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==transhumanist)->We must surpass our biological bodies and become the ultimate being!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==body purist)->Life is about making sure we maximize our natual capabilities.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==greedy)->Money, power, sex - these are what give meaning to our lives!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==ascetic)->We live to revere the Cosmos - and the Cosmos lives to give meaning to our existence.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==ascetic)->Freedom from suffering and having clear judgement - this is our ultimate goal.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==gourmand)->I don't know its meaning - but I know food and drink are the purest forms of joy!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==pyromaniac)->Life is about hungrily exploiting all that's around us, like a spreading wild fire!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==tortured artist)->Does any of us really have a meaning to life?</li>
+			<li>r_logentry(p=0.8,RECIPIENT_trait==kind)->Making other people's life happy and fulfilled - so that they can make us happy too.</li>
+			<li>r_logentry(DAYPERIOD==night)->Isn't it a bit too late for a question like that?!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_artistic_level>=10)->Art and the true expression of oneself give full meaning to our lives.</li>
+			<li>r_logentry(p=0.8,RECIPIENT_social_level>=10)->I don't know its meaning - but I know a long conversation and a good drink make it much better!</li>
+			<li>r_logentry(p=0.8,RECIPIENT_construction_level>=10)->Creating lasting works to improve our surroundings and inspire future generations.</li>
+			<li>r_logentry->Why ask?</li>
+			<li>r_logentry->I haven't the slightest idea.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 
 	<!--TESTING 
 	<InteractionDef ParentName="SpeakUpReply">
@@ -1716,33 +1815,5 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>-->
-	
-	<!--ABANDONWARE
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>WeatherClearOutdoors</defName>
-		<label>reply to root</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(DAYPERIOD==morning)->Ahhh, breathing the crisp morning air, feeling the sun on your skin... it's just great!</li>
-				<li>r_logentry(DAYPERIOD==afternoon)->Sunny afternoons always make me smile.</li>
-				<li>r_logentry(DAYPERIOD==evening)->Yes, the evening landscape is really a pleasant sight in this weather.</li>
-				<li>r_logentry(DAYPERIOD==night)->Look up at that starry sky, it's so beautiful!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>Salute</defName>
-		<label>reply to salute</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry(INITIATOR_mood>=0.7)->Good [DAYPERIOD] to you too, [RECIPIENT_nameDef]! [ask]</li>
-				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->Good [DAYPERIOD]. [ask]</li>
-				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->Hmpf!</li>
-				<li>r_logentry(INITIATOR_mood&lt;0.3)->There's nothing good about it!</li>
-				<li>ask(tag=WeatherAnswer)->Isn't it a lovely [DAYPERIOD]?</li>
-				<li>ask(tag=HowAreYou)->How are you?</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>	
-	-->
+
 </Defs>
