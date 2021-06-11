@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/InteractionDef[defName = "DeepTalk"]/logRulesInitiator/rulesStrings</xpath>
+        <value>
+            <!--Meaning of life-->
+			<li>r_logentry(tag=MeaningOfLife,p=0.4)->[RECIPIENT_nameDef], I was thinking - what is the meaning of life?</li>
+        </value>
+    </Operation>
+	
+</Patch>
