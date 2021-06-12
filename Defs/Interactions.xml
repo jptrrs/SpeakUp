@@ -128,6 +128,23 @@
 	
 <!-- == THOUGHTS == -->	
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>StarvingEating</defName><!-- starving - eating -->
+		<label>starving - eating</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion(INITIATOR_opinion&lt;=25)->Hope you choke on it, [RECIPIENT_nameDef]!</li>
+				<li>bad_opinion->...!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Enjoy, [RECIPIENT_nameDef]!</li>
+				<li>good_opinion(INITIATOR_social_level>=5)->Bon appétit, [RECIPIENT_nameDef]!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_ApparelDamaged</defName>
 		<label>apparel - damaged</label>
 		<logRulesInitiator>
@@ -194,7 +211,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!-- ate meal -->
 		<defName>ReactToThought_AteMeal</defName>
 		<label>ate meal</label>
 		<logRulesInitiator>
@@ -1294,6 +1311,34 @@
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion(INITIATOR_mood&lt;0.4)->[stressed]</li>
+				<li>bad_opinion(INITIATOR_mood&lt;0.4,INITIATOR_trait==jealous,priority=1)->[stressed]</li>
+				<li>bad_opinion->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion(INITIATOR_mood&lt;0.4,priority=1)->...</li>
+				<li>good_opinion->[calm]</li>
+				
+				<!--WILDCARDS-->
+				<li>stressed(INITIATOR_mood>0.3)->|||frowns|||</li>
+				<li>stressed->|||scowls|||</li>
+				<li>stressed->|||glares|||</li>
+				<li>stressed->|||glowers|||</li>
+				<li>stressed(INITIATOR_mood&lt;=0.2)->|||mutters angrily|||</li>
+				
+				<li>calm->|||smiles|||</li>
+				<li>calm(INITIATOR_mood>=0.6)->|||beams a smile to [RECIPIENT_nameDef]|||</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply"><!-- Stressed -->
+		<defName>Stressed</defName>
+		<label>react to - stressed</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 				<li>bad_opinion(INITIATOR_mood&lt;0.4,priority=1)->|||scowls back|||</li>
 				<li>bad_opinion->...</li>
 				<!--Good opinion of recipient-->
@@ -1302,7 +1347,7 @@
 				<li>good_opinion->|||smiles back|||</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>
+	</InteractionDef>	
 	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>HowAreYou</defName>
@@ -1474,35 +1519,62 @@
 	</InteractionDef>
 	
 	<!-- W E A T H E R -->
-	<InteractionDef ParentName="SpeakUpReply"><!--Weather - good temperature - indoors-->
-		<defName>WeatherGoodtempIndoors</defName>
-		<label>weather good temp indoors</label>
+	<InteractionDef ParentName="SpeakUpReply"><!--stuck indoors-->
+		<defName>StuckIndoors</defName>
+		<label>weather - stuck indoors</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry(INITIATOR_opinion>=0)->Me too, [RECIPIENT_nameDef].</li>
+				<li>r_logentry(INITIATOR_opinion>=0,INITIATOR_thoughtDefName==NeedOutdoors,priority=1)->Me too, [RECIPIENT_nameDef].</li>
+				<li>r_logentry(INITIATOR_opinion>=0)->I can tell you - we're having a [weather].</li>
+				
+				<li>weather(WEATHER==clear,priority=1)->[dayperiod_adj] [DAYPERIOD]</li>
+				<li>dayperiod_adj(DAYPERIOD==morning)->sunny</li>
+				<li>dayperiod_adj(DAYPERIOD==afternoon)->sunny</li>
+				<li>dayperiod_adj(DAYPERIOD==evening)->starry</li>
+				<li>dayperiod_adj(DAYPERIOD==night)->starry</li>
+				
+				<li>weather(WEATHER==fog,priority=1)->foggy [DAYPERIOD]</li>
+				<li>weather(WEATHER==rain,priority=1)->rainy [DAYPERIOD]</li>
+				<li>weather(WEATHER==foggy rain,priority=1)->foggy and rainy [DAYPERIOD]</li>
+				<li>weather(WEATHER==hard snow,priority=1)->snowstorm</li>
+				<li>weather(WEATHER==soft snow,priority=1)->snowy [DAYPERIOD]</li>
+				
+				<li>weather->[WEATHER]</li>
+				
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply"><!--Clear weather - good temperature - outdoors-->
-		<defName>WeatherClearGoodtempOutdoors</defName>
-		<label>clear weather outdoors</label>
+	<InteractionDef ParentName="SpeakUpReply"><!--clear weather - good temp - not entombed-->
+		<defName>WeatherClearGoodtempNotEntombed</defName>
+		<label>clear weather - good temp - not entombed</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Opinion-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[yes], [RECIPIENT_nameDef]. [temperature]</li>
-				<li>r_logentry(INITIATOR_opinion&lt;0)->At least on this I must agree with you, [RECIPIENT_nameDef].</li>
-				<!--Temperature comment-->
+				<!--Bad opinion-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Entombed (priority 1) -->
+					<li>good_opinion(INITIATOR_thoughtDefName==NeedOutdoors,priority=1)->I wish I had a chance to go outside and see it for myself!</li>
+					<!--Not entombed (default) -->
+					<li>good_opinion->[yes], [RECIPIENT_nameDef]. [outside_inside]</li>
+
+				<!-- Comment if outside -->
+				<li>outside_inside(OUTDOORS==Yes)->temperature</li>
 				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->It's a very hot [DAYPERIOD], but it's still enjoyable.</li>
 				<li>temperature(TEMPERATURE>26,TEMPERATURE&lt;=30)->A warm, clear [DAYPERIOD] is a blessing!</li>
 				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - a perfect [DAYPERIOD]!</li>
 				<li>temperature(TEMPERATURE>5,TEMPERATURE&lt;16)->A bit chilly, but a [nice] [DAYPERIOD] still.</li>
-				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->This cold is almost numbing[plants]</li>
-				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->It's freezing[plants]</li>
-				<li>plants(INITIATOR_plants_level&lt;5)->, but at least we have a nice clear sky.</li>
-				<li>plants(INITIATOR_plants_level&lt;5)->, but it's still enjoyable.</li>
-				<li>plants(INITIATOR_plants_level>=5)->! That's actually terrible for plants in the open - they will almost freeze.</li>
-				<li>plants(INITIATOR_plants_level>=5)-> - that's bad: plants will grow much slower.</li>
+				<li>temperature(TEMPERATURE>=0,TEMPERATURE&lt;=5)->But this cold is almost numbing[plants1]</li>
+				<li>temperature(TEMPERATURE>=-10,TEMPERATURE&lt;0)->But it's freezing[plants2]</li>
+				<li>plants1(INITIATOR_plants_level&lt;5)->!</li>
+				<li>plants2(INITIATOR_plants_level&lt;5)->!</li>
+				<li>plants1(INITIATOR_plants_level>=5)-> - and plants in the open will grow much slower.</li>
+				<li>plants2(INITIATOR_plants_level>=5)-> - and plants in the open might even freeze and die!</li>
+				<!-- Comment if inside -->
+				<li>outside_inside(OUTDOORS==No)->[outside]</li>
+				<li>outside->It certainly helps to have such a [nice] weather!</li>
+				<li>outside->This [nice] weather is good for us!</li>				
 				<!--WILDCARDS-->
 				<li>nice->nice</li>
 				<li>nice->good</li>
@@ -1516,21 +1588,24 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--Fog - good temperature - outdoors-->
-		<defName>WeatherFogGoodtempOutdoors</defName>
-		<label>fog good temp outdoors</label>
+	<InteractionDef ParentName="SpeakUpReply"><!--Fog - good temperature - not entombed-->
+		<defName>WeatherFogGoodtempNotEntombed</defName>
+		<label>fog - good temp - not entombed</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion(DAYPERIOD==morning)->At least we have some sunlight to help us see through.</li>
+				<li>good_opinion(DAYPERIOD==morning)->At least the sunlight helps a little.</li>
 				<li>good_opinion(DAYPERIOD==morning)->With some luck, daylight should soon get rid of this fog.</li>
-				<li>good_opinion(DAYPERIOD==afternoon)->Let's hope this fog ends before evening - it's really getting difficult to see things.</li>
-				<li>good_opinion(DAYPERIOD==evening)->I can't see much either, I'm afraid.</li>
-				<li>good_opinion(DAYPERIOD==night)->Foggy nights are perfect for trouble - maybe we should get inside.</li>
+				<li>good_opinion(DAYPERIOD==afternoon)->Let's hope this fog ends before evening - it really makes it difficult to see things.</li>
+				<li>good_opinion(DAYPERIOD==evening)->Foggy evenings are perfect for trouble - [inside_outside].</li>
+				<li>good_opinion(DAYPERIOD==night)->Foggy nights are perfect for trouble - [inside_outside].</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->I heard that bonfires help to dissipate fog.</li>
+				
+				<li>inside_outside(OUTDOORS==Yes)->maybe we should get inside</li>
+				<li>inside_outside(OUTDOORS==No)->maybe we should stay inside</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1615,7 +1690,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--Rain - good temperature - outdoors (recipient wants to get inside)-->
+	<InteractionDef ParentName="SpeakUpReply"><!--Rain - good temperature - outdoors (recipient wants to get inside) -->
 		<defName>WeatherRainGoodtempOutdoors</defName>
 		<label>rain - good temperature - outdoors</label>
 		<logRulesInitiator>
@@ -1805,15 +1880,52 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
-	<!--TESTING 
+	<InteractionDef ParentName="SpeakUpReply"><!-- nearest art -->
+		<defName>NearestArt</defName>
+		<label>nearest art</label>
+		<logRulesInitiator>
+			<rulesStrings>
+			<!--Bad opinion of recipient-->
+			<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+			<li>bad_opinion->...</li>
+			<!--Good opinion of recipient-->
+			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+			<li>good_opinion(INITIATOR_artistic_passion!=None)->I agree, [RECIPIENT_nameDef]! Quite the piece of art! I like it too!</li>
+			<li>good_opinion(INITIATOR_artistic_passion==None)->[no_passion]</li>
+				<li>no_passion(INITIATOR_intellectual_level&lt;5)->Mmm... Can't understand its artistic beauty - but yes, it looks nice!</li>
+				<li>no_passion(INITIATOR_intellectual_level>=5)->I'm not into arts, but - yes, I may say it is a pleasant view.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply"><!-- nearest plant -->
+		<defName>NearestPlant</defName>
+		<label>nearest plant</label>
+		<logRulesInitiator>
+			<rulesStrings>
+			<!--Bad opinion of recipient-->
+			<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+			<li>bad_opinion->...</li>
+			<!--Good opinion of recipient-->
+			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+			<li>good_opinion(INITIATOR_plants_passion!=None)->I agree, [RECIPIENT_nameDef]! So nice!</li>
+			<li>good_opinion(INITIATOR_plants_passion==None)->[no_passion]</li>
+				<li>no_passion->Mmm... yes - it's a pleasant view.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+<!-- test name -->
+<!-- TESTING 
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>test_title</defName>
 		<label>test - title</label>
 		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->Yes, my lord. My knights are waiting for your orders.</li>
-			</rulesStrings>
+			<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+			<li>bad_opinion->...</li>
+			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+			<li>good_opinion-></li>
 		</logRulesInitiator>
 	</InteractionDef>-->
-
+	
 </Defs>
