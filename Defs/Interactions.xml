@@ -1560,7 +1560,7 @@
 					<li>good_opinion->[yes], [RECIPIENT_nameDef]. [outside_inside]</li>
 
 				<!-- Comment if outside -->
-				<li>outside_inside(OUTDOORS==Yes)->temperature</li>
+				<li>outside_inside(OUTDOORS==Yes)->[temperature]</li>
 				<li>temperature(TEMPERATURE>30,TEMPERATURE&lt;=44)->It's a very hot [DAYPERIOD], but it's still enjoyable.</li>
 				<li>temperature(TEMPERATURE>26,TEMPERATURE&lt;=30)->A warm, clear [DAYPERIOD] is a blessing!</li>
 				<li>temperature(TEMPERATURE>=16,TEMPERATURE&lt;=26)->Not too hot, not too cold - a perfect [DAYPERIOD]!</li>
