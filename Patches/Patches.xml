@@ -6,7 +6,7 @@
 			<rulesStrings>
 				<!-- generic default -->
 				<li>r_logentry(p=0.1,tag=ChitChat_generic)->Hey, [RECIPIENT_nameDef]!</li>
-				<!--Job Texts (initiator)-->
+				<!--Job Texts (initiator) -->
 				<!--Cloudwatching-->
 				<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==morning,tag=CloudWatching)->[cloud_watching]</li>
 				<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==afternoon,tag=CloudWatching)->[cloud_watching]</li>
@@ -19,12 +19,12 @@
 				<li>cloud_analogy->just look like</li>
 				<li>cloud_analogy->remind you of</li>
 				<li>cloud_analogy(INITIATOR_intellectual_level>=5)->vaguely resemble</li>
-				<!--Job Texts (recipient)-->
-					<!--Butchering(priority 4)-->
+				<!--Job Texts (recipient) -->
+					<!--Butchering(priority 4) -->
 					<li>r_logentry(priority=4,RECIPIENT_jobText==Butchering.,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level>=6)->Well, [RECIPIENT_nameDef] - luckily for us, looks like you know how to properly butcher!</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level&lt;6)->Mmm, [RECIPIENT_nameDef]... looks like you're wasting good meat there...</li>
-					<!--Vomiting (priority 4)-->
+					<!--Vomiting (priority 4) -->
 					<li>r_logentry(priority=4,RECIPIENT_jobText==vomiting.)->[job_recipient_vomiting]</li>
 						<!--gross-->
 						<li>job_recipient_vomiting(tag=Job_Vomiting)->[vomiting_gross][RECIPIENT_nameDef]!</li>
@@ -103,7 +103,7 @@
 									<li>thought_atewotable_construction_skilled(RECIPIENT_construction_level>=4)->We shouldn't have let this happen - we could've built one.</li>
 							<!-- Calm -->
 							<li>thought_atewotable(INITIATOR_mood>0.4)->[mood_calm]</li>
-					<!--Almost decent dining room (default)-->
+					<!--Almost decent dining room (default) -->
 					<li>thought_diningroom->[thought_diningroom_default]</li>
 						<!-- Stressed || abrasive -->
 						<li>thought_diningroom_default(INITIATOR_mood&lt;=0.4,tag=ReactToThought_AteWithoutTable)->[thought_diningroom_stressed]</li>
@@ -162,14 +162,14 @@
 					<!--NeedBeauty-->
 						<!-- hideous -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hideous environment,tag=ReactToThought_NeedBeauty_hideous)->[thought_needbeauty_hideous]</li>
-						<li>thought_needbeauty_hideous->This place is unbearably grotesque. I can't look at this any more.</li>
+						<li>thought_needbeauty_hideous->This place is unbearably [ugly]. I can't look at this any more.</li>
 						<li>thought_needbeauty_hideous(INITIATOR_trait==depressive)->This place is a perfect depiction of our future - bleak and dreary.</li>
 						<li>thought_needbeauty_hideous(INITIATOR_trait==pyromaniac)->This place is so totally dismal we could burn it down to ashes - and even so, it would look better!</li>
 						<!-- ugly -->
 						<li>r_logentry(INITIATOR_thoughtLabel==ugly environment,tag=ReactToThought_NeedBeauty_ugly)->[thought_needbeauty_ugly]</li>
-						<li>thought_needbeauty_ugly->This place is really ugly. I wish I didn't have to look at this any more.</li>
-						<li>thought_needbeauty_ugly(INITIATOR_trait==depressive)->It's ugly here... but then again - it's OK: it's the best I'll ever get in this life, I'm sure.</li>
-						<li>thought_needbeauty_ugly(INITIATOR_trait==pyromaniac)->This place is hopelessly awful. Let's burn it down and build a better one from scratch!</li>
+						<li>thought_needbeauty_ugly->This place is really [ugly]. I wish I didn't have to look at this any more.</li>
+						<li>thought_needbeauty_ugly(INITIATOR_trait==depressive)->It's very [ugly] around here... but then again - it's OK: it's the best I'll ever get in this life, I'm sure.</li>
+						<li>thought_needbeauty_ugly(INITIATOR_trait==pyromaniac)->This place is hopelessly [ugly]. Let's burn it down and build a better one from scratch!</li>
 						<!-- unsightly -->
 						<li>r_logentry(INITIATOR_thoughtLabel==unsightly environment,tag=ReactToThought_NeedBeauty_unsightly)->[thought_needbeauty_unsightly]</li>
 						<li>thought_needbeauty_unsightly->This place is kind of [unsightly]. I wish I didn't have to look at all this.</li>
@@ -201,10 +201,12 @@
 						<li>r_logentry(INITIATOR_thoughtLabel==luxuriantly comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort5]</li>
 						<li>thought_need_comfort5->Our furniture feels like Heaven! So comfy!</li>
 					<!--NeedFood-->
-						<!-- hungry or worse , recipient is cooking (priority 4) [must improve!] -->
-						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT__jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
+						<!-- hungry or worse , eating and seated (priority 5)-->
+						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==Yes,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>			
+						<!-- hungry or worse , recipient is cooking (priority 4) [must improve with other meals!] -->
+						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
 						<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
-						<!-- hungry or worse , recipient is a professional cook -->
+						<!-- hungry or worse , recipient is a professional cook (priority 4) -->
 						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
 						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] - get us some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
 						<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] - can you get us some food already?!</li>
@@ -339,7 +341,7 @@
 					<li>thought_sick(INITIATOR_trait==transhumanist)->Sick - again! The human body is so [swearword]weak and flawed...</li>
 					<!--SleepDisturbed-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed)->[thought_sleepdisturbed]</li>
-						<!--Kind (priority)-->
+						<!--Kind (priority) -->
 						<li>thought_sleepdisturbed(INITIATOR_trait==kind,priority=1)->[thought_sleepdisturbed_calm]</li>
 						<!--Stressed-->
 						<li>thought_sleepdisturbed(INITIATOR_mood&lt;0.4,tag=ReactToThought_SleepDisturbed)->[thought_sleepdisturbed_stressed]</li>
@@ -361,17 +363,33 @@
 						<li>thought_sleepdisturbed_calm(tag=ReactToThought_SleepDisturbed)->Let's be more quiet near sleeping people, OK? Someone disturbed my sleep, recently.</li>
 						<li>thought_sleepdisturbed_calm->[mood_calm]</li>
 					<!--SleptInBarracks-->
-					<li>r_logentry(tag=ReactToThought_SleptInBarracks)->[thought_sleptinbarracks]</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==awful barrack)->Not only I must share my room - it's also a [ugly] one!</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==dull barrack)->My room is slightly [ugly]! And I must share it with other people, too!</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==mediocre barrack)->I share my room with others - I can accept that. But... couldn't it be a nicer one at least?</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==decent barrack)->My room is nice enough, but I find it a bit [annoying] sharing a sleeping space.</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==slightly impressive barrack)->My room is quite nice. Unfortunately, I have to share it with others.</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==impressive barrack)->My room is very nice. If only I didn't have to share it with others...</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==very impressive barrack)->My room is very impressive. I don't even mind sharing it!</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==extremely impressive barrack)->My room is so extremely impressive that sharing it doesn't even bother me!</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==unbelievably impressive barrack)->I can't believe how nice is my shared room!</li>
-					<li>thought_sleptinbarracks(INITIATOR_thoughtLabel==wondrously impressive barrack)->My shared room is just a dream come true!</li>
+					<li>r_logentry->[thought_sleptinbarracks]</li>
+						<!--Kind (priority 1) -->
+						<li>thought_sleptinbarracks(INITIATOR_trait==kind,priority=1)->[thought_sleptinbarracks_calm]</li>
+						<!--Stressed-->
+						<li>thought_sleptinbarracks(INITIATOR_mood&lt;0.4)->[thought_sleptinbarracks_stressed]</li>				
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==awful barrack,tag=ReactToThought_SleptInBarracks)->Not only I must share my [swearword]room - it's also a very [swearword_adverb][ugly] one!</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==dull barrack,tag=ReactToThought_SleptInBarracks)->My room is quite [ugly]! And I must [swearword_adverb]share it with other [swearword]people, too!</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==mediocre barrack,tag=ReactToThought_SleptInBarracks)->I have to [swearword_adverb]share my room with others - OK. But couldn't it be a nicer one at least?</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==decent barrack,tag=ReactToThought_SleptInBarracks)->My room is nice enough, but I find it a bit [annoying] sharing my sleeping space.</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==slightly impressive barrack,tag=ReactToThought_SleptInBarracks)->My room is quite nice. Unfortunately, I have to share it with others.</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==impressive barrack,tag=ReactToThought_SleptInBarracks)->My room is very nice. If only I didn't have to share it with others...</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==very impressive barrack)->[mood_stressed]</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==extremely impressive barrack)->[mood_stressed]</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==unbelievably impressive barrack)->[mood_stressed]</li>
+						<li>thought_sleptinbarracks_stressed(INITIATOR_thoughtLabel==wondrously impressive barrack)->[mood_stressed]</li>
+						<!--Calm-->
+						<li>thought_sleptinbarracks(INITIATOR_mood>=0.4)->[thought_sleptinbarracks_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==awful barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==dull barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==mediocre barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==decent barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==slightly impressive barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==impressive barrack)->[mood_calm]</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==very impressive barrack,tag=ReactToThought_SleptInBarracks)->My shared room is very impressive. I don't even mind sharing it!</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==extremely impressive barrack,tag=ReactToThought_SleptInBarracks)->My shared room is so extremely impressive that sharing it doesn't even bother me!</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==unbelievably impressive barrack,tag=ReactToThought_SleptInBarracks)->I can't believe how nice is my shared room!</li>
+						<li>thought_sleptinbarracks_calm(INITIATOR_thoughtLabel==wondrously impressive barrack,tag=ReactToThought_SleptInBarracks)->My shared room is just a dream come true!</li>
 					<!--SleptInBedroom-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptInBedroom,tag=ReactToThought_Bedroom)->[thought_bedroom] [what_about_yours]</li>
 					<li>thought_bedroom(INITIATOR_thoughtLabel==awful bedroom)->Luckily, I have my own bedroom. Too bad it's [ugly] as hell.</li>
@@ -452,7 +470,7 @@
 					<!--Undergrounder outdoors-->
 					<li>r_logentry(INITIATOR_thoughtDefName==UndergrounderOutdoors,tag=ReactToThought_UndergrounderOutdoors)->[thought_undergrounderoutdoors]</li>
 					<li>thought_undergrounderoutdoors->I don't like being outside. I'd rather be indoors.</li>
-				<!--Thought (Recipient)-->
+				<!--Thought (Recipient) -->
 				<li>r_logentry(INITIATOR_opinion>=0,tag=WhatsUp)->So, [RECIPIENT_nameDef] - [whatsup]</li>
 				<li>whatsup(INITIATOR_intellectual_level&lt;5)->wassup?</li>
 				<li>whatsup(INITIATOR_intellectual_level&lt;3)->sup?</li>
@@ -464,16 +482,32 @@
 				<li>whatsup->what's new?</li>
 				
 				<!--===MOOD===-->
-				<li>r_logentry(INITIATOR_mood>=0.4)->[mood_calm]</li>
-				<li>mood_calm(tag=Calm)->|||smiles|||</li>
-				<!--Mood (Recipient)-->
+				
+				<!--Mood (Initiator) -->
+					<!--Calm-->
+					<li>r_logentry(INITIATOR_mood>=0.4)->[mood_calm]</li>
+					<li>mood_calm(tag=Calm)->[calm_options]</li>
+					<li>calm_options->|||smiles|||</li>
+					<li>calm_options(INITIATOR_mood>=0.6,INITIATOR_opinion>=0)->|||beams a smile to [RECIPIENT_nameDef]|||</li>
+					<li>calm_options(INITIATOR_mood>=0.7)->|||whistles a tune|||</li>
+					<li>calm_options(INITIATOR_mood>=0.8)->|||sings a tune|||</li>
+					<!--Stressed-->
+					<li>r_logentry(INITIATOR_mood&lt;0.4,tag=Stressed)->[mood_stressed]</li>
+					<li>mood_stressed->[stressed_options]</li>
+					<li>stressed_options->|||scowls|||</li>
+					<li>stressed_options->|||glares|||</li>
+					<li>stressed_options->|||glowers|||</li>
+					<li>stressed_options->|||frowns|||</li>
+					<li>stressed_options(INITIATOR_mood&lt;=0.2)->|||mutters angrily|||</li>
+					
+				<!--Mood (Recipient) -->
 				<li>r_logentry(INITIATOR_opinion>=0,tag=HowAreYou)->Hey, [RECIPIENT_nameDef]. [howareyou]</li>
 				<li>howareyou->How are you?</li>
 				<li>howareyou->How are things?</li>
 				<li>howareyou->How have you been?</li>
 				<li>howareyou->How's life?</li>
 				<li>howareyou->How are you getting along?</li>
-				<li>howareyou(RECIPIENT_mood&lt;0.5)->Are you OK?</li>
+				<li>howareyou(RECIPIENT_mood&lt;0.4)->Are you OK?</li>
 				
 				<!--===TRAITS===-->
 					<!--Ascetic-->
@@ -542,17 +576,15 @@
 				<li>r_logentry(WEATHER==clear)->[weather_clear]</li>
 					<!--Good temperature for humans-->
 					<li>weather_clear(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_clear_goodtemp]</li>
-						<!--Indoors (priority=1)-->
-						<li>weather_clear_goodtemp(OUTDOORS==No,tag=WeatherGoodtempIndoors,priority=1)->[weather_goodtemp_indoors]</li>
-						<!--Outdoors (default)-->
-						<li>weather_clear_goodtemp(OUTDOORS==Yes,tag=WeatherClearGoodtempOutdoors)->[weather_clear_goodtemp_outdoors]</li>
+						<!-- Entombed indoors (priority 1) -->
+						<li>weather_clear_goodtemp(OUTDOORS==No,INITIATOR_thoughtDefName==NeedOutdoors,tag=StuckIndoors,priority=1)->I'm curious about what's the weather like out there.</li>
+						<!--Outdoors or indoors but not entombed (default) -->
+						<li>weather_clear_goodtemp(tag=WeatherClearGoodtempNotEntombed)->[weather_clear_goodtemp_not_entombed]</li>
 							<!--Mood-->
-							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.7,priority=1)->What a [nice] weather we're having!</li>
-							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood>=0.7,priority=1)->Such a [nice] [DAYPERIOD]!</li>
-							<li>weather_clear_goodtemp_outdoors->It certainly helps to have such a [nice] weather.</li>
-							<li>weather_clear_goodtemp_outdoors->This [nice] weather is good for us.</li>
-							<li>weather_clear_goodtemp_outdoors->We're having a [nice] [DAYPERIOD].</li>
-							<li>weather_clear_goodtemp_outdoors(INITIATOR_mood&lt;0.4,priority=1)->The weather is [nice], at least...</li>	
+							<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood>=0.7,priority=1)->What a [nice] weather we're having!</li>
+							<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood>=0.7,priority=1)->Such a [nice] [DAYPERIOD]!</li>
+							<li>weather_clear_goodtemp_not_entombed->We're having a [nice] [DAYPERIOD].</li>
+							<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood&lt;0.4,priority=1)->The weather is [nice], at least...</li>	
 					<!--Extreme cold for humans-->
 					<li>weather_clear(TEMPERATURE&lt;-10)->[weather_toocold]</li>
 					<!--Extreme heat for humans-->
@@ -562,15 +594,15 @@
 				<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
 					<!--Good temperature for humans-->
 					<li>weather_fog(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_fog_goodtemp]</li>
-						<!--Indoors (priority=1)-->
-						<li>weather_fog_goodtemp(OUTDOORS==No,tag=WeatherGoodtempIndoors,priority=1)->[weather_goodtemp_indoors]</li>
-						<!--Outdoors (default)-->
-						<li>weather_fog_goodtemp(OUTDOORS==Yes,tag=WeatherFogGoodtempOutdoors)->[weather_fog_goodtemp_outdoors]</li>
+						<!-- Entombed indoors (priority 1) -->
+						<li>weather_fog_goodtemp(OUTDOORS==No,INITIATOR_thoughtDefName==NeedOutdoors,tag=StuckIndoors,priority=1)->I'm curious about what's the weather like out there.</li>
+						<!--Outdoors or indoors but not entombed (default) -->
+						<li>weather_fog_goodtemp(tag=WeatherFogGoodtempNotEntombed)->[weather_fog_goodtemp_not_entombed]</li>
 							<!--Initiator mood-->
-							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.4)->It's pretty foggy out here.</li>
-							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood>=0.2,INITIATOR_mood&lt;0.4)->This [swearword]fog won't let me see a [swearword]thing.</li>
-							<li>weather_fog_goodtemp_outdoors(INITIATOR_mood&lt;0.2)->[swearword]fog! Can't see a [swearword]thing out here! [damn_it]!</li>
-						<!--Hunting skill (recipient)-->
+							<li>weather_fog_goodtemp_not_entombed(INITIATOR_mood>=0.4)->It's pretty foggy [out_here_out_there].</li>
+							<li>weather_fog_goodtemp_not_entombed(INITIATOR_mood>=0.2,INITIATOR_mood&lt;0.4)->The [swearword]fog [out_here_out_there] won't let me see a [swearword]thing.</li>
+							<li>weather_fog_goodtemp_not_entombed(INITIATOR_mood&lt;0.2)->[swearword]fog! Can't see a [swearword]thing [out_here_out_there]! [damn_it]!</li>
+						<!--Hunting skill (recipient) -->
 						<li>weather_fog_goodtemp(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this fog means no hunting for you today?</li>
 						<!--Trait==Too smart-->
 						<li>weather_fog_goodtemp(INITIATOR_trait==too smart,tag=WeatherFogToosmart)->[fog_fact]</li>
@@ -622,14 +654,14 @@
 				<li>annoying->maddening</li>
 				<li>annoying->bothersome</li>
 				<li>annoying(INITIATOR_intellectual_level>=5)->exasperating</li>
-				<!--disgusting (dead body/meal)-->
+				<!--disgusting (dead body/meal) -->
 				<li>disgusting->disgusting</li>
 				<li>disgusting->nauseating</li>
 				<li>disgusting->sickening</li>
 				<li>disgusting->gross</li>
 				<li>disgusting(INITIATOR_intellectual_level>=5)->revolting</li>
 				<li>disgusting(INITIATOR_intellectual_level>=10)->repugnant</li>
-				<!--disturbing (dead body)-->
+				<!--disturbing (dead body) -->
 				<li>disturbing->disturbing</li>
 				<li>disturbing->unsettling</li>
 				<li>disturbing->gut-wrenching</li>
@@ -644,7 +676,7 @@
 				<li>eerie->otherworldy</li>
 				<li>eerie->unearthly</li>
 				<li>eerie->spooky</li>
-				<!--fix (verb, metaphoric)-->
+				<!--fix (verb, metaphoric) -->
 				<li>fix->fix</li>
 				<li>fix->manage</li>
 				<li>fix->handle</li>
@@ -653,7 +685,7 @@
 				<li>fix->take care of</li>
 				<li>fix(INITIATOR_intellectual_level>=5)->remedy</li>
 				<li>fix(INITIATOR_intellectual_level>=10)->rectify</li>
-				<!--horrible (monster)-->
+				<!--horrible (monster) -->
 				<li>horrible->terrible</li>
 				<li>horrible->horrible</li>
 				<li>horrible->unholy</li>
@@ -682,7 +714,7 @@
 				<li>monster->creature</li>
 				<li>monster->ghost</li>
 				<li>monster->alien</li>				
-				<!--nice (weather)-->
+				<!--nice (weather) -->
 				<li>nice->nice</li>
 				<li>nice->good</li>
 				<li>nice->pleasant</li>
@@ -720,7 +752,7 @@
 					<li>swearword(INITIATOR_trait==abrasive)->[swearword_abrasive] </li>
 					<li>swearword_abrasive->frakking</li>
 					<li>swearword_abrasive->fucking</li>
-				<!--swearword (adverb)-->
+				<!--swearword (adverb) -->
 				<li>swearword_adverb(INITIATOR_mood>=0.4,priority=1)-></li>
 				<li>swearword_adverb-></li>
 				<li>swearword_adverb->bloody </li>
@@ -765,6 +797,8 @@
 				<li>unsightly(INITIATOR_intellectual_level>=5)->unappealing</li>
 				<li>unsightly(INITIATOR_intellectual_level>=5)->unattractive</li>				
 				<li>unsightly(INITIATOR_intellectual_level>=10)->bedraggled</li>
+				
+				
 				<!--CHITCHAT WILDCARDS: common sentences-->
 				<!-- accuses from misandrist/mysoginist -->
 				<li>accuse_gender_objective(INITIATOR_trait==misandrist)->him</li>
@@ -803,9 +837,9 @@
 					<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot,priority=1)->I should get better clothing - I'm melting!</li>
 					<!--Clothes are enough-->
 					<li>weather_toohot->Luckily, my gear is good enough to protect me from this scorching heat!</li>
-					<!--Weather good temperature indoors (no windows)-->
-					<li>weather_goodtemp_indoors->I'm curious about what's the weather like out there.</li>
-					<li>weather_goodtemp_indoors->I wonder what's the weather like out there.</li>					
+				<!--Out here or out there-->
+				<li>out_here_out_there(OUTDOORS==No)->out there</li>
+				<li>out_here_out_there(OUTDOORS==Yes)->out here</li>
 				<!--What about yours?-->
 				<li>what_about_yours->What about yours, [RECIPIENT_nameDef]?</li>
 			</rulesStrings>
