@@ -5,14 +5,17 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
-			<li>r_logentry(INITIATOR_artistic_passion!=None,tag=NearestArt)->This [NEAREST_art] here is so beautiful! Don't you think so, [RECIPIENT_nameDef]?</li>
-			<li>r_logentry(INITIATOR_plants_passion!=None,tag=NearestPlant)->Mother Nature is so generous with us - look at that [NEAREST_plant]! Isn't it beautiful, [RECIPIENT_nameDef]?</li>
+
+
 			
-			<!-- COMMENT START
-			<li>r_logentry(RECIPIENT_title==janitor)->[RECIPIENT_nameDef]! Go clean my room - now!</li>
+			
+			
+			<!-- COMMENT START 
+			<li>r_logentry(priority=10,INITIATOR_plants_passion!=None,OUTDOORS==Yes,tag=NearestPlant)->Mother Nature is so generous with us — look at that [NEAREST_plant]! Isn't it beautiful, [RECIPIENT_nameDef]?</li>
+			<li>r_logentry(RECIPIENT_title==janitor)->[RECIPIENT_nameDef]! Go clean my room — now!</li>
 			<li>r_logentry(INITIATOR_title==count,RECIPIENT_title==baron,tag=test_title)->Baron [RECIPIENT_nameDef], we are under attack! Have you rallied your troops?</li>
 			
-			<li>r_logentry(p=2)->test - [INITIATOR_jobDefName]</li>
+			<li>r_logentry(p=2)->test — [INITIATOR_jobDefName]</li>
 			
 			
 

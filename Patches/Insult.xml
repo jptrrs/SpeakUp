@@ -16,24 +16,36 @@
 			<li>r_logentry(p=2,tag=Insult_generic)->[generic]</li>
 			<li>generic->You're [insult_adj][asshole], that's what you are, [RECIPIENT_nameDef]!</li>
 			<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
-			<li>generic->Hey, [RECIPIENT_nameDef] - can you just go die or something?!</li>
-			<li>generic->Hey, [RECIPIENT_nameDef]! Check the news - you're [insult_adj][asshole]!</li>
+			<li>generic->Hey, [RECIPIENT_nameDef] — can you just go die or something?!</li>
+			<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][asshole]!</li>
 			<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>
 		<!-- == Recipient's trait/parameter == -->
+			<!-- Sickly  -->
+			<li>r_logentry(RECIPIENT_trait==sickly,tag=Insult_generic)->[trait_sickly]</li>		
+			<li>trait_sickly->Stay away from me, [RECIPIENT_nameDef] — you [plague_animal]!</li>
+			<li>trait_sickly->[plague_animal]s like you, [RECIPIENT_nameDef], should be exterminated!</li>
+			<li>trait_sickly->Why don't you keep your germs to yourself, [RECIPIENT_nameDef]? Stay away from me!</li>
+			<li>plague_animal->bubonic rat</li>
+			<li>plague_animal->malarial gnat</li>
+			<li>plague_animal->flu-ridden swine</li>
 			<!-- Ugly and staggering ugly -->
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Hey, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
 			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->You're so ugly, [RECIPIENT_nameDef], that when you walk through a haunted house, you come out with a paycheck.</li>
-			<!-- Gender -->
+			<!-- Age -->
+			<li>r_logentry(RECIPIENT_age>=60,tag=Insult_generic)->You old fart!</li>
+			<!-- Gender (higher probability)-->
 			<li>r_logentry(p=2)->[generic_short]</li>
-			<li>generic_short(RECIPIENT_gender==Male,tag=Insult_generic)->you [bloody] [asshole]!</li>
-			<li>generic_short(RECIPIENT_gender==Male,tag=Insult_generic)->you [bloody] son of a [bitch]!</li>
+			<li>generic_short(RECIPIENT_gender==Male,tag=Insult_generic)->[male_generic]!</li>
+			<li>male_generic->you [bloody] [asshole]!</li>
+			<li>male_generic->you [bloody] son of a [bitch]!</li>
 			<li>generic_short(RECIPIENT_gender==Female,tag=Insult_generic)->you [bloody] [bitch]!</li>
+			<li>generic_short(RECIPIENT_gender==Female,tag=Insult_generic)->you basic bitch!</li>
 			<!-- Passion -->
 			<li>r_logentry(RECIPIENT_plants_passion==Major,tag=Insult_generic)->[plants_passion]</li>
 			<li>r_logentry(RECIPIENT_plants_passion==Minor,tag=Insult_generic)->[plants_passion]</li>
 			<li>plants_passion->May your rotten body feed the plants you care so much about!</li>
-			<li>plants_passion->Go die in a [bloody] forest - go feed the trees you care so much about!</li>
+			<li>plants_passion->Go die in a [bloody] forest — go feed the trees you care so much about!</li>
 		<!-- == Recipient's job == -->
 			<li>r_logentry(RECIPIENT_jobText==vomiting.,priority=4,tag=Insult_generic)->I hope you choke on your vomit, [generic_short]</li>
 		<!-- == Initiator's trait == -->
