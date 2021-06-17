@@ -127,6 +127,12 @@ namespace SpeakUp
                 yield return new Rule_String(symbol + skill.def.label + "_passion", skill.passion.ToString());
             }
 
+            //childhood
+            yield return new Rule_String(symbol + "childhood", pawn.story.childhood.title);
+
+            //adulthood
+            yield return new Rule_String(symbol + "adulthood", pawn.story.adulthood.title);
+
             //OTHER PAWN SITUATIONS
 
             //current activity
