@@ -5,7 +5,8 @@
 		<initiatorXpGainSkill>Social</initiatorXpGainSkill>
 		<initiatorXpGainAmount>2</initiatorXpGainAmount>
 	</InteractionDef>
-	
+
+<!-- ============ GENERIC CHITCHAT ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ChitChat_generic</defName>
 		<label>Chitchat generic</label>
@@ -109,11 +110,12 @@
 					<li>busy(INITIATOR_opinion&lt;0)->...</li>
 					<!--Good opinion of recipient-->
 					<li>busy(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef] — I'm busy right now.</li>
-					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>				
+					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>		
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 
+<!-- ============ ASCETIC WISDOM ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>AsceticWisdom</defName>
 		<label>ascetic — wisdom</label>
@@ -133,7 +135,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 			
-<!-- == JOB TEXTS == -->
+<!-- ============ JOB TEXTS ============ -->
 	<InteractionDef ParentName="SpeakUpReply"><!--butchering skill-->
 		<defName>Job_ButcheringSkill</defName>
 		<label>job — butchering skill</label>
@@ -219,7 +221,7 @@
 		</logRulesInitiator>
 	</InteractionDef>		
 	
-<!-- == THOUGHTS == -->	
+<!-- ============ THOUGHTS ============ -->	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>StarvingEating</defName><!-- starving — eating -->
 		<label>starving — eating</label>
@@ -563,7 +565,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>		
-<!--START of Need — Beauty-->
+	<!--START of Need — Beauty-->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedBeauty_hideous</defName>
 		<label>need — beauty — react to hideous</label>
@@ -743,7 +745,7 @@
 			</rulesStrings>
 		</logRulesInitiator>		
 	</InteractionDef>
-<!--END of Need — Beauty-->
+	<!--END of Need — Beauty-->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedComfort</defName>
 		<label>need — comfort</label>
@@ -1396,7 +1398,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
-	<!-- M O O D -->
+<!-- ============ MOOD ============ -->
 	<InteractionDef ParentName="SpeakUpReply"><!-- Calm -->
 		<defName>Calm</defName>
 		<label>react to — calm</label>
@@ -1554,7 +1556,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
-	<!-- T R A I T S -->
+<!-- ============ TRAITS ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>LuckyFuture</defName>
 		<label>lucky future</label>
@@ -1612,7 +1614,7 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	
-	<!-- W E A T H E R -->
+<!-- ============ WEATHER ============ -->
 	<InteractionDef ParentName="SpeakUpReply"><!--stuck indoors-->
 		<defName>StuckIndoors</defName>
 		<label>weather — stuck indoors</label>
