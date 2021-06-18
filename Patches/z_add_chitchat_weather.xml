@@ -133,6 +133,27 @@
 				<li>weather_storm(TEMPERATURE&lt;-10)->[weather_toocold]</li>
 				<!--Extreme heat for humans-->
 				<li>weather_storm(TEMPERATURE>35)->[weather_toohot]</li>
+				
+			<!-- ==HARD SNOW== -->
+			<li>r_logentry(WEATHER==hard snow)->[weather_hardsnow]</li>
+				<!--Good temperature for humans-->
+				<li>weather_hardsnow(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_hardsnow_goodtemp]</li>
+					<!-- Entombed indoors (priority 1) -->
+					<li>weather_hardsnow_goodtemp(OUTDOORS==No,INITIATOR_thoughtDefName==NeedOutdoors,tag=StuckIndoors,priority=1)->I can hear the wind is blowing very hard out there...</li>
+					<!--Outdoors or indoors but not entombed (default) -->
+					<li>weather_hardsnow_goodtemp(tag=WeatherHardsnowGoodtempNotEntombed)->[weather_hardsnow_goodtemp_not_entombed]</li>
+						<!--Initiator mood-->
+						<li>weather_hardsnow_goodtemp_not_entombed(INITIATOR_mood>=0.4)->There's quite the snowstorm [out_here_out_there]!</li>
+						<li>weather_hardsnow_goodtemp_not_entombed(INITIATOR_mood>=0.2,INITIATOR_mood&lt;0.4)->Walking in the [swearword]snowstorm [out_here_out_there] is almost impossible!</li>
+						<li>weather_hardsnow_goodtemp_not_entombed(INITIATOR_mood&lt;0.2)->[swearword]snowstorm! I almost slipped and fell! [damn_it]!</li>
+					<!--Hunting skill (recipient) -->
+					<li>weather_hardsnow_goodtemp(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this snowstorm means no hunting for you today?</li>
+					<!--Trait==Too smart-->
+					<li>weather_hardsnow_goodtemp(INITIATOR_trait==too smart,tag=WeatherSnowstormToosmart)->[snowstorm_fact]</li>
+					<li>snowstorm_fact(INITIATOR_intellectual_level>=10)->Based on atmosphere's temperature profile, snow can be either wet or dry — the former being much more difficult to remove.</li>
+					<li>snowstorm_fact(INITIATOR_intellectual_level>=7)->Winter storm total precipitation is less than its rain counterpart — cold air can not hold as much moisture as warm air.</li>
+					<li>snowstorm_fact(INITIATOR_intellectual_level>=5)->Winter storms are formed when moist air rise up into the atmosphere, creating a low pressure near the ground and clouds up in the air.</li>
+					<li>snowstorm_fact->Winter storms with wind speed of more than 16 m/s and reduced visibility for 3 hours or more, are called blizzards.</li>
 
 			<!-- ==WILDCARDS== -->
 				<!--Extreme cold felt-->
