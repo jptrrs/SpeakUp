@@ -556,10 +556,10 @@
 					<li>good_opinion->What rec room, [RECIPIENT_nameDef]? [comment]</li>
 				<!-- WILDCARDS -->
 				<li>comment-></li>
-				<li>comment->Lately, I couldn't go there at all.</li>
 				<li>comment(INITIATOR_social_level>=5)->If we want to host parties, we need to do much better than what we have now.</li>
-				<li>comment2(INITIATOR_social_level>=5)->And it'll be excellent for hosting our next party!</li>
 				<li>comment(INITIATOR_construction_level>=5)->I'd better build some recreation furniture, if we really want to have one.</li>
+				<li>comment2-></li>
+				<li>comment2(INITIATOR_social_level>=5)->And it'll be excellent for hosting our next party!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>		
@@ -1705,7 +1705,7 @@
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply"><!--Fog — too smart-->
 		<defName>WeatherFogToosmart</defName>
-		<label>fog — trait — too smart</label>
+		<label>fog — too smart</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<li>r_logentry(INITIATOR_trait==too smart)->Correct, yet I do believe you wouldn't be able to determine its type. Well, I can: it's a [fog_type] fog.</li>
@@ -1713,11 +1713,11 @@
 				<li>fog_type(DAYPERIOD==night)->ground</li>
 				<li>fog_type->freezing</li>
 				<li>fog_type->frontal</li>
-				<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed the correct definition of fog.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed a correct definition for fog.</li>
 				<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
 				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
 				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait — fog is... what!?</li>
-				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting.</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting!</li>
 				<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
 			</rulesStrings>
 		</logRulesInitiator>
@@ -1744,7 +1744,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--Fog — hunting-->
+	<InteractionDef ParentName="SpeakUpReply"><!--Fog/hostile weather — hunting-->
 		<defName>HuntWithFog</defName>
 		<label>hunting with fog</label>
 		<logRulesInitiator>
@@ -1860,7 +1860,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->Yes, [RECIPIENT_nameDef] — but let's hope it rains soon, or we'll have wildfires!</li>
+				<li>good_opinion->Yes, [RECIPIENT_nameDef] — let's hope it rains soon, or we'll have wildfires!</li>
 				<li>good_opinion->Mmm... maybe I'd better get inside — I don't want to get struck by a lightning!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Yes! I love lightnings!</li>
 				<li>good_opinion(INITIATOR_trait==wimp)->Aww! I'm going inside — it's too dangerous out here!</li>
@@ -1940,7 +1940,42 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-
+	<InteractionDef ParentName="SpeakUpReply"><!--Hard snow — good temperature — not entombed-->
+		<defName>WeatherHardsnowGoodtempNotEntombed</defName>
+		<label>hard snow — good temp — not entombed</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry->[good_opinion]</li>
+				<li>good_opinion->We're in for some heavy snow shoveling, it seems...</li>
+				<li>good_opinion(OUTDOORS==No)->Let's keep doors closed — so that we can keep warm indoors!</li>
+					<!-- outdoors -->
+					<li>good_opinion(OUTDOORS==Yes)->[outdoors]</li>
+					<li>outdoors->And this wind — I feel it cutting my face!</li>
+					<li>outdoors->I can't keep my eyes open... too much snow in my face...</li>
+					<li>outdoors->Walking is getting difficult out here... I'm getting stuck...</li>
+					<li>outdoors(INITIATOR_trait==sickly,TEMPERATURE&lt;10)->I must get back inside at once — I don't want to catch a cold or worse.</li>
+					<li>outdoors(INITIATOR_trait==wimp,TEMPERATURE&lt;10)->I should get back inside — I wouldn't like to catch a cold or something.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--Hard snow — too smart-->
+		<defName>WeatherSnowstormToosmart</defName>
+		<label>hard snow — too smart</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==too smart)->Correct, yet I bet you wouldn't know that a ground blizzard is a weather condition where snow is not falling but loose snow on the ground is lifted and blown by strong winds.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed a correct definition for a winter storm.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait — winter... storm is... what!?</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting!</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 <!-- ============ SLIGHT ============ -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Slight_generic</defName>

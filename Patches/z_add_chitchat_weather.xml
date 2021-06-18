@@ -25,7 +25,7 @@
 			<!-- ==FOG== -->
 			<li>r_logentry(WEATHER==fog)->[weather_fog]</li>
 				<!--Good temperature for humans-->
-				<li>weather_fog(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_fog_goodtemp]</li>
+				<li>weather_fog(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_fog_goodtemp]</li>
 					<!-- Entombed indoors (priority 1) -->
 					<li>weather_fog_goodtemp(OUTDOORS==No,INITIATOR_thoughtDefName==NeedOutdoors,tag=StuckIndoors,priority=1)->I'm curious about what's the weather like out there.</li>
 					<!--Outdoors or indoors but not entombed (default) -->
@@ -52,7 +52,7 @@
 			<!-- ==RAIN== -->
 			<li>r_logentry(WEATHER==rain)->[weather_rain]</li>
 				<!--Good temperature for humans-->
-				<li>weather_rain(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_rain_goodtemp]</li>
+				<li>weather_rain(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_rain_goodtemp]</li>
 					<!-- Indoors -->
 					<li>weather_rain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
 					<li>weather_rain_goodtemp_indoors->Mmm... It's raining.</li>
@@ -77,7 +77,7 @@
 			<!-- ==DRY THUNDERSTORM== -->
 			<li>r_logentry(WEATHER==dry thunderstorm)->[weather_dry_storm]</li>
 				<!--Good temperature for humans-->
-				<li>weather_dry_storm(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_dry_storm_goodtemp]</li>
+				<li>weather_dry_storm(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_dry_storm_goodtemp]</li>
 					<!-- Indoors -->
 					<li>weather_dry_storm_goodtemp(OUTDOORS==No,tag=WeatherDrystormGoodtempIndoors)->[weather_drystorm_goodtemp_indoors]</li>
 					<li>weather_drystorm_goodtemp_indoors->Did you hear that thunder?</li>
@@ -106,7 +106,7 @@
 			<!-- ==RAINY THUNDERSTORM== -->
 			<li>r_logentry(WEATHER==rainy thunderstorm)->[weather_storm]</li>
 				<!--Good temperature for humans-->
-				<li>weather_storm(TEMPERATURE>=-10,TEMPERATURE&lt;=35)->[weather_storm_goodtemp]</li>
+				<li>weather_storm(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_storm_goodtemp]</li>
 					<!-- Indoors -->
 					<li>weather_storm_goodtemp(OUTDOORS==No,tag=WeatherStormGoodtempIndoors)->[weather_storm_goodtemp_indoors]</li>
 					<li>weather_storm_goodtemp_indoors->Did you hear that thunder? Wow...</li>
@@ -133,7 +133,26 @@
 				<li>weather_storm(TEMPERATURE&lt;-10)->[weather_toocold]</li>
 				<!--Extreme heat for humans-->
 				<li>weather_storm(TEMPERATURE>35)->[weather_toohot]</li>
-				
+
+			<!-- ==FOGGY RAIN== -->
+			<li>r_logentry(WEATHER==foggy rain)->[weather_foggyrain]</li>
+				<!--Good temperature for humans-->
+				<li>weather_foggyrain(TEMPERATURE>=-15,TEMPERATURE&lt;=40)->[weather_foggyrain_goodtemp]</li>
+					<!-- Indoors (as per normal rain)-->
+					<li>weather_foggyrain_goodtemp(OUTDOORS==No,tag=WeatherRainGoodtempIndoors)->[weather_rain_goodtemp_indoors]</li>
+					<!-- Outdoors (as per normal rain) -->
+					<li>weather_foggyrain_goodtemp(OUTDOORS==Yes,tag=WeatherRainGoodtempOutdoors)->[weather_rain_goodtemp_outdoors]</li>
+					<!-- Outdoors (as per normal fog) -->					
+					<li>weather_foggyrain_goodtemp(OUTDOORS==Yes,tag=WeatherFogGoodtempNotEntombed)->[weather_fog_goodtemp_not_entombed]</li>					
+					<!--Hunting skill (recipient) -->
+					<li>weather_foggyrain_goodtemp(RECIPIENT_shooting_level>=5,RECIPIENT_animals_level>=5,tag=HuntWithFog)->I guess this foggy rain means no hunting for you today?</li>
+					<!--Trait==Wimp-->
+					<li>weather_foggyrain_goodtemp(INITIATOR_trait==wimp,tag=WeatherFogWimp)->I'm [scared]... what if some [horrible] [monster] suddenly comes out of this [eerie] rainy [mist]?</li>
+				<!--Extreme cold for humans-->
+				<li>weather_fog(TEMPERATURE&lt;-10)->[weather_toocold]</li>
+				<!--Extreme heat for humans-->
+				<li>weather_fog(TEMPERATURE>35)->[weather_toohot]</li>
+
 			<!-- ==HARD SNOW== -->
 			<li>r_logentry(WEATHER==hard snow)->[weather_hardsnow]</li>
 				<!--Good temperature for humans-->
@@ -155,6 +174,11 @@
 					<li>snowstorm_fact(INITIATOR_intellectual_level>=5)->Winter storms are formed when moist air rise up into the atmosphere, creating a low pressure near the ground and clouds up in the air.</li>
 					<li>snowstorm_fact->Winter storms with wind speed of more than 16 m/s and reduced visibility for 3 hours or more, are called blizzards.</li>
 
+				<!--Extreme cold for humans-->
+				<li>weather_hardsnow(TEMPERATURE&lt;-10)->[weather_toocold]</li>
+				<!--Extreme heat for humans-->
+				<li>weather_hardsnow(TEMPERATURE>35)->[weather_toohot]</li>			
+			
 			<!-- ==WILDCARDS== -->
 				<!--Extreme cold felt-->
 					<!--Clothes are not enough-->
@@ -171,7 +195,11 @@
 					<li>weather_toohot(INITIATOR_thoughtLabel==sweltering hot,priority=1)->I should get better clothing — I'm feeling extremely hot!</li>
 					<li>weather_toohot(INITIATOR_thoughtLabel==blistering hot,priority=1)->I should get better clothing — I'm melting!</li>
 					<!--Clothes are enough-->
-					<li>weather_toohot->Luckily, my gear is good enough to protect me from this scorching heat!</li>				
+					<li>weather_toohot->Luckily, my gear is good enough to protect me from this scorching heat!</li>
+				<!--snowstorm-->
+				<li>snowstorm->snowstorm</li>
+				<li>snowstorm->blizzard</li>
+				<li>snowstorm->winter storm</li>
 				
 		</value>
 	</Operation>
