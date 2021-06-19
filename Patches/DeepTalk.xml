@@ -4,6 +4,7 @@
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/InteractionDef[defName = "DeepTalk"]/logRulesInitiator/rulesStrings</xpath>
         <value>
+            <rulesStrings>
             <!-- Meaning of life -->
 			<li>r_logentry(tag=MeaningOfLife,p=0.4)->[question_life]</li>
             <li>question_life->[RECIPIENT_nameDef], I was thinking - what is the meaning of life?</li>
@@ -11,6 +12,7 @@
             <li>question_life->Why do you think we exist [RECIPIENT_namedef]?</li>
             <li>question_life(INITIATOR_trait==depressive)->[RECIPIENT_namedef], what gives you the will to keep going?</li>
             <li>question_life(INITIATOR_mood>-&lt;=0.4)->[RECIPIENT_namedef], what gives you the will to keep going?</li>
+            </rulesStrings>
         </value>
     </Operation>
     
