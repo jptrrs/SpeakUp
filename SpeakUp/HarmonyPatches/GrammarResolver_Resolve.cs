@@ -14,14 +14,12 @@ namespace SpeakUp
 
         public static void Prefix(object __instance, string rootKeyword, GrammarRequest request)
         {
-            if (rootKeyword == "r_logentry")
-            {
-                List<Rule> rules = (List<Rule>)rulesInfo.GetValue(request);
-                if (!rules.NullOrEmpty())
-                {
-                    rules.AddRange(ExtraGrammarUtility.ExtraRules());
-                }
-            }
+            if (rootKeyword != "r_logentry") return;
+            List<Rule> rules = (List<Rule>)rulesInfo.GetValue(request);
+            if (rules.NullOrEmpty()) return;
+            var newRules = ExtraGrammarUtility.ExtraRules();
+            if (newRules.EnumerableNullOrEmpty()) return;
+            rules.AddRange(newRules);
         }
     }
 }

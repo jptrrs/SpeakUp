@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Patch>
-	<Operation Class="PatchOperationReplace">
+	<!--<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
       <rulesStrings>
@@ -8,5 +8,5 @@
 					<li>r_logentry(INITIATOR_thoughtDefName==NewColonyOptimism,tag=Test2)->Test for NewColonyOptimism</li>
       </rulesStrings>
 		</value>
-	</Operation>
+	</Operation>-->
 </Patch>
