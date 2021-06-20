@@ -103,6 +103,14 @@
 						<li>job_recipient_vomiting(INITIATOR_opinion>=0,tag=Job_Vomiting_help)->[vomiting_help_offer]</li>
 						<li>job_recipient_vomiting(INITIATOR_trait==kind,tag=Job_Vomiting_help,priority=1)->[vomiting_help_offer]</li>
 						<li>vomiting_help_offer->Oh my, [RECIPIENT_nameDef] — do you need help?</li>
+					<!--Build snowman (priority 4) -->
+					<li>r_logentry(priority=4,RECIPIENT_jobDefName==BuildSnowman,tag=Job_BuildSnowman)->Well, [RECIPIENT_nameDef] — [job_recipient_buildsnowman]</li>
+						<li>job_recipient_buildsnowman(RECIPIENT_artistic_level>=5)->[comment_nice_snowman]</li>
+							<li>comment_nice_snowman(INITIATOR_opinion>=0)->that's going to be a beautiful snowman!</li>
+							<li>comment_nice_snowman(INITIATOR_opinion&lt;0)->are you actually building that... snowy mess on purpose!?</li>
+						<li>job_recipient_buildsnowman(RECIPIENT_artistic_level&lt;5)->[comment_ugly_snowman]</li>
+							<li>comment_ugly_snowman(INITIATOR_opinion>=0)->if it's not going to be a nice snowman, it'll be a funny one at least!</li>
+							<li>comment_ugly_snowman(INITIATOR_opinion&lt;0)->what [horrible] [monster] are you trying to build there?</li>
 					<!--Cooking and gathering ingredients-->
 						<!--Simple meal (seated) 
 						<li>r_logentry(priority=4,INITIATOR_jobText==Cooking simple meal.,INITIATOR_seated==Yes)->[cooking_simplemeal]</li>
@@ -273,8 +281,8 @@
 						<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
 						<!-- hungry or worse , recipient is a professional cook (priority 4) -->
 						<li>r_logentry(INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
-						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] — get us some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
-						<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] — can you get us some food already?!</li>
+						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
+						<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
 						<!-- just hungry -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
 						<li>thought_needfood_hungry0->I'm really hungry.</li>
@@ -585,6 +593,7 @@
 					<li>trait_ascetic->Being truly rich is not about having great possessions — it's about having few wants.</li>
 					<li>trait_ascetic->He who fears death will never do anything worth of a man who is alive.</li>
 					<li>trait_ascetic->You can control your mind — not outside events. Absorb this, and you shall find strength.</li>
+					<li>trait_ascetic->One true mistake we can make in our lives — not strive to improve ourselves.</li>
 					<li>trait_ascetic(INITIATOR_animals_passion==Minor)->Observe the [Animal] and its simpler life — there is a lot to learn from it.</li>
 					<li>trait_ascetic(INITIATOR_animals_passion==Major)->Observe the [Animal] and its simpler life — there is a lot to learn from it.</li>
 					<!--Optimist & Sanguine-->

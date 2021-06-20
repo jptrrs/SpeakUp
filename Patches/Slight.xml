@@ -28,6 +28,10 @@
 				<li>recipient_kind(INITIATOR_trait==pessimist)->Is that foolish, fake smile of yours supposed to brighten up everyone's day, [RECIPIENT_nameDef]?</li>
 				<li>recipient_kind(INITIATOR_trait==abrasive)->So, [RECIPIENT_nameDef] — did your make-believe world of love, bunnies and happy smiles crumble already?</li>
 				<li>recipient_kind->All that honey you spit from your mouth, [RECIPIENT_nameDef], is just to coat words of venom and envy!</li>
+				<!-- optimist and sanguine -->
+				<li>r_logentry(RECIPIENT_trait==optimist,tag=Slight_generic)->[recipient_upbeat]</li>
+				<li>r_logentry(RECIPIENT_trait==sanguine,tag=Slight_generic)->[recipient_upbeat]</li>
+				<li>recipient_upbeat->Mark my words, [RECIPIENT_nameDef] — your hollow optimistic nature will be your doom one day.</li>
 				<!-- too smart -->
 				<li>r_logentry(RECIPIENT_trait==too smart,tag=Slight_generic)->[recipient_toosmart]</li>
 				<li>recipient_toosmart->If you're about to endlessly flap your mouth about some nerdy stuff, [RECIPIENT_nameDef] — just don't.</li>

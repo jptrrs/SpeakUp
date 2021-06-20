@@ -172,6 +172,19 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Job_BuildSnowman</defName>
+		<label>job - build snowman</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Why, thank you [RECIPIENT_nameDef]!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply"><!--shooting - hit-->
 		<defName>ShootingHit</defName>
 		<label>shooting — hit</label>
@@ -1152,6 +1165,7 @@
 					<li>good_opinion(INITIATOR_thoughtLabel==ascetic has impressive bedroom,priority=4)->Mine is unnecessarily pompous and extravagant. I'd rather sleep in a simpler room.</li>
 					<!--Barracks-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBarracks,priority=3)->I don't have my own bedroom — I share one with others.</li>
+					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBarracks,priority=3)->I wish I had my own bedroom... who knows when I'll get one...</li>
 					<!--Good bedroom-->
 					<li>good_opinion(INITIATOR_thoughtDefName==SleptInBedroom,priority=2)->[bedroom]</li>
 					<li>bedroom(INITIATOR_thoughtLabel==decent bedroom)->I can say mine is decent, [RECIPIENT_nameDef].</li>
@@ -1270,7 +1284,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!-- slept on ground -->
 		<defName>ReactToThought_SleptOnGround</defName>
 		<label>slept on ground</label>
 		<logRulesInitiator>
@@ -1631,7 +1645,7 @@
 				<li>weather(WEATHER==rain,priority=1)->rainy [DAYPERIOD]</li>
 				<li>weather(WEATHER==foggy rain,priority=1)->foggy and rainy [DAYPERIOD]</li>
 				<li>weather(WEATHER==hard snow,priority=1)->snowstorm</li>
-				<li>weather(WEATHER==soft snow,priority=1)->snowy [DAYPERIOD]</li>
+				<li>weather(WEATHER==gentle snow,priority=1)->snowy [DAYPERIOD]</li>
 				
 				<li>weather->[WEATHER]</li>
 				
@@ -1879,7 +1893,7 @@
 				<li>good_opinion->Whoa — that thunder was loud!</li>
 				<li>good_opinion->This rain's so loud on the roof!</li>
 				<li>good_opinion->It seems Heavens have opened out there!</li>
-				<li>good_opinion->I hope I won't need to do any task outside — I'll immediately get all drenched in this storm!</li>
+				<li>good_opinion->I hope I won't need to do any task outside — I'd immediately get all drenched in this storm!</li>
 				<li>good_opinion(INITIATOR_trait==gourmand)->I hope this humidity won't set back the cooking and ruin our next meals.</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Thunders — the majestic roar of Nature!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->I just don't like rain.</li>
@@ -1911,7 +1925,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->Mmm... maybe I'd better get inside — I don't want to get struck by a lightning!</li>
+				<li>good_opinion->I'd better get inside — I don't want to get struck by a lightning!</li>
 				<li>good_opinion->Damn, I'm getting all drenched here...</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Thunders — the majestic roar of Nature!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->I just hate rain!</li>
@@ -1971,6 +1985,57 @@
 				<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
 				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
 				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait — winter... storm is... what!?</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting!</li>
+				<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--gentle snow — good temperature — not entombed-->
+		<defName>WeatherSoftsnowGoodtempNotEntombed</defName>
+		<label>gentle snow — good temp — not entombed</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry->[good_opinion]</li>
+				<li>good_opinion(INITIATOR_trait==lazy)->It shouldn't be enough to need shoveling — nice!</li>
+				<li>good_opinion(INITIATOR_trait==slothful)->I'm glad it's not enough to need shoveling — nice!</li>
+				<li>good_opinion(INITIATOR_intellectual_passion!=None)->With every falling flake, a unique spark of interest falls from the skies.</li>
+				<li>good_opinion(INITIATOR_plants_passion!=None)->Nature is full of genius and divinity — not a snowflake escapes its fashioning hand.</li>
+				<li>good_opinion(INITIATOR_trait==kind)->Kindness is like snow. It beautifies everything it covers.</li>
+				<li>good_opinion(INITIATOR_trait==ascetic)->To appreciate the beauty of a snowflake it is necessary to stand out in the cold.</li>
+				<li>good_opinion->When it snows, one may either shovel or make snow angels [optimist_pessimist]</li>
+					<li>optimist_pessimist(INITIATOR_trait==optimist)-> — I prefer making snow angels!</li>
+					<li>optimist_pessimist(INITIATOR_trait==sanguine)-> — I obviously prefer making snow angels!</li>
+					<li>optimist_pessimist(INITIATOR_trait==pessimist)-> — in fact, we always end up shoveling...</li>
+					<li>optimist_pessimist(INITIATOR_trait==depressive)-> — in fact, we're all doomed to the shovel...</li>
+				<li>good_opinion(INITIATOR_trait==night owl)->Snow falling soundlessly in the middle of the night will always fill my heart with sweet clarity.</li>
+				<li>good_opinion(INITIATOR_social_passion!=None)->Snowflakes are one of nature's most fragile things, but just look what they can do when they stick together!</li>
+					<!-- mood (default) -->				
+					<li>good_opinion(INITIATOR_mood>=0.7)->I can't wait to build a snowman!</li>
+					<li>good_opinion(INITIATOR_mood>=0.4)->A snow blanketed landscape is so nice!</li>
+					<li>good_opinion(INITIATOR_mood&lt;0.4)->Snow...? Whatever, [RECIPIENT_nameDef]... whatever...</li>
+					<!-- outdoors -->
+					<li>good_opinion(OUTDOORS==Yes)->[outdoors]</li>
+					<li>outdoors(INITIATOR_mood>=0.4)->Snowflakes are so beautiful!</li>
+					<li>outdoors(INITIATOR_mood&lt;0.4)->Damn snowflakes in the eyes...</li>
+					<li>outdoors(INITIATOR_trait==sickly,TEMPERATURE&lt;10)->I must get back inside at once — I don't want to catch a cold or worse.</li>
+					<li>outdoors(INITIATOR_trait==wimp,TEMPERATURE&lt;10)->I should get back inside — I wouldn't like to catch a cold or something.</li>
+					
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--gentle snow — too smart-->
+		<defName>WeatherSnowToosmart</defName>
+		<label>gentle snow — too smart</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==too smart)->Correct — yet I bet you wouldn't know that its main constituent shapes, from which combinations may occur, are needle, column, plate, and rime.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=10)->That is indeed a correct definition for a snowflake.</li>
+				<li>r_logentry(INITIATOR_intellectual_level>=5,INITIATOR_intellectual_level&lt;10)->Mmm... yes, you are correct.</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Err... what was that again?</li>
+				<li>r_logentry(INITIATOR_intellectual_level&lt;5)->Wait — snow... flakes are... what!?</li>
 				<li>r_logentry(INITIATOR_intellectual_passion==Minor)->That's quite interesting!</li>
 				<li>r_logentry(INITIATOR_intellectual_passion==Major)->Fascinating!</li>
 			</rulesStrings>
