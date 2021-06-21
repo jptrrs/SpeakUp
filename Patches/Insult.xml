@@ -30,7 +30,8 @@
 			<li>plague_animal->flu-ridden swine</li>
 			<!-- Ugly and staggering ugly -->
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Hey, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
-			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
+			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->On a scale of one to disgusting, [RECIPIENT_nameDef], you're pretty high up there!</li>
+			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
 			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->You're so ugly, [RECIPIENT_nameDef], that when you walk through a haunted house, you come out with a paycheck.</li>
 			<!-- Age -->
 			<li>r_logentry(RECIPIENT_age>=60,tag=Insult_generic)->You old fart!</li>

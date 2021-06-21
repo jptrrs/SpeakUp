@@ -1187,43 +1187,28 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!-- slept in cold -->
+	
+	<InteractionDef ParentName="SpeakUpReply"><!-- slept in cold (general) -->
 		<defName>ReactToThought_SleptInCold</defName>
 		<label>slept in cold</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-					<!--Initiator is not skilled in construction-->
-					<li>bad_opinion(INITIATOR_construction_level&lt;5)->[bad_opinion_unskilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;5)->...</li>
-						<!--Recipient is skilled in construction-->
-						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=5)->Yes you could have, [RECIPIENT_nameDef] — now, try to be more useful in the future!</li>
-					<!--Initiator is skilled in construction-->
-					<li>bad_opinion(INITIATOR_construction_level>=5)->[bad_opinion_skilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;5)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
-							<li>shut_up->shut up</li>
-							<li>shut_up->stop nagging me</li>
-							<li>shut_up->stop bothering me</li>
-							<li>shut_up->just shut up</li>
-						<!--Recipient is skilled in construction-->
-						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->Hey, [RECIPIENT_nameDef] — you need a heat source, you build one yourself. I've got more important things to do.</li>
+				<li>bad_opinion->...</li>
+				<li>bad_opinion->Are you sure it's the weather — and not you — that's making your room so cold?</li>
+				<li>bad_opinion(INITIATOR_trait==pyromaniac)->If you'd like, I can set your bed on fire to warm you up.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<!--Initiator is not skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef] — it's [annoying].</li>
-						<!--Recipient is skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] — I'm sure you won't let this happen again.</li>
-					<!--Initiator is skilled in construction-->
-					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a proper heat source, but I got distracted. Sorry, [RECIPIENT_nameDef] — it won't happen again.</li>
-						<!--Recipient is skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] — we could have built a proper heat source. We won't let this happen again.</li>
+				<li>good_opinion->Let's hope it won't happen again, [RECIPIENT_nameDef] — it's [annoying].</li>
+				<li>good_opinion->Yeah... I wish we settled somewhere warmer.</li>
+				<li>good_opinion->Well, it gets [weather_cold_adj] this time of the year...we just have to get used to it.</li>
+					<li>weather_cold_adj->chilly</li>
+					<li>weather_cold_adj->cold</li>
+					<li>weather_cold_adj(INITIATOR_intellectual_level>=5)->frigid</li>
+				<li>good_opinion(INITIATOR_trait==pyromaniac)->Well, wouldn't it be nice if I started a big fire to warm us all up?</li>
+				<li>good_opinion(INITIATOR_social_passion!=None)->Maybe it'd be better if we all huddled together.</li>
+				<li>good_opinion(INITIATOR_thoughtDefName==SleptInCold)->I agree with you — I woke up covered in goosebumps!</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
 				<li>annoying->irritating</li>
@@ -1236,18 +1221,16 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
-	<InteractionDef ParentName="SpeakUpReply"><!-- slept in heat -->
-		<defName>ReactToThought_SleptInHeat</defName>
-		<label>slept in heat</label>
+	<InteractionDef ParentName="SpeakUpReply"><!-- slept in cold (construction) -->
+		<defName>ReactToThought_SleptInCold_construction</defName>
+		<label>slept in cold — construction</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!--Bad opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 					<!--Initiator is not skilled in construction-->
 					<li>bad_opinion(INITIATOR_construction_level&lt;5)->[bad_opinion_unskilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>bad_opinion_unskilled(RECIPIENT_construction_level&lt;5)->...</li>
-						<!--Recipient is skilled in construction-->
+						<!--Recipient is skilled in construction (guaranteed)-->
 						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=5)->Yes you could have, [RECIPIENT_nameDef] — now, try to be more useful in the future!</li>
 					<!--Initiator is skilled in construction-->
 					<li>bad_opinion(INITIATOR_construction_level>=5)->[bad_opinion_skilled]</li>
@@ -1258,21 +1241,38 @@
 							<li>shut_up->stop bothering me</li>
 							<li>shut_up->just shut up</li>
 						<!--Recipient is skilled in construction-->
-						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->Hey, [RECIPIENT_nameDef] — you need a cooler, you build one yourself. I've got more important things to do.</li>
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->You need a heat source, [RECIPIENT_nameDef], you build one yourself — I've got more important things to do.</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!--Initiator is not skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
-						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_unskilled(RECIPIENT_construction_level&lt;5)->Let's hope it won't happen again, [RECIPIENT_nameDef] — it's [annoying].</li>
-						<!--Recipient is skilled in construction-->
+						<!--Recipient is skilled in construction (guaranteed)-->
 						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] — I'm sure you won't let this happen again.</li>
 					<!--Initiator is skilled in construction-->
 					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
 						<!--Recipient is not skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a cooler, but I got distracted. Sorry, [RECIPIENT_nameDef] — it won't happen again.</li>
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a heat source, but I got distracted. Sorry, [RECIPIENT_nameDef] — it won't happen again.</li>
 						<!--Recipient is skilled in construction-->
-						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] — we could have built a cooler. We won't let this happen again.</li>
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] — we could have built a proper heat source. We won't let this happen again.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<InteractionDef ParentName="SpeakUpReply"><!-- slept in heat (general) -->
+		<defName>ReactToThought_SleptInHeat</defName>
+		<label>slept in heat</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->Is it that hot for you, [RECIPIENT_nameDef]? I thought the temperature was quite comfortable.</li>
+				<li>bad_opinion->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->I know, it's [annoying]! Here's hoping that we get some new coolers installed.</li>
+				<li>good_opinion->Well, it gets hot this time of the year — we just have to get used to it.</li>
+				<li>good_opinion(INITIATOR_thoughtDefName==SleptInHeat)->Agreed! It was so hot that I woke up sweating!</li>
+				<li>good_opinion(INITIATOR_mood>=0.7)->Yeah — at this rate, we should relocate our beds to a freezer!</li>
 				<!--WILDCARDS-->
 				<li>annoying->bad</li>
 				<li>annoying->irritating</li>
@@ -1281,6 +1281,43 @@
 				<li>annoying->bothersome</li>
 				<li>annoying->unacceptable</li>
 				<li>annoying->not nice</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply"><!-- slept in heat (construction) -->
+		<defName>ReactToThought_SleptInHeat_construction</defName>
+		<label>slept in heat — construction</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level&lt;5)->[bad_opinion_unskilled]</li>
+						<!--Recipient is skilled in construction (guaranteed)-->
+						<li>bad_opinion_unskilled(RECIPIENT_construction_level>=5)->Yes you could have, [RECIPIENT_nameDef] — now, try to be more useful in the future!</li>
+					<!--Initiator is skilled in construction-->
+					<li>bad_opinion(INITIATOR_construction_level>=5)->[bad_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level&lt;5)->And I hope you [shut_up], [RECIPIENT_nameDef].</li>
+							<li>shut_up->shut up</li>
+							<li>shut_up->stop nagging me</li>
+							<li>shut_up->stop bothering me</li>
+							<li>shut_up->just shut up</li>
+						<!--Recipient is skilled in construction-->
+						<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->You need a cooler, [RECIPIENT_nameDef], you build one yourself — I've got more important things to do.</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!--Initiator is not skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level&lt;5)->[good_opinion_unskilled]</li>
+						<!--Recipient is skilled in construction (guaranteed)-->
+						<li>good_opinion_unskilled(RECIPIENT_construction_level>=5)->Don't worry, [RECIPIENT_nameDef] — I'm sure you won't let this happen again.</li>
+					<!--Initiator is skilled in construction-->
+					<li>good_opinion(INITIATOR_construction_level>=5)->[good_opinion_skilled]</li>
+						<!--Recipient is not skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level&lt;5)->I had planned to build a cooler, but I got distracted. Sorry, [RECIPIENT_nameDef] — it won't happen again.</li>
+						<!--Recipient is skilled in construction-->
+						<li>good_opinion_skilled(RECIPIENT_construction_level>=5)->You're right [RECIPIENT_nameDef] — we could have built a cooler. We won't let this happen again.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
@@ -1405,7 +1442,31 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<!--Optimist or Sanguine-->
+					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetSanguine,priority=1)->[sanguine_optimist]</li>
+					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetOptimist,priority=1)->[sanguine_optimist]</li>
+						<li>sanguine_optimist(INITIATOR_mood>=0.4)->Everything's just fine — and I'm certain it'll get even better!</li>
+						<li>sanguine_optimist(INITIATOR_mood&lt;0.4)->Despite my recent troubles, I'm sure things will quickly improve!</li>
+				<!--Pessimist or Depressive-->
+					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetPessimist,priority=1)->[depressive_pessimist]</li>
+					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetDepressive,priority=1)->[depressive_pessimist]</li>
+						<li>depressive_pessimist(INITIATOR_mood>=0.4)->I've recently had some happy moments — but I'm sure it's just a fleeting illusion...</li>
+						<li>depressive_pessimist(INITIATOR_mood>=0.4)->I'm... good...</li>
+						<li>depressive_pessimist(INITIATOR_mood&lt;0.4)->Just when I believe life can't get worse, it promptly proves me wrong!</li>
+						<li>depressive_pessimist(INITIATOR_mood&lt;0.4)->Nothing...</li>
+				<!--Tortured artist-->
+					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetTorturedArtist,priority=1)->[tortured_artist]</li>
+						<li>tortured_artist(INITIATOR_mood>=0.4)->I almost had it... almost... then suddenly my artistic vision faded... lost...</li>
+						<li>tortured_artist(INITIATOR_mood&lt;0.4)->I'm in pain — a [pain_adj] pain you shall never be able to feel the way I do.</li>
 				<li>good_opinion->[INITIATOR_thoughtText]</li>
+				<!--WILDCARDS-->
+				<li>pain_adj->spiritual, higher</li>
+				<li>pain_adj->heinous, abyssal</li>
+				<li>pain_adj->quantic, cosmic</li>
+				<li>pain_adj->sculpted, bleeding</li>
+				<li>pain_adj->deafening, silent</li>
+				<li>pain_adj->tangible, solid</li>
+				<li>pain_adj->blinding, searing</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1853,7 +1914,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->I heard it too, [RECIPIENT_nameDef]! But I hear no rain — we might be in for a wildfire!</li>
+				<li>good_opinion->I heard it too, [RECIPIENT_nameDef]! But I don't hear any rain — we might be in for a wildfire!</li>
 				<li>good_opinion->Yes, [RECIPIENT_nameDef] - quite a loud one! Let's hope no wildfires are started!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Thunders — the majestic roar of Nature!</li>
 				<li>good_opinion(INITIATOR_trait==tortured artist)->Nature's perfectly expressing my internal turmoil right now.</li>
@@ -1875,7 +1936,7 @@
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
 				<li>good_opinion->Yes, [RECIPIENT_nameDef] — let's hope it rains soon, or we'll have wildfires!</li>
-				<li>good_opinion->Mmm... maybe I'd better get inside — I don't want to get struck by a lightning!</li>
+				<li>good_opinion->Mmm... maybe I'd better get inside — I don't want to get struck by lightning!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Yes! I love lightnings!</li>
 				<li>good_opinion(INITIATOR_trait==wimp)->Aww! I'm going inside — it's too dangerous out here!</li>
 			</rulesStrings>
@@ -1892,7 +1953,7 @@
 				<li>r_logentry->[good_opinion]</li>
 				<li>good_opinion->Whoa — that thunder was loud!</li>
 				<li>good_opinion->This rain's so loud on the roof!</li>
-				<li>good_opinion->It seems Heavens have opened out there!</li>
+				<li>good_opinion->It seems the heavens have opened out there!</li>
 				<li>good_opinion->I hope I won't need to do any task outside — I'd immediately get all drenched in this storm!</li>
 				<li>good_opinion(INITIATOR_trait==gourmand)->I hope this humidity won't set back the cooking and ruin our next meals.</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Thunders — the majestic roar of Nature!</li>
@@ -1964,7 +2025,7 @@
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
 				<li>good_opinion->We're in for some heavy snow shoveling, it seems...</li>
-				<li>good_opinion(OUTDOORS==No)->Let's keep doors closed — so that we can keep warm indoors!</li>
+				<li>good_opinion(OUTDOORS==No)->Let's keep the doors closed — so that we can keep warm indoors!</li>
 					<!-- outdoors -->
 					<li>good_opinion(OUTDOORS==Yes)->[outdoors]</li>
 					<li>outdoors->And this wind — I feel it cutting my face!</li>

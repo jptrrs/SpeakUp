@@ -13,7 +13,7 @@
 					<!--Outdoors or indoors but not entombed (default) -->
 					<li>weather_clear_goodtemp(tag=WeatherClearGoodtempNotEntombed)->[weather_clear_goodtemp_not_entombed]</li>
 						<!--Mood-->
-						<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood>=0.7,priority=1)->What a [nice] weather we're having!</li>
+						<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood>=0.7,priority=1)->What [nice] weather we're having!</li>
 						<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood>=0.7,priority=1)->Such a [nice] [DAYPERIOD]!</li>
 						<li>weather_clear_goodtemp_not_entombed->We're having a [nice] [DAYPERIOD].</li>
 						<li>weather_clear_goodtemp_not_entombed(INITIATOR_mood&lt;0.4,priority=1)->The weather is [nice], at least...</li>	
@@ -89,6 +89,7 @@
 					<li>weather_drystorm_goodtemp_outdoors->The wind is [wind_pickingup] — a storm's approaching.</li>
 					<li>wind_pickingup->picking up</li>
 					<li>wind_pickingup->getting stronger</li>
+					<li>wind_pickingup->howling</li>
 					<!-- Wimp — Indoors -->
 					<li>weather_dry_storm_goodtemp(INITIATOR_trait==wimp,OUTDOORS==No,tag=WimpThunder)->[wimp_thunder_indoors]</li>
 					<li>wimp_thunder_indoors->Aww! Will these [swearword]thunders ever stop? I'm [scared]!</li>
@@ -194,7 +195,7 @@
 						<li>weather_softsnow_goodtemp_not_entombed(INITIATOR_mood>=0.4,OUTDOORS==No)->Did you have a peek outdoors? It's snowing!</li>
 						<li>weather_softsnow_goodtemp_not_entombed(INITIATOR_mood>=0.4,OUTDOORS==Yes)->It's snowing!</li>
 						<li>weather_softsnow_goodtemp_not_entombed(INITIATOR_mood&lt;0.4,OUTDOORS==No)->[swearword]snow...</li>
-						<li>weather_softsnow_goodtemp_not_entombed(INITIATOR_mood&lt;0.4,OUTDOORS==Yes)->[damn_it] — a snowflake got into my eye...!</li>
+						<li>weather_softsnow_goodtemp_not_entombed(INITIATOR_mood&lt;0.4,OUTDOORS==Yes)->[damn_it] — a snowflake got in my eye...!</li>
 					<!--Trait==Too smart-->
 					<li>weather_softsnow_goodtemp(INITIATOR_trait==too smart,OUTDOORS==Yes,tag=WeatherSnowToosmart)->[snow_fact]</li>
 					<li>snow_fact(INITIATOR_intellectual_level>=10)->Snowflakes form by attracting supercooled cloud water droplets, which freeze and accrete in crystal form.</li>

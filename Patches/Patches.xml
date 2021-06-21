@@ -272,7 +272,7 @@
 						<li>thought_need_comfort4->This place is so cushy — we truly have excellent furniture around here!</li>
 						<!-- luxuriantly comfortable -->
 						<li>r_logentry(INITIATOR_thoughtLabel==luxuriantly comfortable,tag=ReactToThought_NeedComfort)->[thought_need_comfort5]</li>
-						<li>thought_need_comfort5->Our furniture feels like Heaven! So comfy!</li>
+						<li>thought_need_comfort5->Our furniture feels like heaven! So comfy!</li>
 					<!--NeedFood-->
 						<!-- hungry or worse , eating and seated (priority 5)-->
 						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==Yes,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>			
@@ -282,6 +282,7 @@
 						<!-- hungry or worse , recipient is a professional cook (priority 4) -->
 						<li>r_logentry(INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
 						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
+						<li>thought_needfood_cookrecipient->What's someone got to do to get some food around here?</li>
 						<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
 						<!-- just hungry -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
@@ -472,41 +473,62 @@
 					<li>thought_bedroom(INITIATOR_thoughtLabel==very impressive bedroom)->I sleep in a very impressive bedroom. I just love it!</li>
 					<li>thought_bedroom(INITIATOR_thoughtLabel==extremely impressive bedroom)->I get to sleep in an extremely impressive bedroom! </li>
 					<li>thought_bedroom(INITIATOR_thoughtLabel==unbelievably impressive bedroom)->My bedroom is truly astounding!</li>
-					<li>thought_bedroom(INITIATOR_thoughtLabel==wondrously impressive bedroom)->Sleeping in my bedroom feels like Heaven. Just wondrous!</li>
+					<li>thought_bedroom(INITIATOR_thoughtLabel==wondrously impressive bedroom)->Sleeping in my bedroom feels like heaven. Just wondrous!</li>
+
 					<!--SleptInCold-->
-					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold,tag=ReactToThought_SleptInCold)->[thought_sleptincold]</li>
-					<li>thought_sleptincold->[slept_in_cold] [hope_wont_happen_again_heatsource]</li>
-					<li>slept_in_cold->I slept in the [swearword]cold.</li>
-					<li>slept_in_cold->I couldn't sleep well — the [swearword]cold wouldn't let me.</li>
-						<!--Initiator is not skilled in construction-->
-						<li>hope_wont_happen_again_heatsource(INITIATOR_construction_level&lt;5)->[thought_sleptincold_construction_unskilled]</li>
-							<!--Recipient is not skilled in construction-->
-							<li>thought_sleptincold_construction_unskilled(RECIPIENT_construction_level&lt;5)->[damn_it]...</li>
-							<!--Recipient is skilled in construction-->
-							<li>thought_sleptincold_construction_unskilled(RECIPIENT_construction_level>=5)->I hope you won't let this happen again, [RECIPIENT_nameDef].</li>								
-						<!--Initiator is skilled in construction-->
-						<li>hope_wont_happen_again_heatsource(INITIATOR_construction_level>=5)->[thought_sleptincold_construction_skilled]</li>
-							<!--Recipient is not skilled in construction-->
-							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen — I could've built a [proper] heat source.</li>
-							<!--Recipient is skilled in construction-->
-							<li>thought_sleptincold_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen — we could've built a [proper] heat source.</li>					
+					<li>r_logentry(INITIATOR_thoughtDefName==SleptInCold)->[thought_sleptincold]</li>
+						<!--Construction skill-->
+						<li>thought_sleptincold->I couldn't sleep well — the [swearword]cold wouldn't let me! [hope_wont_happen_again_heatsource]</li>
+							<!--Initiator is not skilled in construction-->
+							<li>hope_wont_happen_again_heatsource(INITIATOR_construction_level&lt;5)->[sleptincold_construction_unskilled]</li>
+								<!--Recipient is not skilled in construction-->
+								<li>sleptincold_construction_unskilled(RECIPIENT_construction_level&lt;5,tag=ReactToThought_SleptInCold)->I wish my room had a heat source...</li>
+								<!--Recipient is skilled in construction-->
+								<li>sleptincold_construction_unskilled(RECIPIENT_construction_level>=5,tag=ReactToThought_SleptInCold_construction)->I hope you won't let this happen again, [RECIPIENT_nameDef].</li>								
+							<!--Initiator is skilled in construction-->
+							<li>hope_wont_happen_again_heatsource(INITIATOR_construction_level>=5,tag=ReactToThought_SleptInCold_construction)->[sleptincold_construction_skilled]</li>
+								<!--Recipient is not skilled in construction-->
+								<li>sleptincold_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen — I could've built a heat source.</li>
+								<!--Recipient is skilled in construction-->
+								<li>sleptincold_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen — we could've built a heat source.</li>
+						<!--General-->
+						<li>thought_sleptincold(tag=ReactToThought_SleptInCold)->[slept_in_cold]</li>
+							<!-- Mood -->
+							<li>slept_in_cold(INITIATOR_mood>=0.7)->I'm going to start losing my toes if I have to keep on sleeping in this [swearword]cold!</li>
+							<li>slept_in_cold(INITIATOR_mood>=0.4)->Jeez — I was shivering so much in bed that it was impossible to get a [sleep_adj] sleep.</li>
+								<li>sleep_adj->good</li>
+								<li>sleep_adj->decent</li>
+								<li>sleep_adj->restful</li>
+							<li>slept_in_cold(INITIATOR_mood&lt;0.4)->It's hard to fall asleep when I'm freezing my [sleptincold_bodypart] off!</li>
+								<li>sleptincold_bodypart->hands</li>
+								<li>sleptincold_bodypart->toes</li>
+								<li>sleptincold_bodypart->fingers</li>
+								<li>sleptincold_bodypart->ears</li>
+							<!-- Brawler -->
+							<li>slept_in_cold(INITIATOR_trait==brawler)->I wonder if sleeping with a plasmasword would make this [swearword]cold more bearable.</li>
+							
 					<!--SleptInHeat-->
-					<li>r_logentry(INITIATOR_thoughtDefName==SleptInHeat,tag=ReactToThought_SleptInHeat)->[thought_sleptinheat]</li>
-					<li>thought_sleptinheat->[slept_in_heat] [hope_wont_happen_again_cooler]</li>
-					<li>slept_in_heat->I had to sleep in the [swearword]heat.</li>
-					<li>slept_in_heat->I couldn't sleep well — the [swearword]heat wouldn't let me.</li>					
-						<!--Initiator is not skilled in construction-->
-						<li>hope_wont_happen_again_cooler(INITIATOR_construction_level&lt;5)->[thought_sleptinheat_construction_unskilled]</li>
-							<!--Recipient is not skilled in construction-->
-							<li>thought_sleptinheat_construction_unskilled(RECIPIENT_construction_level&lt;5)->[damn_it]...</li>
-							<!--Recipient is skilled in construction-->
-							<li>thought_sleptinheat_construction_unskilled(RECIPIENT_construction_level>=5)->I hope you won't let this happen again, [RECIPIENT_nameDef].</li>								
-						<!--Initiator is skilled in construction-->
-						<li>hope_wont_happen_again_cooler(INITIATOR_construction_level>=5)->[thought_sleptinheat_construction_skilled]</li>
-							<!--Recipient is not skilled in construction-->
-							<li>thought_sleptinheat_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen — I could've built a cooler.</li>
-							<!--Recipient is skilled in construction-->
-							<li>thought_sleptinheat_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen — we could've built a cooler.</li>
+					<li>r_logentry(INITIATOR_thoughtDefName==SleptInHeat)->[thought_sleptinheat]</li>
+						<!--Construction skill-->
+						<li>thought_sleptinheat->I couldn't sleep well — the [swearword]heat wouldn't let me! [hope_wont_happen_again_cooler]</li>
+							<!--Initiator is not skilled in construction-->
+							<li>hope_wont_happen_again_cooler(INITIATOR_construction_level&lt;5)->[sleptinheat_construction_unskilled]</li>
+								<!--Recipient is not skilled in construction-->
+								<li>sleptinheat_construction_unskilled(RECIPIENT_construction_level&lt;5,tag=ReactToThought_SleptInHeat)->I wish my room had a cooler...</li>
+								<!--Recipient is skilled in construction-->
+								<li>sleptinheat_construction_unskilled(RECIPIENT_construction_level>=5,tag=ReactToThought_SleptInHeat_construction)->I hope you won't let this happen again, [RECIPIENT_nameDef].</li>								
+							<!--Initiator is skilled in construction-->
+							<li>hope_wont_happen_again_cooler(INITIATOR_construction_level>=5,tag=ReactToThought_SleptInHeat_construction)->[sleptinheat_construction_skilled]</li>
+								<!--Recipient is not skilled in construction-->
+								<li>sleptinheat_construction_skilled(RECIPIENT_construction_level&lt;5)->I shouldn't have let this happen — I could've built a cooler.</li>
+								<!--Recipient is skilled in construction-->
+								<li>sleptinheat_construction_skilled(RECIPIENT_construction_level>=5)->We shouldn't have let this happen — we could've built a cooler.</li>
+						<!--General-->
+						<li>thought_sleptinheat(tag=ReactToThought_SleptInHeat)->[slept_in_heat]</li>
+							<!-- Mood -->
+							<li>slept_in_heat(INITIATOR_mood>=0.7)->Phew... if I [swearword_adverb]die during my sleep, tell them it was heatstroke!</li>
+							<li>slept_in_heat(INITIATOR_mood>=0.4)->The [swearword]heat is making it difficult for me to fall asleep.</li>
+							<li>slept_in_heat(INITIATOR_mood&lt;0.4)->Ugh! Sleeping in this [swearword]heat is just as bad as eating nutrient paste meals!</li>
 					<!--SleptOnGround-->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleptOnGround,tag=ReactToThought_SleptOnGround)->[thought_sleptonground]</li>
 					<li>thought_sleptonground->[slept_on_ground] [hope_wont_happen_again_bed]</li>
