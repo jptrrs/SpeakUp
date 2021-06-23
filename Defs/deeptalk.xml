@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ============ Meaning of Life ============ -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>MeaningOfLife</defName>
+			<label>react — meaning of life</label>
+			<logRulesInitiator>
+				<rulesStrings>
+				<li>r_logentry(p=0.1)->42.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==pessimist)->Everything we do is meaningless. So, why care answering that?</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==depressive)->Nothing we do will be remembered, eventually. So, why care answering that?</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==optimist)->Life is what you make of it — so make it good, today!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==teetotaler)->I don't know its meaning — but I know it should be free of drugs.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==chemical interest)->A nice beer and cigarette!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==chemical fascination)->A line of yayo and some psychite tea!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==industrious)->Working hard to achieve all our goals!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==slothful)->I don't know its meaning — but I know it should be on a comfy couch.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==bloodlust)->Meaning?! I live for the kill — that's meaning enough!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==psychopath)->*Cackles maniacally*</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==psychopath)->*Stares in silence*</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==abrasive)->Wouldn't you like to know!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==brawler)->I don't know its meaning — but a good fistfight gives meaning to my life!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==masochist)->I don't know its meaning — but a little bit of pain always makes my life worth living.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==transhumanist)->We must surpass our biological bodies and become the ultimate being!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==body purist)->Life is about making sure we maximize our natual capabilities.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==greedy)->Money, power, sex — these are what give meaning to our lives!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==ascetic)->We live to revere the Cosmos — and the Cosmos lives to give meaning to our existence.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==ascetic)->Freedom from suffering and having clear judgement — this is our ultimate goal.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==gourmand)->I don't know its meaning — but I know food and drink are the purest forms of joy!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==pyromaniac)->Life is about hungrily exploiting all that's around us, like a spreading wild fire!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==tortured artist)->Does any of us really have a meaning to life?</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait==kind)->Making other people's life happy and fulfilled — so that they can make us happy too.</li>
+				<li>r_logentry(DAYPERIOD==night)->Isn't it a bit too late for a question like that?!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Art and the true expression of oneself give full meaning to our lives.</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait>=10)->I don't know its meaning — but I know a long conversation and a good drink make it much better!</li>
+				<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Creating lasting works to improve our surroundings and inspire future generations.</li>
+				<li>r_logentry->Why ask?</li>
+				<li>r_logentry->I haven't the slightest idea.</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ============ Childhood ============ -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>ChildhoodDiscussions</defName>
+			<label>react - childhood discussion</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- Childhood Checks -->
+						<li>r_logentry(INITIATOR_childhood==tribe child)->[tribe_child]</li>
+						<li>r_logentry(INITIATOR_childhood==abandoned child)->[abandoned_child]</li>
+						<li>r_logentry(INITIATOR_childhood==reclusive child)->[reclusive_child]</li>
+						<li>r_logentry(INITIATOR_childhood==herder)->[herder]</li>
+						<li>r_logentry(INITIATOR_childhood==scavenger)->[scavenger]</li>
+						<li>r_logentry(INITIATOR_childhood==cave child)->[cave_child]</li>
+						
+						<li>r_logentry(INITIATOR_childhood==sole survivor)->[sole_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==vengeful child)->[vengeful_child]</li>
+						<li>r_logentry(INITIATOR_childhood==fire keeper)->[fire_keeper]</li>
+						<li>r_logentry(INITIATOR_childhood==hideaway)->[hideaway]</li>
+						<li>r_logentry(INITIATOR_childhood==crash baby)->[crash_baby]</li>
+						<li>r_logentry(INITIATOR_childhood==budding artist)->[budding_artist]</li>
+						<li>r_logentry(INITIATOR_childhood==bully)->[bully]</li>
+						<li>r_logentry(INITIATOR_childhood==bookworm)->[bookworm]</li>
+						<li>r_logentry(INITIATOR_childhood==industrial orphan)->[industrial_orphan]</li>
+						<li>r_logentry(INITIATOR_childhood==urbworld urchin)->[urbworld_urchin]</li>
+						<li>r_logentry(INITIATOR_childhood==test subject)->[test_subject]</li>
+						<li>r_logentry(INITIATOR_childhood==wreckage explorer)->[wreckage_explorer]</li>
+						<li>r_logentry(INITIATOR_childhood==apocalypse survivor)->[apocalypse_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==caveworld tunneler)->[caveworld_tunneler]</li>
+						<li>r_logentry(INITIATOR_childhood==scout)->[scout]</li>
+						<li>r_logentry(INITIATOR_childhood==shelter child)->[shelter_child]</li>
+						<li>r_logentry(INITIATOR_childhood==vatgrown soldier)->[vatgrown_soldier]</li>
+						<li>r_logentry(INITIATOR_childhood==sickly child)->[sickly_child]</li>
+						<li>r_logentry(INITIATOR_childhood==frightened child)->[frightened_child]</li>
+						<li>r_logentry(INITIATOR_childhood==coma child)->[coma_child]</li>
+						<li>r_logentry(INITIATOR_childhood==pyromaniac)->[pyromaniac]</li>
+						<li>r_logentry(INITIATOR_childhood==mute)->[mute]</li>
+						<li>r_logentry(INITIATOR_childhood==war refugee)->[war_refugee]</li>
+						<li>r_logentry(INITIATOR_childhood==musical kid)->[musical_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==child star)->[child_star]</li>
+						<li>r_logentry(INITIATOR_childhood==child spy)->[child_spy]</li>
+						<li>r_logentry(INITIATOR_childhood==shop kid)->[shop_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==organ farm)->[organ_farm]</li>
+						<li>r_logentry(INITIATOR_childhood==medical assistant)->[medical_assistant]</li>
+						<li>r_logentry(INITIATOR_childhood==cult child)->[cult_child]</li>
+						<li>r_logentry(INITIATOR_childhood==story writer)->[story_writer]</li>
+						<li>r_logentry(INITIATOR_childhood==medieval slave)->[medieval_slave]</li>
+						<li>r_logentry(INITIATOR_childhood==medieval lordling)->[medieval_lord]</li>
+						<li>r_logentry(INITIATOR_childhood==medieval lady)->[medieval_lord]</li>
+						<li>r_logentry(INITIATOR_childhood==convent child)->[convent_child]</li>
+						<li>r_logentry(INITIATOR_childhood==country lady)->[country_person]</li>
+						<li>r_logentry(INITIATOR_childhood==country lordling)->[country_person]</li>
+						<li>r_logentry(INITIATOR_childhood==urban lordling)->[urban_person]</li>
+						<li>r_logentry(INITIATOR_childhood==urban lady)->[urban_person]</li>
+						<li>r_logentry(INITIATOR_childhood==shipbound lady)->[shipbound_person]</li>
+						<li>r_logentry(INITIATOR_childhood==shipbound lordling)->[shipbound_person]</li>
+						<li>r_logentry(INITIATOR_childhood==pampered princess)->[pampered_princess]</li>
+						<li>r_logentry(INITIATOR_childhood==pampered lordling)->[pampered_lordling]</li>
+						<li>r_logentry(INITIATOR_childhood==unwanted survivor)->[unwanted_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==ship boy)->[ship_child]</li>
+						<li>r_logentry(INITIATOR_childhood==ship girl)->[ship_child]</li>
+						<li>r_logentry(INITIATOR_childhood==military cadet)->[military_cadet]</li>
+						<li>r_logentry(INITIATOR_childhood==political captive)->[political_captive]</li>
+						<li>r_logentry(INITIATOR_childhood==delinquent)->[deliquent]</li>
+						<li>r_logentry(INITIATOR_childhood==rich kid)->[rich_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==street rat)->[street_rat]</li>
+						<li>r_logentry(INITIATOR_childhood==soldier's kid)->[soldier_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==machinist)->[machinist]</li>
+						<li>r_logentry(INITIATOR_childhood==servant boy)->[servant]</li>
+						<li>r_logentry(INITIATOR_childhood==servant girl)->[servant]</li>
+						<li>r_logentry(INITIATOR_childhood==royal bastard)->[royal_bastard]</li>
+						<li>r_logentry(INITIATOR_childhood==war bastard)->[war_bastard]</li>
+
+
+					<!-- Replies -->
+						<li>r_logentry(RECIPIENT_trait==abrasive)->I don't like the way you're talking [RECIPIENT_nameDef]...</li>
+
+					<!-- Tribe Child -->
+						<li>tribe_child->I had no technology during my childhood, we survived on the land and moved with the Muffalo [RECIPIENT_nameDef].</li>
+						<li>tribe_child->I miss being able to roam free with the muffalo and playing sticks and stones.</li>
+						<li>tribe_child->My childhood was full of nature. These new technologies are both confusing and scary.</li>
+						<li>tribe_child->I grew up learning how tos urvive off the land and animals around us.</li>
+
+					<!-- Abandoned Child -->
+						<li>abandoned_child->When my parents had me I was as sick as a dog and left for dead. Through the powers that be I managed to make it here today.</li>
+						<li>abandoned_child->It's a miracle I made it into adulthood. I was abandoned as a baby and through sheer luck I lived</li>
+						<li>abandoned_child->Due to being abaonded by my parents, I really didn't have a childhood [RECIPIENT_nameDef].</li>
+
+					<!-- Reclusive Child -->
+						<li>reclusive_child->I spent a majority of my childhood to myself, contemplating great wonders and whether or not the nearest berry would kill me!</li>
+						<li>reclusive_child->[RECIPIENT_nameDef], I always stuck to myself.</li>
+						<li>reclusive_child->I often roamed around the woods for weeks at a time, much to my caretakers dismay</li>
+						<li>reclusive_child->I wasn't a very social child, [RECIPIENT_nameDef]. I prefferred to keep to myself.</li>
+
+					<!-- Herder -->
+						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals, quiet but honest work.</li>
+						<li>herder->I protected the Muffalo from both predators and nature itself, I had no time for childish games.</li>
+						<li>herder->The Tribe relied on me to keep the Muffalo safe from both sickness and predation.</li>
+						<li>herder->I disliked being around other people, but the Muffalo made great company [RECIPIENT_nameDef]</li>
+						
+					<!-- Scavenger -->
+						<li>scavenger->I was a brave adventurer into the unknown, scavenging for treasure and trash alike!</li>
+						<li>scavenger->[RECIPIENT_nameDef], I avoided a lot of the grunt work and instead I explored wrecks and ruins.</li>
+						<li>scavenger->I got into a lot of trouble during my childhood, but sometimes it paid off [RECIPIENT_nameDef].</li>
+
+					<!-- Cave Child -->
+						<li>cave_child->I spent a lot of time in an elaborate cave system, helping develop it into a thribing Tribe!</li>
+						<li>cave_child-></li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+</Defs>
