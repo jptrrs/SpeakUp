@@ -13,6 +13,10 @@
 				<li>r_logentry(INITIATOR_trait==abrasive,tag=Slight_generic)->[initiator_abrasive]</li>
 				<li>initiator_abrasive->Bug off, [RECIPIENT_nameDef]!</li>
 				<li>initiator_abrasive->Get lost, [RECIPIENT_nameDef]!</li>
+				<!-- cannibal -->
+				<li>r_logentry(INITIATOR_trait==cannibal,tag=Slight_generic)->[initiator_cannibal]</li>
+				<li>initiator_cannibal->I'm feeling quite peckish — and you're about the right size for a meal, [RECIPIENT_nameDef]!</li>
+				<li>initiator_cannibal->The hungrier I get, the tastier you look... [RECIPIENT_nameDef]!</li>
 				<!-- too smart -->
 				<li>r_logentry(tag=Slight_generic,INITIATOR_trait==too smart)->[initiator_toosmart]</li>
 				<li>initiator_toosmart->I'd love to have a fair battle of wits with you, [RECIPIENT_nameDef] — but you seem to be totally unarmed.</li>
@@ -72,6 +76,7 @@
 			<li>low_skill_major_passion(RECIPIENT_cooking_level&lt;=10,RECIPIENT_cooking_passion==Major)->I must say, [RECIPIENT_nameDef] — your cooking skills would make you a [brilliant] assassin!</li>
 			<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=10,RECIPIENT_plants_passion==Major)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
 			<li>low_skill_major_passion(RECIPIENT_medical_level&lt;=10,RECIPIENT_medical_passion==Major)->Hey, [RECIPIENT_nameDef] — why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>			
+			
 			<!--WILDCARDS-->
 			<li>a_weak_animal->a [adj] bunny</li>
 			<li>a_weak_animal->a [adj] squirrel</li>
