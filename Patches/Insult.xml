@@ -7,18 +7,21 @@
 			<rulesStrings>
 		<!-- == General == -->			
 			<!-- Ancestors -->
-			<li>r_logentry(tag=Insult_Ancestors)->[insult_ancestors]</li>
+			<li>r_logentry(p=0.5,tag=Insult_Ancestors)->[insult_ancestors]</li>
 			<li>insult_ancestors->Your ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your most beloved ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
 			<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
 			<!-- Miscellaneous -->
 			<li>r_logentry(p=2,tag=Insult_generic)->[generic]</li>
-			<li>generic->You're [insult_adj][asshole], that's what you are, [RECIPIENT_nameDef]!</li>
+			<li>generic->You're [insult_adj][insult] — that's what you are, [RECIPIENT_nameDef]!</li>
 			<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
 			<li>generic->Hey, [RECIPIENT_nameDef] — can you just go die or something?!</li>
-			<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][asshole]!</li>
+			<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][insult]!</li>
 			<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>
+			<li>r_logentry(p=2,tag=Insult_generic)->[generic_short]</li>
+			<li>generic_short->you [bloody] [insult]!</li>
+			<li>generic_short(RECIPIENT_gender==Male)->you [bloody] son of a [bitch]!</li>
 		<!-- == Recipient's trait/parameter == -->
 			<!-- Sickly  -->
 			<li>r_logentry(RECIPIENT_trait==sickly,tag=Insult_generic)->[trait_sickly]</li>		
@@ -30,20 +33,13 @@
 			<li>plague_animal->flu-ridden swine</li>
 			<!-- Ugly and staggering ugly -->
 			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->Hey, [RECIPIENT_nameDef]! You're so ugly you scare the shit back into people!</li>
-			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
+			<li>r_logentry(RECIPIENT_trait==ugly,tag=Insult_generic)->On a scale of one to disgusting, [RECIPIENT_nameDef], you're pretty high up there!</li>
+			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->When you die, [RECIPIENT_nameDef], your rotten body will look better than you look now!</li>
 			<li>r_logentry(RECIPIENT_trait==staggering ugly,tag=Insult_generic)->You're so ugly, [RECIPIENT_nameDef], that when you walk through a haunted house, you come out with a paycheck.</li>
 			<!-- Age -->
 			<li>r_logentry(RECIPIENT_age>=60,tag=Insult_generic)->You old fart!</li>
-			<!-- Gender (higher probability)-->
-			<li>r_logentry(p=2)->[generic_short]</li>
-			<li>generic_short(RECIPIENT_gender==Male,tag=Insult_generic)->[male_generic]!</li>
-			<li>male_generic->you [bloody] [asshole]!</li>
-			<li>male_generic->you [bloody] son of a [bitch]!</li>
-			<li>generic_short(RECIPIENT_gender==Female,tag=Insult_generic)->you [bloody] [bitch]!</li>
-			<li>generic_short(RECIPIENT_gender==Female,tag=Insult_generic)->you basic bitch!</li>
 			<!-- Passion -->
-			<li>r_logentry(RECIPIENT_plants_passion==Major,tag=Insult_generic)->[plants_passion]</li>
-			<li>r_logentry(RECIPIENT_plants_passion==Minor,tag=Insult_generic)->[plants_passion]</li>
+			<li>r_logentry(RECIPIENT_plants_passion!=None,tag=Insult_generic)->[plants_passion]</li>
 			<li>plants_passion->May your rotten body feed the plants you care so much about!</li>
 			<li>plants_passion->Go die in a [bloody] forest — go feed the trees you care so much about!</li>
 		<!-- == Recipient's job == -->
@@ -59,8 +55,8 @@
 			<li>bloodlust->Soon enough your entrails will be a fine addition to my wardrobe!</li>
 			<li>bloodlust->Your dried-up skin will look great on me!</li>
 		<!-- == Initiator's job == -->
-			<!-- Social fight -->
-			<li>r_logentry(INITIATOR_jobDefName==SocialFight,priority=4)->[social_fight]</li>
+			<!-- Social fight (priority 5) -->
+			<li>r_logentry(INITIATOR_jobDefName==SocialFight,priority=5)->[social_fight]</li>
 			<li>social_fight->I'll kick your sorry ass, [generic_short]</li>
 			<li>social_fight->I'll punch you in the throat, [generic_short]</li>
 			<li>social_fight->I'm gonna kill you, [generic_short]</li>
@@ -70,15 +66,19 @@
 			<li>social_fight->Die, [generic_short]</li>
 			<li>social_fight->Aaaurghh!</li>
 		<!--== WILDCARDS ==-->
-			<li>asshole->asshole</li>
-			<li>asshole->jerk</li>
+			<li>insult(RECIPIENT_gender==Female)->[bitch]</li>
+			<li>insult(RECIPIENT_gender==Male)->[asshole]</li>
+			<li>insult->fart-hopper</li>
+			<li>insult->jerk</li>
+			<li>insult->asshole</li>
+			<li>insult(INITIATOR_intellectual_level>=5)->latrine dweller</li>
 			<li>asshole->arse-wipe</li>
 			<li>asshole->dickhead</li>
 			<li>asshole->prick</li>
 			<li>asshole->bastard</li>
 			<li>bitch->bitch</li>
-			<li>bitch->fart-hopper</li>
-			<li>bitch->latrine dweller</li>
+			<li>bitch->basic bitch</li>
+			<li>bitch->cunt</li>
 			<li>bitch->tart</li>
 			<li>bitch->whore</li>
 			<li>bitch->wench</li>
@@ -91,7 +91,7 @@
 			<li>bloody->foul</li>
 			<li>bloody->sodding</li>
 			<li>bloody->wretched</li>
-			<li>bloody(INITIATOR_trait==abrasive)->fucking</li>
+			<li>bloody(p=2,INITIATOR_trait==abrasive)->fucking</li>
 			<li>bloody(INITIATOR_intellectual_level>=5)->accursed</li>
 			<li>bloody(INITIATOR_intellectual_level>=10)->despicable</li>
 			<li>bloody(INITIATOR_intellectual_level>=10)->execrable</li>

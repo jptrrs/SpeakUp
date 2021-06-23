@@ -6,12 +6,21 @@
         <value>
             <rulesStrings>
             <!-- Meaning of life -->
-			<li>r_logentry(tag=MeaningOfLife,p=0.4)->[question_life]</li>
-            <li>question_life->[RECIPIENT_nameDef], I was thinking - what is the meaning of life?</li>
+    			<li>r_logentry(tag=MeaningOfLife,p=0.4)->[question_life]</li>
+                <li>question_life->[RECIPIENT_nameDef], I was thinking - what is the meaning of life?</li>
                 <li>question_life->What does life mean to you [RECIPIENT_nameDef]?</li>
                 <li>question_life->Why do you think we exist [RECIPIENT_nameDef]?</li>
                 <li>question_life(INITIATOR_trait==depressive)->[RECIPIENT_nameDef], what gives you the will to keep going?</li>
                 <li>question_life(INITIATOR_mood>-&lt;=0.4)->[RECIPIENT_nameDef], what gives you the will to keep going?</li>
+
+            <!-- Childhood -->
+                <li>r_logentry(RECIPIENT_age&lt;=18,tag=ChildhoodDiscussions)->[childhood_discussion]</li>
+
+                <li>childhood_discussion(INITIATOR_trait==abrasive)->Enjoy your youth and life while you can [RECIPIENT_nameDef], it could end at any moment!</li>
+                <li>childhood_discussion(RECIPIENT_trait==psychopath)->What made you such an... interesting person [RECIPIENT_nameDef]?</li>
+                <li>childhood_discussion(INITIATOR_age>=25)->Enjoy being young while you can [RECIPIENT_nameDef].</li>
+                <li>childhood_discussion->How did you grow up [RECIPIENT_namedef]?</li>
+                <li>childhood_discussion->[RECIPIENT_nameDef], what was your childhood like?</li>
             </rulesStrings>
         </value>
     </Operation>
