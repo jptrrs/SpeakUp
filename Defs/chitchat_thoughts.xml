@@ -160,7 +160,7 @@
 				<li>medical_opinion_lavish_2-></li>
 				<li>medical_opinion_lavish_2(INITIATOR_medical_level>=5,priority=1)->[moreover] I think you'd be healthier if you ate less lavishly.</li>
 				<li>medical_opinion_fine_1-></li>
-				<li>medical_opinion_fine_1(INITIATOR_medical_level>=5,priority=1)->[moreover] our well-balanced, varied diet it's excellent for our health.</li>
+				<li>medical_opinion_fine_1(INITIATOR_medical_level>=5,priority=1)->[moreover] our well-balanced, varied diet is excellent for our health.</li>
 				<li>medical_opinion_fine_2-></li>
 				<li>medical_opinion_fine_2(INITIATOR_medical_level>=5,priority=1)->At least, you're lucky enough to have a well-balanced diet — excellent for your health.</li>
 				<li>medical_opinion_raw-></li>
@@ -344,6 +344,37 @@
 		</logRulesInitiator>
 	</InteractionDef>		
 
+	<InteractionDef ParentName="SpeakUpReply"><!-- prisoner sold -->
+		<defName>ReactToThought_PrisonerSold</defName>
+		<label>prisoner sold</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->I agree, [RECIPIENT_nameDef]!</li>
+					<!--Initiator is Kind-->
+					<li>good_opinion(INITIATOR_trait==kind,priority=1)->[i_kind]</li>
+					<li>i_kind->Slavery is awful, [RECIPIENT_nameDef]! Nobody deserves that fate!</li>
+					<li>i_kind(RECIPIENT_trait==kind,priority=2)->I fully agree, [RECIPIENT_nameDef]! Mean and debasing!</li>
+					<li>i_kind(RECIPIENT_trait==bloodlust,priority=1)->[i_kind_r_canniblood]</li>
+					<li>i_kind(RECIPIENT_trait==cannibal,priority=1)->[i_kind_r_canniblood]</li>
+					<li>i_kind_r_canniblood->That's just so wrong, [RECIPIENT_nameDef]! I totally disagree!</li>
+					<!--Initiator is Cannibal or Bloodlusty-->
+					<li>good_opinion(INITIATOR_trait==cannibal,priority=1)->[i_canniblood]</li>
+					<li>good_opinion(INITIATOR_trait==bloodlust,priority=1)->[i_canniblood]</li>
+					<li>i_canniblood->Those lucky slavers will get all the fun...</li>
+					<li>i_canniblood(RECIPIENT_trait==bloodlust,priority=1)->[i_canniblood_r_canniblood]</li>
+					<li>i_canniblood(RECIPIENT_trait==cannibal,priority=1)->[i_canniblood_r_canniblood]</li>
+					<li>i_canniblood_r_canniblood->Right! We could've used'em as a punching bag!</li>
+					<li>i_canniblood_r_canniblood->Right! We could've tortured'em for fun!</li>
+					<li>i_canniblood_r_canniblood->Right! We could've tortured'em to squeeze out some useful intelligence!</li>
+					<li>i_canniblood_r_canniblood->Right! We could've skinned'em — a just punishment!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
 <!--START of Need — Beauty-->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedBeauty_hideous</defName>
@@ -604,6 +635,7 @@
 				<!--animal — large-->
 				<li>animal_large->a horse</li>
 				<li>animal_large->a muffalo</li>
+				<li>animal_large->a thrumbo</li>
 				<li>animal_large->an elephant</li>
 			</rulesStrings>
 		</logRulesInitiator>
@@ -790,7 +822,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!-- released prisoner -->
 		<defName>ReactToThought_ReleasedPrisoner</defName>
 		<label>released prisoner</label>
 		<logRulesInitiator>
@@ -803,7 +835,7 @@
 					<!--Initiator is Kind-->
 					<li>good_opinion(INITIATOR_trait==kind,priority=1)->[i_kind]</li>
 					<li>i_kind->We certainly did the right and most humane thing, [RECIPIENT_nameDef]!</li>
-					<li>i_kind(RECIPIENT_trait==kind,priority=1)->Treating others kindly is always the best choice, in the end!</li>
+					<li>i_kind(RECIPIENT_trait==kind,priority=2)->In the end, treating others kindly is always the best choice!</li>
 					<li>i_kind(RECIPIENT_trait==bloodlust,priority=1)->[i_kind_r_canniblood]</li>
 					<li>i_kind(RECIPIENT_trait==cannibal,priority=1)->[i_kind_r_canniblood]</li>
 					<li>i_kind_r_canniblood->That's just so wrong, [RECIPIENT_nameDef]! I totally disagree!</li>
@@ -815,12 +847,11 @@
 					<li>i_canniblood(RECIPIENT_trait==cannibal,priority=1)->[i_canniblood_r_canniblood]</li>
 					<li>i_canniblood_r_canniblood->Right! We could've used'em as a punching bag!</li>
 					<li>i_canniblood_r_canniblood->Right! We could've tortured'em for fun!</li>
-					<li>i_canniblood_r_canniblood->Right! We could've tortured'em and squeeze some useful intelligence from them!</li>
+					<li>i_canniblood_r_canniblood->Right! We could've tortured'em to squeeze out some useful intelligence!</li>
 					<li>i_canniblood_r_canniblood->Right! We could've skinned'em — a just punishment!</li>
-					<li>i_canniblood_r_canniblood->Right! We could've sold'em into slavery — a just punishment!</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_Rescued</defName>
 		<label>rescued</label>
@@ -1263,6 +1294,10 @@
 					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetTorturedArtist,priority=1)->[tortured_artist]</li>
 						<li>tortured_artist(INITIATOR_mood>=0.4)->I almost had it... almost... then suddenly my artistic vision faded... lost...</li>
 						<li>tortured_artist(INITIATOR_mood&lt;0.4)->I'm in pain — a [pain_adj] pain you shall never be able to feel the way I do.</li>
+				<!-- GotSomeLovin -->
+					<li>good_opinion(INITIATOR_thoughtDefName==GotSomeLovin,priority=1)->[gotsomelovin]</li>
+					<li>gotsomelovin->Well, [RECIPIENT_nameDef]... Let's say that not being single has its advantages... *wink*</li>
+					<li>gotsomelovin(INITIATOR_opinion>=50)->There's nothing like a good tumble between the sheets to lift the mood, my dear [RECIPIENT_nameDef]!</li>
 				<li>good_opinion->[INITIATOR_thoughtText]</li>
 				<!--WILDCARDS-->
 				<li>pain_adj->spiritual, higher</li>

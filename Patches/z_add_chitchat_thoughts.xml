@@ -117,8 +117,8 @@
 				<li>thought_joyroom(INITIATOR_thoughtLabel==extremely impressive rec room)->I think our rec room is extremely impressive!</li>
 				<li>thought_joyroom(INITIATOR_thoughtLabel==unbelievably impressive rec room)->We're so lucky to have such an unbelievably impressive rec room!</li>
 				<li>thought_joyroom(INITIATOR_thoughtLabel==wondrously impressive rec room)->Our rec room is wondrously impressive! I could stay there forever!</li>
-				<!--KnowPrisonerSold-->
-				<li>r_logentry(INITIATOR_thoughtDefName==KnowPrisonerSold,tag=ReactToThought_PrisonerSold)->[thought_prisonersold]</li>
+				<!--KnowPrisonerSold (PlayerColony only)-->
+				<li>r_logentry(INITIATOR_faction==PlayerColony,INITIATOR_thoughtDefName==KnowPrisonerSold,tag=ReactToThought_PrisonerSold)->[thought_prisonersold]</li>
 				<li>thought_prisonersold->[RECIPIENT_nameDef], did you hear? We sold that poor [prisoner] into slavery. [prisonersold_comment]</li>
 					<!--comment-->
 					<li>prisonersold_comment->That's a worrying thought...</li>
@@ -179,7 +179,7 @@
 					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
 					<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
 					<!-- hungry or worse , recipient is a professional cook (priority 4) -->
-					<li>r_logentry(INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
+					<li>r_logentry(RECIPIENT_faction==PlayerColony,INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
 					<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
 					<li>thought_needfood_cookrecipient->What's someone got to do to get some food around here?</li>
 					<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
@@ -299,8 +299,8 @@
 				<li>thought_rotting_corpse(INITIATOR_trait==cannibal,priority=1)->[saw_a_rotting_body]</li>
 				<li>saw_a_rotting_body->I saw a rotting body laying on the ground.</li>
 				<li>saw_a_rotting_body->I saw an unburied rotting body.</li>					
-				<!--ReleasedHealthyPrisoner-->
-				<li>r_logentry(INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,tag=ReactToThought_ReleasedPrisoner)->[thought_releasedprisoner]</li>
+				<!--ReleasedHealthyPrisoner (playerfaction only)-->
+				<li>r_logentry(INITIATOR_faction==PlayerColony,INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,tag=ReactToThought_ReleasedPrisoner)->[thought_releasedprisoner]</li>
 				<li>thought_releasedprisoner->[RECIPIENT_nameDef], did you hear? We finally released that poor [prisoner]. [took_care_prisoner]</li>
 					<!--took care of prisoner-->
 					<li>took_care_prisoner->It feels good to know we don't treat them poorly.</li>
@@ -345,7 +345,7 @@
 					<!--Calm-->
 					<li>thought_sleepdisturbed(INITIATOR_mood>=0.4)->[thought_sleepdisturbed_calm]</li>
 					<li>thought_sleepdisturbed_calm(tag=ReactToThought_SleepDisturbed_Dream)->I was having such [nice] dream when somebody entered my room and woke me up.</li>
-					<li>thought_sleepdisturbed_calm(tag=ReactToThought_SleepDisturbed)->Let's be more quiet near sleeping people, OK? Someone disturbed my sleep, recently.</li>
+					<li>thought_sleepdisturbed_calm(tag=ReactToThought_SleepDisturbed)->Let's be more quiet near sleeping people, OK? Someone disturbed my sleep.</li>
 					<li>thought_sleepdisturbed_calm->[mood_calm]</li>
 				<!--SleptInBarracks-->
 				<li>r_logentry->[thought_sleptinbarracks]</li>
