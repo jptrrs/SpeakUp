@@ -112,27 +112,7 @@
 					<li>busy(INITIATOR_opinion&lt;0)->...</li>
 					<!--Good opinion of recipient-->
 					<li>busy(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef] — I'm busy right now.</li>
-					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>		
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-
-<!-- ============ ASCETIC WISDOM ============ -->
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>AsceticWisdom</defName>
-		<label>ascetic — wisdom</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Wow, that was deep.</li>
-				<li>good_opinion->That was heavy, [RECIPIENT_nameDef] — but I dig it.</li>
-				<li>good_opinion(INITIATOR_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef].</li>
-				<li>good_opinion(INITIATOR_trait==greedy,priority=1)->...</li>
-				<li>good_opinion(INITIATOR_trait==jealous,priority=1)->...</li>
-				<li>good_opinion(INITIATOR_trait==gourmand,priority=1)->...</li>
+					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>					
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
