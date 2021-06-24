@@ -13,7 +13,7 @@
 			<!-- GRASS -->
 			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==grass)->[grasses]</li>
 			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==tall grass)->[grasses]</li>
-			<li>grasses->It's so nice being outdoors! Look at this grass — I love its green!</li>
+			<li>grasses->Look at this grass — I love its green!</li>
 			<!-- Default -->
 			<li>nearest_plant_outdoors->[mood]</li>
 			
