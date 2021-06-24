@@ -306,6 +306,9 @@
 				<li>outdoors->outdoors</li>
 				<li>outdoors->in the open</li>
 				<li>outdoors->outside</li>
+				<!--prisoner-->
+				<li>prisoner->prisoner</li>
+				<li>prisoner->captive</li>				
 				<!--proper-->
 				<li>proper->fitting</li>
 				<li>proper->suitable</li>

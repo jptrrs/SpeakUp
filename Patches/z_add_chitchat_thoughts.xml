@@ -117,7 +117,18 @@
 				<li>thought_joyroom(INITIATOR_thoughtLabel==extremely impressive rec room)->I think our rec room is extremely impressive!</li>
 				<li>thought_joyroom(INITIATOR_thoughtLabel==unbelievably impressive rec room)->We're so lucky to have such an unbelievably impressive rec room!</li>
 				<li>thought_joyroom(INITIATOR_thoughtLabel==wondrously impressive rec room)->Our rec room is wondrously impressive! I could stay there forever!</li>
-				<!--MoodOffsetTorturedArtist-->
+				<!--KnowPrisonerSold-->
+				<li>r_logentry(INITIATOR_thoughtDefName==KnowPrisonerSold,tag=ReactToThought_PrisonerSold)->[thought_prisonersold]</li>
+				<li>thought_prisonersold->[RECIPIENT_nameDef], did you hear? We sold that poor [prisoner] into slavery. [prisonersold_comment]</li>
+					<!--comment-->
+					<li>prisonersold_comment->That's a worrying thought...</li>
+					<li>prisonersold_comment->I hope we won't have to take such mean measures again...</li>
+					<li>prisonersold_comment->It's terrible to know we had to stoop so low...</li>
+				<li>thought_prisonersold(INITIATOR_trait==kind,priority=2)->Selling that poor [prisoner] into slavery was such a mean thing to do!</li>
+				<li>thought_prisonersold(INITIATOR_trait==bloodlust,priority=1)->[prisoner_canniblood]</li>
+				<li>thought_prisonersold(INITIATOR_trait==cannibal,priority=1)->[prisoner_canniblood]</li>
+				<li>prisoner_canniblood->Did we really have to sell that [prisoner] into slavery? Such a waste of resources!</li>
+				<li>thought_prisonersold(INITIATOR_trait==greedy,priority=1)->Selling that [prisoner] into slavery was no noble deed, but hey — if it means getting paid for it, I'm in!</li>				
 				<!--NeedBeauty-->
 					<!-- hideous -->
 					<li>r_logentry(INITIATOR_thoughtLabel==hideous environment,tag=ReactToThought_NeedBeauty_hideous)->[thought_needbeauty_hideous]</li>
@@ -161,7 +172,9 @@
 					<li>thought_need_comfort5->Our furniture feels like heaven! So comfy!</li>
 				<!--NeedFood-->
 					<!-- hungry or worse , eating and seated (priority 5)-->
-					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==Yes,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>			
+					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==Yes,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>
+					<!-- hungry or worse , going to eat or eating standing (priority 5)-->
+					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==No,priority=5,tag=StarvingEating)->So hungry! I'm going to devour this at once!</li>					
 					<!-- hungry or worse , recipient is cooking (priority 4) [must improve with other meals!] -->
 					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
 					<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
@@ -288,17 +301,15 @@
 				<li>saw_a_rotting_body->I saw an unburied rotting body.</li>					
 				<!--ReleasedHealthyPrisoner-->
 				<li>r_logentry(INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,tag=ReactToThought_ReleasedPrisoner)->[thought_releasedprisoner]</li>
-				<li>thought_releasedprisoner->[took_care_prisoner1] [took_care_prisoner2]</li>
+				<li>thought_releasedprisoner->[RECIPIENT_nameDef], did you hear? We finally released that poor [prisoner]. [took_care_prisoner]</li>
 					<!--took care of prisoner-->
-					<li>took_care_prisoner1->We took care of and then released a healthy prisoner.</li>
-					<li>took_care_prisoner1->We looked after and then released a healthy prisoner.</li>
-					<li>took_care_prisoner2->It feels good to know we don't treat them poorly.</li>
-					<li>took_care_prisoner2->It feels good to know that we treat even prisoners well.</li>
-					<li>took_care_prisoner2->It's great to know that we have compassion even for those who harm us.</li>
-				<li>thought_releasedprisoner(INITIATOR_trait==kind,priority=1)->Taking care of and then releasing that poor prisoner was such a wholesome thing to do!</li>
+					<li>took_care_prisoner->It feels good to know we don't treat them poorly.</li>
+					<li>took_care_prisoner->It feels good to know that we treat even prisoners well.</li>
+					<li>took_care_prisoner->It's great to know that we have compassion even for those who harm us.</li>
+				<li>thought_releasedprisoner(INITIATOR_trait==kind,priority=2)->Taking care of and then releasing that poor [prisoner] was such a wholesome thing to do!</li>
 				<li>thought_releasedprisoner(INITIATOR_trait==bloodlust,priority=1)->[prisoner_canniblood]</li>
 				<li>thought_releasedprisoner(INITIATOR_trait==cannibal,priority=1)->[prisoner_canniblood]</li>
-				<li>prisoner_canniblood->Did we really have to set that prisoner free? Such a waste of resources!</li>
+				<li>prisoner_canniblood->Did we really have to set that [prisoner] free? Such a waste of resources!</li>
 				<!--Rescued-->
 				<li>r_logentry(INITIATOR_thoughtDefName==Rescued,tag=ReactToThought_Rescued)->[thought_rescued]</li>
 				<li>thought_rescued->I'm so thankful you guys rescued me. Without your help, I probably wouldn't be here today.</li>
