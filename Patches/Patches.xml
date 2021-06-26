@@ -161,8 +161,7 @@
 					<li>trait_ascetic->He who fears death will never do anything worth of a man who is alive.</li>
 					<li>trait_ascetic->You can control your mind — not outside events. Absorb this, and you shall find strength.</li>
 					<li>trait_ascetic->One true mistake we can make in our lives — not strive to improve ourselves.</li>
-					<li>trait_ascetic(INITIATOR_animals_passion==Minor)->Observe the [Animal] and its simpler life — there is a lot to learn from it.</li>
-					<li>trait_ascetic(INITIATOR_animals_passion==Major)->Observe the [Animal] and its simpler life — there is a lot to learn from it.</li>
+					<li>trait_ascetic(INITIATOR_animals_passion!=None)->Observe the [Animal] and its simpler life — there is a lot to learn from it.</li>
 					<!--Optimist & Sanguine-->
 					<li>r_logentry(INITIATOR_trait==optimist,tag=LuckyFuture)->[lucky_future]</li>
 					<li>r_logentry(INITIATOR_trait==sanguine,tag=LuckyFuture)->[lucky_future]</li>
@@ -190,6 +189,7 @@
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveLarge] [AnimalGroup] of [Animal]s in a [TreeType] forest.</li>
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about [Animal]-shaped clouds over a [AdjectiveAny] [TerrainFeature].</li>
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [Color] [Animal] and a [Color] [Animal] competing for the same [TerrainFeature].</li>
+					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [Color] [Animal] playing [Game].</li>
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveBadass] [Enemy] struggling against a [AdjectiveBadass] [Enemy].</li>
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a [AdjectiveAny] [Apparel] dancing in the wind over a [TerrainFeature].</li>
 					<li>trait_psy_sensitive(tag=PsyVision)->[vision_start] about a group of [PersonJob]s visiting a [Community] to buy [AdjectiveAny] [Apparel]s.</li>

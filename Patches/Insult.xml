@@ -18,6 +18,8 @@
 			<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
 			<li>generic->Hey, [RECIPIENT_nameDef] — can you just go die or something?!</li>
 			<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][insult]!</li>
+			<li>generic->[RECIPIENT_nameDef], I will be the first one at your funeral!</li>
+			<li>generic(INITIATOR_intellectual_level>=5)->I look forward to attending your funeral, [RECIPIENT_nameDef].</li>
 			<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>
 			<li>r_logentry(p=2,tag=Insult_generic)->[generic_short]</li>
 			<li>generic_short->you [bloody] [insult]!</li>

@@ -111,10 +111,11 @@
 						<li>r_logentry(INITIATOR_childhood==servant girl)->[servant]</li>
 						<li>r_logentry(INITIATOR_childhood==royal bastard)->[royal_bastard]</li>
 						<li>r_logentry(INITIATOR_childhood==war bastard)->[war_bastard]</li>
+						<!-- User provided childhood backgrounds -->
+						<li>r_logentry(INITIATOR_childhood==street urchin)->[street_urchin]</li>
 
-
-					<!-- Replies -->
-						<li>r_logentry(RECIPIENT_trait==abrasive)->I don't like the way you're talking [RECIPIENT_nameDef]...</li>
+					<!-- Default -->
+						<li>r_logentry(priority=-1)->I wouldn't like to speak about it...</li>
 
 					<!-- Tribe Child -->
 						<li>tribe_child->I had no technology during my childhood, we survived on the land and moved with the Muffalo [RECIPIENT_nameDef].</li>
@@ -137,7 +138,7 @@
 						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals, quiet but honest work.</li>
 						<li>herder->I protected the Muffalo from both predators and nature itself, I had no time for childish games.</li>
 						<li>herder->The Tribe relied on me to keep the Muffalo safe from both sickness and predation.</li>
-						<li>herder->I disliked being around other people, but the Muffalo made great company [RECIPIENT_nameDef]</li>
+						<li>herder->I disliked being around other people, [RECIPIENT_nameDef] — but the Muffalo made great company.</li>
 						
 					<!-- Scavenger -->
 						<li>scavenger->I was a brave adventurer into the unknown, scavenging for treasure and trash alike!</li>
@@ -176,7 +177,7 @@
 
 					<!-- Budding Artist -->
 						<li>budding_artist->My childhood was full of art exhibits and selling art to societies from all over the galaxy.</li>
-						<li>budding_artist->Perhaps you have heard of me [RECIPIENT_nameDef], I was a rather popular artist in my youth and now!</li>
+						<li>budding_artist->Perhaps you have heard of me, [RECIPIENT_nameDef] — I was a rather popular artist in my youth and now!</li>
 						<li>budding_artist->I spent most of my time creating art and talking to socialites about my art.</li>
 
 					<!-- Bully -->
@@ -196,7 +197,7 @@
 
 					<!-- Urbworld Urchin -->
 						<li>urbworld_urchin->I am from an Urbworld, [RECIPIENT_nameDef]. We don't speak about the things I had to do as a kid.</li>
-						<li>urbworld_urchin->I grew up in a true hellscape, fighting for food and survival. Survival of the fittest is a lie, it is all luck.</li>
+						<li>urbworld_urchin->I grew up in a true hellscape, fighting for food and survival. Survival of the fittest is a lie; it is all luck.</li>
 						<li>urbworld_urchin->My childhood planet was neglected and avoided by others, used solely for profit and exploitation of our people. There wasn't a single thing I never had to fight for.</li>
 
 					<!-- Test Subject -->
@@ -273,13 +274,13 @@
 
 					<!-- Musical Kid -->
 						<li>musical_kid->I always had a talent for instruments, and I spent a lot of time training and performing with lavish praise!</li>
-						<li>musical_kid->You may have heard of me [RECIPIENT_nameDef]. I was a very well known musician even as a child!</li>
+						<li>musical_kid->You may have heard of me, [RECIPIENT_nameDef]. I was a very well known musician even as a child!</li>
 						<li>musical_kid->You don't know that I was a renown musician even as a child [RECIPIENT_nameDef]? You really missed out.</li>
 						<li>musical_kid->Being a musician was always my focus. I trained and performed until I became famous!</li>
 
 					<!-- Child Star -->
 						<li>child_star->I was a famous actor as a kid! It was fabulous, I met all sorts of people and ate all sorts of lavish foods.</li>
-						<li>child_star->You haven't heard of me [RECIPIENT_nameDef]? I was an extremely famous child actor!</li>
+						<li>child_star->You haven't heard of me, [RECIPIENT_nameDef]? I was an extremely famous child actor!</li>
 						<li>child_star->Most of my time was spent in front of a camera, acting or being interviewed. I hadn't a large need for education.</li>
 
 					<!-- Child Spy -->
@@ -304,8 +305,8 @@
 
 					<!-- Cult Child -->
 						<li>cult_child->I was raised to hate technology by my cult, but when I was able to see the real world I left it immediately.</li>
-						<li>cult_child->Have you ever been part of a cult [RECIPIENT_nameDef]? You probably wouldn't understand.</li>
-						<li>cult_child->I was always told that any illness was solvable through ritual, to me medicine seems like a miracle and blessing.</li>
+						<li>cult_child->Have you ever been part of a cult, [RECIPIENT_nameDef]? You probably wouldn't understand.</li>
+						<li>cult_child->I was always told that any illness was solvable through soul-cleansing rituals.</li>
 
 					<!-- Story Writer -->
 						<li>story_writer->I used to spend all my time at the local library until it closed down. Once that happened I began writing my own books [RECIPIENT_nameDef].</li>
@@ -396,20 +397,27 @@
 
 					<!-- Servant Boy/Girl -->
 						<li>servant->I was born into a family of servants, so my childhood was full of serving the royal family we worked for.</li>
-						<li>servant->I spent a lot of time polishing silverware and carrying miscellaneous things for the lords [RECIPIENT_nameDef].</li>
-						<li>servant->I was born a servant, raised a servant, and worked a servants life.</li>
+						<li>servant->I spent a lot of time polishing silverware and carrying miscellaneous things for the lords, [RECIPIENT_nameDef].</li>
+						<li>servant->I was born a servant, raised a servant, and worked a servant's life.</li>
 
 					<!-- Royal Bastard -->
 						<li>royal_bastard->I was born a bastard, working for the brothel where my mother worked.</li>
-						<li>royal_bastard->I always felt like I was destined for more, but my fathers line was strong, thus I could never ask for a title.</li>
-						<li>royal_bastard->[RECIPIENT_nameDef], what do you think of prostitutes? I hope you don't judge them, my mother was one.</li>
+						<li>royal_bastard->I always felt like I was destined for more, but even if my father's line was strong, I could never ask for a title.</li>
+						<li>royal_bastard->What do you think of prostitutes, [RECIPIENT_nameDef]? I hope you don't judge them — my mother was one.</li>
 
-					<!-- War Bastard -->
-						<li>war_bastard->[RECIPIENT_nameDef] my father was a soldier who conquered our town. That is all I know of him.</li>
-						<li>war_bastard->My mother taught me that men are the vile of this earth, and so is war.</li>
-						<li>war_bastard->War, Men, is there really a difference?</li>
-						<li>war_bastard->My pet rabbit was my best friend. I miss them.</li>
+					<!-- War Bastard (misandrist)-->
+						<li>war_bastard->My father was a soldier who conquered our town. That is all I know of him.</li>
 						<li>war_bastard->I was born into a war ravaged town, and during my childhood there wasn't a single person who treated me well.</li>
+						<li>war_bastard(INITIATOR_animals_passion!=None,priority=1)->My pet rabbit was my best friend. I miss them.</li>
+						
+						<li>war_bastard->War, men... My early years taught me [war_bastard_comment1]</li>
+							<li>war_bastard_comment1(INITIATOR_trait==bloodlust,priority=1)->to love war and despise men!</li>
+							<li>war_bastard_comment1->they're both disgusting!</li>
+						
+						<li>war_bastard->My mother taught me that men are the vile of this earth, and so is war. [war_bastard_comment2]</li>
+							<li>war_bastard_comment2(INITIATOR_trait==bloodlust,priority=1)->She was wrong — about war.</li>
+							<li>war_bastard_comment2->She was totally right.</li>
+
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>

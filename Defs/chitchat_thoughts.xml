@@ -332,12 +332,16 @@
 					<li>rec_room(INITIATOR_thoughtLabel==extremely impressive rec room)->I truly have loads of fun in it, [RECIPIENT_nameDef]! [comment2]</li>
 					<li>rec_room(INITIATOR_thoughtLabel==unbelievably impressive rec room)->It's the coolest ever, [RECIPIENT_nameDef]! [comment2]</li>
 					<li>rec_room(INITIATOR_thoughtLabel==wondrously impressive rec room)->It's a complete Paradise, [RECIPIENT_nameDef] — all decked for maxxing out anyone's fun! [comment2]</li>
+					<!-- recreation satisfied -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation satisfied,priority=1)->I think we have several nice entertainment options around here.</li>
+					<!-- recreation fully satisfied -->
+					<li>good_opinion(INITIATOR_thoughtLabel==recreation fully satisfied,priority=1)->I think we have lots of excellent entertainment options around here!</li>
 					<!--Absent or bad rec room-->
 					<li>good_opinion->What rec room, [RECIPIENT_nameDef]? [comment]</li>
 				<!-- WILDCARDS -->
-				<li>comment-></li>
+				<li>comment->I can't seem to have any fun around here...</li>
 				<li>comment(INITIATOR_social_level>=5)->If we want to host parties, we need to do much better than what we have now.</li>
-				<li>comment(INITIATOR_construction_level>=5)->I'd better build some recreation furniture, if we really want to have one.</li>
+				<li>comment(INITIATOR_construction_level>=5)->I'd better take care of it myself, if we really want to have one.</li>
 				<li>comment2-></li>
 				<li>comment2(INITIATOR_social_level>=5)->And it'll be excellent for hosting our next party!</li>
 			</rulesStrings>
@@ -628,10 +632,11 @@
 				<!--WILDCARDS-->
 				<!--offer a solution-->
 				<li>offer_solution-></li>
-				<li>offer_solution(INITIATOR_plants_level>=5)->We should consider enlarging our fields, so it won't happen again.</li>
-				<li>offer_solution(INITIATOR_animals_level>=5)->We should consider getting more cattle, so it won't happen again.</li>
-				<li>offer_solution(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5)->I'll try and hunt something — I hope it helps.</li>
-				<li>offer_solution(INITIATOR_social_level>=5)->Let's hope some caravan passes by — I'll negotiate for more food myself.</li>
+				<li>offer_solution(INITIATOR_faction==PlayerColony,priority=1)->[offer_solution_colonist]</li>
+				<li>offer_solution_colonist(INITIATOR_plants_level>=5)->We should consider enlarging our fields, so it won't happen again.</li>
+				<li>offer_solution_colonist(INITIATOR_animals_level>=5)->We should consider getting more cattle, so it won't happen again.</li>
+				<li>offer_solution_colonist(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5)->I'll try and hunt something — I hope it helps.</li>
+				<li>offer_solution_colonist(INITIATOR_social_level>=5)->Let's hope some caravan passes by — I'll negotiate for more food myself.</li>
 				<!--animal — large-->
 				<li>animal_large->a horse</li>
 				<li>animal_large->a muffalo</li>
@@ -652,7 +657,8 @@
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!-- Default -->
-					<li>good_opinion->Calm down, [RECIPIENT_nameDef]! As soon as I can get my hands on some ingredients, I'll get you a meal!</li>		
+					<li>good_opinion(RECIPIENT_mood&lt;0.4,priority=1)->Calm down, [RECIPIENT_nameDef]! As soon as I can get my hands on some ingredients, I'll get you a meal!</li>
+					<li>good_opinion->I'll cook some tasty food as soon as possible, [RECIPIENT_nameDef]. Just wait a little while...</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1010,7 +1016,7 @@
 					<li>bedroom(INITIATOR_thoughtLabel==extremely impressive bedroom)->Mine is extremely impressive, [RECIPIENT_nameDef]!</li>
 					<li>bedroom(INITIATOR_thoughtLabel==unbelievably impressive bedroom)->Mine feels like a piece of Heaven itself, [RECIPIENT_nameDef]!</li>
 					<li>bedroom(INITIATOR_thoughtLabel==wondrously impressive bedroom)->Mine is worthy of an emperor, [RECIPIENT_nameDef]!</li>
-					<!--Dull or mediocre rec room-->
+					<!--Dull or mediocre bedroom-->
 					<li>good_opinion->Mine? Mine could be... better[construction]</li>
 					<!--Awful bedroom-->
 					<li>good_opinion(INITIATOR_thoughtLabel==awful bedroom,priority=1)->[bedroom_awful]</li>
@@ -1298,6 +1304,18 @@
 					<li>good_opinion(INITIATOR_thoughtDefName==GotSomeLovin,priority=1)->[gotsomelovin]</li>
 					<li>gotsomelovin->Well, [RECIPIENT_nameDef]... Let's say that not being single has its advantages... *wink*</li>
 					<li>gotsomelovin(INITIATOR_opinion>=50)->There's nothing like a good tumble between the sheets to lift the mood, my dear [RECIPIENT_nameDef]!</li>
+				<!-- ReleasedHealthyPrisoner -->
+					<li>good_opinion(INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,priority=1)->[released_prisoner]</li>
+					<li>released_prisoner(INITIATOR_faction==PlayerColony)->We released a [prisoner] — [comment]</li>
+					<li>released_prisoner(INITIATOR_faction!=PlayerColony)->They released a [prisoner] — [comment]</li>
+						<li>comment->I think it was the right thing to do.</li>
+						<li>comment(INITIATOR_trait==kind,priority=2)->poor thing! It was the best thing to do.</li>
+						<li>comment(INITIATOR_trait==cannibal,priority=1)->what a waste of resources!</li>
+						<li>comment(INITIATOR_trait==bloodlust,priority=1)->what a waste of resources!</li>
+				<!-- ThoughtWorker_RoyalTitleApparelMinQualityNotMet -->
+					<li>good_opinion(INITIATOR_thoughtDefName==ThoughtWorker_RoyalTitleApparelMinQualityNotMet,priority=1)->[INITIATOR_royalTitle0Indef] like me should wear higher quality apparel!</li>
+				<!-- ThoughtWorker_RoyalTitleApparelRequirementNotMet -->
+					<li>good_opinion(INITIATOR_thoughtDefName==ThoughtWorker_RoyalTitleApparelRequirementNotMet,priority=1)->Every [INITIATOR_royalTitle0] in [INITIATOR_bestRoyalTitleFaction] wears a specific traditional outfit — I should try to get mine too.</li>
 				<li>good_opinion->[INITIATOR_thoughtText]</li>
 				<!--WILDCARDS-->
 				<li>pain_adj->spiritual, higher</li>
@@ -1307,6 +1325,8 @@
 				<li>pain_adj->deafening, silent</li>
 				<li>pain_adj->tangible, solid</li>
 				<li>pain_adj->blinding, searing</li>
+				<li>prisoner->prisoner</li>
+				<li>prisoner->captive</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>

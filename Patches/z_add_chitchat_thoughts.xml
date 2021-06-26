@@ -179,10 +179,11 @@
 					<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
 					<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
 					<!-- hungry or worse , recipient is a professional cook (priority 4) -->
-					<li>r_logentry(RECIPIENT_faction==PlayerColony,INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
-					<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.5)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
-					<li>thought_needfood_cookrecipient->What's someone got to do to get some food around here?</li>
-					<li>thought_needfood_cookrecipient->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
+					<li>r_logentry(RECIPIENT_faction==PlayerColony,INITIATOR_jobDefName!=StandAndBeSociallyActive,INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
+					<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.4)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
+					<li>thought_needfood_cookrecipient(INITIATOR_mood&lt;0.4)->What's someone got to do to get some food around here?</li>
+					<li>thought_needfood_cookrecipient(INITIATOR_mood&lt;0.4)->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
+					<li>thought_needfood_cookrecipient(priority=-1)->Hey, [RECIPIENT_nameDef] — is there anything I could eat around here?</li>
 					<!-- just hungry -->
 					<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
 					<li>thought_needfood_hungry0->I'm really hungry.</li>
