@@ -245,7 +245,7 @@
 					<!-- Sickly Child -->
 						<li>sickly_child->I was born with a rare disease that left me hospital ridden. I didn't have a big social life but I did learn a lot about science and medicine!</li>
 						<li>sickly_child->I had little contact with others throughout my childhood, which led me to be a bit of a recluse [RECIPIENT_nameDef].</li>
-						<li>sickly_child->As a child I suffered from a rare disease, leaving me bed ridden and unable to exercise.</li>
+						<li>sickly_child->As a child I suffered from a rare disease, leaving me bed-ridden and unable to exercise.</li>
 
 					<!-- Frightened Child -->
 						<li>frightened_child->I am scared of telling you about my childhood [RECIPIENT_nameDef]...</li>
@@ -299,7 +299,7 @@
 						<li>organ_farm->Violence is what led to me being used as a body part farm, so really we should avoid it at all costs.</li>
 
 					<!-- Medical Assistant -->
-						<li>medical_assistant->Growing up I saw what horrors and terrible things fire does to people. I will never be able to face fire [RECIPIENT_nameDef], not after what I saw...</li>
+						<li>medical_assistant->Growing up I saw what horrors and terrible things fire does to people. I will never be able to face fire, [RECIPIENT_nameDef] — not after what I saw...</li>
 						<li>medical_assistant->I was born during a horrible war full of incendiary weapons, and during my youth I helped tend to the patients in the infirmary.</li>
 						<li>medical_assistant->Have you ever tended to the severely burned [RECIPIENT_nameDef]? It leaves you scarred, it really changes something in you.</li>
 

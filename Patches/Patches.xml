@@ -86,8 +86,8 @@
 						<li>shooting_miss(INITIATOR_shooting_level&lt;5)->Again... miss...</li>
 						<li>shooting_miss(INITIATOR_shooting_level&lt;5)->This is way too hard...</li>						
 				<!--Job Texts (recipient) -->
-					<!--Butchering(priority 4) -->
-					<li>r_logentry(priority=4,RECIPIENT_jobText==Butchering.,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
+					<!--Butchering -->
+					<li>r_logentry(RECIPIENT_jobText==Butchering.,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level>=6)->Well, [RECIPIENT_nameDef] — luckily for us, looks like you know how to properly butcher!</li>
 					<li>job_recipient_butchering(RECIPIENT_cooking_level&lt;6)->Mmm, [RECIPIENT_nameDef]... looks like you're wasting good meat there...</li>
 					<!--Vomiting (priority 4) -->

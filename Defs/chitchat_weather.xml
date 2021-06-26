@@ -299,7 +299,7 @@
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!--Good opinion of recipient-->
 				<li>r_logentry->[good_opinion]</li>
-				<li>good_opinion->I'd better get inside — I don't want to get struck by a lightning!</li>
+				<li>good_opinion->I'd better get inside — I don't want to get struck by lightning!</li>
 				<li>good_opinion->Damn, I'm getting all drenched here...</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->Thunders — the majestic roar of Nature!</li>
 				<li>good_opinion(INITIATOR_trait==pyromaniac)->I just hate rain!</li>

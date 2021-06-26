@@ -1042,7 +1042,7 @@
 				<!--Good opinion of recipient-->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 				<li>good_opinion->Let's hope it won't happen again, [RECIPIENT_nameDef] — it's [annoying].</li>
-				<li>good_opinion->Yeah... I wish we settled somewhere warmer.</li>
+				<li>good_opinion(INITIATOR_faction==PlayerColony)->Yeah... I wish we settled somewhere warmer.</li>
 				<li>good_opinion->Well, it gets [weather_cold_adj] this time of the year...we just have to get used to it.</li>
 					<li>weather_cold_adj->chilly</li>
 					<li>weather_cold_adj->cold</li>
