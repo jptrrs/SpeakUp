@@ -54,7 +54,7 @@
 						<li>hit_b->Aced it!</li>
 					<li>shooting_hit->Score!</li>
 					<li>shooting_hit->Right on target!</li>
-					<li>shooting_hit->Point for [INITIATOR_nameDef] team!</li>
+					<li>shooting_hit->Point for team [INITIATOR_nameDef]!</li>
 						<!-- high skill -->
 						<li>shooting_hit(INITIATOR_shooting_level>=5)->All skill, no luck!</li>
 						<li>shooting_hit(INITIATOR_shooting_level>=10)->Naturally...</li>
