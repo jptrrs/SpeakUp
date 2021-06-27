@@ -32,6 +32,79 @@
 	</InteractionDef>
 
 <!-- ==JOBS== -->
+	<InteractionDef ParentName="SpeakUpReply"><!--chess — smart move-->
+		<defName>Chess_smart</defName>
+		<label>chess — smart move</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->Cheater!</li>
+				<li>bad_opinion->Mmm... a skillful move. But I doubt you did it on purpose...</li>
+				<li>bad_opinion->*frowns*</li>
+				<li>bad_opinion->*scowls*</li>
+				<li>bad_opinion->*pales*</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->Smart move. You got me this time, [RECIPIENT_nameDef]!</li>
+				<li>good_opinion->Masterful. I forfeit.</li>
+				<li>good_opinion->Outstanding. I lost [random_5_10] turns ago and didn't even notice.</li>
+				<li>good_opinion->*muses*</li>
+				<li>good_opinion->*ponders*</li>
+				<li>good_opinion->*thinks*</li>
+				
+				<li>random_5_10->5</li>
+				<li>random_5_10->6</li>
+				<li>random_5_10->7</li>
+				<li>random_5_10->8</li>
+				<li>random_5_10->9</li>
+				<li>random_5_10->10</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--chess — blunder-->
+		<defName>Chess_blunder</defName>
+		<label>chess — blunder</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->*sneers*</li>
+				<li>bad_opinion->*scoffs*</li>
+				<li>bad_opinion->What a silly move!</li>
+				<li>bad_opinion->How predictable! Mark my words — you're done in [random_1_5] moves.</li>
+				<li>bad_opinion->Your blunders, [RECIPIENT_nameDef], are all there on the board — just waiting to be made!</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->And you think I don't know about your little plan, [RECIPIENT_nameDef]?</li>
+				<li>good_opinion->Heh... Just as I thought...</li>
+				<li>good_opinion->Here's a hint for you, [RECIPIENT_nameDef] — when you believe you saw a good move, look for a better one...</li>
+				<li>good_opinion->Well, [RECIPIENT_nameDef]... You may learn much more from a game you lose than from a game you win.</li>
+
+				<li>random_1_5->1</li>
+				<li>random_1_5->2</li>
+				<li>random_1_5->3</li>
+				<li>random_1_5->4</li>
+				<li>random_1_5->5</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!--chess — comment-->
+		<defName>Chess_comment</defName>
+		<label>chess — comment</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!--Bad opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+				<li>bad_opinion->...</li>
+				<li>bad_opinion->Hey, [RECIPIENT_nameDef] — less talking, more playing.</li>
+				<!--Good opinion of recipient-->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<li>good_opinion->I agree with that, [RECIPIENT_nameDef].</li>
+				<li>good_opinion->A nice chess quote, [RECIPIENT_nameDef].</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply"><!--Cleaning-->
 		<defName>Cleaning</defName>
 		<label>cleaning</label>
@@ -81,7 +154,7 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"><!--Cloudwatching-->
 		<defName>CloudWatching</defName>
 		<label>cloudwatching</label>
 		<logRulesInitiator>

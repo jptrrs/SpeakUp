@@ -8,6 +8,32 @@
 				<li>r_logentry(p=0.1,tag=ChitChat_generic)->Hey, [RECIPIENT_nameDef]!</li>
 				
 				<!--Job Texts (initiator) -->
+				<!--Chess-->
+				<li>r_logentry(INITIATOR_jobDefName==Play_Chess,INITIATOR_seated==Yes,RECIPIENT_jobDefName==Play_Chess,RECIPIENT_seated==Yes,priority=4)->[game_chess]</li>
+					<!--Smart move-->
+					<li>game_chess(INITIATOR_intellectual_level>=0)->[chess_smart]</li>
+					<li>game_chess(INITIATOR_intellectual_level>=5)->[chess_smart]</li>
+					<li>game_chess(INITIATOR_intellectual_level>=10)->[chess_smart]</li>
+					<li>game_chess(INITIATOR_intellectual_level>=15)->[chess_smart]</li>
+					<li>game_chess(p=2,INITIATOR_intellectual_level>=RECIPIENT_intellectual_level)->[chess_smart]</li>
+					<li>chess_smart(tag=Chess_smart)->[chess_neutral]</li>
+					<!--Blunder-->
+					<li>game_chess(p=2,INITIATOR_intellectual_level&lt;=RECIPIENT_intellectual_level)->[chess_blunder]</li>
+					<li>game_chess(INITIATOR_intellectual_level&lt;5)->[chess_blunder]</li>
+					<li>game_chess(INITIATOR_intellectual_level&lt;10)->[chess_blunder]</li>
+					<li>game_chess(INITIATOR_intellectual_level&lt;15)->[chess_blunder]</li>
+					<li>game_chess(INITIATOR_intellectual_level&lt;=20)->[chess_blunder]</li>
+					<li>chess_blunder(tag=Chess_blunder)->[chess_neutral]</li>
+				<li>chess_neutral->[chess_piece] to [random_A_G][random_1_8].</li>
+				<li>chess_neutral->[chess_piece] takes [random_A_G][random_1_8].</li>
+				
+				<li>r_logentry(INITIATOR_jobDefName==Play_Chess,INITIATOR_seated==Yes,RECIPIENT_jobDefName==Play_Chess,RECIPIENT_seated==Yes,priority=4,tag=Chess_comment)->[chess_comment]</li>
+				<li>chess_comment(INITIATOR_artistic_passion!=None)->I think that while all artists are not chess players, all chess players are artists.</li>
+				<li>chess_comment(INITIATOR_trait==ascetic)->In life, as in chess, one's own pawns block one's way.</li>
+				<li>chess_comment(INITIATOR_intellectual_level&lt;5)->Every chess master was once a beginner.</li>
+				<li>chess_comment->I am convinced that the way one plays chess always reflects the player's personality.</li>
+				<li>chess_comment->Chess doesn't drive people mad, it keeps mad people sane.</li>
+				<li>chess_comment->Pawns are the soul of this game.</li>
 				<!--Clean-->
 				<li>r_logentry(priority=4,INITIATOR_jobDefName==Clean,tag=Cleaning)->[job_clean]</li>
 				<li>job_clean->Mmm... let's clean here.</li>
@@ -394,6 +420,13 @@
 				<li>accuse_gender_someone(INITIATOR_trait==misandrist)->some [stupid] guy</li>
 				<li>accuse_gender_someone(INITIATOR_trait==misogynist)->some [stupid] bitch</li>
 				<li>accuse_gender_someone->someone</li>
+				<!-- chess pieces -->
+				<li>chess_piece->king</li>
+				<li>chess_piece->queen</li>
+				<li>chess_piece->rook</li>
+				<li>chess_piece->bishop</li>
+				<li>chess_piece->knight</li>
+				<li>chess_piece->pawn</li>
 				<!-- damn it! -->
 				<li>damn_it->damn</li>
 				<li>damn_it->damn it</li>				
@@ -408,6 +441,23 @@
 				<!--Out here or out there-->
 				<li>out_here_out_there(OUTDOORS==No)->out there</li>
 				<li>out_here_out_there(OUTDOORS==Yes)->out here</li>
+				<!-- Random ranges -->
+				<li>random_1_8->1</li>
+				<li>random_1_8->2</li>
+				<li>random_1_8->3</li>
+				<li>random_1_8->4</li>
+				<li>random_1_8->5</li>
+				<li>random_1_8->6</li>
+				<li>random_1_8->7</li>
+				<li>random_1_8->8</li>
+				<li>random_A_G->A</li>
+				<li>random_A_G->B</li>
+				<li>random_A_G->C</li>
+				<li>random_A_G->D</li>
+				<li>random_A_G->E</li>
+				<li>random_A_G->F</li>
+				<li>random_A_G->G</li>
+				<li>random_A_G->H</li>
 				<!--What about yours?-->
 				<li>what_about_yours->What do you think of yours, [RECIPIENT_nameDef]?</li>
 			</rulesStrings>
