@@ -47,70 +47,63 @@
 			<logRulesInitiator>
 				<rulesStrings>
 					<!-- Childhood Checks -->
-						<li>r_logentry(INITIATOR_childhood==tribe child)->[tribe_child]</li>
-						<li>r_logentry(INITIATOR_childhood==abandoned child)->[abandoned_child]</li>
-						<li>r_logentry(INITIATOR_childhood==reclusive child)->[reclusive_child]</li>
-						<li>r_logentry(INITIATOR_childhood==herder)->[herder]</li>
-						<li>r_logentry(INITIATOR_childhood==scavenger)->[scavenger]</li>
-						<li>r_logentry(INITIATOR_childhood==cave child)->[cave_child]</li>
-						<li>r_logentry(INITIATOR_childhood==sole survivor)->[sole_survivor]</li>
-						<li>r_logentry(INITIATOR_childhood==vengeful child)->[vengeful_child]</li>
-						<li>r_logentry(INITIATOR_childhood==fire keeper)->[fire_keeper]</li>
-						<li>r_logentry(INITIATOR_childhood==hideaway)->[hideaway]</li>
-						<li>r_logentry(INITIATOR_childhood==crash baby)->[crash_baby]</li>
-						<li>r_logentry(INITIATOR_childhood==budding artist)->[budding_artist]</li>
-						<li>r_logentry(INITIATOR_childhood==bully)->[bully]</li>
-						<li>r_logentry(INITIATOR_childhood==bookworm)->[bookworm]</li>
-						<li>r_logentry(INITIATOR_childhood==industrial orphan)->[industrial_orphan]</li>
-						<li>r_logentry(INITIATOR_childhood==urbworld urchin)->[urbworld_urchin]</li>
-						<li>r_logentry(INITIATOR_childhood==test subject)->[test_subject]</li>
-						<li>r_logentry(INITIATOR_childhood==wreckage explorer)->[wreckage_explorer]</li>
-						<li>r_logentry(INITIATOR_childhood==apocalypse survivor)->[apocalypse_survivor]</li>
-						<li>r_logentry(INITIATOR_childhood==caveworld tender)->[caveworld_tender]</li>
-						<li>r_logentry(INITIATOR_childhood==caveworld tunneler)->[caveworld_tunneler]</li>
-						<li>r_logentry(INITIATOR_childhood==scout)->[scout]</li>
-						<li>r_logentry(INITIATOR_childhood==shelter child)->[shelter_child]</li>
-						<li>r_logentry(INITIATOR_childhood==vatgrown soldier)->[vatgrown_soldier]</li>
-						<li>r_logentry(INITIATOR_childhood==sickly child)->[sickly_child]</li>
-						<li>r_logentry(INITIATOR_childhood==frightened child)->[frightened_child]</li>
-						<li>r_logentry(INITIATOR_childhood==coma child)->[coma_child]</li>
-						<li>r_logentry(INITIATOR_childhood==pyromaniac)->[pyromaniac]</li>
-						<li>r_logentry(INITIATOR_childhood==mute)->[mute]</li>
-						<li>r_logentry(INITIATOR_childhood==war refugee)->[war_refugee]</li>
-						<li>r_logentry(INITIATOR_childhood==musical kid)->[musical_kid]</li>
-						<li>r_logentry(INITIATOR_childhood==child star)->[child_star]</li>
-						<li>r_logentry(INITIATOR_childhood==child spy)->[child_spy]</li>
-						<li>r_logentry(INITIATOR_childhood==shop kid)->[shop_kid]</li>
-						<li>r_logentry(INITIATOR_childhood==organ farm)->[organ_farm]</li>
-						<li>r_logentry(INITIATOR_childhood==medical assistant)->[medical_assistant]</li>
-						<li>r_logentry(INITIATOR_childhood==cult child)->[cult_child]</li>
-						<li>r_logentry(INITIATOR_childhood==story writer)->[story_writer]</li>
-						<li>r_logentry(INITIATOR_childhood==medieval slave)->[medieval_slave]</li>
-						<li>r_logentry(INITIATOR_childhood==medieval lordling)->[medieval_lord]</li>
-						<li>r_logentry(INITIATOR_childhood==medieval lady)->[medieval_lord]</li>
-						<li>r_logentry(INITIATOR_childhood==convent child)->[convent_child]</li>
-						<li>r_logentry(INITIATOR_childhood==country lady)->[country_person]</li>
-						<li>r_logentry(INITIATOR_childhood==country lordling)->[country_person]</li>
-						<li>r_logentry(INITIATOR_childhood==urban lordling)->[urban_person]</li>
-						<li>r_logentry(INITIATOR_childhood==urban lady)->[urban_person]</li>
-						<li>r_logentry(INITIATOR_childhood==shipbound lady)->[shipbound_person]</li>
-						<li>r_logentry(INITIATOR_childhood==shipbound lordling)->[shipbound_person]</li>
-						<li>r_logentry(INITIATOR_childhood==pampered princess)->[pampered_person]</li>
-						<li>r_logentry(INITIATOR_childhood==pampered lordling)->[pampered_person]</li>
-						<li>r_logentry(INITIATOR_childhood==unwanted survivor)->[unwanted_survivor]</li>
-						<li>r_logentry(INITIATOR_childhood==ship boy)->[ship_child]</li>
-						<li>r_logentry(INITIATOR_childhood==ship girl)->[ship_child]</li>
-						<li>r_logentry(INITIATOR_childhood==military cadet)->[military_cadet]</li>
-						<li>r_logentry(INITIATOR_childhood==political captive)->[political_captive]</li>
-						<li>r_logentry(INITIATOR_childhood==delinquent)->[delinquent]</li>
-						<li>r_logentry(INITIATOR_childhood==rich kid)->[rich_kid]</li>
-						<li>r_logentry(INITIATOR_childhood==street rat)->[street_rat]</li>
-						<li>r_logentry(INITIATOR_childhood==soldier's kid)->[soldier_kid]</li>
-						<li>r_logentry(INITIATOR_childhood==machinist)->[machinist]</li>
-						<li>r_logentry(INITIATOR_childhood==servant boy)->[servant]</li>
-						<li>r_logentry(INITIATOR_childhood==servant girl)->[servant]</li>
-						<li>r_logentry(INITIATOR_childhood==royal bastard)->[royal_bastard]</li>
-						<li>r_logentry(INITIATOR_childhood==war bastard)->[war_bastard]</li>
+						<li>r_logentry(INITIATOR_childhood==TribeChild40)->[tribe_child]</li>
+						<li>r_logentry(INITIATOR_childhood==AbandonedChild23)->[abandoned_child]</li>
+						<li>r_logentry(INITIATOR_childhood==ReclusiveChild81)->[reclusive_child]</li>
+						<li>r_logentry(INITIATOR_childhood==Herder19)->[herder]</li>
+						<li>r_logentry(INITIATOR_childhood==Scavenger22)->[scavenger]</li>
+						<li>r_logentry(INITIATOR_childhood==CaveChild30)->[cave_child]</li>
+						<li>r_logentry(INITIATOR_childhood==SoleSurvivor21)->[sole_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==VengefulChild43)->[vengeful_child]</li>
+						<li>r_logentry(INITIATOR_childhood==FireKepper44)->[fire_keeper]</li>
+						<li>r_logentry(INITIATOR_childhood==Hideaway7)->[hideaway]</li>
+						<li>r_logentry(INITIATOR_childhood==CrashBaby32)->[crash_baby]</li>
+						<li>r_logentry(INITIATOR_childhood==BuddingArtist44)->[budding_artist]</li>
+						<li>r_logentry(INITIATOR_childhood==Bully70)->[bully]</li>
+						<li>r_logentry(INITIATOR_childhood==Bookworm19)->[bookworm]</li>
+						<li>r_logentry(INITIATOR_childhood==IndustrialOrphan13)->[industrial_orphan]</li>
+						<li>r_logentry(INITIATOR_childhood==UrbworldUrchin61)->[urbworld_urchin]</li>
+						<li>r_logentry(INITIATOR_childhood==TestSubject15)->[test_subject]</li>
+						<li>r_logentry(INITIATOR_childhood==WreckageExplorer93)->[wreckage_explorer]</li>
+						<li>r_logentry(INITIATOR_childhood==ApocalypseSurvivor23)->[apocalypse_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==CaveworldTender20)->[caveworld_tender]</li>
+						<li>r_logentry(INITIATOR_childhood==CaveworldTunneler48)->[caveworld_tunneler]</li>
+						<li>r_logentry(INITIATOR_childhood==Scout44)->[scout]</li>
+						<li>r_logentry(INITIATOR_childhood==ShelterChild50)->[shelter_child]</li>
+						<li>r_logentry(INITIATOR_childhood==VatgrownSoldier8)->[vatgrown_soldier]</li>
+						<li>r_logentry(INITIATOR_childhood==SicklyChild55)->[sickly_child]</li>
+						<li>r_logentry(INITIATOR_childhood==FrightenedChild43)->[frightened_child]</li>
+						<li>r_logentry(INITIATOR_childhood==ComaChild57)->[coma_child]</li>
+						<li>r_logentry(INITIATOR_childhood==Pyromaniac18)->[pyromaniac]</li>
+						<li>r_logentry(INITIATOR_childhood==Mute34)->[mute]</li>
+						<li>r_logentry(INITIATOR_childhood==WarRefugee51)->[war_refugee]</li>
+						<li>r_logentry(INITIATOR_childhood==MusicalKid86)->[musical_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==ChildStar74)->[child_star]</li>
+						<li>r_logentry(INITIATOR_childhood==ChildSpy47)->[child_spy]</li>
+						<li>r_logentry(INITIATOR_childhood==ShopKid36)->[shop_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==OrganFarm67)->[organ_farm]</li>
+						<li>r_logentry(INITIATOR_childhood==MedicalAssistant12)->[medical_assistant]</li>
+						<li>r_logentry(INITIATOR_childhood==CultChild3)->[cult_child]</li>
+						<li>r_logentry(INITIATOR_childhood==StoryWriter67)->[story_writer]</li>
+						<li>r_logentry(INITIATOR_childhood==MedievalSlave49)->[medieval_slave]</li>
+						<li>r_logentry(INITIATOR_childhood==MedievalLordling19)->[medieval_lord]</li>
+						<li>r_logentry(INITIATOR_childhood==ConventChild16)->[convent_child]</li>
+						<li>r_logentry(INITIATOR_childhood==CountryLordling92)->[country_person]</li>
+						<li>r_logentry(INITIATOR_childhood==UrbanLordling82)->[urban_person]</li>
+						<li>r_logentry(INITIATOR_childhood==ShipboundLordling12)->[shipbound_person]</li>
+						<li>r_logentry(INITIATOR_childhood==PamperedLordling37)->[pampered_person]</li>
+						<li>r_logentry(INITIATOR_childhood==UnwantedSurvivor67)->[unwanted_survivor]</li>
+						<li>r_logentry(INITIATOR_childhood==ShipBoy89)->[ship_child]</li>
+						<li>r_logentry(INITIATOR_childhood==MilitaryCadet46)->[military_cadet]</li>
+						<li>r_logentry(INITIATOR_childhood==PoliticalCaptive7)->[political_captive]</li>
+						<li>r_logentry(INITIATOR_childhood==Delinquent13)->[delinquent]</li>
+						<li>r_logentry(INITIATOR_childhood==RichKid61)->[rich_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==StreetRat81)->[street_rat]</li>
+						<li>r_logentry(INITIATOR_childhood==SoldiersKid55)->[soldier_kid]</li>
+						<li>r_logentry(INITIATOR_childhood==Machinist56)->[machinist]</li>
+						<li>r_logentry(INITIATOR_childhood==ServingBoy97)->[servant]</li>
+						<li>r_logentry(INITIATOR_childhood==RoyalBastard3)->[royal_bastard]</li>
+						<li>r_logentry(INITIATOR_childhood==WarBastard60)->[war_bastard]</li>
 						<!-- User provided childhood backgrounds -->
 						<li>r_logentry(INITIATOR_childhood==street urchin)->[street_urchin]</li>
 
