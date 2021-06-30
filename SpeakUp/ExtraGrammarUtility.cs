@@ -116,13 +116,12 @@ namespace SpeakUp
             }
 
             //childhood
-            if (pawn.story.childhood != null) MakeRule(symbol + "childhood", pawn.story.childhood.identifier);
+            MakeRule(symbol + "childhood", pawn.story.childhood.identifier);
 
             //adulthood
             if (pawn.story.adulthood != null) MakeRule(symbol + "adulthood", pawn.story.adulthood.identifier);
 
             //OTHER PAWN SITUATIONS
-            MakeRule(symbol + "moving", pawn.pather.Moving.ToStringYesNo());
 
             //current activity
             if (pawn.CurJob != null)
