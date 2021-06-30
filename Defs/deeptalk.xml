@@ -34,7 +34,7 @@
 			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Art and the true expression of oneself give full meaning to our lives.</li>
 			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->I don't know its meaning — but I know a long conversation and a good drink make it much better!</li>
 			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Creating lasting works to improve our surroundings and inspire future generations.</li>
-			<li>r_logentry->Why ask?</li>
+			<li>r_logentry->Why ask me? I have no idea.</li>
 			<li>r_logentry->I haven't the slightest idea.</li>
 			</rulesStrings>
 		</logRulesInitiator>
@@ -109,15 +109,16 @@
 						<li>r_logentry(priority=-1)->I wouldn't like to speak about it...</li>
 
 					<!-- Tribe Child -->
-						<li>tribe_child->I had no technology during my childhood, we survived on the land and moved with the Muffalo [RECIPIENT_nameDef].</li>
+						<li>tribe_child->I had no technology during my childhood. We survived on the land and moved with the Muffalo, [RECIPIENT_nameDef].</li>
+						<li>tribe_child->I lived a nomadic lifestyle — living off the land and moving alongside muffalos.</li>
 						<li>tribe_child->I miss being able to roam free with the muffalo and playing sticks and stones.</li>
 						<li>tribe_child->My childhood was full of nature. These new technologies are both confusing and scary.</li>
 						<li>tribe_child->I grew up learning how to survive off the land and animals around us.</li>
 
 					<!-- Abandoned Child -->
 						<li>abandoned_child->When my parents had me I was as sick as a dog and left for dead. Through the powers that be I managed to make it here today.</li>
-						<li>abandoned_child->It's a miracle I made it into adulthood. I was abandoned as a baby and through sheer luck I lived</li>
-						<li>abandoned_child->Due to being abandoned by my parents, I really didn't have a childhood [RECIPIENT_nameDef].</li>
+						<li>abandoned_child->It's a miracle I made it into adulthood. I was abandoned as a baby and through sheer luck I lived.</li>
+						<li>abandoned_child->Well, [RECIPIENT_nameDef]... Due to being abandoned by my parents, I really didn't have a childhood.</li>
 
 					<!-- Reclusive Child -->
 						<li>reclusive_child->I spent a majority of my childhood to myself, contemplating great wonders and whether or not the nearest berry would kill me!</li>
@@ -174,7 +175,7 @@
 					<!-- Bully -->
 						<li>bully->I was forced to join a hunting party as a kid, I think this was because of how I acted around other children.</li>
 						<li>bully->I don't know why [RECIPIENT_nameDef], but for some reason the elders put me on a hunting party at a young age.</li>
-						<li>bully->I spent a majority of my time hunting animals, and when I wasn't hunting animals I was chasing other kids *chuckles*.</li>
+						<li>bully->I spent a majority of my time hunting animals, and when I wasn't hunting animals I was roughing up other kids. *chuckles*</li>
 
 					<!-- Bookworm -->
 						<li>bookworm->I always had my face buried in a book, they are far more interesting than people.</li>
@@ -231,8 +232,13 @@
 					<!-- Vatgrown Soldier -->
 						<li>vatgrown_soldier->I had a very short childhood that consisted of mostly combat training in a bioweapons facility.</li>
 						<li>vatgrown_soldier->From birth I was trained with the intent to become an instrument of destruction with very little human contact.</li>
-						<li>vatgrown_soldier->[RECIPIENT_nameDef], I didn't have a childhood, I was born and raised as a weapon, and nothing else.</li>
-
+						<li>vatgrown_soldier->[RECIPIENT_nameDef], I didn't have a childhood — I was born and raised as a weapon, and nothing else.</li>
+						<li>vatgrown_soldier->I was created to be the ultimate weapon of destruction — [vatgrown_soldier_comment1]</li>	
+							<li>vatgrown_soldier_comment1(INITIATOR_trait==bloodlust,priority=1)->then I honed myself to become that ultimate weapon.</li>	
+							<li>vatgrown_soldier_comment1(INITIATOR_trait==kind,priority=1)->then I was forced into vicious military drills. It was terrible...</li>
+							<li>vatgrown_soldier_comment1(INITIATOR_trait==brawler,priority=1)->then I honed my close combat skills until I became that ultimate weapon.</li>
+							<li>vatgrown_soldier_comment1->then I was heavily trained to be one.</li>
+							
 					<!-- Sickly Child -->
 						<li>sickly_child->I was born with a rare disease that left me hospital ridden. I didn't have a big social life but I did learn a lot about science and medicine!</li>
 						<li>sickly_child->I had little contact with others throughout my childhood, which led me to be a bit of a recluse [RECIPIENT_nameDef].</li>
@@ -252,7 +258,8 @@
 						<li>pyromaniac->I've always liked fire [RECIPIENT_nameDef]. Like, I REALLY like fire...</li>
 						<li>pyromaniac->Fire was an integral part of my upbringing, I even burned down my house once!</li>
 						<li>pyromaniac->I used to set fire to the garbage piles, they are so mesmerizing. Wouldn't you agree [RECIPIENT_nameDef]?</li>
-
+						<li>pyromaniac->I was born in fire, I used to live near fire, and I can't keep away from fire.</li>
+						
 					<!-- Mute -->
 						<li>mute->Animals have always been better companions than humans to me [RECIPIENT_nameDef], especially when I was young.</li>
 						<li>mute->After what happened to me, I stuck to myself and didn't really speak to anyone.</li>
@@ -266,7 +273,7 @@
 					<!-- Musical Kid -->
 						<li>musical_kid->I always had a talent for instruments, and I spent a lot of time training and performing with lavish praise!</li>
 						<li>musical_kid->You may have heard of me, [RECIPIENT_nameDef]. I was a very well known musician even as a child!</li>
-						<li>musical_kid->You don't know that I was a renown musician even as a child [RECIPIENT_nameDef]? You really missed out.</li>
+						<li>musical_kid->You don't know that I was a renowned musician even as a child [RECIPIENT_nameDef]? You really missed out.</li>
 						<li>musical_kid->Being a musician was always my focus. I trained and performed until I became famous!</li>
 
 					<!-- Child Star -->
@@ -362,10 +369,13 @@
 						<li>political_captive->Have you ever been a political pawn [RECIPIENT_nameDef]? They treat you surprisingly well until they don't need you anymore...</li>
 
 					<!-- Delinquent -->
-						<li>delinquent->I was always a rule breaker [RECIPIENT_nameDef]. I spent more time in jail than out.</li>
+						<li>delinquent->I was always a rule breaker, [RECIPIENT_nameDef]. I spent more time in jail than out.</li>
 						<li>delinquent->I failed an attempt to escape prison just once, after that they forced me into military service.</li>
 						<li>delinquent->I'd much rather have spent more of my childhood breaking laws than serving in the military.</li>
-
+						<li>delinquent->I was nearly always in prison, where [delinquent_comment1]</li>	
+							<li>delinquent_comment1(INITIATOR_trait==masochist,INITIATOR_opinion>=25,priority=1)->I was physically abused so much, I eventually grew to love it!</li>	
+							<li>delinquent_comment1->I learnt the hard way how much being in jail really sucks.</li>
+							
 					<!-- Rich Kid -->
 						<li>rich_kid->I was born into extreme wealth and influence. If only that carried over to this planet...</li>
 						<li>rich_kid->Unfortunately [RECIPIENT_nameDef], I did not carry any of my wealth over from my youth to this planet.</li>

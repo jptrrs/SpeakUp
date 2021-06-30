@@ -13,7 +13,11 @@
 			<!-- GRASS -->
 			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==grass)->[grasses]</li>
 			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==tall grass)->[grasses]</li>
-			<li>grasses->Look at this grass — I love its green!</li>
+			<li>grasses->Look at this grass — [grass_comment]!</li>
+				<li>grass_comment->I love its smell</li>
+				<li>grass_comment->I love its green color</li>
+				<li>grass_comment->I love how green it is</li>
+				<li>grass_comment(INITIATOR_intellectual_level>=10)->I admire its vibrancy</li>
 			<!-- Default -->
 			<li>nearest_plant_outdoors->[mood]</li>
 			
