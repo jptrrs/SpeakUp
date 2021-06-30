@@ -3,19 +3,19 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/InteractionDef[defName = "Chitchat"]/logRulesInitiator/rulesStrings</xpath>
 		<value>
-			<!-- PLANTS - TEMPERATE - TREES -->
-			<li>r_logentry(OUTDOORS==Yes,INITIATOR_plants_passion!=None)->[nearest_plant_outdoors]</li>
-			<li>nearest_plant_outdoors(tag=NearestPlant)->[nearest_plant_outdoors_tag]</li>
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==birch tree)->What a generous birch we have here!</li>
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==oak tree)->What a proud oak we have here!</li>
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==pine tree)->What a magnificent pine tree we have here!</li>
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==poplar tree)->What a charming poplar we have here!</li>
-			<!-- GRASS -->
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==grass)->[grasses]</li>
-			<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==tall grass)->[grasses]</li>
-			<li>grasses->Look at this grass — I love its green!</li>
-			<!-- Default -->
-			<li>nearest_plant_outdoors->[mood]</li>
+			<!-- ===PLANTS - TEMPERATE - TREES=== -->
+				<li>r_logentry(OUTDOORS==Yes,INITIATOR_plants_passion!=None)->[nearest_plant_outdoors]</li>
+				<li>nearest_plant_outdoors(tag=NearestPlant)->[nearest_plant_outdoors_tag]</li>
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==birch tree)->What a generous birch we have here!</li>
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==oak tree)->What a proud oak we have here!</li>
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==pine tree)->What a magnificent pine tree we have here!</li>
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==poplar tree)->What a charming poplar we have here!</li>
+			<!-- ===GRASS=== -->
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==grass)->[grasses]</li>
+				<li>nearest_plant_outdoors_tag(priority=4,NEAREST_plant==tall grass)->[grasses]</li>
+				<li>grasses->Look at this grass — I love its green!</li>
+			<!-- ===Default=== -->
+				<li>nearest_plant_outdoors->[mood]</li>
 			
 			
 			<!-- ART 			
