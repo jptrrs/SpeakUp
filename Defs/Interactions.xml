@@ -6,15 +6,16 @@
 		<initiatorXpGainAmount>2</initiatorXpGainAmount>
 	</InteractionDef>
 	
+<!-- ===ChitChat Generic=== -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ChitChat_generic</defName>
 		<label>Chitchat generic</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0,tag=ChitChat_generic2)->Yes, [RECIPIENT_nameDef]?</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0,tag=ChitChat_generic2)->Yes, [RECIPIENT_nameDef]?</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -23,624 +24,651 @@
 		<label>Chitchat generic2</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->Nothing — forget it.</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->Mmm... it's nothing — sorry to have bothered you.</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->Nothing — forget it.</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->Mmm... it's nothing — sorry to have bothered you.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 
-<!-- ==JOBS== -->
-	<InteractionDef ParentName="SpeakUpReply"><!--chess — smart move-->
+<!-- ===JOBS=== -->
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===chess — smart move=== -->
 		<defName>Chess_smart</defName>
 		<label>chess — smart move</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->Cheater!</li>
-				<li>bad_opinion->Mmm... a skillful move. But I doubt you did it on purpose...</li>
-				<li>bad_opinion->*frowns*</li>
-				<li>bad_opinion->*scowls*</li>
-				<li>bad_opinion->*pales*</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Smart move. You got me this time, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Masterful. I forfeit.</li>
-				<li>good_opinion->Outstanding. I lost [random_5_10] turns ago and didn't even notice.</li>
-				<li>good_opinion->*muses*</li>
-				<li>good_opinion->*ponders*</li>
-				<li>good_opinion->*thinks*</li>
-				
-				<li>random_5_10->5</li>
-				<li>random_5_10->6</li>
-				<li>random_5_10->7</li>
-				<li>random_5_10->8</li>
-				<li>random_5_10->9</li>
-				<li>random_5_10->10</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->Cheater!</li>
+					<li>bad_opinion->Mmm... a skillful move. But I doubt you did it on purpose...</li>
+					<li>bad_opinion->*frowns*</li>
+					<li>bad_opinion->*scowls*</li>
+					<li>bad_opinion->*pales*</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Smart move. You got me this time, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Masterful. I forfeit.</li>
+					<li>good_opinion->Outstanding. I lost [random_5_10] turns ago and didn't even notice.</li>
+					<li>good_opinion->*muses*</li>
+					<li>good_opinion->*ponders*</li>
+					<li>good_opinion->*thinks*</li>
+					
+					<li>random_5_10->5</li>
+					<li>random_5_10->6</li>
+					<li>random_5_10->7</li>
+					<li>random_5_10->8</li>
+					<li>random_5_10->9</li>
+					<li>random_5_10->10</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--chess — blunder-->
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===chess — blunder=== -->
 		<defName>Chess_blunder</defName>
 		<label>chess — blunder</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->*sneers*</li>
-				<li>bad_opinion->*scoffs*</li>
-				<li>bad_opinion->What a silly move!</li>
-				<li>bad_opinion->How predictable! Mark my words — you're done in [random_1_5] moves.</li>
-				<li>bad_opinion->Your blunders, [RECIPIENT_nameDef], are all there on the board — just waiting to be made!</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->And you think I don't know about your little plan, [RECIPIENT_nameDef]?</li>
-				<li>good_opinion->Heh... Just as I thought...</li>
-				<li>good_opinion->Here's a hint for you, [RECIPIENT_nameDef] — when you believe you saw a good move, look for a better one...</li>
-				<li>good_opinion->Well, [RECIPIENT_nameDef]... You may learn much more from a game you lose than from a game you win.</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->*sneers*</li>
+					<li>bad_opinion->*scoffs*</li>
+					<li>bad_opinion->What a silly move!</li>
+					<li>bad_opinion->How predictable! Mark my words — you're done in [random_1_5] moves.</li>
+					<li>bad_opinion->Your blunders, [RECIPIENT_nameDef], are all there on the board — just waiting to be made!</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->And you think I don't know about your little plan, [RECIPIENT_nameDef]?</li>
+					<li>good_opinion->Heh... Just as I thought...</li>
+					<li>good_opinion->Here's a hint for you, [RECIPIENT_nameDef] — when you believe you saw a good move, look for a better one...</li>
+					<li>good_opinion->Well, [RECIPIENT_nameDef]... You may learn much more from a game you lose than from a game you win.</li>
 
-				<li>random_1_5->1</li>
-				<li>random_1_5->2</li>
-				<li>random_1_5->3</li>
-				<li>random_1_5->4</li>
-				<li>random_1_5->5</li>
+					<li>random_1_5->1</li>
+					<li>random_1_5->2</li>
+					<li>random_1_5->3</li>
+					<li>random_1_5->4</li>
+					<li>random_1_5->5</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--chess — comment-->
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===chess — comment=== -->
 		<defName>Chess_comment</defName>
 		<label>chess — comment</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->...</li>
-				<li>bad_opinion->Hey, [RECIPIENT_nameDef] — less talking, more playing.</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->I agree with that, [RECIPIENT_nameDef].</li>
-				<li>good_opinion->A nice chess quote, [RECIPIENT_nameDef].</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->...</li>
+					<li>bad_opinion->Hey, [RECIPIENT_nameDef] — less talking, more playing.</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->I agree with that, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->A nice chess quote, [RECIPIENT_nameDef].</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--going to bed-->
+
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===going to bed=== -->
 		<defName>GoingToBed</defName>
 		<label>going to bed</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
+				<!-- ===Bad opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->...</li>
-				<li>bad_opinion(INITIATOR_opinion&lt;-50)->May you wake up cold and stiff.</li>
-				<!--Good opinion of recipient-->
+					<li>bad_opinion->...</li>
+					<li>bad_opinion(INITIATOR_opinion&lt;-50)->May you wake up cold and stiff.</li>
+				<!-- ===Good opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Have a good rest, [RECIPIENT_nameDef].</li>
-				<li>good_opinion->Sleep well, [RECIPIENT_nameDef].</li>
-				<li>good_opinion->Rest well, [RECIPIENT_nameDef].</li>
-				<li>good_opinion->I wish you a good rest, [RECIPIENT_nameDef].</li>
-				<li>good_opinion(DAYPERIOD==evening)->Good night, [RECIPIENT_nameDef].</li>
-				<li>good_opinion(DAYPERIOD==night)->Good night, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Have a good rest, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Sleep well, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Rest well, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->I wish you a good rest, [RECIPIENT_nameDef].</li>
+					<li>good_opinion(DAYPERIOD==evening)->Good night, [RECIPIENT_nameDef].</li>
+					<li>good_opinion(DAYPERIOD==night)->Good night, [RECIPIENT_nameDef].</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--Cleaning-->
+
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===Cleaning=== -->
 		<defName>Cleaning</defName>
 		<label>cleaning</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==hideous environment,priority=1)->Thanks, [RECIPIENT_nameDef] — this place looks [ugly], [cleaning] it certainly helps!</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==ugly environment,priority=1)->Thanks, [RECIPIENT_nameDef] — this place looks [unsightly], [cleaning] it helps for sure!</li>
-					<li>good_opinion->Thanks, [RECIPIENT_nameDef] — this place certainly needs some [cleaning].</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==pretty environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so nice — let's keep it [clean]!</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==beautiful environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so beautiful — let's keep it [clean]!</li>
-					<li>good_opinion(INITIATOR_thoughtLabel==gorgeous environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so gorgeous — let's keep it [clean]!</li>
-				<!--WILDCARDS-->
-				<!--clean-->
-				<li>clean->clean</li>
-				<li>clean->tidy</li>
-				<li>clean->spotless</li>							
-				<!--cleaning (action) -->
-				<li>cleaning->cleaning</li>
-				<li>cleaning->scrubbing</li>
-				<li>cleaning->washing</li>
-				<!--ugly-->
-				<li>ugly->ugly</li>
-				<li>ugly->hideous</li>
-				<li>ugly->horrible</li>
-				<li>ugly->frightful</li>
-				<li>ugly->grisly</li>
-				<li>ugly->gruesome</li>
-				<li>ugly->grim</li>
-				<li>ugly(INITIATOR_intellectual_level>=5)->repugnant</li>
-				<li>ugly(INITIATOR_intellectual_level>=5)->vile</li>
-				<li>ugly(INITIATOR_intellectual_level>=5)->grotesque</li>
-				<!--unsightly-->
-				<li>unsightly->unsightly</li>
-				<li>unsightly->messy</li>
-				<li>unsightly->shabby</li>
-				<li>unsightly->sloppy</li>				
-				<li>unsightly->trashy</li>
-				<li>unsightly->trashed</li>
-				<li>unsightly->unkempt</li>
-				<li>unsightly(INITIATOR_intellectual_level>=5)->unappealing</li>
-				<li>unsightly(INITIATOR_intellectual_level>=5)->unattractive</li>				
-				<li>unsightly(INITIATOR_intellectual_level>=10)->bedraggled</li>				
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==hideous environment,priority=1)->Thanks, [RECIPIENT_nameDef] — this place looks [ugly], [cleaning] it certainly helps!</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==ugly environment,priority=1)->Thanks, [RECIPIENT_nameDef] — this place looks [unsightly], [cleaning] it helps for sure!</li>
+						<li>good_opinion->Thanks, [RECIPIENT_nameDef] — this place certainly needs some [cleaning].</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==pretty environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so nice — let's keep it [clean]!</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==beautiful environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so beautiful — let's keep it [clean]!</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==gorgeous environment,priority=1)->Thanks, [RECIPIENT_nameDef]. This place is so gorgeous — let's keep it [clean]!</li>
+				<!-- ===WILDCARDS=== -->
+				<!-- ===clean=== -->
+					<li>clean->clean</li>
+					<li>clean->tidy</li>
+					<li>clean->spotless</li>							
+				<!-- ===cleaning (action)=== -->
+					<li>cleaning->cleaning</li>
+					<li>cleaning->scrubbing</li>
+					<li>cleaning->washing</li>
+				<!-- ===ugly=== -->
+					<li>ugly->ugly</li>
+					<li>ugly->hideous</li>
+					<li>ugly->horrible</li>
+					<li>ugly->frightful</li>
+					<li>ugly->grisly</li>
+					<li>ugly->gruesome</li>
+					<li>ugly->grim</li>
+					<li>ugly(INITIATOR_intellectual_level>=5)->repugnant</li>
+					<li>ugly(INITIATOR_intellectual_level>=5)->vile</li>
+					<li>ugly(INITIATOR_intellectual_level>=5)->grotesque</li>
+				<!-- ===unsightly=== -->
+					<li>unsightly->unsightly</li>
+					<li>unsightly->messy</li>
+					<li>unsightly->shabby</li>
+					<li>unsightly->sloppy</li>				
+					<li>unsightly->trashy</li>
+					<li>unsightly->trashed</li>
+					<li>unsightly->unkempt</li>
+					<li>unsightly(INITIATOR_intellectual_level>=5)->unappealing</li>
+					<li>unsightly(INITIATOR_intellectual_level>=5)->unattractive</li>				
+					<li>unsightly(INITIATOR_intellectual_level>=10)->bedraggled</li>				
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply"><!--Cloudwatching-->
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===Cloudwatching=== -->
 		<defName>CloudWatching</defName>
 		<label>cloudwatching</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Idle-->
-				<li>r_logentry(INITIATOR_jobDefName==GotoWander,priority=1)->[idle]</li>
-				<li>r_logentry(INITIATOR_jobDefName==Ingest,priority=1)->[idle]</li>
-				<li>r_logentry(INITIATOR_jobDefName==Wait_Wander,priority=1)->[idle]</li>
-				<li>r_logentry(INITIATOR_jobDefName==Skygaze,priority=1)->[idle]</li>				
-				<li>r_logentry(INITIATOR_jobDefName==SocialRelax,priority=1)->[idle]</li>
-				<li>r_logentry(INITIATOR_jobDefName==Sow,priority=1)->[idle]</li>
-				<li>r_logentry(INITIATOR_jobDefName==StandAndBeSociallyActive,priority=1)->[idle]</li>
-					<!--Bad opinion of recipient-->
-					<li>idle(INITIATOR_opinion&lt;0)->No it doesn't, [RECIPIENT_nameDef].</li>
-					<li>idle(INITIATOR_opinion&lt;0)->It actually reminds me more of the way I'd rather be right now — far from annoying people like you.</li>
-					<!--Good opinion of recipient-->
-					<li>idle(INITIATOR_opinion>=0)->Yes... wow, you're right — how funny!</li>
-					<li>idle(INITIATOR_opinion>=0)->Mmm... you might be right — but I'd rather say it looks like [a_cloudshape].</li>
-						<li>a_cloudshape->a [Animal]</li>
-						<li>a_cloudshape->a [Apparel]</li>
-						<li>a_cloudshape->a [TreeType]</li>
-						<li>a_cloudshape->a [Vegetable]</li>
-						<li>a_cloudshape->a [Weapon]</li>
-				<!--Busy-->
-				<li>r_logentry->[busy]</li>
-					<!--Bad opinion of recipient-->
-					<li>busy(INITIATOR_opinion&lt;0)->...</li>
-					<!--Good opinion of recipient-->
-					<li>busy(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef] — I'm busy right now.</li>
-					<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>				
+				<!-- ===Idle=== -->
+					<li>r_logentry(INITIATOR_jobDefName==GotoWander,priority=1)->[idle]</li>
+					<li>r_logentry(INITIATOR_jobDefName==Ingest,priority=1)->[idle]</li>
+					<li>r_logentry(INITIATOR_jobDefName==Wait_Wander,priority=1)->[idle]</li>
+					<li>r_logentry(INITIATOR_jobDefName==Skygaze,priority=1)->[idle]</li>				
+					<li>r_logentry(INITIATOR_jobDefName==SocialRelax,priority=1)->[idle]</li>
+					<li>r_logentry(INITIATOR_jobDefName==Sow,priority=1)->[idle]</li>
+					<li>r_logentry(INITIATOR_jobDefName==StandAndBeSociallyActive,priority=1)->[idle]</li>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>idle(INITIATOR_opinion&lt;0)->No it doesn't, [RECIPIENT_nameDef].</li>
+						<li>idle(INITIATOR_opinion&lt;0)->It actually reminds me more of the way I'd rather be right now — far from annoying people like you.</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>idle(INITIATOR_opinion>=0)->Yes... wow, you're right — how funny!</li>
+						<li>idle(INITIATOR_opinion>=0)->Mmm... you might be right — but I'd rather say it looks like [a_cloudshape].</li>
+							<li>a_cloudshape->a [Animal]</li>
+							<li>a_cloudshape->a [Apparel]</li>
+							<li>a_cloudshape->a [TreeType]</li>
+							<li>a_cloudshape->a [Vegetable]</li>
+							<li>a_cloudshape->a [Weapon]</li>
+				<!-- ===Busy=== -->
+					<li>r_logentry->[busy]</li>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>busy(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>busy(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef] — I'm busy right now.</li>
+						<li>busy(INITIATOR_opinion>=0)->Uh? Ah... well.. sorry I missed it, [RECIPIENT_nameDef].</li>				
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 			
-	<InteractionDef ParentName="SpeakUpReply"><!--butchering skill-->
-		<defName>Job_ButcheringSkill</defName>
-		<label>job — butchering skill</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion(INITIATOR_cooking_level>=6)->Thank you, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion(INITIATOR_cooking_level&lt;6)->I'm sorry, [RECIPIENT_nameDef] — I'm doing the best I can!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--playing instrument — compliment-->
+	<!-- ===butchering skill=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Job_ButcheringSkill</defName>
+			<label>job — butchering skill</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_cooking_level>=6)->Thank you, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion(INITIATOR_cooking_level&lt;6)->I'm sorry, [RECIPIENT_nameDef] — I'm doing the best I can!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===playing instrument — compliment=== -->
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Job_PlayMusic_compliment</defName>
 		<label>job — playing — compliment</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
+				<!-- ===Bad opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
+				<!-- ===Good opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion>=0)->Thank you, [RECIPIENT_nameDef]!</li>
 				<li>r_logentry(INITIATOR_opinion>=0)->Thanks, [RECIPIENT_nameDef]!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--playing instrument — critic-->
+	
+	<!-- ===playing instrument — critic=== -->
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Job_PlayMusic_critic</defName>
 		<label>job — playing — critic</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
+				<!-- ===Bad opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<li>r_logentry(INITIATOR_opinion&lt;0)->Well, [RECIPIENT_nameDef] — nobody forced you to listen in the first place.</li>
 				<li>r_logentry(INITIATOR_opinion&lt;0)->If you don't like it, [RECIPIENT_nameDef], just go and get busy somewhere else.</li>
-				<!--Good opinion of recipient-->
+				<!-- ===Good opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion>=0)->I'm sorry, [RECIPIENT_nameDef] — I obviously need more practice.</li>
 				<li>r_logentry(INITIATOR_opinion>=0)->I'm sorry, [RECIPIENT_nameDef] — I'll try to do better.</li>
 			</rulesStrings>
 		</logRulesInitiator>
-	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply"><!--vomiting-->
-		<defName>Job_Vomiting</defName>
-		<label>job — vomiting</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef]...</li>
-			</rulesStrings>
-		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--vomiting — help offer-->
-		<defName>Job_Vomiting_help</defName>
-		<label>job — vomiting — help offer</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->It's ok, [RECIPIENT_nameDef] — thanks...</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>	
+
+	<!-- ===vomiting=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Job_Vomiting</defName>
+			<label>job — vomiting</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->Sorry, [RECIPIENT_nameDef]...</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===vomiting — help offer=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Job_Vomiting_help</defName>
+			<label>job — vomiting — help offer</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->It's ok, [RECIPIENT_nameDef] — thanks...</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===Build Snowman=== -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Job_BuildSnowman</defName>
 		<label>job - build snowman</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Why, thank you [RECIPIENT_nameDef]!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--shooting - hit-->
-		<defName>ShootingHit</defName>
-		<label>shooting — hit</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->You just got lucky!</li>
-				<li>bad_opinion->Lucky...</li>
-				<li>bad_opinion->Small victories, big failures...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Great job, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Good shot, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Deadshot, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Wow, [RECIPIENT_nameDef] — good aim!</li>
-				<li>good_opinion(RECIPIENT_gender==Male,INITIATOR_intellectual_level&lt;5)->Atta boy!</li>
-				<li>good_opinion(RECIPIENT_gender==Female,INITIATOR_intellectual_level&lt;5)->Atta girl!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!--shooting - miss-->
-		<defName>ShootingMiss</defName>
-		<label>shooting — miss</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->...</li>
-				<li>bad_opinion->Lame...</li>
-				<li>bad_opinion->Pathetic...</li>
-				<li>bad_opinion->You really do suck at that, huh.</li>
-				<li>bad_opinion->Seems like you can't do anything right, [RECIPIENT_nameDef].</li>
-				<li>bad_opinion->So close — yet so far...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Try again, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Oh, aim a little more to the [left_right] next time.</li>
-				<li>good_opinion->Maybe try from a different angle...</li>
-				<li>good_opinion->Close one!</li>
-				<li>good_opinion->Missed by a hair!</li>
-				<li>left_right->left</li>
-				<li>left_right->right</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>		
-	
-
-<!-- ==MOOD== -->
-	<InteractionDef ParentName="SpeakUpReply"><!-- Calm -->
-		<defName>Calm</defName>
-		<label>react to — calm</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion(INITIATOR_mood&lt;0.4)->[stressed]</li>
-				<li>bad_opinion(INITIATOR_mood&lt;0.4,INITIATOR_trait==jealous,priority=1)->[stressed]</li>
-				<li>bad_opinion->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion(INITIATOR_mood&lt;0.4,priority=1)->...</li>
-				<li>good_opinion->[calm]</li>
-				
-				<!--WILDCARDS-->
-				<li>stressed(INITIATOR_mood>0.3)->*frowns*</li>
-				<li>stressed->*scowls*</li>
-				<li>stressed->*glares*</li>
-				<li>stressed->*glowers*</li>
-				<li>stressed(INITIATOR_mood&lt;=0.2)->*mutters angrily*</li>
-				
-				<li>calm->*smiles*</li>
-				<li>calm(INITIATOR_mood>=0.6)->*beams a smile to [RECIPIENT_nameDef]*</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	
-	<InteractionDef ParentName="SpeakUpReply"><!-- Stressed -->
-		<defName>Stressed</defName>
-		<label>react to — stressed</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion(INITIATOR_mood&lt;0.4,priority=1)->*scowls back*</li>
-				<li>bad_opinion->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion(INITIATOR_mood&lt;0.4,priority=1)->...</li>
-				<li>good_opinion->*smiles back*</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>	
-
-	<InteractionDef ParentName="SpeakUpReply"><!-- Singing -->
-		<defName>Singing</defName>
-		<label>react to — singing</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->...</li>
-				<li>bad_opinion(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
-				<li>bad_opinion(RECIPIENT_trait==annoying voice)->Bravo, [RECIPIENT_nameDef] — that was a perfect impression of a squealing pig!</li>
-				<li>bad_opinion(RECIPIENT_artistic_level&lt;5)->Stop that, [RECIPIENT_nameDef] — my ears are bleeding already!</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion(RECIPIENT_trait==annoying voice)->Err, [RECIPIENT_nameDef]... have you considered playing an instrument instead?</li>
-				<li>good_opinion(RECIPIENT_artistic_level&lt;5)->[unskilled]</li>
-					<li>unskilled->...</li>
-					<li>unskilled(INITIATOR_artistic_level>=5)->Mmm, not bad [RECIPIENT_nameDef] — but you definitely need some singing lessons...</li>
-				<li>good_opinion(RECIPIENT_artistic_level>=5)->[calm]</li>
-					<li>calm->*smiles*</li>
-					<li>calm(INITIATOR_mood>=0.6)->*beams a smile to [RECIPIENT_nameDef]*</li>
-				<li>good_opinion(RECIPIENT_artistic_level>=10)->Bravo, [RECIPIENT_nameDef] — what a beautiful voice!</li>
-				<li>good_opinion(RECIPIENT_artistic_level>=10)->Your voice is so pleasant to hear, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion(RECIPIENT_artistic_level>=15)->That was some amazing singing, [RECIPIENT_nameDef] — I loved it!</li>
-				<li>good_opinion(RECIPIENT_artistic_level>=15)->Ahh... I just love hearing your voice, [RECIPIENT_nameDef]!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	
-	<InteractionDef ParentName="SpeakUpReply"><!-- How are you -->
-		<defName>HowAreYou</defName>
-		<label>how are you</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!-- bad opinion -->
-				<li>r_logentry(INITIATOR_opinion&lt;-5)->[bad_opinion]</li>
-				<li>bad_opinion->Leave me alone, [RECIPIENT_nameDef]!</li>
-				<li>bad_opinion->Mind your business, [RECIPIENT_nameDef]!</li>
-				<li>bad_opinion->None of your business, [RECIPIENT_nameDef]!</li>
-				<li>bad_opinion->...</li>
-				<!-- decent or good opinion, but sick -->
-				<li>r_logentry(INITIATOR_opinion>=-5,INITIATOR_thoughtDefName==sick,priority=1)->[good_opinion_sick]</li>
-				<li>good_opinion_sick(INITIATOR_mood>=0.7)->I'm not feeling well, but I'm sure I'll recover soon! [whataboutyou]</li>
-				<li>good_opinion_sick(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm not feeling well, but I believe I'll recover soon. [whataboutyou]</li>
-				<li>good_opinion_sick(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I'm not feeling well.</li>
-				<li>good_opinion_sick(INITIATOR_mood&lt;0.3)->[furious] And on top of that, I'm sick!</li>				
-				<!-- decent or good opinion -->
-				<li>r_logentry(INITIATOR_opinion>=-5)->[good_opinion]</li>
-				<li>good_opinion(INITIATOR_mood>=0.7)->I'm feeling [great], thank you! [whataboutyou]</li>
-				<li>good_opinion(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm [fine], thanks. [whataboutyou]</li>
-				<li>good_opinion(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->[not_so_well]</li>
-				<li>good_opinion(INITIATOR_mood&lt;0.3)->[furious]</li>
-				<!-- WILDCARDS -->
-				<li>great->great</li>
-				<li>great->awesome</li>
-				<li>great->groovy</li>
-				<li>great->very well</li>
-				<li>fine->fine</li>
-				<li>fine->OK</li>
-				<li>fine->good</li>
-				<li>fine->doing fine</li>
-				<li>fine->doing well</li>
-				<li>not_so_well->Could be better...</li>
-				<li>not_so_well->Not so well...</li>
-				<li>not_so_well->So-so...</li>
-				<li>not_so_well->Not too bad...</li>
-				<li>not_so_well->I'm... OK, I guess.</li>
-				<li>not_so_well->Same old, same old...</li>
-				<li>furious->I hate my life!</li>
-				<li>furious->I'm sick and tired of my life!</li>
-				<li>furious->I feel terrible!</li>
-				<li>furious->I'm losing it!</li>
-				<li>furious->I'm outraged!</li>
-				<li>furious->I'm pissed off!</li>
-				<li>furious(INITIATOR_intellectual_level>=5)->I'm seething!</li>
-				<li>furious(INITIATOR_intellectual_level>=5)->I'm wrathful!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm beside myself!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm irate!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm aggrieved!</li>
-				<li>furious(INITIATOR_intellectual_level>=15)->I'm in high dudgeon!</li>
-				<li>furious(INITIATOR_trait==abrasive)->I'm feeling like shit, OK?!</li>
-				<li>furious(INITIATOR_trait==abrasive)->I just fucking hate my shitty life!</li>
-				<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or I might punch you in the face!</li>
-				<li>furious(INITIATOR_trait==brawler)->I'm so pissed off! I need something to smash!</li>
-				<li>furious(INITIATOR_trait==pyromaniac)->If my anger could burn things around me, this whole area would turn to a desert wasteland.</li>
-				<li>furious(INITIATOR_trait==tortured artist)->Nobody will ever understand the rough maelstrom swirling inside my tortured soul!</li>
-				<!-- FOLLOWUP -->
-				<li>whataboutyou(INITIATOR_opinion>=5,tag=HowAreYou2)->What about you?</li>
-				<li>whataboutyou(INITIATOR_opinion&lt;5)-></li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply"><!-- How are you 2 -->
-		<defName>HowAreYou2</defName>
-		<label>reply to HowAreYou</label>
-		<logRulesInitiator>
-			<rulesStrings>
-			<!--Since the starting chitchat requires its Initiator to have positive opinion of Recipient, here we certainly have INITIATOR_opinion>=0-->
-			<!--It's almost a identical copy of HowAreYou, but with no "bad opinion", [whataboutyou] and "followup" sections.-->
-				<li>r_logentry(INITIATOR_mood>=0.7)->I'm feeling [great], thank you!</li>
-				<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm [fine], thanks.</li>
-				<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->[not_so_well]</li>
-				<li>r_logentry(INITIATOR_mood&lt;0.3)->[furious]</li>
-				<!-- WILDCARDS -->
-				<li>great->great</li>
-				<li>great->awesome</li>
-				<li>great->groovy</li>
-				<li>great->very well</li>
-				<li>fine->fine</li>
-				<li>fine->OK</li>
-				<li>fine->good</li>
-				<li>fine->doing fine</li>
-				<li>fine->doing well</li>
-				<li>not_so_well->Could be better...</li>
-				<li>not_so_well->Not so well...</li>
-				<li>not_so_well->So-so...</li>
-				<li>not_so_well->Not too bad...</li>
-				<li>not_so_well->I'm... OK, I guess.</li>
-				<li>not_so_well->Same old, same old...</li>
-				<li>furious->I hate my life!</li>
-				<li>furious->I'm sick and tired of my life!</li>
-				<li>furious->I feel terrible!</li>
-				<li>furious->I'm losing it!</li>
-				<li>furious->I'm outraged!</li>
-				<li>furious->I'm pissed off!</li>
-				<li>furious(INITIATOR_intellectual_level>=5)->I'm resentful of recent events!</li>
-				<li>furious(INITIATOR_intellectual_level>=5)->I'm wratful!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm beside myself!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm irate!</li>
-				<li>furious(INITIATOR_intellectual_level>=10)->I'm aggrieved!</li>
-				<li>furious(INITIATOR_intellectual_level>=15)->I'm in high dudgeon!</li>
-				<li>furious(INITIATOR_trait==abrasive)->I'm feeling like shit, OK?!</li>
-				<li>furious(INITIATOR_trait==abrasive)->I just fucking hate my shitty life!</li>
-				<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or I might punch you in the face!</li>
-				<li>furious(INITIATOR_trait==brawler)->I'm so pissed off! I need something to smash!</li>
-				<li>furious(INITIATOR_trait==pyromaniac)->If my anger could burn things around me, this whole area would turn to a desert wasteland.</li>
-				<li>furious(INITIATOR_trait==tortured artist)->Nobody will ever understand the rough maelstrom swirling inside my tortured soul!</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Why, thank you [RECIPIENT_nameDef]!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 
-<!-- ==TRAITS== -->
-	<InteractionDef ParentName="SpeakUpReply"><!-- ascetic — wisdom -->
-		<defName>AsceticWisdom</defName>
-		<label>ascetic — wisdom</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Wow, that was deep.</li>
-				<li>good_opinion->That was heavy, [RECIPIENT_nameDef] — but I dig it.</li>
-				<li>good_opinion(INITIATOR_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef].</li>
-				<li>good_opinion(INITIATOR_trait==greedy,priority=1)->...</li>
-				<li>good_opinion(INITIATOR_trait==jealous,priority=1)->...</li>
-				<li>good_opinion(INITIATOR_trait==gourmand,priority=1)->...</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
+	<!-- ===shooting - hit=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>ShootingHit</defName>
+			<label>shooting — hit</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion->You just got lucky!</li>
+						<li>bad_opinion->Lucky...</li>
+						<li>bad_opinion->Small victories, big failures...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion->Great job, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion->Good shot, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion->Deadshot, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion->Wow, [RECIPIENT_nameDef] — good aim!</li>
+						<li>good_opinion(RECIPIENT_gender==Male,INITIATOR_intellectual_level&lt;5)->Atta boy!</li>
+						<li>good_opinion(RECIPIENT_gender==Female,INITIATOR_intellectual_level&lt;5)->Atta girl!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
 
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>LuckyFuture</defName>
-		<label>lucky future</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->...</li>
-				<li>bad_opinion->Lucky? No way — your very presence alone is a bad sign!</li>
-				<li>bad_opinion->I don't know about yours, [RECIPIENT_nameDef] — but mine will be once you're far far away!</li>
-				<li>bad_opinion->Save your useless home-made horoscope for who cares, [RECIPIENT_nameDef].</li>
-				<li>bad_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment_hostile]</li>
-				<li>bad_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment_hostile]</li>
-				<li>anti_comment_hostile->I have a feeling too, [RECIPIENT_nameDef] — that you're going to be proven wrong soon!</li>
-				<li>anti_comment_hostile->Your irrational hopes are as childish as dangerous. Grow up, [RECIPIENT_nameDef] — life isn't a playground!</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>				
-				<li>good_opinion->Well, [RECIPIENT_nameDef] — let's hope you're right!</li>
-				<li>good_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment]</li>
-				<li>good_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment]</li>
-				<li>anti_comment->I envy your optimism, [RECIPIENT_nameDef].</li>
-				<li>anti_comment->I know you mean well, [RECIPIENT_nameDef] — but I disagree. We should be ready for the worst.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>	
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>PsyVision</defName>
-		<label>Psychic vision</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->Mmm... I wonder what this is actually about.</li>
-				<li>r_logentry->Mmm... I wonder if this means anything.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>PsyVisionGood</defName>
-		<label>Psychic vision</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->Wow — that's inspiring!</li>
-				<li>r_logentry->I believe that's a good omen!</li>
-				<li>r_logentry->I believe we're in for some good event, then!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
-		<defName>PsyVisionBad</defName>
-		<label>Psychic vision</label>
-		<logRulesInitiator>
-			<rulesStrings>
-				<li>r_logentry->That's worrisome...</li>
-				<li>r_logentry->Mmm — quite unsettling...</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
+	<!-- ===shooting - miss=== -->	
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>ShootingMiss</defName>
+			<label>shooting — miss</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion->...</li>
+						<li>bad_opinion->Lame...</li>
+						<li>bad_opinion->Pathetic...</li>
+						<li>bad_opinion->You really do suck at that, huh.</li>
+						<li>bad_opinion->Seems like you can't do anything right, [RECIPIENT_nameDef].</li>
+						<li>bad_opinion->So close — yet so far...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion->Try again, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion->Oh, aim a little more to the [left_right] next time.</li>
+						<li>good_opinion->Maybe try from a different angle...</li>
+						<li>good_opinion->Close one!</li>
+						<li>good_opinion->Missed by a hair!</li>
+						<li>left_right->left</li>
+						<li>left_right->right</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>		
 	
 
+<!-- ==MOOD=== -->
+	<!-- ===Calm=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Calm</defName>
+			<label>react to — calm</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion(INITIATOR_mood&lt;0.4)->[stressed]</li>
+						<li>bad_opinion(INITIATOR_mood&lt;0.4,INITIATOR_trait==jealous,priority=1)->[stressed]</li>
+						<li>bad_opinion->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_mood&lt;0.4,priority=1)->...</li>
+						<li>good_opinion->[calm]</li>
+						
+					<!-- ===WILDCARDS=== -->
+						<li>stressed(INITIATOR_mood>0.3)->*frowns*</li>
+						<li>stressed->*scowls*</li>
+						<li>stressed->*glares*</li>
+						<li>stressed->*glowers*</li>
+						<li>stressed(INITIATOR_mood&lt;=0.2)->*mutters angrily*</li>
+						
+						<li>calm->*smiles*</li>
+						<li>calm(INITIATOR_mood>=0.6)->*beams a smile to [RECIPIENT_nameDef]*</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===Stressed=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Stressed</defName>
+			<label>react to — stressed</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion(INITIATOR_mood&lt;0.4,priority=1)->*scowls back*</li>
+						<li>bad_opinion->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_mood&lt;0.4,priority=1)->...</li>
+						<li>good_opinion->*smiles back*</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>	
+
+	<!-- ===Singing=== -->	
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Singing</defName>
+			<label>react to — singing</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion->...</li>
+						<li>bad_opinion(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
+						<li>bad_opinion(RECIPIENT_trait==annoying voice)->Bravo, [RECIPIENT_nameDef] — that was a perfect impression of a squealing pig!</li>
+						<li>bad_opinion(RECIPIENT_artistic_level&lt;5)->Stop that, [RECIPIENT_nameDef] — my ears are bleeding already!</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(RECIPIENT_trait==annoying voice)->Err, [RECIPIENT_nameDef]... have you considered playing an instrument instead?</li>
+						<li>good_opinion(RECIPIENT_artistic_level&lt;5)->[unskilled]</li>
+							<li>unskilled->...</li>
+							<li>unskilled(INITIATOR_artistic_level>=5)->Mmm, not bad [RECIPIENT_nameDef] — but you definitely need some singing lessons...</li>
+						<li>good_opinion(RECIPIENT_artistic_level>=5)->[calm]</li>
+							<li>calm->*smiles*</li>
+							<li>calm(INITIATOR_mood>=0.6)->*beams a smile to [RECIPIENT_nameDef]*</li>
+						<li>good_opinion(RECIPIENT_artistic_level>=10)->Bravo, [RECIPIENT_nameDef] — what a beautiful voice!</li>
+						<li>good_opinion(RECIPIENT_artistic_level>=10)->Your voice is so pleasant to hear, [RECIPIENT_nameDef]!</li>
+						<li>good_opinion(RECIPIENT_artistic_level>=15)->That was some amazing singing, [RECIPIENT_nameDef] — I loved it!</li>
+						<li>good_opinion(RECIPIENT_artistic_level>=15)->Ahh... I just love hearing your voice, [RECIPIENT_nameDef]!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+	
+	<!-- ===How are you=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>HowAreYou</defName>
+			<label>how are you</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===bad opinion=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;-5)->[bad_opinion]</li>
+						<li>bad_opinion->Leave me alone, [RECIPIENT_nameDef]!</li>
+						<li>bad_opinion->Mind your business, [RECIPIENT_nameDef]!</li>
+						<li>bad_opinion->None of your business, [RECIPIENT_nameDef]!</li>
+						<li>bad_opinion->...</li>
+					<!-- ===decent or good opinion, but sick=== -->
+						<li>r_logentry(INITIATOR_opinion>=-5,INITIATOR_thoughtDefName==sick,priority=1)->[good_opinion_sick]</li>
+						<li>good_opinion_sick(INITIATOR_mood>=0.7)->I'm not feeling well, but I'm sure I'll recover soon! [whataboutyou]</li>
+						<li>good_opinion_sick(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm not feeling well, but I believe I'll recover soon. [whataboutyou]</li>
+						<li>good_opinion_sick(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I'm not feeling well.</li>
+						<li>good_opinion_sick(INITIATOR_mood&lt;0.3)->[furious] And on top of that, I'm sick!</li>				
+					<!-- ===decent or good opinion=== -->
+						<li>r_logentry(INITIATOR_opinion>=-5)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_mood>=0.7)->I'm feeling [great], thank you! [whataboutyou]</li>
+						<li>good_opinion(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm [fine], thanks. [whataboutyou]</li>
+						<li>good_opinion(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->[not_so_well]</li>
+						<li>good_opinion(INITIATOR_mood&lt;0.3)->[furious]</li>
+					<!-- ===WILDCARDS=== -->
+						<li>great->great</li>
+						<li>great->awesome</li>
+						<li>great->groovy</li>
+						<li>great->very well</li>
+						<li>fine->fine</li>
+						<li>fine->OK</li>
+						<li>fine->good</li>
+						<li>fine->doing fine</li>
+						<li>fine->doing well</li>
+						<li>not_so_well->Could be better...</li>
+						<li>not_so_well->Not so well...</li>
+						<li>not_so_well->So-so...</li>
+						<li>not_so_well->Not too bad...</li>
+						<li>not_so_well->I'm... OK, I guess.</li>
+						<li>not_so_well->Same old, same old...</li>
+						<li>furious->I hate my life!</li>
+						<li>furious->I'm sick and tired of my life!</li>
+						<li>furious->I feel terrible!</li>
+						<li>furious->I'm losing it!</li>
+						<li>furious->I'm outraged!</li>
+						<li>furious->I'm pissed off!</li>
+						<li>furious(INITIATOR_intellectual_level>=5)->I'm seething!</li>
+						<li>furious(INITIATOR_intellectual_level>=5)->I'm wrathful!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm beside myself!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm irate!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm aggrieved!</li>
+						<li>furious(INITIATOR_intellectual_level>=15)->I'm in high dudgeon!</li>
+						<li>furious(INITIATOR_trait==abrasive)->I'm feeling like shit, OK?!</li>
+						<li>furious(INITIATOR_trait==abrasive)->I just fucking hate my shitty life!</li>
+						<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or I might punch you in the face!</li>
+						<li>furious(INITIATOR_trait==brawler)->I'm so pissed off! I need something to smash!</li>
+						<li>furious(INITIATOR_trait==pyromaniac)->If my anger could burn things around me, this whole area would turn to a desert wasteland.</li>
+						<li>furious(INITIATOR_trait==tortured artist)->Nobody will ever understand the rough maelstrom swirling inside my tortured soul!</li>
+					<!-- ===FOLLOWUP=== -->
+						<li>whataboutyou(INITIATOR_opinion>=5,tag=HowAreYou2)->What about you?</li>
+						<li>whataboutyou(INITIATOR_opinion&lt;5)-></li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===How are you 2=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>HowAreYou2</defName>
+			<label>reply to HowAreYou</label>
+			<logRulesInitiator>
+				<rulesStrings>
+				<!-- ===Since the starting chitchat requires its Initiator to have positive opinion of Recipient, here we certainly have INITIATOR_opinion>=0=== -->
+				<!-- ===It's almost a identical copy of HowAreYou, but with no "bad opinion", [whataboutyou] and "followup" sections.=== -->
+					<li>r_logentry(INITIATOR_mood>=0.7)->I'm feeling [great], thank you!</li>
+					<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm [fine], thanks.</li>
+					<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->[not_so_well]</li>
+					<li>r_logentry(INITIATOR_mood&lt;0.3)->[furious]</li>
+					<!-- === WILDCARDS=== -->
+						<li>great->great</li>
+						<li>great->awesome</li>
+						<li>great->groovy</li>
+						<li>great->very well</li>
+						<li>fine->fine</li>
+						<li>fine->OK</li>
+						<li>fine->good</li>
+						<li>fine->doing fine</li>
+						<li>fine->doing well</li>
+						<li>not_so_well->Could be better...</li>
+						<li>not_so_well->Not so well...</li>
+						<li>not_so_well->So-so...</li>
+						<li>not_so_well->Not too bad...</li>
+						<li>not_so_well->I'm... OK, I guess.</li>
+						<li>not_so_well->Same old, same old...</li>
+						<li>furious->I hate my life!</li>
+						<li>furious->I'm sick and tired of my life!</li>
+						<li>furious->I feel terrible!</li>
+						<li>furious->I'm losing it!</li>
+						<li>furious->I'm outraged!</li>
+						<li>furious->I'm pissed off!</li>
+						<li>furious(INITIATOR_intellectual_level>=5)->I'm resentful of recent events!</li>
+						<li>furious(INITIATOR_intellectual_level>=5)->I'm wratful!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm beside myself!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm irate!</li>
+						<li>furious(INITIATOR_intellectual_level>=10)->I'm aggrieved!</li>
+						<li>furious(INITIATOR_intellectual_level>=15)->I'm in high dudgeon!</li>
+						<li>furious(INITIATOR_trait==abrasive)->I'm feeling like shit, OK?!</li>
+						<li>furious(INITIATOR_trait==abrasive)->I just fucking hate my shitty life!</li>
+						<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or I might punch you in the face!</li>
+						<li>furious(INITIATOR_trait==brawler)->I'm so pissed off! I need something to smash!</li>
+						<li>furious(INITIATOR_trait==pyromaniac)->If my anger could burn things around me, this whole area would turn to a desert wasteland.</li>
+						<li>furious(INITIATOR_trait==tortured artist)->Nobody will ever understand the rough maelstrom swirling inside my tortured soul!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+<!-- ===TRAITS=== -->
+	<!-- ===ascetic — wisdom=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>AsceticWisdom</defName>
+			<label>ascetic — wisdom</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion->Wow, that was deep.</li>
+						<li>good_opinion->That was heavy, [RECIPIENT_nameDef] — but I dig it.</li>
+						<li>good_opinion(INITIATOR_trait==ascetic,priority=1)->Wise words, [RECIPIENT_nameDef].</li>
+						<li>good_opinion(INITIATOR_trait==greedy,priority=1)->...</li>
+						<li>good_opinion(INITIATOR_trait==jealous,priority=1)->...</li>
+						<li>good_opinion(INITIATOR_trait==gourmand,priority=1)->...</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===Lucky Future=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>LuckyFuture</defName>
+			<label>lucky future</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion->...</li>
+						<li>bad_opinion->Lucky? No way — your very presence alone is a bad sign!</li>
+						<li>bad_opinion->I don't know about yours, [RECIPIENT_nameDef] — but mine will be once you're far far away!</li>
+						<li>bad_opinion->Save your useless home-made horoscope for who cares, [RECIPIENT_nameDef].</li>
+						<li>bad_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment_hostile]</li>
+						<li>bad_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment_hostile]</li>
+						<li>anti_comment_hostile->I have a feeling too, [RECIPIENT_nameDef] — that you're going to be proven wrong soon!</li>
+						<li>anti_comment_hostile->Your irrational hopes are as childish as dangerous. Grow up, [RECIPIENT_nameDef] — life isn't a playground!</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>				
+						<li>good_opinion->Well, [RECIPIENT_nameDef] — let's hope you're right!</li>
+						<li>good_opinion(INITIATOR_trait==pessimist,priority=1)->[anti_comment]</li>
+						<li>good_opinion(INITIATOR_trait==depressive,priority=1)->[anti_comment]</li>
+						<li>anti_comment->I envy your optimism, [RECIPIENT_nameDef].</li>
+						<li>anti_comment->I know you mean well, [RECIPIENT_nameDef] — but I disagree. We should be ready for the worst.</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===PsyVision=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>PsyVision</defName>
+			<label>Psychic vision</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<li>r_logentry->Mmm... I wonder what this is actually about.</li>
+					<li>r_logentry->Mmm... I wonder if this means anything.</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>PsyVisionGood</defName>
+			<label>Psychic vision</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<li>r_logentry->Wow — that's inspiring!</li>
+					<li>r_logentry->I believe that's a good omen!</li>
+					<li>r_logentry->I believe we're in for some good event, then!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>PsyVisionBad</defName>
+			<label>Psychic vision</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<li>r_logentry->That's worrisome...</li>
+					<li>r_logentry->Mmm — quite unsettling...</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+		
+
 	
 	
-<!-- ============ SLIGHT ============ -->
+<!-- ===SLIGHT=== -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Slight_generic</defName>
 		<label>slight — react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->Ah, shut up you [fool]!</li>
-				<li>bad_opinion->Frankly, my dear [RECIPIENT_nameDef], I don't give a damn about what you think of me!</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Ouch — that hurt, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Are you serious, [RECIPIENT_nameDef]! [what_for]</li>
-				<li>good_opinion->Ouch, [RECIPIENT_nameDef]! [what_for]</li>
-				<li>good_opinion->Aww, [RECIPIENT_nameDef]! [what_for]</li>
-				<!-- WILDCARDS -->
-				<li>fool->[adj]fool</li>
-				<li>fool->[adj]idiot</li>
-				<li>fool->[adj]dimwit</li>
-				<li>fool->[adj]halfwit</li>
-				<li>fool->[adj]moron</li>
-				<li>fool->[adj]loon</li>
-				<li>adj-></li>
-				<li>adj->bumbling </li>
-				<li>adj->babbling </li>
-				<li>adj->stupid </li>
-				<li>adj(INITIATOR_intellectual_level>=5)->illiterate </li>
-				<li>adj(INITIATOR_intellectual_level>=5)->imbecile </li>
-				<li>adj(INITIATOR_intellectual_level>=5)->lamebrain </li>
-				<li>what_for->That was so uncalled for!</li>
-				<li>what_for->What was that for!?</li>
-				<li>what_for->What was that about!?</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->Ah, shut up you [fool]!</li>
+					<li>bad_opinion->Frankly, my dear [RECIPIENT_nameDef], I don't give a damn about what you think of me!</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Ouch — that hurt, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Are you serious, [RECIPIENT_nameDef]! [what_for]</li>
+					<li>good_opinion->Ouch, [RECIPIENT_nameDef]! [what_for]</li>
+					<li>good_opinion->Aww, [RECIPIENT_nameDef]! [what_for]</li>
+				<!-- ===WILDCARDS=== -->
+					<li>fool->[adj]fool</li>
+					<li>fool->[adj]idiot</li>
+					<li>fool->[adj]dimwit</li>
+					<li>fool->[adj]halfwit</li>
+					<li>fool->[adj]moron</li>
+					<li>fool->[adj]loon</li>
+					<li>adj-></li>
+					<li>adj->bumbling </li>
+					<li>adj->babbling </li>
+					<li>adj->stupid </li>
+					<li>adj(INITIATOR_intellectual_level>=5)->illiterate </li>
+					<li>adj(INITIATOR_intellectual_level>=5)->imbecile </li>
+					<li>adj(INITIATOR_intellectual_level>=5)->lamebrain </li>
+					<li>what_for->That was so uncalled for!</li>
+					<li>what_for->What was that for!?</li>
+					<li>what_for->What was that about!?</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 		
-<!-- ============ INSULT ============ -->
+<!-- ===INSULT=== -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>Insult_Ancestors</defName>
 		<label>insult — react to — ancestors</label>
@@ -656,146 +684,148 @@
 		<label>insult — react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!-- abrasive -->
-				<li>r_logentry(INITIATOR_trait==abrasive,priority=1)->[abrasive]</li>
-				<li>abrasive->Fuck off, [RECIPIENT_nameDef]!</li>
-				<!-- ascetic -->
-				<li>r_logentry(INITIATOR_trait==ascetic,priority=1)->[ascetic]</li>
-				<li>ascetic->Your worldly, low feelings barely affect me, [RECIPIENT_nameDef] — spare your energies for something wholesome.</li>
-				<li>ascetic->Your words are powerless, as they offend the image of me you have in your head — not me.</li>
-				<li>ascetic->These sour feelings come from unresolved problems you nurture inside yourself. Cleanse them, or be enslaved by them.</li>
-				<!-- kind -->
-				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[kind]</li>
-				<li>kind(RECIPIENT_mood&lt;0.4)->I'm sorry you're so upset, [RECIPIENT_nameDef].</li>
-				<li>kind->If insulting me makes you feel better, I'm always here to help you.</li>
-				<li>kind->I know you really didn't mean to say that, [RECIPIENT_nameDef] — I forgive you.</li>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->[reaction] [insult_you]</li>
-					<li>reaction->How dare you,</li>
-					<li>reaction->Put a sock in it,</li>
-					<li>reaction->Keep me out of that thin mouth of yours,</li>
-					<li>insult_you->you [bloody] [insult]!</li>
-					<li>insult_you(RECIPIENT_gender==Male)->you [bloody] son of a [bitch]!</li>
-					<!-- calm -->
-					<li>bad_opinion(INITIATOR_mood>=0.4)->Stop it, [RECIPIENT_nameDef] — spare the shame.</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Who pissed in your cereal, [RECIPIENT_nameDef]?</li>
-				<li>good_opinion->Aww, [RECIPIENT_nameDef]! What did I do to you!?</li>
-				<li>good_opinion->Watch it, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->You're crossing the line, [RECIPIENT_nameDef]!</li>
-				<li>good_opinion->Damn you, [RECIPIENT_nameDef]! What was that for!?</li>
-				<li>good_opinion->Aww, [RECIPIENT_nameDef]! What was that about!?</li>
+				<!-- ===abrasive=== -->
+					<li>r_logentry(INITIATOR_trait==abrasive,priority=1)->[abrasive]</li>
+					<li>abrasive->Fuck off, [RECIPIENT_nameDef]!</li>
+				<!-- ===ascetic=== -->
+					<li>r_logentry(INITIATOR_trait==ascetic,priority=1)->[ascetic]</li>
+					<li>ascetic->Your worldly, low feelings barely affect me, [RECIPIENT_nameDef] — spare your energies for something wholesome.</li>
+					<li>ascetic->Your words are powerless, as they offend the image of me you have in your head — not me.</li>
+					<li>ascetic->These sour feelings come from unresolved problems you nurture inside yourself. Cleanse them, or be enslaved by them.</li>
+				<!-- ===kind=== -->
+					<li>r_logentry(INITIATOR_trait==kind,priority=1)->[kind]</li>
+					<li>kind(RECIPIENT_mood&lt;0.4)->I'm sorry you're so upset, [RECIPIENT_nameDef].</li>
+					<li>kind->If insulting me makes you feel better, I'm always here to help you.</li>
+					<li>kind->I know you really didn't mean to say that, [RECIPIENT_nameDef] — I forgive you.</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->[reaction] [insult_you]</li>
+						<li>reaction->How dare you,</li>
+						<li>reaction->Put a sock in it,</li>
+						<li>reaction->Keep me out of that thin mouth of yours,</li>
+						<li>insult_you->you [bloody] [insult]!</li>
+						<li>insult_you(RECIPIENT_gender==Male)->you [bloody] son of a [bitch]!</li>
+					<!-- ===calm=== -->
+						<li>bad_opinion(INITIATOR_mood>=0.4)->Stop it, [RECIPIENT_nameDef] — spare the shame.</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Who pissed in your cereal, [RECIPIENT_nameDef]?</li>
+					<li>good_opinion->Aww, [RECIPIENT_nameDef]! What did I do to you!?</li>
+					<li>good_opinion->Watch it, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->You're crossing the line, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Damn you, [RECIPIENT_nameDef]! What was that for!?</li>
+					<li>good_opinion->Aww, [RECIPIENT_nameDef]! What was that about!?</li>
 				
-			<!--== WILDCARDS ==-->
-			<li>insult(RECIPIENT_gender==Female)->[bitch]</li>
-			<li>insult(RECIPIENT_gender==Male)->[asshole]</li>
-			<li>insult->fart-hopper</li>
-			<li>insult->jerk</li>
-			<li>insult->asshole</li>
-			<li>insult(INITIATOR_intellectual_level>=5)->latrine dweller</li>
-			<li>asshole->arse-wipe</li>
-			<li>asshole->dickhead</li>
-			<li>asshole->prick</li>
-			<li>asshole->bastard</li>
-			<li>bitch->bitch</li>
-			<li>bitch->basic bitch</li>
-			<li>bitch->cunt</li>
-			<li>bitch->tart</li>
-			<li>bitch->whore</li>
-			<li>bitch->wench</li>
-			<li>bitch(INITIATOR_intellectual_level>=5)->courtesan</li>
-			<li>bitch(INITIATOR_intellectual_level>=10)->woman of ill repute</li>
-			<li>bloody->bloody</li>
-			<li>bloody->blasted</li>
-			<li>bloody->blighted</li>
-			<li>bloody->frigging</li>
-			<li>bloody->foul</li>
-			<li>bloody->sodding</li>
-			<li>bloody->wretched</li>
-			<li>bloody(p=2,INITIATOR_trait==abrasive)->fucking</li>
-			<li>bloody(INITIATOR_intellectual_level>=5)->accursed</li>
-			<li>bloody(INITIATOR_intellectual_level>=10)->despicable</li>
-			<li>bloody(INITIATOR_intellectual_level>=10)->execrable</li>
-			<li>bloody(INITIATOR_intellectual_level>=10)->ill-omened</li>
-				
+			<!-- ===WILDCARDS=== -->
+				<li>insult(RECIPIENT_gender==Female)->[bitch]</li>
+				<li>insult(RECIPIENT_gender==Male)->[asshole]</li>
+				<li>insult->fart-hopper</li>
+				<li>insult->jerk</li>
+				<li>insult->asshole</li>
+				<li>insult(INITIATOR_intellectual_level>=5)->latrine dweller</li>
+				<li>asshole->arse-wipe</li>
+				<li>asshole->dickhead</li>
+				<li>asshole->prick</li>
+				<li>asshole->bastard</li>
+				<li>bitch->bitch</li>
+				<li>bitch->basic bitch</li>
+				<li>bitch->cunt</li>
+				<li>bitch->tart</li>
+				<li>bitch->whore</li>
+				<li>bitch->wench</li>
+				<li>bitch(INITIATOR_intellectual_level>=5)->courtesan</li>
+				<li>bitch(INITIATOR_intellectual_level>=10)->woman of ill repute</li>
+				<li>bloody->bloody</li>
+				<li>bloody->blasted</li>
+				<li>bloody->blighted</li>
+				<li>bloody->frigging</li>
+				<li>bloody->foul</li>
+				<li>bloody->sodding</li>
+				<li>bloody->wretched</li>
+				<li>bloody(p=2,INITIATOR_trait==abrasive)->fucking</li>
+				<li>bloody(INITIATOR_intellectual_level>=5)->accursed</li>
+				<li>bloody(INITIATOR_intellectual_level>=10)->despicable</li>
+				<li>bloody(INITIATOR_intellectual_level>=10)->execrable</li>
+				<li>bloody(INITIATOR_intellectual_level>=10)->ill-omened</li>
+					
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 
-<!-- ============ KIND WORDS ============ -->
+<!-- ===KIND WORDS=== -->
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>KindWords_generic</defName>
 		<label>kind words — react to</label>
 		<logRulesInitiator>
 			<rulesStrings>
-				<!--Bad opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-				<li>bad_opinion->Thanks, [RECIPIENT_nameDef].</li>
-				<li>bad_opinion->I hope you're not being ironic here, [RECIPIENT_nameDef]. Or else.</li>
-				<!--Good opinion of recipient-->
-				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-				<li>good_opinion->Oh, [RECIPIENT_nameDef]! That's so nice of you — thanks!</li>
-				<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->Thanks, [RECIPIENT_nameDef].</li>
+					<li>bad_opinion->I hope you're not being ironic here, [RECIPIENT_nameDef]. Or else.</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Oh, [RECIPIENT_nameDef]! That's so nice of you — thanks!</li>
+					<li>good_opinion->Thanks, [RECIPIENT_nameDef]! Your words made my day!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 	
-	<InteractionDef ParentName="SpeakUpReply"><!-- nearest art -->
-		<defName>NearestArt</defName>
-		<label>nearest art</label>
-		<logRulesInitiator>
-			<rulesStrings>
-			<!--Bad opinion of recipient-->
-			<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-			<li>bad_opinion->...</li>
-			<!--Good opinion of recipient-->
-			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-			<li>good_opinion(INITIATOR_artistic_passion!=None)->I agree, [RECIPIENT_nameDef]! Quite the piece of art! I like it too!</li>
-			<li>good_opinion(INITIATOR_artistic_passion==None)->[no_passion]</li>
-				<li>no_passion(INITIATOR_intellectual_level&lt;5)->Mmm... Can't understand its artistic beauty — but yes, it looks nice!</li>
-				<li>no_passion(INITIATOR_intellectual_level>=5)->I'm not into arts, but — yes, I may say it is a nice item.</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
+	<!-- ===nearest art=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>NearestArt</defName>
+			<label>nearest art</label>
+			<logRulesInitiator>
+				<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion(INITIATOR_artistic_passion!=None)->I agree, [RECIPIENT_nameDef]! Quite the piece of art! I like it too!</li>
+					<li>good_opinion(INITIATOR_artistic_passion==None)->[no_passion]</li>
+						<li>no_passion(INITIATOR_intellectual_level&lt;5)->Mmm... Can't understand its artistic beauty — but yes, it looks nice!</li>
+						<li>no_passion(INITIATOR_intellectual_level>=5)->I'm not into arts, but — yes, I may say it is a nice item.</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
 	
-	<InteractionDef ParentName="SpeakUpReply"><!-- nearest plant -->
-		<defName>NearestPlant</defName>
-		<label>nearest plant</label>
-		<logRulesInitiator>
-			<rulesStrings>
-			<!--Bad opinion of recipient-->
-			<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
-			<li>bad_opinion->...</li>
-			<!--Good opinion of recipient-->
-			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-			<li>good_opinion(INITIATOR_plants_passion!=None)->Yes, [RECIPIENT_nameDef]! [comment]</li>
-				<li>comment(p=0.1)-></li>
-				
-				<li>comment(NEAREST_plant==birch tree)->[birch]</li>
-				<li>birch->Birches have such slender and elegant trunks!</li>
-				<li>birch->Moreover, birches are a blessing for the land — they improve its fertility.</li>
-				
-				<li>comment(NEAREST_plant==oak tree)->[oak]</li>
-				<li>oak->Majestic and sturdy — a truly masterwork of Nature!</li>
-				<li>oak->Oaks can live more than a thousand years — an inspiring symbol of endurance!</li>
-				
-				<li>comment(NEAREST_plant==pine tree)->[pine]</li>
-				<li>pine->So charming — and its bark has such a nice perfume!</li>
-				
-				<li>comment(NEAREST_plant==poplar tree)->[poplar]</li>
-				<li>poplar->So beautiful! Moreover, poplars grow so quick — a perfect wood source!</li>
-				
-				<li>comment(NEAREST_plant==grass)->[grasses]</li>
-				<li>comment(NEAREST_plant==tall grass)->[grasses]</li>
-				<li>grasses->I love it too!</li>
-				
-			<li>good_opinion(INITIATOR_plants_passion==None)->[no_passion]</li>
-				<li>no_passion->Yes, [RECIPIENT_nameDef] — quite a beautiful sight!</li>
-			</rulesStrings>
-		</logRulesInitiator>
-	</InteractionDef>
+	<!-- ===nearest plant=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>NearestPlant</defName>
+			<label>nearest plant</label>
+			<logRulesInitiator>
+				<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion(INITIATOR_plants_passion!=None)->Yes, [RECIPIENT_nameDef]! [comment]</li>
+						<li>comment(p=0.1)-></li>
+						
+						<li>comment(NEAREST_plant==birch tree)->[birch]</li>
+						<li>birch->Birches have such slender and elegant trunks!</li>
+						<li>birch->Moreover, birches are a blessing for the land — they improve its fertility.</li>
+						
+						<li>comment(NEAREST_plant==oak tree)->[oak]</li>
+						<li>oak->Majestic and sturdy — a truly masterwork of Nature!</li>
+						<li>oak->Oaks can live more than a thousand years — an inspiring symbol of endurance!</li>
+						
+						<li>comment(NEAREST_plant==pine tree)->[pine]</li>
+						<li>pine->So charming — and its bark has such a nice perfume!</li>
+						
+						<li>comment(NEAREST_plant==poplar tree)->[poplar]</li>
+						<li>poplar->So beautiful! Moreover, poplars grow so quick — a perfect wood source!</li>
+						
+						<li>comment(NEAREST_plant==grass)->[grasses]</li>
+						<li>comment(NEAREST_plant==tall grass)->[grasses]</li>
+						<li>grasses->I love it too!</li>
+						
+					<li>good_opinion(INITIATOR_plants_passion==None)->[no_passion]</li>
+						<li>no_passion->Yes, [RECIPIENT_nameDef] — quite a beautiful sight!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
 
 <!-- test name -->
 <!-- TESTING 
@@ -808,6 +838,6 @@
 			<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 			<li>good_opinion-></li>
 		</logRulesInitiator>
-	</InteractionDef>-->
+	</InteractionDef> -->
 	
 </Defs>
