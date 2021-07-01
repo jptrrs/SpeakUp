@@ -80,6 +80,7 @@
 					<li>annoying->bothersome</li>
 					<li>annoying->unacceptable</li>
 					<li>annoying->not nice</li>
+					<li>annoying->unpleasant</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -226,8 +227,10 @@
 		<label>environment — cold</label>
 		<logRulesInitiator>
 			<rulesStrings>
+				<li>r_logentry(INITIATOR_trait==too smart)->We'll all freeze someday, as per universe heat death theory. Our long-derived and processed molecules would survive, but that's hardly what defines our higher functions.</li>
 				<!-- ===Bad opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->Good — for I hope you freeze to death, [RECIPIENT_nameDef]!</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!-- ===Feeling cold=== -->
@@ -238,11 +241,13 @@
 						<li>feeling_cold(INITIATOR_thoughtLabel==absolutely freezing)->I can't feel my toes and fingers. I urgently need to get warm.</li>
 					<!-- ===Not feeling cold=== -->
 						<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
+				
 				<!-- ===WILDCARDS === -->
 					<li>comment-></li>
 					<li>comment(INITIATOR_social_level>=5)->I'll try to trade in something in exchange for some warmer clothing for you.</li>
 					<li>comment(INITIATOR_crafting_level>=5)->I could try and make some warmer clothing for you.</li>
 					<li>comment(INITIATOR_medical_level>=5)->We must find a way to get you warm — or you might even get a nasty frostbite.</li>
+					<li>comment(INITIATOR_cooking_level>=5)->I'll try to prepare a nice, hot meal to warm you up.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -297,6 +302,7 @@
 					<li>comment(INITIATOR_social_level>=5)->I'll try to trade in something in exchange for some cooler clothing for you.</li>
 					<li>comment(INITIATOR_crafting_level>=5)->I could try and make some cooler clothing for you.</li>
 					<li>comment(INITIATOR_medical_level>=5)->We must find a way to cool you down — or you might even get a nasty heatstroke.</li>
+					<li>comment(INITIATOR_cooking_level>=5)->I'll try to prepare a nice, cold meal to cool you down.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -307,6 +313,7 @@
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion&lt;0)->You should be thankful indeed, [RECIPIENT_nameDef]. Let's hope rescuing you was worth our while!</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->Sometimes I think that we would've been better off leaving you to those slavers...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->No problem, [RECIPIENT_nameDef]. It was the right thing to do.</li>
@@ -376,6 +383,7 @@
 						<li>i_canniblood_r_canniblood->Right! We could've tortured'em for fun!</li>
 						<li>i_canniblood_r_canniblood->Right! We could've tortured'em to squeeze out some useful intelligence!</li>
 						<li>i_canniblood_r_canniblood->Right! We could've skinned'em — a just punishment!</li>
+						<li>i_canniblood_r_canniblood(INITIATOR_trait==greedy)->Right! We could've took out their lungs and heart to sell for lots of silver!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -682,8 +690,10 @@
 						<li>cooking_intro->Be patient, [RECIPIENT_nameDef]!</li>
 						<li>cooking_intro->Keep your pants on, [RECIPIENT_nameDef]!</li>
 						<li>cooking_intro->Hold your horses, [RECIPIENT_nameDef]!</li>
+						<li>cooking_intro->It'll be a moment, [RECIPIENT_nameDef]!</li>
 						<li>cooking_start->Just give me a few more minutes and you'll get </li>
-						<li>cooking_start->I'm on it right now — you'll soon get </li>								
+						<li>cooking_start->I'm on it right now — you'll soon get </li>
+						<li>cooking_start->I'm nearly done, you'll get</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
@@ -700,6 +710,8 @@
 					<!-- ===recreation-starved === -->
 						<li>good_opinion(INITIATOR_thoughtLabel==recreation-starved,priority=1)->[thought_needjoy_bored0]</li>
 						<li>thought_needjoy_bored0->I really feel like a slave here. All work, no fun.</li>
+						<li>thought_needjoy_bored0->All work and no play makes Jack a dull boy... that's my life right now!</li>
+						<li>thought_needjoy_bored0->All work and no play makes [INITIATOR_nameDef] a dull boy...</li>						
 					<!-- ===recreation-deprived === -->
 						<li>good_opinion(INITIATOR_thoughtLabel==recreation-deprived,priority=1)->[thought_needjoy_bored1]</li>
 						<li>thought_needjoy_bored1->Let's face it — you can easily get bored around here</li>
@@ -781,19 +793,23 @@
 					<li>yes->Yes</li>
 					<li>yes->Well said</li>
 					<li>yes->That's right</li>
+					<li>yes->Correct</li>
 					<li>comment->We can do this!</li>
 					<li>comment->We can make it!</li>
-					<li>comment->It'll be allright!</li>
+					<li>comment->It'll be alright!</li>
+					<li>comment->It'll be all right!</li>
+					<li>comment->We'll get through this!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	<InteractionDef ParentName="SpeakUpReply">
+	<InteractionDef ParentName="SpeakUpReply"> <!-- saw unburied corpse -->
 		<defName>ReactToThought_ObservedLayingCorpse</defName>
 		<label>saw unburied corpse</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->I wouldn't bury you, either.</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->Oh my, [RECIPIENT_nameDef]. [saw_it]I hope someone took care of it already.</li>
@@ -810,12 +826,13 @@
 		</logRulesInitiator>
 	</InteractionDef>
 	<InteractionDef ParentName="SpeakUpReply">
-		<defName>ReactToThought_ObservedLayingRottingCorpse</defName>
+		<defName>ReactToThought_ObservedLayingRottingCorpse</defName><!-- saw unburied rotten corpse -->
 		<label>saw unburied rotten corpse</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->I'd leave you to rot, too...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->That's disgusting, [RECIPIENT_nameDef]! [saw_it]I hope someone took care of it already.</li>
@@ -866,6 +883,7 @@
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion&lt;0)->You should be thankful indeed, [RECIPIENT_nameDef]. Let's hope rescuing you was worth our while!</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->Sometimes I think that we would've been better off leaving you in the wilderness...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->No problem, [RECIPIENT_nameDef]. It was the right thing to do.</li>
@@ -886,7 +904,8 @@
 					<li>good_opinion->I'm sorry to hear that, [RECIPIENT_nameDef]. [comment]</li>
 					<li>comment-></li>
 					<li>comment(INITIATOR_medical_level>=5)->I could give you some medicine to speed up the healing process.</li>
-					<li>comment(INITIATOR_plants_level>=8)->I could prepare for you a potent healing concoction, if you want.</li>
+					<li>comment(INITIATOR_plants_level>=8,priority=1)->I could prepare for you a potent healing concoction, if you want.</li>
+					<li>comment(INITIATOR_plants_level>=5)->I could prepare some healroot for you, if you want.</li>
 					<li>comment(INITIATOR_cooking_level>=6)->Eating healthy food might help avoiding that. I could cook something for you.</li>
 					<li>comment(INITIATOR_thoughtDefName==sick)->I'm not in great shape either...</li>
 					<li>comment(INITIATOR_thoughtDefName==transhumanist)->But then again, human body is so vulnerable...</li>
@@ -953,10 +972,10 @@
 					<li>nice_food->chocolate</li>
 					<li>nice_food->milkshake</li>
 					<li>nice_food->hamburgers</li>
+					<li>nice_food->lasagna</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
-	
 	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_SleptInBarracks</defName>
 		<label>slept in a shared room</label>
@@ -1030,7 +1049,6 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
-	
 	<InteractionDef ParentName="SpeakUpReply"><!-- ===slept in cold (general) === -->
 		<defName>ReactToThought_SleptInCold</defName>
 		<label>slept in cold</label>
@@ -1060,6 +1078,7 @@
 					<li>annoying->bothersome</li>
 					<li>annoying->unacceptable</li>
 					<li>annoying->not nice</li>
+					<li>annoying->unpleasant</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1083,6 +1102,7 @@
 								<li>shut_up->stop nagging me</li>
 								<li>shut_up->stop bothering me</li>
 								<li>shut_up->just shut up</li>
+								<li>shut_up(INITIATOR_intellctual_level>=5)->would be quiet for an extended period of time</li>
 						<!-- ===Recipient is skilled in construction=== -->
 							<li>bad_opinion_skilled(RECIPIENT_construction_level>=5)->You need a heat source, [RECIPIENT_nameDef], you build one yourself — I've got more important things to do.</li>
 				<!-- ===Good opinion of recipient=== -->
@@ -1124,6 +1144,7 @@
 					<li>annoying->bothersome</li>
 					<li>annoying->unacceptable</li>
 					<li>annoying->not nice</li>
+					<li>annoying->unpleasant</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1209,6 +1230,7 @@
 					<li>annoying->bothersome</li>
 					<li>annoying->unacceptable</li>
 					<li>annoying->not nice</li>
+					<li>annoying->unpleasant</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1259,6 +1281,7 @@
 					<li>annoying->bothersome</li>
 					<li>annoying->unacceptable</li>
 					<li>annoying->not nice</li>
+					<li>annoying->unpleasant</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1286,6 +1309,10 @@
 					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+				<!-- ===DeadMansApparel=== -->
+					<li>good_opinion(INITIATOR_thoughtDefName==DeadMansApparel,priority=1)->[deadmans_apparel]</li>
+					<li>deadmans_apparel(INITIATOR_trait==bloodlust,priority=1)->I am wearing apparel that someone died in — and that's perfectly fine by me.</li>
+					<li>deadmans_apparel->I am wearing apparel that someone died in. It creeps me out and feels dirty!</li>
 				<!-- ===Optimist or Sanguine=== -->
 					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetSanguine,priority=1)->[sanguine_optimist]</li>
 					<li>good_opinion(INITIATOR_thoughtDefName==MoodOffsetOptimist,priority=1)->[sanguine_optimist]</li>

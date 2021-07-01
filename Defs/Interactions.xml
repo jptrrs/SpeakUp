@@ -106,6 +106,28 @@
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===going to bed=== -->
+		<defName>GoingToBed</defName>
+		<label>going to bed</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->...</li>
+					<li>bad_opinion(INITIATOR_opinion&lt;-50)->May you wake up cold and stiff.</li>
+				<!-- ===Good opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<li>good_opinion->Have a good rest, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Sleep well, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Rest well, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->I wish you a good rest, [RECIPIENT_nameDef].</li>
+					<li>good_opinion(DAYPERIOD==evening)->Good night, [RECIPIENT_nameDef].</li>
+					<li>good_opinion(DAYPERIOD==night)->Good night, [RECIPIENT_nameDef].</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
 	<InteractionDef ParentName="SpeakUpReply"><!-- ===Cleaning=== -->
 		<defName>Cleaning</defName>
 		<label>cleaning</label>
@@ -205,6 +227,38 @@
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>
+
+	<!-- ===playing instrument — compliment=== -->
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Job_PlayMusic_compliment</defName>
+		<label>job — playing — compliment</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<!-- ===Good opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion>=0)->Thank you, [RECIPIENT_nameDef]!</li>
+				<li>r_logentry(INITIATOR_opinion>=0)->Thanks, [RECIPIENT_nameDef]!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<!-- ===playing instrument — critic=== -->
+	<InteractionDef ParentName="SpeakUpReply">
+		<defName>Job_PlayMusic_critic</defName>
+		<label>job — playing — critic</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->Well, [RECIPIENT_nameDef] — nobody forced you to listen in the first place.</li>
+				<li>r_logentry(INITIATOR_opinion&lt;0)->If you don't like it, [RECIPIENT_nameDef], just go and get busy somewhere else.</li>
+				<!-- ===Good opinion of recipient=== -->
+				<li>r_logentry(INITIATOR_opinion>=0)->I'm sorry, [RECIPIENT_nameDef] — I obviously need more practice.</li>
+				<li>r_logentry(INITIATOR_opinion>=0)->I'm sorry, [RECIPIENT_nameDef] — I'll try to do better.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
 
 	<!-- ===vomiting=== -->
 		<InteractionDef ParentName="SpeakUpReply">
