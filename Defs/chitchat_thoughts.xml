@@ -953,7 +953,7 @@
 						<li>fun_activity->Everybody was dancing and having fun...</li>
 						<li>fun_activity->Everybody was laughing and drinking beer...</li>
 						<li>fun_activity->There was this large [color]table filled with [nice_food]...</li>
-						<li>fun_activity->There was this singer, enthralling everybody with her sweet voice...</li>
+						<li>fun_activity->There was this [AdjectiveFriendly] singer, enthralling everybody with her sweet voice...</li>
 					<li>dream->I was flying over a beautiful [color][TerrainFeature] — [description1]. They looked so tiny from up there...</li>
 					<li>description1->crowded by [color][AdjectiveFriendly] [PersonJob]s</li>
 					<li>description1->crawling with [color][AdjectiveFriendly] [Animal]s</li>
@@ -961,6 +961,8 @@
 					<li>dream->I was on a stage performing a standup show for [AdjectiveFriendly] [color][Animals]s — everybody was drinking beer and laughing hard!</li>
 					<li>dream->There was this [AdjectiveFriendly] [PersonJob] who gave me this [color][Apparel] — I wore it, and I instantly felt so happy!</li>
 					<li>dream->I was happily swimming in a pool of [color][Vegetable]s — weird right? But when I ate them, they tasted like [nice_food]!</li>
+					<li>dream->There was this [AdjectiveFriendly] [PersonJob] speaking to me about [TalkTopicAny] — it was so interesting!</li>
+					<li>dream->There was this floating [color]parchment with a moving [color]mouth, reciting [poem_adj] poem about [TalkTopicAny]...</li>
 				<!-- ===WILDCARDS=== -->
 					<li>color-></li>
 					<li>color->[Color] </li>
@@ -973,6 +975,9 @@
 					<li>nice_food->milkshake</li>
 					<li>nice_food->hamburgers</li>
 					<li>nice_food->lasagna</li>
+					<li>poem_adj->an elegant</li>
+					<li>poem_adj->a beautiful</li>
+					<li>poem_adj->a charming</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
@@ -1294,7 +1299,7 @@
 					<li>r_logentry(INITIATOR_opinion&lt;0)->Go back inside then, [RECIPIENT_nameDef] — at least I won't hear your pitiful whining anymore!</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<li>good_opinion->I know, [RECIPIENT_nameDef] — but some vital tasks are performed outdoors — we can't change that, unfortunately...</li>
+					<li>good_opinion->I know, [RECIPIENT_nameDef] — but some vital tasks must be performed outdoors. We can't change that, unfortunately...</li>
 					<li>good_opinion->I know, [RECIPIENT_nameDef] — maybe we could try and plan for you to run indoors tasks only.</li>
 			</rulesStrings>
 		</logRulesInitiator>

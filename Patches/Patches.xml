@@ -36,8 +36,8 @@
 							<li>chess_comment->Chess doesn't drive people mad, it keeps mad people sane.</li>
 							<li>chess_comment->Pawns are the soul of this game.</li>
 					<!-- ===Clean=== -->
-					<li>r_logentry(priority=4,INITIATOR_jobDefName==Clean,tag=Cleaning)->[job_clean]</li>
-						<li>job_clean(INITIATOR_moving==False)->[job_clean_static]</li>
+					<li>r_logentry(p=3,INITIATOR_jobDefName==Clean,tag=Cleaning)->[job_clean]</li>
+						<li>job_clean(INITIATOR_moving==No)->[job_clean_static]</li>
 							<li>job_clean_static->Mmm... let's clean here.</li>
 							<li>job_clean_static->This place needs some [swearword][cleaning].</li>
 							<li>job_clean_static->Whoa — what a [swearword]mess. Let's clean it!</li>
@@ -48,16 +48,16 @@
 							<li>job_clean_static(INITIATOR_jobText==cleaning rock rubble.)->Mmm... let's remove these rocks...</li>
 							<li>job_clean_static(INITIATOR_jobText==cleaning vomit.)->Eww... gross...</li>
 							<li>job_clean_static(INITIATOR_jobText==cleaning building rubble.)->Mmm... let's clean this debris...</li>
-						<li>job_clean(INITIATOR_moving==True)->[job_clean_going]</li>
-							<li>job_clean_going->Cleaning, washing, dusting... there I go again with the [swearword][cleaning] chores...</li>
-							<li>job_clean_going(INITIATOR_jobText==cleaning dirt.)->[wipe_our_feet] [swearword]dirt.</li>
-							<li>job_clean_going(INITIATOR_jobText==cleaning sand.)->[wipe_our_feet] [swearword]sand.</li>				
+						<li>job_clean(INITIATOR_moving==Yes)->[job_clean_going]</li>
+							<li>job_clean_going->There are so many [swearword][cleaning] chores to do around here...</li>
+							<li>job_clean_going(INITIATOR_jobText==cleaning dirt.)->[wipe_feet] [swearword]dirt...</li>
+							<li>job_clean_going(INITIATOR_jobText==cleaning sand.)->[wipe_feet] [swearword]sand...</li>				
 							<li>job_clean_going(INITIATOR_jobText==cleaning trash.)->Who left that [swearword]trash around? Sigh...</li>
 							<li>job_clean_going(INITIATOR_jobText==cleaning blood.)->I saw a lot of [swearword]blood over there — I'll go and clean it.</li>
 							<li>job_clean_going(INITIATOR_jobText==cleaning rock rubble.)->I'm going to remove those rocks...</li>
 							<li>job_clean_going(INITIATOR_jobText==cleaning vomit.)->Cleaning up vomit isn't nice, but someone has to do it...</li>
 							<li>job_clean_going(INITIATOR_jobText==cleaning building rubble.)->I'm going to clean that debris...</li>
-							<li>wipe_our_feet->Let's wipe our feet, shall we? This place is getting covered in</li>
+							<li>wipe_feet->Nobody ever wipes their feet, so here I go cleaning more</li>
 					<!-- ===Cloudwatching=== -->
 						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==morning,tag=CloudWatching)->[cloud_watching]</li>
 						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==afternoon,tag=CloudWatching)->[cloud_watching]</li>
@@ -71,7 +71,7 @@
 						<li>cloud_analogy->remind you of</li>
 						<li>cloud_analogy(INITIATOR_intellectual_level>=5)->vaguely resemble</li>
 					<!-- ===Horseshoes=== -->
-						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Horseshoes,INITIATOR_moving==False)->[game_horseshoes]</li>
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Horseshoes,INITIATOR_moving==No)->[game_horseshoes]</li>
 						<li>game_horseshoes(INITIATOR_shooting_level>=0)->[horseshoes_hit]</li>
 						<li>game_horseshoes(INITIATOR_shooting_level>=5)->[horseshoes_hit]</li>
 						<li>game_horseshoes(INITIATOR_shooting_level>=10)->[horseshoes_hit]</li>
@@ -125,7 +125,7 @@
 							<li>shooting_miss(INITIATOR_shooting_level&lt;5)->This is way too hard...</li>
 
 				<!-- ===LayDown=== -->
-				<li>r_logentry(INITIATOR_jobDefName==LayDown,INITIATOR_moving==True,priority=4,tag=GoingToBed)->[going_to_bed]</li>
+				<li>r_logentry(INITIATOR_jobDefName==LayDown,INITIATOR_moving==Yes,priority=4,tag=GoingToBed)->[going_to_bed]</li>
 				<li>going_to_bed->Well, [RECIPIENT_nameDef] — I'm going to bed.</li>
 				<li>going_to_bed->Let's call it a day, [RECIPIENT_nameDef] — I'm going to bed.</li>
 				
@@ -157,7 +157,7 @@
 								<li>comment_ugly_snowman(INITIATOR_opinion>=0)->if it's not going to be a nice snowman, it'll be a funny one at least!</li>
 								<li>comment_ugly_snowman(INITIATOR_opinion&lt;0)->what [horrible] [monster] are you trying to build there?</li>
 					<!-- ===Play_MusicalInstrument=== -->
-					<li>r_logentry(priority=4,RECIPIENT_jobDefName==Play_MusicalInstrument,RECIPIENT_moving==False)->[job_play_instrument]</li>
+					<li>r_logentry(priority=4,RECIPIENT_jobDefName==Play_MusicalInstrument,RECIPIENT_moving==No)->[job_play_instrument]</li>
 						<li>job_play_instrument(RECIPIENT_artistic_level>=0)->[play_instrument_good]</li>
 						<li>job_play_instrument(RECIPIENT_artistic_level>=5)->[play_instrument_good]</li>
 						<li>job_play_instrument(RECIPIENT_artistic_level>=10)->[play_instrument_good]</li>
@@ -167,25 +167,34 @@
 						<li>job_play_instrument(RECIPIENT_artistic_level&lt;15)->[play_instrument_bad]</li>
 						<li>job_play_instrument(RECIPIENT_artistic_level&lt;=20)->[play_instrument_bad]</li>
 							<!-- ===Good performance=== -->
-							<li>play_instrument_good(tag=Job_PlayMusic_compliment)->[play_instrument_compliment]</li>
-							<li>play_instrument_compliment->*claps*</li>
-							<li>play_instrument_compliment->Wow, [RECIPIENT_nameDef] — what a great performance!</li>
-							<li>play_instrument_compliment->Please, [RECIPIENT_nameDef] — play some more! It was so good!</li>
-							<li>play_instrument_compliment->That was some real inspired performance, [RECIPIENT_nameDef]!</li>
-							<li>play_instrument_compliment->Ah, I love this part... and I love how you play it, [RECIPIENT_nameDef]...</li>
-							<li>play_instrument_compliment(INITIATOR_opinion&lt;0,priority=1)->Mmm... at least you have some musical skills, [RECIPIENT_nameDef]...</li>
-							<li>play_instrument_compliment(INITIATOR_intellectual_level>=5)->Bravo, [RECIPIENT_nameDef]! Bravo!</li>
-							<li>play_instrument_compliment(INITIATOR_intellectual_level>=10)->Encore, [RECIPIENT_nameDef]! Encore!</li>
-							<li>play_instrument_compliment(RECIPIENT_artistic_passion==Minor)->I can feel all your passion in those sweet notes, [RECIPIENT_nameDef]!</li>
-							<li>play_instrument_compliment(RECIPIENT_artistic_passion==Major)->Such a nice performance! It makes me feel all the joy and strenght of your artistic soul, [RECIPIENT_nameDef]!</li>
-							<li>play_instrument_compliment(INITIATOR_artistic_level>=5)->I know a good performer when I see one — and you're certainly that, [RECIPIENT_nameDef]!</li>
-							<li>play_instrument_compliment(INITIATOR_artistic_level>RECIPIENT_artistic_level)->Mmm... I have some hints for you about performing this music, but still — good job, [RECIPIENT_nameDef]!</li>
-							<li>play_instrument_compliment(INITIATOR_artistic_level&lt;RECIPIENT_artistic_level)->You're so talented, [RECIPIENT_nameDef]! I hope someday you can teach me a thing or two about performing this music!</li>
+								<!-- ===Compliment=== -->
+								<li>play_instrument_good(tag=Job_PlayMusic_compliment)->[play_instrument_compliment]</li>
+								<li>play_instrument_compliment->*claps*</li>
+								<li>play_instrument_compliment->Wow, [RECIPIENT_nameDef] — what a great performance!</li>
+								<li>play_instrument_compliment->Please, [RECIPIENT_nameDef] — play some more! It was so good!</li>
+								<li>play_instrument_compliment->That was some real inspired performance, [RECIPIENT_nameDef]!</li>
+								<li>play_instrument_compliment->Ah, I love this part... and I love how you play it, [RECIPIENT_nameDef]...</li>
+								<li>play_instrument_compliment(INITIATOR_opinion&lt;0,priority=1)->Mmm... at least you have some musical skills, [RECIPIENT_nameDef]...</li>
+								<li>play_instrument_compliment(INITIATOR_intellectual_level>=5)->Bravo, [RECIPIENT_nameDef]! Bravo!</li>
+								<li>play_instrument_compliment(INITIATOR_intellectual_level>=10)->Encore, [RECIPIENT_nameDef]! Encore!</li>
+								<li>play_instrument_compliment(RECIPIENT_artistic_passion==Minor)->I can feel all your passion in those sweet notes, [RECIPIENT_nameDef]!</li>
+								<li>play_instrument_compliment(RECIPIENT_artistic_passion==Major)->Such a nice performance! It makes me feel all the joy and strenght of your artistic soul, [RECIPIENT_nameDef]!</li>
+								<li>play_instrument_compliment(INITIATOR_artistic_level>=5)->I know a good performer when I see one — and you're certainly that, [RECIPIENT_nameDef]!</li>
+								<li>play_instrument_compliment(INITIATOR_artistic_level>RECIPIENT_artistic_level)->Mmm... I have some hints for you about performing this music, but still — good job, [RECIPIENT_nameDef]!</li>
+								<li>play_instrument_compliment(INITIATOR_artistic_level&lt;RECIPIENT_artistic_level)->You're so talented, [RECIPIENT_nameDef]! I hope someday you can teach me a thing or two about performing this music!</li>
+								<!-- ===Join in=== -->
+								<li>play_instrument_good(tag=Job_PlayMusic_join)->[play_instrument_join]</li>
+								<li>play_instrument_join->♪♫♪ hums along ♪♫♪</li>
+								<li>play_instrument_join(INITIATOR_artistic_passion!=None)->♪♫♪ sings along ♪♫♪</li>
 							<!-- ===Bad performance=== -->
 							<li>play_instrument_bad(tag=Job_PlayMusic_critic)->[play_instrument_critic]</li>
 							<li>play_instrument_critic->Well, [RECIPIENT_nameDef] — no offense, but I don't believe this is your best performance...</li>
 							<li>play_instrument_critic(RECIPIENT_artistic_level>=5)->Mmm, [RECIPIENT_nameDef] — I know you can perform better than that...</li>
-							<li>play_instrument_critic(INITIATOR_trait==kind,priority=1)->Thanks for your — err — nice performance, [RECIPIENT_nameDef].</li>
+								<!-- ===Kind=== -->
+							<li>play_instrument_critic(INITIATOR_trait==kind,priority=1)->[play_instrument_kindcomment]</li>
+								<li>play_instrument_kindcomment->Thanks for your — err — nice performance, [RECIPIENT_nameDef].</li>
+								<li>play_instrument_kindcomment->Don't worry about that mistake [RECIPIENT_nameDef] — it's just a very minor one.</li>
+								<li>play_instrument_kindcomment(INITIATOR_artistic_level>=5)->A minor mistake, [RECIPIENT_nameDef] — easily corrected. Don't worry, play on!</li>
 							<li>play_instrument_critic(RECIPIENT_artistic_passion!=None)->I felt some passion in your performance, but... mmm... maybe you need more practicing to get it right, [RECIPIENT_nameDef].</li>
 							<li>play_instrument_critic(INITIATOR_artistic_level>=5,RECIPIENT_artistic_passion!=None)->The talent is there, [RECIPIENT_nameDef] — I can see it clearly. But you need much training still...</li>
 							<li>play_instrument_critic(INITIATOR_artistic_level>RECIPIENT_artistic_level)->May I give you some hints about performing this music? No offense, [RECIPIENT_nameDef] — but I didn't enjoy your performance.</li>
@@ -302,8 +311,7 @@
 							<li>vision_adj->colorful</li>
 							<li>vision_adj->clear</li>
 							<li>vision_adj->sudden</li>
-					
-
+						
 				<!-- ===CHITCHAT WILDCARDS: dictionary=== -->
 					<!-- ===animal — large=== -->
 						<li>animal_large->a horse</li>

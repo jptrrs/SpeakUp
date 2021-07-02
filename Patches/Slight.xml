@@ -7,7 +7,7 @@
 			<rulesStrings>
 			<!-- ===generic=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;=-50,tag=Slight_generic)->I'm not saying I hate you, but I'd unplug your life support to charge my batteries.</li>
-				<li>r_logentry->The world would be a better place without you, [RECIPIENT_nameDef].</li>
+				<li>r_logentry(INITIATOR_opinion>=-25,tag=Slight_generic)->The world would be a better place without you, [RECIPIENT_nameDef].</li>
 			<!-- ===initiator's traits=== -->
 				<!-- ===abrasive=== -->
 					<li>r_logentry(INITIATOR_trait==abrasive,tag=Slight_generic)->[initiator_abrasive]</li>

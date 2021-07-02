@@ -127,7 +127,7 @@
 						<li>reclusive_child->I wasn't a very social child, [RECIPIENT_nameDef]. I preferred to keep to myself.</li>
 
 					<!-- ===Herder=== -->
-						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals, quiet but honest work.</li>
+						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals — quiet but honest work.</li>
 						<li>herder->I protected the Muffalo from both predators and nature itself, I had no time for childish games.</li>
 						<li>herder->The Tribe relied on me to keep the Muffalo safe from both sickness and predation.</li>
 						<li>herder->I disliked being around other people, [RECIPIENT_nameDef] — but the Muffalo made great company.</li>
@@ -241,7 +241,7 @@
 							
 					<!-- ===Sickly Child=== -->
 						<li>sickly_child->I was born with a rare disease that left me hospital ridden. I didn't have a big social life but I did learn a lot about science and medicine!</li>
-						<li>sickly_child->I had little contact with others throughout my childhood, which led me to be a bit of a recluse [RECIPIENT_nameDef].</li>
+						<li>sickly_child->I had little contact with others throughout my childhood, [RECIPIENT_nameDef]. This led me to be a bit of a recluse...</li>
 						<li>sickly_child->As a child I suffered from a rare disease, leaving me bed-ridden and unable to exercise.</li>
 
 					<!-- ===Frightened Child=== -->
@@ -289,7 +289,7 @@
 					<!-- ===Shop Kid=== -->
 						<li>shop_kid->I mostly ran the shop for my mom when she would get sick, we sold some interesting artifacts, but I learned far more about trade than the items themselves.</li>
 						<li>shop_kid->My mother was almost always sick, so even as a kid the responsibility of running the family store fell on me.</li>
-						<li>shop_kid->[RECIPIENT_nameDef], I ran my mothers shop most of the time, which let me learn a great deal about a wide variety of exotic artifacts.</li>
+						<li>shop_kid->[RECIPIENT_nameDef], I ran my mother's shop most of the time, which let me learn a great deal about a wide variety of exotic artifacts.</li>
 
 					<!-- ===Organ Farm=== -->
 						<li>organ_farm->I was raised in an organ farm where my body was used to grow implants for wounded mercenaries, and although it is quite gruesome I learned a lot about medicine during it all.</li>
@@ -419,6 +419,21 @@
 							<li>war_bastard_comment2(INITIATOR_trait==bloodlust,priority=1)->She was wrong — about war.</li>
 							<li>war_bastard_comment2->She was totally right.</li>
 
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+	
+	<!-- ===Dreams=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>WhatDream</defName>
+			<label>what dream</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(tag=Dream_nice)->Oh... And what was this dream about, [RECIPIENT_nameDef]?</li>
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>

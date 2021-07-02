@@ -229,15 +229,16 @@
 						<li>r_logentry(INITIATOR_thoughtLabel==recreation fully satisfied,tag=ReactToThought_NeedJoy)->[thought_need_joy5]</li>
 						<li>thought_need_joy5->I've been enjoying myself so much, I love it!</li>						
 				<!-- ===NeedRest=== -->
+					<li>r_logentry(INITIATOR_thoughtDefName==NeedRest,tag=ReactToThought_NeedRest)->[thought_need_rest]</li>
 					<!-- ===drowsy=== -->
-						<li>r_logentry(INITIATOR_thoughtLabel==drowsy,tag=ReactToThought_NeedRest)->[thought_need_rest1]</li>
+						<li>thought_need_rest(INITIATOR_thoughtLabel==drowsy)->[thought_need_rest1]</li>
 						<li>thought_need_rest1->I haven't slept in a while. It's hard to keep focus.</li>
 					<!-- ===tired=== -->
-						<li>r_logentry(INITIATOR_thoughtLabel==tired,tag=ReactToThought_NeedRest)->[thought_need_rest2]</li>
+						<li>thought_need_rest(INITIATOR_thoughtLabel==tired)->[thought_need_rest2]</li>
 						<li>thought_need_rest2->I'm so tired. I just want to lay down and rest for a few minutes...</li>
 					<!-- ===exhausted=== -->
-						<li>r_logentry(INITIATOR_thoughtLabel==exhausted,tag=ReactToThought_NeedRest)->[thought_need_rest3]</li>
-						<li>thought_need_rest3->I'm so exhausted I can barely stand. Let me sleep...</li>					
+						<li>thought_need_rest(INITIATOR_thoughtLabel==exhausted)->[thought_need_rest3]</li>
+						<li>thought_need_rest3->I'm so exhausted I can barely stand. Let me sleep...</li>
 				<!-- ===NeedRoomSize=== -->
 					<!-- ===confined interior=== -->
 						<li>r_logentry(INITIATOR_thoughtLabel==confined interior,tag=ReactToThought_NeedSpace)->[thought_need_space1]</li>
