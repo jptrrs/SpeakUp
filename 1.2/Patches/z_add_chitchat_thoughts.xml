@@ -33,6 +33,7 @@
 					
 					<!-- ===AteWithoutTable // AteInImpressiveDiningRoom=== -->
 						<li>r_logentry(INITIATOR_faction==PlayerColony)->[thought_diningroom]</li>
+						<li>r_logentry(INITIATOR_faction==PlayerTribe)->[thought_diningroom]</li>
 						<!-- ===AteInImpressiveDiningRoom=== -->
 							<li>thought_diningroom(INITIATOR_thoughtDefName==AteInImpressiveDiningRoom,tag=ReactToThought_DiningRoom,priority=2)->[thought_diningroom_good]</li>
 							<li>thought_diningroom_good(INITIATOR_thoughtLabel==decent dining room)->Last time I ate, it was in a [proper] dining room.</li>
@@ -117,17 +118,18 @@
 					<li>thought_joyroom(INITIATOR_thoughtLabel==extremely impressive rec room)->I think our rec room is extremely impressive!</li>
 					<li>thought_joyroom(INITIATOR_thoughtLabel==unbelievably impressive rec room)->We're so lucky to have such an unbelievably impressive rec room!</li>
 					<li>thought_joyroom(INITIATOR_thoughtLabel==wondrously impressive rec room)->Our rec room is wondrously impressive! I could stay there forever!</li>
-				<!-- ===KnowPrisonerSold (PlayerColony only)=== -->
+				<!-- ===KnowPrisonerSold (PlayerColony or PlayerTribe only)=== -->
 					<li>r_logentry(INITIATOR_faction==PlayerColony,INITIATOR_thoughtDefName==KnowPrisonerSold,tag=ReactToThought_PrisonerSold)->[thought_prisonersold]</li>
+					<li>r_logentry(INITIATOR_faction==PlayerTribe,INITIATOR_thoughtDefName==KnowPrisonerSold,tag=ReactToThought_PrisonerSold)->[thought_prisonersold]</li>
 					<li>thought_prisonersold->[RECIPIENT_nameDef], did you hear? We sold that poor [prisoner] into slavery. [prisonersold_comment]</li>
 						<!-- ===comment=== -->
 						<li>prisonersold_comment->That's a worrying thought...</li>
 						<li>prisonersold_comment->I hope we won't have to take such mean measures again...</li>
 						<li>prisonersold_comment->It's terrible to know we had to stoop so low...</li>
 					<li>thought_prisonersold(INITIATOR_trait==kind,priority=2)->Selling that poor [prisoner] into slavery was such a mean thing to do!</li>
-					<li>thought_prisonersold(INITIATOR_trait==bloodlust,priority=1)->[prisoner_canniblood]</li>
-					<li>thought_prisonersold(INITIATOR_trait==cannibal,priority=1)->[prisoner_canniblood]</li>
-					<li>prisoner_canniblood->Did we really have to sell that [prisoner] into slavery? Such a waste of resources!</li>
+					<li>thought_prisonersold(INITIATOR_trait==bloodlust,priority=1)->[prisoner_sold_canniblood]</li>
+					<li>thought_prisonersold(INITIATOR_trait==cannibal,priority=1)->[prisoner_sold_canniblood]</li>
+					<li>prisoner_sold_canniblood->Did we really have to sell that [prisoner] into slavery? Such a waste of resources!</li>
 					<li>thought_prisonersold(INITIATOR_trait==greedy,priority=1)->Selling that [prisoner] into slavery was no noble deed, but hey — if it means getting paid for it, I'm in!</li>				
 				<!-- ===NeedBeauty=== -->
 					<!-- ===hideous=== -->
@@ -172,17 +174,28 @@
 						<li>thought_need_comfort5->Our furniture feels like heaven! So comfy!</li>
 				<!-- ===NeedFood===-->
 					<!-- ===hungry or worse , eating and seated (priority 5)=== -->
-						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==Yes,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>
+						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_moving==No,priority=5,tag=StarvingEating)->Mmm! So tasty! I was starving!</li>
 					<!-- ===hungry or worse , going to eat or eating standing (priority 5)=== -->
-						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_seated==No,priority=5,tag=StarvingEating)->So hungry! I'm going to devour this at once!</li>					
+						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,INITIATOR_jobDefName==Ingest,INITIATOR_moving==Yes,priority=5,tag=StarvingEating)->So hungry! I'm going to [devour] something at once!</li>
+							<li>devour->devour</li>
+							<li>devour->eat up</li>
+							<li>devour->eat</li>
+							<li>devour->cram down</li>
+							<li>devour->shovel down</li>
+							<li>devour->wolf down</li>
+							<li>devour->gobble down</li>
+							<li>devour->stuff my face with</li>
+							<li>devour->stuff myself with</li>
 					<!-- ===hungry or worse , recipient is cooking (priority 4) [must improve with other meals!]=== -->
 						<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,RECIPIENT_jobText==Cooking simple meal.,tag=ReactToThought_NeedFood_RecipientCooking,priority=4)->[thought_needfood_recipientcooking]</li>
 						<li>thought_needfood_recipientcooking->[thought_needfood_hungry0]</li>
 					<!-- ===hungry or worse , recipient is a professional cook (priority 4)=== -->
 						<li>r_logentry(RECIPIENT_faction==PlayerColony,INITIATOR_jobDefName!=StandAndBeSociallyActive,INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
-						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.4)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
+						<li>r_logentry(RECIPIENT_faction==PlayerTribe,INITIATOR_jobDefName!=StandAndBeSociallyActive,INITIATOR_jobDefName!=Ingest,INITIATOR_thoughtDefName==NeedFood,RECIPIENT_cooking_level>=6,tag=ReactToThought_NeedFood_CookRecipient,priority=4)->[thought_needfood_cookrecipient]</li>
+						<li>thought_needfood_cookrecipient(INITIATOR_trait==brawler,INITIATOR_mood&lt;0.4,priority=1)->[damn_it], [RECIPIENT_nameDef] — get me some cooked food already or I swear I'll eat that [ugly] face of yours!</li>
 						<li>thought_needfood_cookrecipient(INITIATOR_mood&lt;0.4)->What's someone got to do to get some food around here?</li>
 						<li>thought_needfood_cookrecipient(INITIATOR_mood&lt;0.4)->Hey, [RECIPIENT_nameDef] — can you get me some food already?!</li>
+						<li>thought_needfood_cookrecipient(INITIATOR_jobText==resting.)->[thought_needfood_hungry0] Can you get me some food, please?</li>
 						<li>thought_needfood_cookrecipient(priority=-1)->Hey, [RECIPIENT_nameDef] — is there anything I could eat around here?</li>
 					<!-- ===just hungry=== -->
 						<li>r_logentry(INITIATOR_thoughtLabel==hungry,tag=ReactToThought_NeedFood)->[thought_needfood_hungry0]</li>
@@ -258,8 +271,8 @@
 						<!-- ===Special cases=== -->
 							<li>thought_newcolhope(INITIATOR_trait==ascetic)->By humbly observing the planet's behaviour, we shall survive and thrive against all odds.</li>
 						<!-- ===Other cases=== -->
-							<li>thought_newcolhope(INITIATOR_trait==hard worker)->Our hard work got us safely so far. Let's keep this up, and we'll be allright!</li>
-							<li>thought_newcolhope(INITIATOR_trait==industrious)->Our hard work got us safely so far. Let's keep this up, and we'll be allright!</li>
+							<li>thought_newcolhope(INITIATOR_trait==hard worker)->Our hard work got us safely so far. Let's keep this up, and we'll be all right!</li>
+							<li>thought_newcolhope(INITIATOR_trait==industrious)->Our hard work got us safely so far. Let's keep this up, and we'll be all right!</li>
 							<li>thought_newcolhope(INITIATOR_trait==iron-willed)->We never gave up, and now here we are — strong and ready to face what lies ahead.</li>
 							<li>thought_newcolhope(INITIATOR_trait==optimist)->So far, so good — right? We won past challenges, we shall win the future ones too! </li>
 							<li>thought_newcolhope(INITIATOR_trait==sanguine)->So far, so good — right? We won past challenges, we shall win the future ones too!</li>
@@ -280,7 +293,7 @@
 						<li>thought_newcolopt(INITIATOR_trait==steadfast)->By sheer willpower, we will get through this! I'm sure!</li>
 						<li>thought_newcolopt(INITIATOR_trait==tough)->Come what may, nothing can defeat us! Let's do this!</li>
 						<li>thought_newcolopt(INITIATOR_construction_level>=4)->Let's start building the basic buildings — we'll be fine.</li>
-						<li>thought_newcolopt(INITIATOR_medical_level>=4)->If you have any medical issues, I can help. Do not worry — we'll be allright.</li>
+						<li>thought_newcolopt(INITIATOR_medical_level>=4)->If you have any medical issues, I can help. Do not worry — we'll be all right.</li>
 						<li>thought_newcolopt(INITIATOR_plants_level>=5)->I believe we may grow our own food here — and that will [surely] give us a great start!</li>
 						<li>thought_newcolopt(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5)->I believe we may hunt for food here — and that will [surely] give us a great start!</li>
 				<!-- ===ObservedLayingCorpse=== -->
@@ -303,6 +316,7 @@
 					<li>saw_a_rotting_body->I saw an unburied rotting body.</li>					
 				<!-- ===ReleasedHealthyPrisoner (playerfaction only)=== -->
 					<li>r_logentry(INITIATOR_faction==PlayerColony,INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,tag=ReactToThought_ReleasedPrisoner)->[thought_releasedprisoner]</li>
+					<li>r_logentry(INITIATOR_faction==PlayerTribe,INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,tag=ReactToThought_ReleasedPrisoner)->[thought_releasedprisoner]</li>
 					<li>thought_releasedprisoner->[RECIPIENT_nameDef], did you hear? We finally released that poor [prisoner]. [took_care_prisoner]</li>
 						<!-- ===took care of prisoner=== -->
 							<li>took_care_prisoner->It feels good to know we don't treat them poorly.</li>
@@ -325,7 +339,7 @@
 					<li>thought_sick(INITIATOR_trait==tortured artist)->Sickness: rich fuel for my creativity, yet painful dagger in the flesh still.</li>
 					<li>thought_sick(INITIATOR_trait==sickly)->[damn_it], I'm sick again... same old story...</li>
 					<li>thought_sick(INITIATOR_trait==super-immune)->Ah — this [swearword]sickness. I shouldn't even be sick! I never get sick!</li>
-					<li>thought_sick(INITIATOR_trait==transhumanist)->Sick — again! The human body is so [swearword]weak and flawed...</li>
+					<li>thought_sick(INITIATOR_trait==body modder)->Sick — again! The human body is so [swearword]weak and flawed...</li>
 				<!-- ===SleepDisturbed=== -->
 					<li>r_logentry(INITIATOR_thoughtDefName==SleepDisturbed)->[thought_sleepdisturbed]</li>
 						<!-- ===Kind (priority)=== -->

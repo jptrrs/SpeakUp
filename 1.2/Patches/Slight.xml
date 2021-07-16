@@ -8,6 +8,7 @@
 			<!-- ===generic=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;=-50,tag=Slight_generic)->I'm not saying I hate you, but I'd unplug your life support to charge my batteries.</li>
 				<li>r_logentry(INITIATOR_opinion>=-25,tag=Slight_generic)->The world would be a better place without you, [RECIPIENT_nameDef].</li>
+				<li>r_logentry(INITIATOR_opinion>=-25,tag=Slight_generic)->You're useless as tits on a bull, [RECIPIENT_nameDef].</li>
 			<!-- ===initiator's traits=== -->
 				<!-- ===abrasive=== -->
 					<li>r_logentry(INITIATOR_trait==abrasive,tag=Slight_generic)->[initiator_abrasive]</li>
@@ -32,6 +33,10 @@
 					<li>recipient_kind(INITIATOR_trait==pessimist)->Is that foolish, fake smile of yours supposed to brighten up everyone's day, [RECIPIENT_nameDef]?</li>
 					<li>recipient_kind(INITIATOR_trait==abrasive)->So, [RECIPIENT_nameDef] — did your make-believe world of love, bunnies and happy smiles crumble already?</li>
 					<li>recipient_kind->All that honey you spit from your mouth, [RECIPIENT_nameDef], is just to coat words of venom and envy!</li>
+				<!-- ===lazy and slothful=== -->
+					<li>r_logentry(RECIPIENT_trait==lazy)->[recipient_lazysloth]</li>
+					<li>r_logentry(RECIPIENT_trait==slothful)->[recipient_lazysloth]</li>
+						<li>recipient_lazysloth->Will you ever stop sleeping with the tit in your mouth, [RECIPIENT_nameDef]?</li>
 				<!-- ===optimist and sanguine=== -->
 					<li>r_logentry(RECIPIENT_trait==optimist,tag=Slight_generic)->[recipient_upbeat]</li>
 					<li>r_logentry(RECIPIENT_trait==sanguine,tag=Slight_generic)->[recipient_upbeat]</li>
@@ -76,6 +81,12 @@
 				<li>low_skill_major_passion(RECIPIENT_cooking_level&lt;=10,RECIPIENT_cooking_passion==Major)->I must say, [RECIPIENT_nameDef] — your cooking skills would make you a [brilliant] assassin!</li>
 				<li>low_skill_major_passion(RECIPIENT_plants_level&lt;=10,RECIPIENT_plants_passion==Major)->Stay away from plants, [RECIPIENT_nameDef]! We need them alive and healthy. Thanks!</li>
 				<li>low_skill_major_passion(RECIPIENT_medical_level&lt;=10,RECIPIENT_medical_passion==Major)->Hey, [RECIPIENT_nameDef] — why do you strive so much to become a physician, when you're a highly skilled mortician already?</li>			
+		
+		<!-- ===Initiator's job=== -->
+			<!-- ===Telescope (priority 4)=== -->
+				<li>r_logentry(INITIATOR_jobText==using telescope.,INITIATOR_moving==No,priority=4,tag=Slight_generic)->[insult_telescope]</li>
+				<li>insult_telescope->I'm looking through this telescope, [RECIPIENT_nameDef] — and I still can't find your [RECIPIENT_worstSkill] skills!</li>
+				<li>insult_telescope->I'm looking through this telescope, [RECIPIENT_nameDef] — and I still can't see why this community would need you!</li>
 				
 			<!-- ===WILDCARDS=== -->
 				<li>a_weak_animal->a [adj] bunny</li>

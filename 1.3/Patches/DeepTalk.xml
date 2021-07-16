@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/InteractionDef[defName = "DeepTalk"]/logRulesInitiator/rulesStrings</xpath>
+        <value>
+		<rulesStrings>
+            <!-- ===Meaning of life=== -->
+				<li>r_logentry(tag=MeaningOfLife)->[RECIPIENT_nameDef], I was thinking — what is the meaning of life?</li>
+
+			<!-- ===Childhood discussions=== -->
+				<li>r_logentry(tag=ChildhoodDiscussions)->[childhood_discussion]</li>
+				<li>childhood_discussion(RECIPIENT_trait==psychopath)->What made you such an... interesting person [RECIPIENT_nameDef]?</li>
+				<li>childhood_discussion->How did you grow up [RECIPIENT_nameDef]?</li>
+				<li>childhood_discussion->[RECIPIENT_nameDef], what was your childhood like?</li>
+				<li>childhood_discussion->Hey [RECIPIENT_nameDef], did you do anything interesting as a kid?</li>
+				<li>childhood_discussion->[RECIPIENT_nameDef], could you tell me about your childhood? I'd like to get to know you a bit better.</li>
+				
+			<!-- ===Dreams=== -->
+				<!-- ===Nice=== -->
+				<li>r_logentry(INITIATOR_mood>=0.6,tag=WhatDream)->Ah, [RECIPIENT_nameDef]... I had such a nice dream...</li>
+					
+        </rulesStrings>
+		</value>
+    </Operation>
+	
+</Patch>

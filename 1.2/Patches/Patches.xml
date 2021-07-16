@@ -8,7 +8,105 @@
 					<li>r_logentry(p=0.1,tag=ChitChat_generic)->Hey, [RECIPIENT_nameDef]!</li>
 				
 				<!-- ===Job Texts (initiator)=== -->
+					<!-- ===Aurora=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobText==watching the aurora.,INITIATOR_moving==No,tag=Aurora)->[watching_aurora]</li>
+							<li>watching_aurora->Auroras are so rare and stunningly beautiful...</li>
+							<li>watching_aurora(INITIATOR_artistic_passion!=None)->Auroras are so inspiring — I need to start an art piece before its image fades away from my memory...</li>
+							<li>watching_aurora(INITIATOR_artistic_passion!=None)->Auroras are so inspiring — I need to get its image on paper before it fades away from my memory...</li>
+							<li>watching_aurora->This aurora has got so many vibrant colors, but I'm in love with its [aurora_color] hues...</li>
+								<li>aurora_color->pink</li>
+								<li>aurora_color->green</li>
+								<li>aurora_color->yellow</li>
+								<li>aurora_color->blue</li>
+								<li>aurora_color->violet</li>
+								<li>aurora_color(p=0.2)->orange</li>
+								<li>aurora_color(p=0.2)->white</li>
+								
+					<!-- ===Billiards=== -->
+						<li>r_logentry(INITIATOR_jobDefName==Play_Billiards,priority=4)->[game_billiards]</li>
+						<!-- ===Called shot=== -->
+						<li>game_billiards(INITIATOR_moving==No,RECIPIENT_jobDefName==Play_Billiards)->[billiards_calledshot]</li>
+							<!-- ===Smart move=== -->
+								<li>billiards_calledshot(INITIATOR_shooting_level>=0)->[billiards_smart]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level>=5)->[billiards_smart]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level>=10)->[billiards_smart]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level>=15)->[billiards_smart]</li>
+								<li>billiards_calledshot(p=2,INITIATOR_shooting_level>=RECIPIENT_shooting_level)->[billiards_smart]</li>
+									<li>billiards_smart(tag=Billiards_smart)->[billiards_shot_description]</li>
+							<!-- ===Blunder=== -->
+								<li>billiards_calledshot(p=2,INITIATOR_shooting_level&lt;=RECIPIENT_shooting_level)->[billiards_blunder]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level&lt;5)->[billiards_blunder]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level&lt;10)->[billiards_blunder]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level&lt;15)->[billiards_blunder]</li>
+								<li>billiards_calledshot(INITIATOR_shooting_level&lt;=20)->[billiards_blunder]</li>
+									<li>billiards_blunder(tag=Billiards_blunder)->[billiards_shot_description]</li>
+							
+							<li>billiards_shot_description->[billiards_calledshot_start] ball [billiards_ball] in that [billiards_pocket] pocket.</li>
+							<li>billiards_shot_description->Mmm, let me try this [billiards_shot_type] shot...</li>
+							<li>billiards_shot_description->Mmm, what if I try this [billiards_shot_type] shot...</li>
+							<li>billiards_shot_description->Maybe if I hit ball [billiards_ball] with the right cut-angle...</li>
+							<li>billiards_shot_description(INITIATOR_shooting_level>=10)->Just watch me — I'll [billiards_pot] ball [billiards_ball] in that [billiards_pocket] pocket.</li>
+							
+						<!-- ===Invitation=== -->
+						<li>game_billiards(RECIPIENT_jobDefName==Play_Billiards,INITIATOR_moving==Yes,tag=Invite_answer_yes)->[billiards_invite]</li>
+						<li>game_billiards(INITIATOR_moving==Yes,priority=-1,tag=Invite_answer_no)->[billiards_invite]</li>
+							<li>billiards_invite->I'm going to start a new billiards game. Would you like to join me, [RECIPIENT_nameDef]?</li>
+							<li>billiards_invite->Would you like to join me in a new billiards match, [RECIPIENT_nameDef]?</li>
+							
+						<!-- ===Ready?=== -->
+							<li>game_billiards(p=0.5,RECIPIENT_jobDefName==Play_Billiards,tag=Billiards_ready)->[billiards_ready]</li>
+								<li>billiards_ready->Time to activate beast mode, [RECIPIENT_nameDef]. Are you ready?</li>
+								<li>billiards_ready->Ready for a new game, [RECIPIENT_nameDef]?</li>
+								<li>billiards_ready->Are you in for another game, [RECIPIENT_nameDef]?</li>
+								<li>billiards_ready->Cue is chalked, rack is set up. Ready, [RECIPIENT_nameDef]?</li>
+							
+							<!-- ===Wildcards=== -->
+							<li>billiards_ball->1</li>
+							<li>billiards_ball->2</li>
+							<li>billiards_ball->3</li>
+							<li>billiards_ball->4</li>
+							<li>billiards_ball->5</li>
+							<li>billiards_ball->6</li>
+							<li>billiards_ball->7</li>
+							<li>billiards_ball->9</li>
+							<li>billiards_ball->10</li>
+							<li>billiards_ball->11</li>
+							<li>billiards_ball->12</li>
+							<li>billiards_ball->13</li>
+							<li>billiards_ball->14</li>
+							<li>billiards_ball->15</li>
+							
+							<li>billiards_calledshot_start->I'll try [billiards_potting]</li>
+							<li>billiards_calledshot_start->[billiards_potting]</li>
+							<li>billiards_calledshot_start(INITIATOR_intellectual_level&lt;5)->I'm gonna [billiards_pot]</li>
+							<li>billiards_calledshot_start(INITIATOR_shooting_level&lt;5)->Mmm... what if I try [billiards_potting]</li>
+							
+							<li>billiards_pocket->corner</li>
+							<li>billiards_pocket->side</li>
+							
+							<li>billiards_pot->make</li>
+							<li>billiards_pot->pocket</li>
+							<li>billiards_pot->pot</li>
+							<li>billiards_pot->sink</li>
+							
+							<li>billiards_potting->making</li>
+							<li>billiards_potting->pocketing</li>
+							<li>billiards_potting->potting</li>
+							<li>billiards_potting->sinking</li>
+							
+							<li>billiards_shot_type->rail</li>
+							<li>billiards_shot_type->rail cut</li>
+							<li>billiards_shot_type->carom</li>
+
 					<!-- ===Chess=== -->
+						<!-- ===Invitation=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Chess,INITIATOR_moving==Yes)->[game_chess_going]</li>
+							<li>game_chess_going(RECIPIENT_jobDefName==Play_Chess,tag=Invite_answer_yes)->[game_chess_invite]</li>
+							<li>game_chess_going(RECIPIENT_jobDefName!=Play_Chess,tag=Invite_answer_no)->[game_chess_invite]</li>
+								<li>game_chess_invite->I'm going to play chess. Would you like to join me, [RECIPIENT_nameDef]?</li>
+								<li>game_chess_invite->Would you like to join me in a chess game, [RECIPIENT_nameDef]?</li>
+						
+						<!-- ===Playing=== -->
 						<li>r_logentry(INITIATOR_jobDefName==Play_Chess,INITIATOR_seated==Yes,RECIPIENT_jobDefName==Play_Chess,RECIPIENT_seated==Yes,priority=4)->[game_chess]</li>
 							<!-- ===Smart move=== -->
 								<li>game_chess(INITIATOR_intellectual_level>=0)->[chess_smart]</li>
@@ -35,6 +133,7 @@
 							<li>chess_comment->I am convinced that the way one plays chess always reflects the player's personality.</li>
 							<li>chess_comment->Chess doesn't drive people mad, it keeps mad people sane.</li>
 							<li>chess_comment->Pawns are the soul of this game.</li>
+					
 					<!-- ===Clean=== -->
 					<li>r_logentry(p=3,INITIATOR_jobDefName==Clean,tag=Cleaning)->[job_clean]</li>
 						<li>job_clean(INITIATOR_moving==No)->[job_clean_static]</li>
@@ -58,9 +157,10 @@
 							<li>job_clean_going(INITIATOR_jobText==cleaning vomit.)->Cleaning up vomit isn't nice, but someone has to do it...</li>
 							<li>job_clean_going(INITIATOR_jobText==cleaning building rubble.)->I'm going to clean that debris...</li>
 							<li>wipe_feet->Nobody ever wipes their feet, so here I go cleaning more</li>
+					
 					<!-- ===Cloudwatching=== -->
-						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==morning,tag=CloudWatching)->[cloud_watching]</li>
-						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,DAYPERIOD==afternoon,tag=CloudWatching)->[cloud_watching]</li>
+						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,INITIATOR_moving==No,DAYPERIOD==morning,tag=CloudWatching)->[cloud_watching]</li>
+						<li>r_logentry(priority=4,INITIATOR_jobText==cloudwatching.,INITIATOR_moving==No,DAYPERIOD==afternoon,tag=CloudWatching)->[cloud_watching]</li>
 						<li>cloud_watching->Look at that cloud! Doesn't it [cloud_analogy] [a_cloudshape]?</li>
 						<li>a_cloudshape->a [Animal]</li>
 						<li>a_cloudshape->a [Apparel]</li>
@@ -70,7 +170,60 @@
 						<li>cloud_analogy->just look like</li>
 						<li>cloud_analogy->remind you of</li>
 						<li>cloud_analogy(INITIATOR_intellectual_level>=5)->vaguely resemble</li>
-					<!-- ===Horseshoes=== -->
+				
+					<!-- ===Eclipse=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobText==watching the eclipse.,INITIATOR_moving==No,tag=Eclipse)->[watching_eclipse]</li>
+							<li>watching_eclipse(INITIATOR_trait==night owl)->The longer this eclipse lasts, the wider my smile will be.</li>
+							<li>watching_eclipse(INITIATOR_artistic_passion!=None)->An elegant dance of celestial bodies brought us this stunning sky composition...</li>
+							<li>watching_eclipse->Eclipses are so peculiar — it seems like night, but it's [DAYPERIOD].</li>
+							<li>watching_eclipse->This eclipse is so fascinating...</li>
+							
+					<!-- ===GameOfUr=== -->
+						<!-- ===Invitation=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_GameOfUr,INITIATOR_moving==Yes)->[game_ur_going]</li>
+							<li>game_ur_going(RECIPIENT_jobDefName==Play_GameOfUr,tag=Invite_answer_yes)->[game_ur_invite]</li>
+							<li>game_ur_going(RECIPIENT_jobDefName!=Play_GameOfUr,tag=Invite_answer_no)->[game_ur_invite]</li>
+								<li>game_ur_invite->I'm going to play a game of Ur. Would you like to join me, [RECIPIENT_nameDef]?</li>
+								<li>game_ur_invite->Would you like to join me in a game of Ur, [RECIPIENT_nameDef]?</li>
+						
+						<!-- ===Playing=== -->
+						<li>r_logentry(INITIATOR_jobDefName==Play_GameOfUr,INITIATOR_moving==No,RECIPIENT_jobDefName==Play_GameOfUr,RECIPIENT_moving==No,priority=4)->[game_ur]</li>
+							<!-- ===Smart move=== -->
+								<li>game_ur(INITIATOR_intellectual_level>=0)->[game_ur_smart]</li>
+								<li>game_ur(INITIATOR_intellectual_level>=5)->[game_ur_smart]</li>
+								<li>game_ur(INITIATOR_intellectual_level>=10)->[game_ur_smart]</li>
+								<li>game_ur(INITIATOR_intellectual_level>=15)->[game_ur_smart]</li>
+								<li>game_ur(p=2,INITIATOR_intellectual_level>=RECIPIENT_intellectual_level)->[game_ur_smart]</li>
+								<li>game_ur_smart(tag=GameOfUr_smart)->[game_ur_neutral]</li>
+							<!-- ===Blunder=== -->
+								<li>game_ur(p=2,INITIATOR_intellectual_level&lt;=RECIPIENT_intellectual_level)->[game_ur_blunder]</li>
+								<li>game_ur(INITIATOR_intellectual_level&lt;5)->[game_ur_blunder]</li>
+								<li>game_ur(INITIATOR_intellectual_level&lt;10)->[game_ur_blunder]</li>
+								<li>game_ur(INITIATOR_intellectual_level&lt;15)->[game_ur_blunder]</li>
+								<li>game_ur(INITIATOR_intellectual_level&lt;=20)->[game_ur_blunder]</li>
+								<li>game_ur_blunder(tag=GameOfUr_blunder)->[game_ur_neutral]</li>
+							<li>game_ur_neutral->I got [random_1_8] move points on the dice.</li>
+							<li>game_ur_neutral->I'll add a new racing piece.</li>
+							<li>game_ur_neutral->I'll move this piece.</li>
+							<li>game_ur_neutral->I'll move these pieces.</li>
+							
+							
+					<!-- ===Horseshoes and hoopstone=== -->
+						<!-- ===Invitation=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Hoopstone,INITIATOR_moving==Yes)->[game_hoopstone_going]</li>
+							<li>game_hoopstone_going(RECIPIENT_jobDefName==Play_Hoopstone,tag=Invite_answer_yes)->[game_hoopstone_invite]</li>
+							<li>game_hoopstone_going(RECIPIENT_jobDefName!=Play_Hoopstone,tag=Invite_answer_no)->[game_hoopstone_invite]</li>
+								<li>game_hoopstone_invite->I'm going to play hoopstone. Would you like to join me, [RECIPIENT_nameDef]?</li>
+								<li>game_hoopstone_invite->Would you like to join me in a hoopstone game, [RECIPIENT_nameDef]?</li>
+							
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Horseshoes,INITIATOR_moving==Yes)->[game_horseshoes_going]</li>
+							<li>game_horseshoes_going(RECIPIENT_jobDefName==Play_Horseshoes,tag=Invite_answer_yes)->[game_horseshoes_invite]</li>
+							<li>game_horseshoes_going(RECIPIENT_jobDefName!=Play_Horseshoes,tag=Invite_answer_no)->[game_horseshoes_invite]</li>
+								<li>game_horseshoes_invite->I'm going to play horseshoes. Would you like to join me, [RECIPIENT_nameDef]?</li>
+								<li>game_horseshoes_invite->Would you like to join me in a horseshoes game, [RECIPIENT_nameDef]?</li>
+							
+						<!-- ===Playing=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Hoopstone,INITIATOR_moving==No)->[game_horseshoes]</li>
 						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_Horseshoes,INITIATOR_moving==No)->[game_horseshoes]</li>
 						<li>game_horseshoes(INITIATOR_shooting_level>=0)->[horseshoes_hit]</li>
 						<li>game_horseshoes(INITIATOR_shooting_level>=5)->[horseshoes_hit]</li>
@@ -124,11 +277,238 @@
 							<li>shooting_miss(INITIATOR_shooting_level&lt;5)->Again... miss...</li>
 							<li>shooting_miss(INITIATOR_shooting_level&lt;5)->This is way too hard...</li>
 
-				<!-- ===LayDown=== -->
-				<li>r_logentry(INITIATOR_jobDefName==LayDown,INITIATOR_moving==Yes,priority=4,tag=GoingToBed)->[going_to_bed]</li>
-				<li>going_to_bed->Well, [RECIPIENT_nameDef] — I'm going to bed.</li>
-				<li>going_to_bed->Let's call it a day, [RECIPIENT_nameDef] — I'm going to bed.</li>
+					<!-- ===LayDown=== -->
+						<li>r_logentry(INITIATOR_jobDefName==LayDown,INITIATOR_moving==Yes,priority=4,tag=GoingToBed)->[going_to_bed]</li>
+						<li>going_to_bed->Well, [RECIPIENT_nameDef] — I'm going to bed.</li>
+						<li>going_to_bed->Let's call it a day, [RECIPIENT_nameDef] — I'm going to bed.</li>
+						<li>going_to_bed(INITIATOR_thoughtDefName==Sick,priority=1)->I'm not feeling well, [RECIPIENT_nameDef] — I'm going to bed.</li>
+						<li>going_to_bed(INITIATOR_thoughtDefName==NeedRest,priority=1)->I'm so tired... I'm going to bed...</li>
 				
+					
+					<!-- ===Poker=== -->
+						<li>r_logentry(INITIATOR_jobDefName==Play_Poker,priority=4)->[game_poker]</li>
+						<!-- ===Both seated and playing=== -->
+							<li>game_poker(INITIATOR_seated==Yes,RECIPIENT_seated==Yes,RECIPIENT_jobDefName==Play_Poker)->[poker_endgame]</li>
+							<!-- ===Smart play=== -->
+								<li>poker_endgame(INITIATOR_intellectual_level>=0)->[poker_smart]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level>=5)->[poker_smart]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level>=10)->[poker_smart]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level>=15)->[poker_smart]</li>
+								<li>poker_endgame(p=2,INITIATOR_trait==great memory)->[poker_smart]</li>
+								<li>poker_endgame(p=2,INITIATOR_intellectual_level>=RECIPIENT_intellectual_level)->[poker_smart]</li>
+									<li>poker_smart(tag=Poker_smart)->[poker_endgame_description]</li>
+							<!-- ===Blunder=== -->
+								<li>poker_endgame(p=2,INITIATOR_intellectual_level&lt;=RECIPIENT_intellectual_level)->[poker_blunder]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level&lt;5)->[poker_blunder]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level&lt;10)->[poker_blunder]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level&lt;15)->[poker_blunder]</li>
+								<li>poker_endgame(INITIATOR_intellectual_level&lt;=20)->[poker_blunder]</li>
+								<li>poker_endgame(p=2,RECIPIENT_trait==great memory)->[poker_blunder]</li>
+									<li>poker_blunder(tag=Poker_blunder)->[poker_endgame_description]</li>
+							
+							<li>poker_endgame_description->[poker_endgame_start] [poker_score]</li>
+								<li>poker_endgame_start->I got</li>
+								
+								<li>poker_score(INITIATOR_intellectual_level>=0)->nothing.</li>
+								<li>poker_score(INITIATOR_intellectual_level>=0)->one pair.</li>
+								<li>poker_score(INITIATOR_intellectual_level>=0)->two pairs.</li>
+								<li>poker_score(INITIATOR_intellectual_level>=0)->three of a kind.</li>
+								<li>poker_score(INITIATOR_intellectual_level>=5)->a straight!</li>
+								<li>poker_score(INITIATOR_intellectual_level>=5)->a flush!</li>
+								<li>poker_score(INITIATOR_intellectual_level>=10)->a full house!</li>
+								<li>poker_score(INITIATOR_intellectual_level>=10)->four of a kind!</li>
+								<li>poker_score(INITIATOR_intellectual_level>=15)->a straight flush!</li>
+								<li>poker_score(INITIATOR_intellectual_level>=15)->a royal flush!</li>
+								<li>poker_score->nothing.</li>
+								<li>poker_score->one pair.</li>
+								<li>poker_score->two pairs.</li>
+								<li>poker_score->three of a kind.</li>
+								<li>poker_score->a straight!</li>
+								<li>poker_score->a flush!</li>
+								<li>poker_score->a full house!</li>
+								<li>poker_score->four of a kind!</li>
+								<li>poker_score->a straight flush!</li>
+								<li>poker_score->a royal flush!</li>
+								
+						<!-- ===Invitation=== -->
+						<li>game_poker(INITIATOR_seated==No,RECIPIENT_jobDefName==Play_Poker,tag=Invite_answer_yes)->[poker_invite]</li>
+						<li>game_poker(INITIATOR_seated==No,priority=-1,tag=Invite_answer_no)->[poker_invite]</li>
+							<li>poker_invite->I'm going to start a poker game. Would you like to join me, [RECIPIENT_nameDef]?</li>
+							<li>poker_invite->Would you like to join me in a poker game, [RECIPIENT_nameDef]?</li>
+							
+						<!-- ===Ready?=== -->
+						<li>game_poker(p=0.5,RECIPIENT_jobDefName==Play_Poker,RECIPIENT_seated==Yes,tag=Poker_ready)->[poker_ready]</li>
+							<li>poker_ready->Ok, new round of betting. I'll deal, [RECIPIENT_nameDef]. Ready?</li>
+							<li>poker_ready->My turn to deal. Ready for a new game, [RECIPIENT_nameDef]?</li>
+							<li>poker_ready->Are you in for another game, [RECIPIENT_nameDef]?</li>
+							<li>poker_ready->I cut and shuffled the deck. Are you ready, [RECIPIENT_nameDef]?</li>					
+					
+					<!-- ===Television=== -->
+						<!-- ===Both sitting and watching (priority 4)=== -->
+						<li>r_logentry(INITIATOR_jobDefName==WatchTelevision,INITIATOR_moving==No,RECIPIENT_jobDefName==WatchTelevision,RECIPIENT_moving==No,priority=4)->[job_tv]</li>
+							<li>job_tv(tag=TV_newchannel)->[job_tv1]</li>
+								<li>job_tv1->Hmmm... should I change the channel to a [tv_show]?</li>
+								<li>job_tv1->Do you want me to switch the television to [tv_letters], [RECIPIENT_nameDef]?</li>
+								<li>job_tv1->Seems like there's a new program airing... [tv_letters] [tv_news]. [RECIPIENT_nameDef], [wanna] [tv_seeit] together?</li>
+								<li>job_tv1->Oooh! There's a new program: [tv_letters] [tv_news]. [wanna] [tv_seeit], [RECIPIENT_nameDef]?</li>
+								<li>job_tv1->Hey, [RECIPIENT_nameDef] — there's this program called [tv_letters] [tv_news] airing right now. [wanna] [seeit]?</li>
+						
+							<li>job_tv(tag=TV_whatsthis)->[job_tv2]</li>
+								<li>job_tv2->Sorry... [tv_distraction] — what is it we're we watching now?</li>
+									<li>tv_distraction->I dozed off</li>
+									<li>tv_distraction->I fell asleep</li>
+									<li>tv_distraction->I was daydreaming</li>
+									<li>tv_distraction->I was lost in thought</li>
+									<li>tv_distraction->I got distracted</li>
+							
+							<li>job_tv(tag=TV_problem)->[job_tv3]</li>
+								<li>job_tv3->It's so quiet... [RECIPIENT_nameDef], do you know how to turn up the volume on this thing?</li>
+								<li>job_tv3->I can't hear what the characters are saying. How do you turn on the subtitles?</li>
+								<li>job_tv3->Jeez — the television is really [tv_volume]. How do you turn down the volume?</li>
+								<li>job_tv3->The tv audio seems to be cutting off. Do you know how to fix it, [RECIPIENT_nameDef]?</li>
+									<li>tv_volume->loud</li>
+									<li>tv_volume->noisy</li>
+									
+						<!-- ===Recipient sitting and watching (priority 3)=== -->							
+						<li>r_logentry(RECIPIENT_jobDefName==WatchTelevision,RECIPIENT_moving==No,priority=3,tag=TV_whatsthis)->[job_tv_whatsthis]</li>
+							<li>job_tv_whatsthis->What's this playing on the television, [RECIPIENT_nameDef]?</li>
+							<li>job_tv_whatsthis->This program looks so [adj_tv]... what is it about, [RECIPIENT_nameDef]?</li>	
+							<li>job_tv_whatsthis(INITIATOR_intellectual_level&lt;5)->Whatcha watching, [RECIPIENT_nameDef]?</li>
+						
+						<!-- ===Wildcards=== -->						
+							<li>adj_tv->[adj_tv_good]</li>
+								<li>adj_tv_good->cool</li>
+								<li>adj_tv_good->good</li>
+								<li>adj_tv_good->interesting</li>
+								<li>adj_tv_good->intriguing</li>
+								<li>adj_tv_good->amusing</li>
+								<li>adj_tv_good->entertaining</li>								
+							<li>adj_tv->[adj_tv_weird]</li>
+								<li>adj_tv_weird->weird</li>
+								<li>adj_tv_weird->strange</li>
+								<li>adj_tv_weird->peculiar</li>
+								<li>adj_tv_weird->uncanny</li>
+								<li>adj_tv_weird->atypical</li>
+								<li>adj_tv_weird->unusual</li>
+					
+					<!-- ===Stargazing=== -->
+						<li>r_logentry(INITIATOR_jobText==stargazing.,INITIATOR_moving==No,priority=4,tag=Stargazing)->[job_stargazing]</li>
+						<li>job_stargazing->Hey — what's that bright flashing light I just saw?</li>
+						<li>job_stargazing(INITIATOR_intellectual_level>=5)->How interesting — that constellation there just looks like a [Animal]!</li>
+						<li>job_stargazing(DAYPERIOD==evening)->The stars looks so [stars_adj] this evening...</li>
+						<li>job_stargazing(DAYPERIOD==night)->The stars looks so [stars_adj] tonight...</li>
+							<li>stars_adj->beautiful</li>
+							<li>stars_adj->heavenly</li>
+							<li>stars_adj->magical</li>
+							<li>stars_adj->bright</li>							
+						
+					<!-- ===Sunrise=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobText==watching the sunrise.,INITIATOR_moving==No,tag=Sunrise)->[watching_sunrise]</li>
+							<li>watching_sunrise->I love watching the sunrise...</li>
+							<li>watching_sunrise->It's almost impossible to watch a sunrise and not dream...</li>
+							<li>watching_sunrise(INITIATOR_trait==kind)->The beauty of sunrise keeps my heart warm.</li>
+							<li>watching_sunrise(INITIATOR_artistic_passion!=None)->I always get excited when the sky turns pretty colors.</li>
+							<li>watching_sunrise(INITIATOR_artistic_passion!=None)->The blue sky paints itself with gold colors and joyfully dances to the music of a morning breeze...</li>
+							<li>watching_sunrise->A faint blush below the horizon, as the first kiss from the Sun wakes the Planet from its slumber.</li>
+							<li>watching_sunrise->When the sun rises, it rises for everyone.</li>
+							<li>watching_sunrise->What better way to start off the day than watching the sunrise?</li>
+							<li>watching_sunrise->How pretty... I'm speechless. Maybe the Rim isn't so bad, after all.</li>
+							<li>watching_sunrise->The sky is simply gorgeous today, and this sunrise only makes it prettier.</li>
+							<li>watching_sunrise(INITIATOR_trait==pyromaniac)->Good morning, my favorite fireball. Burn bright!</li>
+							
+					<!-- ===Sunset=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobText==watching the sunset.,INITIATOR_moving==No,tag=Sunset)->[watching_sunset]</li>
+							<li>watching_sunset->I feel a wave of reassurance when I watch the sunset... as if everything will be okay tomorrow.</li>
+							<li>watching_sunset->I love watching the sunset...</li>
+							<li>watching_sunset->Look at those beautiful colors in the sky...</li>
+							<li>watching_sunset->Twilight drops her curtain down and pins it with a star.</li>
+							<li>watching_sunset->Sunset is when I get my chance to reset.</li>
+							<li>watching_sunset(INITIATOR_artistic_passion!=None)->Sunset is the opening music of the night.</li>
+							<li>watching_sunset->What better way to finish off the day than watching the sunset?</li>
+							<li>watching_sunset->How pretty... I'm speechless. Maybe the Rim isn't so bad, after all.</li>
+							<li>watching_sunset(INITIATOR_trait==ascetic)->The blessed Sun is going down. Sleep tight, Mother Nature.</li>
+							<li>watching_sunset->The sky is simply gorgeous today, and this sunset only makes it prettier.</li>
+							<li>watching_sunset(INITIATOR_trait==pyromaniac)->Goodnight, my favorite fireball. Burn bright!</li>
+							<li>watching_sunset->I feel as if all my suffering washes away when I gaze at the setting sun...</li>
+							
+					<!-- ===Telescope=== -->
+						<li>r_logentry(INITIATOR_jobText==using telescope.,INITIATOR_moving==No,priority=4,tag=Telescope)->[using_telescope]</li>
+						<li>using_telescope->Woah! I think I can see another planet!</li>
+						<li>using_telescope->I wonder how many moons this planet has...</li>
+						<li>using_telescope->Hey — what's that bright flashing light I just saw?</li>
+						<li>using_telescope(DAYPERIOD==evening)->The stars looks so [stars_adj] this evening...</li>
+						<li>using_telescope(DAYPERIOD==night)->The stars looks so [stars_adj] tonight...</li>
+							<li>stars_adj->beautiful</li>
+							<li>stars_adj->heavenly</li>
+							<li>stars_adj->magical</li>
+					
+					<!-- ===ViewArt=== -->
+						<li>r_logentry(INITIATOR_jobDefName==ViewArt,INITIATOR_moving==No,priority=4)->[job_viewart]</li>
+							<!-- ===How beautiful=== -->
+							<li>job_viewart(tag=Job_ViewArt1)->[job_viewart_1]</li>
+								<li>job_viewart_1->I like this [artwork]; it looks very [adj_artwork].</li>
+								<li>job_viewart_1->I like this [NEAREST_art]; it looks very [adj_artwork].</li>
+								<li>job_viewart_1->Such [a_adj_artwork] [artwork]!</li>
+								<li>job_viewart_1->Such [a_adj_artwork] [NEAREST_art]! </li>
+								<li>job_viewart_1->We're lucky to have such [a_adj_artwork] [artwork]!</li>
+								<li>job_viewart_1->How [adj_artwork]!</li>
+								<li>job_viewart_1->Look, [RECIPIENT_nameDef]! Isn't it just so [adj_artwork]?</li>
+								<li>job_viewart_1->Look at this [NEAREST_art], [RECIPIENT_nameDef]! Isn't it just so [adj_artwork]?</li>
+								<li>job_viewart_1(INITIATOR_artistic_passion!=None)->[artistic_passion]</li>
+									<li>artistic_passion->This [NEAREST_art] fosters my natural connection to Art, [RECIPIENT_nameDef]. Isn't it just so [adj_artwork]?</li>
+									<li>artistic_passion->This [NEAREST_art] and its [adj_artwork] sprezzaturas visit my very soul...</li>
+									<li>artistic_passion->This [adj_artwork] [artwork] is a generous cornucopia for my eyes!</li>
+								<!-- ===No artistic passion (priority 1)=== -->
+								<li>job_viewart_1(INITIATOR_artistic_passion==None,priority=1)->[no_artistic_passion]</li>
+									<li>no_artistic_passion->[no_artistic_passion_start], but I find this [NEAREST_art] to be quite [adj_artwork]...</li>
+									<li>no_artistic_passion->[no_artistic_passion_start], but I find this [artwork] to be quite [adj_artwork]...</li>
+										<li>no_artistic_passion_start->I never understood arts</li>
+										<li>no_artistic_passion_start->I don't enjoy arts in general</li>
+										<li>no_artistic_passion_start->Normally no [artwork] interests me</li>
+										<li>no_artistic_passion_start->I never made efforts to understand and enjoy arts</li>
+										<li>no_artistic_passion_start->I never had the chance or will to develop my artistic sense</li>
+										
+								<li>adj_artwork->beautiful</li>
+								<li>adj_artwork->captivating</li>
+								<li>adj_artwork->charming</li>
+								<li>adj_artwork->delightful</li>
+								<li>adj_artwork->inspiring</li>
+								<li>adj_artwork->pretty</li>
+								
+								<li>a_adj_artwork->a beautiful</li>
+								<li>a_adj_artwork->a captivating</li>
+								<li>a_adj_artwork->a charming</li>
+								<li>a_adj_artwork->a delightful</li>
+								<li>a_adj_artwork->a pretty</li>
+								<li>a_adj_artwork->an inspiring</li>
+								
+								<li>artwork->art work</li>
+								<li>artwork->artistic production</li>
+								<li>artwork->artistic work</li>
+								<li>artwork->piece</li>
+								<li>artwork->creation</li>
+								<li>artwork->ornament</li>
+								<li>artwork->decoration</li>
+								<li>artwork->work of art</li>
+								<li>artwork(INITIATOR_intellectual_level>=5)->oeuvre</li>
+								<li>artwork(INITIATOR_intellectual_level>=5)->objet d'art</li>
+								<li>artwork(INITIATOR_intellectual_level>=10)->opus artis</li>
+								
+					<!-- ===VisitSickPawn=== -->
+						<li>r_logentry(INITIATOR_jobDefName==VisitSickPawn,INITIATOR_moving==No,priority=4)->[job_visitpawn]</li>
+						<li>job_visitpawn->[tell_joke]</li>
+						<li>job_visitpawn(tag=GetWell)->Don't worry, [RECIPIENT_nameDef] — you'll get well very soon!</li>
+						<li>job_visitpawn(tag=GetWell)->I'm sure you'll be fine in no time, [RECIPIENT_nameDef]!</li>
+						<li>job_visitpawn(p=0.5,tag=HowAreYou)->So, how is our patient doing?</li>
+						<li>job_visitpawn(tag=Thanks)->[visitpawn_thanks]</li>
+							<li>visitpawn_thanks->If you need anything, let me know — OK, [RECIPIENT_nameDef]?</li>
+							<li>visitpawn_thanks->If I can do anything to help, let me know — OK, [RECIPIENT_nameDef]?</li>
+							<li>visitpawn_thanks->Don't worry, [RECIPIENT_nameDef] — [visitpawn_takecare]</li>
+								<li>visitpawn_takecare->I'll take care of you</li>
+								<li>visitpawn_takecare(INITIATOR_medical_level&lt;5)->I'll do my best to take care of you.</li>
+								<li>visitpawn_takecare(INITIATOR_medical_level>=5)->you're in good hands.</li>
+								<li>visitpawn_takecare(INITIATOR_medical_level>=10)->with my high medical skills, you'll get well in no time.</li>
+								
 				<!-- ===Job Texts (recipient)=== -->
 					<!-- ===Butchering=== -->
 						<li>r_logentry(RECIPIENT_jobText==Butchering.,tag=Job_ButcheringSkill)->[job_recipient_butchering]</li>
@@ -188,24 +568,29 @@
 								<li>play_instrument_join(INITIATOR_artistic_passion!=None)->♪♫♪ sings along ♪♫♪</li>
 							<!-- ===Bad performance=== -->
 							<li>play_instrument_bad(tag=Job_PlayMusic_critic)->[play_instrument_critic]</li>
+							<li>play_instrument_critic->*sighs*</li>
+							<li>play_instrument_critic->Have you considered playing another instrument, [RECIPIENT_nameDef]? This one doesn't seem to agree with you...</li>
+							<li>play_instrument_critic->Have you considered playing another music, [RECIPIENT_nameDef]? This one seems to be too difficult for you...</li>
 							<li>play_instrument_critic->Well, [RECIPIENT_nameDef] — no offense, but I don't believe this is your best performance...</li>
+							<li>play_instrument_critic->Mmm...</li>
 							<li>play_instrument_critic(RECIPIENT_artistic_level>=5)->Mmm, [RECIPIENT_nameDef] — I know you can perform better than that...</li>
-								<!-- ===Kind=== -->
-							<li>play_instrument_critic(INITIATOR_trait==kind,priority=1)->[play_instrument_kindcomment]</li>
-								<li>play_instrument_kindcomment->Thanks for your — err — nice performance, [RECIPIENT_nameDef].</li>
-								<li>play_instrument_kindcomment->Don't worry about that mistake [RECIPIENT_nameDef] — it's just a very minor one.</li>
-								<li>play_instrument_kindcomment(INITIATOR_artistic_level>=5)->A minor mistake, [RECIPIENT_nameDef] — easily corrected. Don't worry, play on!</li>
 							<li>play_instrument_critic(RECIPIENT_artistic_passion!=None)->I felt some passion in your performance, but... mmm... maybe you need more practicing to get it right, [RECIPIENT_nameDef].</li>
 							<li>play_instrument_critic(INITIATOR_artistic_level>=5,RECIPIENT_artistic_passion!=None)->The talent is there, [RECIPIENT_nameDef] — I can see it clearly. But you need much training still...</li>
 							<li>play_instrument_critic(INITIATOR_artistic_level>RECIPIENT_artistic_level)->May I give you some hints about performing this music? No offense, [RECIPIENT_nameDef] — but I didn't enjoy your performance.</li>
 							<li>play_instrument_critic(INITIATOR_artistic_level&lt;RECIPIENT_artistic_level)->Was that your personal way of playing it, [RECIPIENT_nameDef]? I couldn't understand what you were trying to do there...</li>
-							<li>play_instrument_critic(INITIATOR_opinion&lt;0,priority=1)->[play_instrument_hostile_critic]</li>
-								<!--Hostile critic-->
+								<!-- ===Hostile critic=== -->
+								<li>play_instrument_critic(INITIATOR_opinion&lt;0,priority=1)->[play_instrument_hostile_critic]</li>
 								<li>play_instrument_hostile_critic->What a lousy performance...</li>
 								<li>play_instrument_hostile_critic(INITIATOR_artistic_level&lt;5)->I'm no artist myself, but I can easily understand this is quite a bad performance!</li>
 								<li>play_instrument_hostile_critic(RECIPIENT_artistic_passion!=None)->Your raw skills sound horrible, [RECIPIENT_nameDef] — and no amount of training can change that!</li>
 								<li>play_instrument_hostile_critic(INITIATOR_artistic_level>RECIPIENT_artistic_level)->And you call that a performance? Don't be around when I perform — I don't want to humiliate you, [RECIPIENT_nameDef]!</li>
-
+								<!-- ===Kind=== -->
+								<li>play_instrument_critic(INITIATOR_trait==kind,priority=1)->[play_instrument_kindcomment]</li>
+								<li>play_instrument_kindcomment->Thanks for your — err — nice performance, [RECIPIENT_nameDef].</li>
+								<li>play_instrument_kindcomment->Don't worry about that mistake [RECIPIENT_nameDef] — it's just a very minor one.</li>
+								<li>play_instrument_kindcomment(INITIATOR_artistic_level>=5)->A minor mistake, [RECIPIENT_nameDef] — easily corrected. Don't worry, play on!</li>
+					
+					
 					<!-- ===Cooking and gathering ingredients=== -->
 						<!--Simple meal (seated) 
 							<li>r_logentry(priority=4,INITIATOR_jobText==Cooking simple meal.,INITIATOR_seated==Yes)->[cooking_simplemeal]</li>
@@ -252,6 +637,8 @@
 				<!-- ===TRAITS=== -->
 					<!-- ===Ascetic=== -->
 						<li>r_logentry(INITIATOR_trait==ascetic,tag=AsceticWisdom)->[trait_ascetic]</li>
+						<li>trait_ascetic->Remember — one day you shall die. Shine today, at your best, while you can.</li>
+						<li>trait_ascetic->Look in the mirror — for that's where you can find the only person worth competing with.</li>
 						<li>trait_ascetic->Being truly rich is not about having great possessions — it's about having few wants.</li>
 						<li>trait_ascetic->He who fears death will never do anything worth of a man who is alive.</li>
 						<li>trait_ascetic->You can control your mind — not outside events. Absorb this, and you shall find strength.</li>
@@ -264,7 +651,7 @@
 						<li>lucky_future(DAYPERIOD==morning)->[can_feel_it] today [lucky_day]</li>
 						<li>lucky_future(DAYPERIOD==afternoon)->[can_feel_it] tomorrow [lucky_day]</li>
 						<li>lucky_future(DAYPERIOD==evening)->[can_feel_it] tomorrow [lucky_day]</li>
-						<li>can_feel_it->I can feel it -</li>
+						<li>can_feel_it->I can feel it —</li>
 						<li>can_feel_it->I have a feeling</li>
 						<li>lucky_day->will be my lucky day!</li>
 						<li>lucky_day->is going to be my lucky day!</li>
@@ -453,6 +840,52 @@
 						<li>surely->definitely</li>
 						<li>surely(INITIATOR_intellectual_level>=10)->unquestionably</li>
 						<li>surely(INITIATOR_intellectual_level>=5)->undeniably</li>
+
+					<!-- ===tv letters=== -->					
+						<li>tv_letters->NTQ</li>
+						<li>tv_letters->SRA</li>
+						<li>tv_letters->NAO</li>
+						<li>tv_letters->CZ</li>
+						<li>tv_letters->RMA</li>
+						<li>tv_letters->OPY</li>
+						<li>tv_letters->WYO</li>
+						<li>tv_letters->LPZ</li>
+						<li>tv_letters->ZCV</li>
+						<li>tv_letters->BNV</li>
+						<li>tv_letters->UQY</li>
+						<li>tv_letters->PPT</li>
+						<li>tv_letters->NAP</li>
+						<li>tv_letters->SDN</li>
+						<li>tv_letters->JPT</li>
+
+					<!-- ===tv news=== -->
+						<li>tv_news->[tv_news1] [tv_news2]</li>
+							<li>tv_news1->Intergalactic</li>
+							<li>tv_news1->Urbworld</li>
+							<li>tv_news1->Midworld</li>
+							<li>tv_news1->Frontier Worlds</li>
+							<li>tv_news1->Outer Rim</li>
+							<li>tv_news1->Glitter</li>
+							<li>tv_news1->Rim</li>
+							
+							<li>tv_news2->Forecast</li>
+							<li>tv_news2->Daily</li>
+							<li>tv_news2->Post</li>
+							<li>tv_news2->Express</li>
+							<li>tv_news2->Weekly</li>
+							<li>tv_news2->News</li>
+							<li>tv_news2->Net</li>
+							<li>tv_news2->Broadcast</li>
+							<li>tv_news2(DAYPERIOD==night)->Nightly</li>
+							<li>tv_news2(DAYPERIOD==evening)->Nightly</li>
+					
+					<!-- ===tv show=== -->
+						<li>tv_show->show</li>
+						<li>tv_show->movie</li>
+						<li>tv_show->documentary</li>
+						<li>tv_show->report</li>
+						<li>tv_show->flick</li>
+		
 					<!-- ===ugly=== -->
 						<li>ugly->ugly</li>
 						<li>ugly->hideous</li>
@@ -464,6 +897,7 @@
 						<li>ugly(INITIATOR_intellectual_level>=5)->repugnant</li>
 						<li>ugly(INITIATOR_intellectual_level>=5)->vile</li>
 						<li>ugly(INITIATOR_intellectual_level>=5)->grotesque</li>
+						
 					<!-- ===unsightly=== -->
 						<li>unsightly->unsightly</li>
 						<li>unsightly->messy</li>
@@ -526,6 +960,17 @@
 						<li>random_A_G->F</li>
 						<li>random_A_G->G</li>
 						<li>random_A_G->H</li>
+					
+					<!-- ===TV — see it?=== -->
+						<li>tv_seeit->see it</li>
+						<li>tv_seeit->watch their broadcast</li>
+						<li>tv_seeit->check it out</li>
+						<li>tv_seeit->take a look</li>
+						
+					<!-- ===Wanna?=== -->
+						<li>wanna(INITIATOR_intellectual_level>=5)->would you like to</li>
+						<li>wanna(INITIATOR_intellectual_level&lt;5)->wanna</li>
+							
 					<!-- ===What about yours?=== -->
 						<li>what_about_yours->What do you think of yours, [RECIPIENT_nameDef]?</li>
 			</rulesStrings>
@@ -541,6 +986,27 @@
 	</Operation>
 
 
+
+<!-- ===Sentence_RecruitAttemptAccepted=== -->	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/RulePackDef[defName = "Sentence_RecruitAttemptAccepted"]/rulePack/rulesStrings</xpath>
+		<value>
+		  <rulesStrings>
+			<li>sent-></li>
+		  </rulesStrings>
+		</value>
+	</Operation>
+	
+<!-- ===Sentence_RecruitAttemptRejected=== -->	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/RulePackDef[defName = "Sentence_RecruitAttemptRejected"]/rulePack/rulesStrings</xpath>
+		<value>
+		  <rulesStrings>
+			<li>sent-></li>
+		  </rulesStrings>
+		</value>
+	</Operation>
+	
 <!-- ===Sentence_SocialFightStarted=== -->	
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/RulePackDef[defName = "Sentence_SocialFightStarted"]/rulePack/rulesStrings</xpath>
@@ -550,5 +1016,5 @@
 		  </rulesStrings>
 		</value>
 	</Operation>
-
+	
 </Patch>
