@@ -14,8 +14,10 @@
 
 				<!-- ===2 line jokes=== -->
 				<li>tell_joke(tag=JokeReaction)->[2line_joke]</li>
+				<li>2line_joke->[joke_fridge]</li>
+					<li>joke_fridge->I got my best friend a fridge for her birthday — can't wait to see her face light up when she opens it!</li>
+					<li>joke_fridge->I got my best friend a fridge for his birthday — can't wait to see his face light up when he opens it!</li>
 				<li>2line_joke->I told a friend of mine she was drawing her eyebrows too high — she looked at me surprised!</li>
-				<li>2line_joke->I got my best friend a fridge for her birthday — can't wait to see her face light up when [he_she] opens it!</li>
 				<li>2line_joke(INITIATOR_intellectual_level>=5,RECIPIENT_intellectual_level>=5)->I poured root beer in a square glass... Now I just have beer!</li>
 				<li>2line_joke->Do you know how much it costs to take care of a warg? Well, it costs an arm and a leg!</li>
 				<li>2line_joke->I asked the librarian if they had any books about paranoia. [he_she] looked up and whispered "Shh! They're right behind you!"</li>
@@ -37,6 +39,7 @@
 				<li>4line_joke(tag=Joke_12)->What do you call a cow with no legs?</li>
 				<li>4line_joke(tag=Joke_13)->What do thrumbo siblings call each other?</li>
 				<li>4line_joke(tag=Joke_14)->A patient went to [his_her] doctor and said: Doc, help me — I broke my arm in three places!</li>
+				<li>4line_joke(tag=Joke_15)->Did you hear about the psycaster's music performance?</li>
 				
 				<!-- ==Wildcards== -->
 					<li>he_she->he</li>

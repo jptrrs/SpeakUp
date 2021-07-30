@@ -399,6 +399,32 @@
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>
+
+	<!-- ===joke — 15=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Joke_15</defName>
+			<label>joke — 15</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0,tag=Joke_15b)->[good_opinion]</li>
+						<li>good_opinion->No, how was it?</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+
+	<!-- ===joke — 15b=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>Joke_15b</defName>
+			<label>joke — 15b</label>
+			<logRulesInitiator>
+				<rulesStrings>
+						<li>r_logentry(tag=JokeReaction)->The entire audience was stunned!</li>
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
 		
 	<!-- ===joke — reaction=== -->
 		<InteractionDef ParentName="SpeakUpReply">

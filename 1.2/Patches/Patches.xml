@@ -22,6 +22,39 @@
 								<li>aurora_color(p=0.2)->orange</li>
 								<li>aurora_color(p=0.2)->white</li>
 								
+					
+					<!-- ===BeatFire (priority 5)=== -->
+						<li>r_logentry(priority=5,INITIATOR_jobDefName==BeatFire,INITIATOR_moving==No,tag=BeatFireStatic)->[job_beatfire_static]</li>
+							<!-- ===BeatFire together=== -->
+							<li>job_beatfire_static(RECIPIENT_jobDefName==BeatFire,RECIPIENT_moving==No)->[job_beatfire_together]</li>
+								<li>job_beatfire_together->*coughs*</li>
+								<li>job_beatfire_together->[put_it_out]!</li>
+								<li>job_beatfire_together->Quick, [put_it_out]!</li>
+								<li>job_beatfire_together->Quick, before it spreads out!</li>
+								<li>job_beatfire_together->Let's [put_it_out]!</li>
+									<li>put_it_out->put it out</li>
+									<li>put_it_out->stamp it out</li>
+									<li>put_it_out->beat it out</li>
+									<li>put_it_out->smother it</li>
+									<li>put_it_out(INITIATOR_intellectual_level>=5)->extinguish it</li>
+							<li>job_beatfire_static(RECIPIENT_jobDefName==BeatFire,RECIPIENT_moving==Yes)->[job_beatfire_come]</li>
+								<li>job_beatfire_come->Quick, [RECIPIENT_nameDef] — come here and help me [put_it_out]!</li>
+							<!-- ===BeatFire initiator only=== -->
+							<li>job_beatfire_static(RECIPIENT_jobDefName!=BeatFire,RECIPIENT_moving==No)->[job_beatfire_ignoring_static]</li>
+								<li>job_beatfire_ignoring_static->Don't just stand there, [RECIPIENT_nameDef]! Come here and help me [put_it_out]!</li>
+							<li>job_beatfire_static(RECIPIENT_jobDefName!=BeatFire,RECIPIENT_moving==Yes)->[job_beatfire_ignoring]</li>
+								<li>job_beatfire_ignoring->Where are you going, [RECIPIENT_nameDef]!? Come here and help me [put_it_out]!</li>
+					<!-- ===Going to BeatFire=== -->	
+						<li>r_logentry(priority=5,INITIATOR_jobDefName==BeatFire,INITIATOR_moving==Yes,RECIPIENT_moving==Yes,tag=BeatFireMoving)->[job_beatfire_letsgo]</li>
+							<li>job_beatfire_letsgo(RECIPIENT_jobDefName!=BeatFire,priority=1)->Where are you going, [RECIPIENT_nameDef]!? The fire's over there — help me [put_it_out]!</li>
+							<li>job_beatfire_letsgo->Come on [RECIPIENT_nameDef] — we got a fire to [fire_put_out]!</li>
+							<li>job_beatfire_letsgo->There's a fire over there, [RECIPIENT_nameDef] — let's go [put_it_out]!</li>
+									<li>fire_put_out->put out</li>
+									<li>fire_put_out->stamp out</li>
+									<li>fire_put_out->beat out</li>
+									<li>fire_put_out->smother</li>
+									<li>fire_put_out(INITIATOR_intellectual_level>=5)->extinguish</li>
+									
 					<!-- ===Billiards=== -->
 						<li>r_logentry(INITIATOR_jobDefName==Play_Billiards,priority=4)->[game_billiards]</li>
 						<!-- ===Called shot=== -->
@@ -177,7 +210,34 @@
 							<li>watching_eclipse(INITIATOR_artistic_passion!=None)->An elegant dance of celestial bodies brought us this stunning sky composition...</li>
 							<li>watching_eclipse->Eclipses are so peculiar — it seems like night, but it's [DAYPERIOD].</li>
 							<li>watching_eclipse->This eclipse is so fascinating...</li>
-							
+					
+					<!-- ===Drinking beer=== -->
+						<li>r_logentry(priority=4,INITIATOR_jobText==Drinking beer.,INITIATOR_moving==No,tag=DrinkBeer)->[drinking_beer]</li>
+							<li>drinking_beer->Cheers, [RECIPIENT_nameDef]!</li>
+							<li>drinking_beer->Bottoms up!</li>
+							<li>drinking_beer->Here's to those who wish us well, all the rest can go to hell!</li>
+							<li>drinking_beer->Let's have a toast to the incompetence of our enemies!</li>
+							<li>drinking_beer->Fine beer for my real friends and real pain for my sham friends!</li>
+							<li>drinking_beer->Here's to the floor, who will hold you when no one else will!</li>
+							<li>drinking_beer->Over the teeth, over the gums — look out, stomach, here it comes!</li>
+							<li>drinking_beer->When the liquor is inside, the pain goes elsewhere!</li>
+							<li>drinking_beer(INITIATOR_social_level&lt;5)->*burps*</li>
+							<li>drinking_beer(INITIATOR_social_level&lt;3)->*burps savagely*</li>
+							<li>drinking_beer(INITIATOR_opinion>=0)->[beer_good_opinion]</li>
+								<li>beer_good_opinion->Here's to your liver, [RECIPIENT_nameDef] — may it live as long as you last!</li>
+								<li>beer_good_opinion->Here's to stealing, cheating and lying, [RECIPIENT_nameDef] — may you cheat death, steal hearts and lie with your love!</li>
+								<li>beer_good_opinion->May the face of every good news and the back of every bad news be towards us!</li>
+								<li>beer_good_opinion->May the roof above us never fall in — and may we friends gathered below never fall out!</li>
+								<li>beer_good_opinion->May you be in heaven a half an hour before the devil knows you're dead, [RECIPIENT_nameDef]!</li>
+								<li>beer_good_opinion->May misfortune follow you the rest of your life — and never catch up, [RECIPIENT_nameDef]!</li>
+							<li>drinking_beer(INITIATOR_opinion>=25)->Here's to your health, my dear [RECIPIENT_nameDef]!</li>
+							<li>drinking_beer->Here's to [beer_hope]!</li>
+								<li>beer_hope->our enemies' defeat!</li>
+								<li>beer_hope->abundant food on our table!</li>
+								<li>beer_hope->our good health!</li>
+								<li>beer_hope(INITIATOR_trait==kind)->friendship and smiles!</li>
+								<li>beer_hope(INITIATOR_mood&lt;0.4)->leaving this forsaken rimworld!</li>
+								
 					<!-- ===GameOfUr=== -->
 						<!-- ===Invitation=== -->
 						<li>r_logentry(priority=4,INITIATOR_jobDefName==Play_GameOfUr,INITIATOR_moving==Yes)->[game_ur_going]</li>
@@ -351,7 +411,7 @@
 								<li>job_tv1->Do you want me to switch the television to [tv_letters], [RECIPIENT_nameDef]?</li>
 								<li>job_tv1->Seems like there's a new program airing... [tv_letters] [tv_news]. [RECIPIENT_nameDef], [wanna] [tv_seeit] together?</li>
 								<li>job_tv1->Oooh! There's a new program: [tv_letters] [tv_news]. [wanna] [tv_seeit], [RECIPIENT_nameDef]?</li>
-								<li>job_tv1->Hey, [RECIPIENT_nameDef] — there's this program called [tv_letters] [tv_news] airing right now. [wanna] [seeit]?</li>
+								<li>job_tv1->Hey, [RECIPIENT_nameDef] — there's this program called [tv_letters] [tv_news] airing right now. [wanna] [tv_seeit]?</li>
 						
 							<li>job_tv(tag=TV_whatsthis)->[job_tv2]</li>
 								<li>job_tv2->Sorry... [tv_distraction] — what is it we're we watching now?</li>
@@ -365,7 +425,7 @@
 								<li>job_tv3->It's so quiet... [RECIPIENT_nameDef], do you know how to turn up the volume on this thing?</li>
 								<li>job_tv3->I can't hear what the characters are saying. How do you turn on the subtitles?</li>
 								<li>job_tv3->Jeez — the television is really [tv_volume]. How do you turn down the volume?</li>
-								<li>job_tv3->The tv audio seems to be cutting off. Do you know how to fix it, [RECIPIENT_nameDef]?</li>
+								<li>job_tv3->The tv audio seems to be cutting off. Do you know how to [fix] it, [RECIPIENT_nameDef]?</li>
 									<li>tv_volume->loud</li>
 									<li>tv_volume->noisy</li>
 									
@@ -467,6 +527,8 @@
 										<li>no_artistic_passion_start->Normally no [artwork] interests me</li>
 										<li>no_artistic_passion_start->I never made efforts to understand and enjoy arts</li>
 										<li>no_artistic_passion_start->I never had the chance or will to develop my artistic sense</li>
+										<li>no_artistic_passion_start->I don't have an eye for art</li>
+										<li>no_artistic_passion_start->The arts really are not my thing</li>
 										
 								<li>adj_artwork->beautiful</li>
 								<li>adj_artwork->captivating</li>
@@ -974,6 +1036,13 @@
 					<!-- ===What about yours?=== -->
 						<li>what_about_yours->What do you think of yours, [RECIPIENT_nameDef]?</li>
 			</rulesStrings>
+
+<!--
+		    <rulesFiles>
+				<li>pasticcini->Cibo/Pasticcini</li>
+			</rulesFiles>
+-->
+
 		</value>
 	</Operation>
 
@@ -985,24 +1054,23 @@
 		</value>
 	</Operation>
 
-
-
 <!-- ===Sentence_RecruitAttemptAccepted=== -->	
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/RulePackDef[defName = "Sentence_RecruitAttemptAccepted"]/rulePack/rulesStrings</xpath>
 		<value>
 		  <rulesStrings>
-			<li>sent-></li>
+			<li>sent(priority=-1)-></li>
 		  </rulesStrings>
 		</value>
 	</Operation>
 	
-<!-- ===Sentence_RecruitAttemptRejected=== -->	
+<!-- ===Sentence_RecruitAttemptRejected=== (seems to be unreachable in vanilla) -->	
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/RulePackDef[defName = "Sentence_RecruitAttemptRejected"]/rulePack/rulesStrings</xpath>
 		<value>
 		  <rulesStrings>
-			<li>sent-></li>
+			<li>sent(priority=-1)-></li>
+			<li>sent(RECIPIENT_faction!=PlayerColony,tag=PrisonerRefuses)->I hope you're ready to join us?</li>
 		  </rulesStrings>
 		</value>
 	</Operation>

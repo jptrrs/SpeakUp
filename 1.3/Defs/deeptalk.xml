@@ -11,7 +11,7 @@
 			<li>r_logentry(INITIATOR_trait==depressive)->Nothing we do will be remembered, eventually. So, why care answering that?</li>
 			<li>r_logentry(INITIATOR_trait==optimist)->Life is what you make of it — so make it good, today!</li>
 			<li>r_logentry(INITIATOR_trait==teetotaler)->I don't know its meaning — but I know it should be free of drugs.</li>
-			<li>r_logentry(INITIATOR_trait==chemical interest)->A nice beer and cigarette!</li>
+			<li>r_logentry(INITIATOR_trait==chemical interest)->A nice beer and smokeleaf!</li>
 			<li>r_logentry(INITIATOR_trait==chemical fascination)->A line of yayo and some psychite tea!</li>
 			<li>r_logentry(INITIATOR_trait==industrious)->Working hard to achieve all our goals!</li>
 			<li>r_logentry(INITIATOR_trait==slothful)->I don't know its meaning — but I know it should be on a comfy couch.</li>
@@ -32,7 +32,7 @@
 			<li>r_logentry(INITIATOR_trait==kind)->Making other people's life happy and fulfilled — so that they can make us happy too.</li>
 			<li>r_logentry(DAYPERIOD==night)->Isn't it a bit too late for a question like that?!</li>
 			<li>r_logentry(INITIATOR_artistic_passion!=None)->Art and the true expression of oneself give full meaning to our lives.</li>
-			<li>r_logentry(INITIATOR_social_passion!=None)->I don't know its meaning — but I know a long conversation and a good drink make it much better!</li>
+			<li>r_logentry(INITIATOR_social_passion!=None)->I don't know its meaning — but I know a long conversation and a good soft drink make it much better!</li>
 			<li>r_logentry(INITIATOR_construction_passion!=None)->Creating lasting works to improve our surroundings and inspire future generations.</li>
 			<li>r_logentry(priority=-1)->Why ask me? I have no idea.</li>
 			<li>r_logentry(priority=-1)->I haven't the slightest idea.</li>
@@ -287,7 +287,7 @@
 					<!-- ===Child Spy=== -->
 						<li>child_spy->I was taught at a very young age the art of espionage. I was then put undercover for many years of my childhood.</li>
 						<li>child_spy->I was a spy, trained in the arts of lying and infiltration, so I really didn't get to have much of a childhood.</li>
-						<li>child_spy->I spent all my time infiltrating and spying for my superiors [RECIPIENT_nameDef]. Do you need me to get some information?</li>
+						<li>child_spy->I spent all my time infiltrating and spying for my superiors, [RECIPIENT_nameDef]. If you need to discreetly obtain information, let me know.</li>
 
 					<!-- ===Shop Kid=== -->
 						<li>shop_kid->I mostly ran the shop for my mom when she would get sick, we sold some interesting artifacts, but I learned far more about trade than the items themselves.</li>
@@ -310,7 +310,7 @@
 						<li>cult_child->I was always told that any illness was solvable through soul-cleansing rituals.</li>
 
 					<!-- ===Story Writer=== -->
-						<li>story_writer->I used to spend all my time at the local library until it closed down. Once that happened I began writing my own books [RECIPIENT_nameDef].</li>
+						<li>story_writer->I used to spend all my time at the local library until it closed down. Once that happened, I began writing my own books.</li>
 						<li>story_writer->Books have always been my addiction, so one day I decided to start making my own!</li>
 						<li>story_writer->I have always loved books, and when I couldn't find more to read I started to create my own.</li>
 
