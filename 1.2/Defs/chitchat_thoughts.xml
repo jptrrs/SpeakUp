@@ -642,6 +642,7 @@
 				<!-- ===offer a solution=== -->
 					<li>offer_solution-></li>
 					<li>offer_solution(INITIATOR_faction==PlayerColony,priority=1)->[offer_solution_colonist]</li>
+					<li>offer_solution(INITIATOR_faction==PlayerTribe,priority=1)->[offer_solution_colonist]</li>
 					<li>offer_solution_colonist(INITIATOR_plants_level>=5)->We should consider enlarging our fields, so it won't happen again.</li>
 					<li>offer_solution_colonist(INITIATOR_animals_level>=5)->We should consider getting more cattle, so it won't happen again.</li>
 					<li>offer_solution_colonist(INITIATOR_animals_level>=5,INITIATOR_shooting_level>=5)->I'll try and hunt something — I hope it helps.</li>
@@ -796,7 +797,6 @@
 					<li>yes->Correct</li>
 					<li>comment->We can do this!</li>
 					<li>comment->We can make it!</li>
-					<li>comment->It'll be alright!</li>
 					<li>comment->It'll be all right!</li>
 					<li>comment->We'll get through this!</li>
 			</rulesStrings>
@@ -908,7 +908,7 @@
 					<li>comment(INITIATOR_plants_level>=5)->I could prepare some healroot for you, if you want.</li>
 					<li>comment(INITIATOR_cooking_level>=6)->Eating healthy food might help avoiding that. I could cook something for you.</li>
 					<li>comment(INITIATOR_thoughtDefName==sick)->I'm not in great shape either...</li>
-					<li>comment(INITIATOR_thoughtDefName==transhumanist)->But then again, human body is so vulnerable...</li>
+					<li>comment(INITIATOR_thoughtDefName==body modder)->But then again, human body is so vulnerable...</li>
 					<li>comment(INITIATOR_thoughtDefName==sickly)->I know how it feels, I get sick all the time...</li>
 			</rulesStrings>
 		</logRulesInitiator>
@@ -953,7 +953,7 @@
 						<li>fun_activity->Everybody was dancing and having fun...</li>
 						<li>fun_activity->Everybody was laughing and drinking beer...</li>
 						<li>fun_activity->There was this large [color]table filled with [nice_food]...</li>
-						<li>fun_activity->There was this singer, enthralling everybody with her sweet voice...</li>
+						<li>fun_activity->There was this [AdjectiveFriendly] singer, enthralling everybody with her sweet voice...</li>
 					<li>dream->I was flying over a beautiful [color][TerrainFeature] — [description1]. They looked so tiny from up there...</li>
 					<li>description1->crowded by [color][AdjectiveFriendly] [PersonJob]s</li>
 					<li>description1->crawling with [color][AdjectiveFriendly] [Animal]s</li>
@@ -961,6 +961,9 @@
 					<li>dream->I was on a stage performing a standup show for [AdjectiveFriendly] [color][Animals]s — everybody was drinking beer and laughing hard!</li>
 					<li>dream->There was this [AdjectiveFriendly] [PersonJob] who gave me this [color][Apparel] — I wore it, and I instantly felt so happy!</li>
 					<li>dream->I was happily swimming in a pool of [color][Vegetable]s — weird right? But when I ate them, they tasted like [nice_food]!</li>
+					<li>dream->There was this [AdjectiveFriendly] [PersonJob] speaking to me about [TalkTopicAny] — it was so interesting!</li>
+					<li>dream->There was this floating [color]parchment with a moving [color]mouth, reciting [poem_adj] poem about [TalkTopicAny]...</li>
+					<li>dream->I don't remember its details, but I recall it was something about [TalkTopicAny] and that it felt me feel good...</li>
 				<!-- ===WILDCARDS=== -->
 					<li>color-></li>
 					<li>color->[Color] </li>
@@ -973,6 +976,9 @@
 					<li>nice_food->milkshake</li>
 					<li>nice_food->hamburgers</li>
 					<li>nice_food->lasagna</li>
+					<li>poem_adj->an elegant</li>
+					<li>poem_adj->a beautiful</li>
+					<li>poem_adj->a charming</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	
@@ -1013,7 +1019,11 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
-					<li>r_logentry(INITIATOR_opinion&lt;0)->My room is none of your business, [RECIPIENT_nameDef].</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion->My room is none of your business, [RECIPIENT_nameDef].</li>
+						<li>bad_opinion->Where I sleep is none of your business, [RECIPIENT_nameDef].</li>
+						<li>bad_opinion->None of your business, [RECIPIENT_nameDef].</li>
+						<li>bad_opinion->...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!-- ===Slept on the ground=== -->
@@ -1021,8 +1031,8 @@
 					<!-- ===Slept outside=== -->
 						<li>good_opinion(INITIATOR_thoughtDefName==SleptOutside,priority=4)->What bedroom!? Last time I slept, it was out in the open!</li>
 					<!-- ===Ascetic=== -->
-						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has awful bedroom,priority=4)->Mine is just how I want it to be: very humble and simple.</li>
-						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has dull bedroom,priority=4)->Mine is just how I want it to be: humble and simple.</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has awful bedroom,priority=4)->Mine is just how I want it to be — very humble and simple.</li>
+						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has dull bedroom,priority=4)->Mine is just how I want it to be — humble and simple.</li>
 						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has mediocre bedroom,priority=4)->Mine is simple. I like it.</li>
 						<li>good_opinion(INITIATOR_thoughtLabel==ascetic has impressive bedroom,priority=4)->Mine is unnecessarily pompous and extravagant. I'd rather sleep in a simpler room.</li>
 					<!-- ===Barracks=== -->
@@ -1063,6 +1073,7 @@
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->Let's hope it won't happen again, [RECIPIENT_nameDef] — it's [annoying].</li>
 					<li>good_opinion(INITIATOR_faction==PlayerColony)->Yeah... I wish we settled somewhere warmer.</li>
+					<li>good_opinion(INITIATOR_faction==PlayerTribe)->Yeah... I wish we settled somewhere warmer.</li>
 					<li>good_opinion->Well, it gets [weather_cold_adj] this time of the year...we just have to get used to it.</li>
 						<li>weather_cold_adj->chilly</li>
 						<li>weather_cold_adj->cold</li>
@@ -1294,7 +1305,7 @@
 					<li>r_logentry(INITIATOR_opinion&lt;0)->Go back inside then, [RECIPIENT_nameDef] — at least I won't hear your pitiful whining anymore!</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-					<li>good_opinion->I know, [RECIPIENT_nameDef] — but some vital tasks are performed outdoors — we can't change that, unfortunately...</li>
+					<li>good_opinion->I know, [RECIPIENT_nameDef] — but some vital tasks must be performed outdoors. We can't change that, unfortunately...</li>
 					<li>good_opinion->I know, [RECIPIENT_nameDef] — maybe we could try and plan for you to run indoors tasks only.</li>
 			</rulesStrings>
 		</logRulesInitiator>
@@ -1336,7 +1347,8 @@
 				<!-- ===ReleasedHealthyPrisoner === -->
 					<li>good_opinion(INITIATOR_thoughtDefName==ReleasedHealthyPrisoner,priority=1)->[released_prisoner]</li>
 					<li>released_prisoner(INITIATOR_faction==PlayerColony)->We released a [prisoner] — [comment]</li>
-					<li>released_prisoner(INITIATOR_faction!=PlayerColony)->They released a [prisoner] — [comment]</li>
+					<li>released_prisoner(INITIATOR_faction==PlayerTribe)->We released a [prisoner] — [comment]</li>
+					<li>released_prisoner(INITIATOR_faction!=PlayerColony,INITIATOR_faction!=PlayerTribe)->They released a [prisoner] — [comment]</li>
 						<li>comment->I think it was the right thing to do.</li>
 						<li>comment(INITIATOR_trait==kind,priority=2)->poor thing! It was the best thing to do.</li>
 						<li>comment(INITIATOR_trait==cannibal,priority=1)->what a waste of resources!</li>
