@@ -57,7 +57,6 @@
 			</rulesFiles>			
 		</logRulesInitiator>
 	</InteractionDef>
-
 	
 	<InteractionDef ParentName="SpeakUpReply"><!-- ===Passion=== -->
 		<defName>PrisonerPassion</defName>
@@ -195,6 +194,21 @@
 		<label>prisoner — accepts</label>
 		<logRulesInitiator>
 			<rulesStrings>
+			<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentDark,priority=1)->[dark_cell]</li>
+				<li>dark_cell(INITIATOR_trait==undergrounder)->[good_opinion]</li>
+				<li>dark_cell(INITIATOR_trait==night owl)->[good_opinion]</li>
+				<li>dark_cell(priority=-1)->I'm done with this dark cell — I'll join [RECIPIENT_factionName]!</li>
+			
+			<li>r_logentry(INITIATOR_thoughtLabel==hideous environment,priority=1)->[ugly_cell]</li>
+			<li>r_logentry(INITIATOR_thoughtLabel==ugly environment,priority=1)->[ugly_cell]</li>
+			<li>r_logentry(INITIATOR_thoughtLabel==unsightly environment,priority=1)->[ugly_cell]</li>
+				<li>ugly_cell->I'm done with this awful dungeon — I'll join [RECIPIENT_factionName]!</li>
+			
+			<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentCold,priority=1)->I just want to get out of this cold. I'll do whatever — I'll join [RECIPIENT_factionName]!</li>
+			<li>r_logentry(INITIATOR_thoughtDefName==EnvironmentHot,priority=1)->I just want to get out of this heat. I'll do whatever — I'll join [RECIPIENT_factionName]!</li>
+			<li>r_logentry(INITIATOR_thoughtDefName==NeedFood,priority=1)->Now that I'm part of [RECIPIENT_factionName], I expect to be fed!</li>
+			<li>r_logentry(INITIATOR_thoughtDefName==MyOrganHarvested,priority=1)->Please! If it stops you from harvesting my organs, I'll join [RECIPIENT_factionName]!</li>
+			
 			<!-- ===Bad opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
 				<li>bad_opinion(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
@@ -202,6 +216,15 @@
 			<!-- ===Good opinion of recipient=== -->
 				<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->I'm ready to be part of [RECIPIENT_factionName].</li>
+					<li>good_opinion->You finally convinced me, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->Your arguments finally won me over, [RECIPIENT_nameDef].</li>
+					<li>good_opinion->I finally understood [RECIPIENT_factionName] is a better choice for me.</li>
+					<li>good_opinion->I finally understood [RECIPIENT_factionName] can guarantee a better future for me.</li>
+					<li>good_opinion->You know what? Maybe youre not so bad after all — I'm ready to join [RECIPIENT_factionName].</li>
+					<li>good_opinion->Hmm... Okay, whatever. I'm in.</li>
+					<li>good_opinion->If joining [RECIPIENT_factionName] is what it takes to get out of this cell, then I might as well join.</li>
+					<li>good_opinion->I've thought about it, and I think I'm up for joining [RECIPIENT_factionName].</li>
+					<li>good_opinion->The food alone is worth staying — I'll join [RECIPIENT_factionName]!</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
