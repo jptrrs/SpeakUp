@@ -17,7 +17,15 @@
 			
 			<li>r_logentry(p=2)->test — [INITIATOR_jobDefName]</li>
 			
-			
+			<li>sent(RECIPIENT_faction==TribeSavage,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==TribeRough,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==TribeCivil,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==Pirate,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==OutlanderCivil,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==OutlanderRough,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==AncientsHostile,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==Ancients,tag=PrisonerAccepts)-></li>
+			<li>sent(RECIPIENT_faction==Empire,tag=PrisonerAccepts)-></li>
 
 			<li>r_logentry->test - [INITIATOR_thoughtDefName]</li>
 			<li>r_logentry->I am [INITIATOR_trait].</li>

@@ -12,7 +12,14 @@
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<li>good_opinion->Enjoy, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Chow down, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Eat hearty, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Enjoy your meal, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion->Eat up, [RECIPIENT_nameDef]!</li>
 					<li>good_opinion(INITIATOR_social_level>=5)->Bon appétit, [RECIPIENT_nameDef]!</li>
+					<li>good_opinion(INITIATOR_medical_level>=5)->Chew slowly, [RECIPIENT_nameDef].</li>
+					<li>good_opinion(INITIATOR_trait==gourmand)->Enjoy your meal, enjoy your life!</li>
+					<li>good_opinion(INITIATOR_trait==ascetic)->Temperance, [RECIPIENT_nameDef], temperance...</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -125,7 +132,7 @@
 						<li>recipient_awful(INITIATOR_thoughtDefName==AteLavishMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
 						<li>recipient_awful(INITIATOR_thoughtDefName==AteFineMeal,priority=1)->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
 						<li>recipient_awful->I'm sorry to hear that, [RECIPIENT_nameDef]. [cooking_offer]</li>
-						<li>recipient_awful(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->Me too! [cook_opinion]</li>
+						<li>recipient_awful(INITIATOR_thoughtDefName==AteAwfulMeal,priority=1)->I totally agree! [cook_opinion]</li>
 						<li>recipient_awful(INITIATOR_thoughtDefName==AteRawFood,priority=1)->Lucky you — I had to eat some raw food earlier! [cook_opinion]</li>
 						<li>recipient_awful(INITIATOR_thoughtDefName==AteKibble,priority=1)->Lucky you — I had to eat some kibble earlier! [cook_opinion]</li>
 						<li>recipient_awful(INITIATOR_thoughtDefName==AteCorpse,priority=1)->And I had to eat some unbutchered corpse earlier! That was horrible!</li>
@@ -345,11 +352,8 @@
 					<!-- ===recreation fully satisfied === -->
 						<li>good_opinion(INITIATOR_thoughtLabel==recreation fully satisfied,priority=1)->I think we have lots of excellent entertainment options around here!</li>
 					<!-- ===Absent or bad rec room=== -->
-						<li>good_opinion->What rec room, [RECIPIENT_nameDef]? [comment]</li>
+						<li>good_opinion->What rec room, [RECIPIENT_nameDef]? I can't seem to have any fun around here...</li>
 				<!-- ===WILDCARDS === -->
-					<li>comment->I can't seem to have any fun around here...</li>
-					<li>comment(INITIATOR_social_level>=5)->If we want to host parties, we need to do much better than what we have now.</li>
-					<li>comment(INITIATOR_construction_level>=5)->I'd better take care of it myself, if we really want to have one.</li>
 					<li>comment2-></li>
 					<li>comment2(INITIATOR_social_level>=5)->And it'll be excellent for hosting our next party!</li>
 			</rulesStrings>
@@ -657,13 +661,33 @@
 	</InteractionDef>
 	
 	<InteractionDef ParentName="SpeakUpReply">
+		<defName>IsCooking</defName>
+		<label>is cooking</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+					<!-- ===Good cook === -->
+						<li>good_opinion(INITIATOR_cooking_level>=6,priority=1)->Thank you!</li>
+					<!-- ===Bad cook === -->
+						<li>good_opinion->Well, I'm doing my best here... I hope to get it right...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
+	<InteractionDef ParentName="SpeakUpReply">
 		<defName>ReactToThought_NeedFood_CookRecipient</defName>
 		<label>need — react to hunger — recipient cook</label>
 		<logRulesInitiator>
 			<rulesStrings>
 				<!-- ===Bad opinion of recipient=== -->
-					<li>r_logentry(INITIATOR_opinion&lt;0)->Cook it yourself, [RECIPIENT_nameDef]!</li>
-					<li>r_logentry(INITIATOR_opinion&lt;0)->For all I care, [RECIPIENT_nameDef], you may starve to death!</li>
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+						<li>bad_opinion(INITIATOR_trait==kind,priority=1)->[good_opinion]</li>
+						<li>bad_opinion->For all I care, [RECIPIENT_nameDef], you may starve to death!</li>
+						<li>bad_opinion->Cook it yourself, [RECIPIENT_nameDef]!</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
 					<!-- ===Default === -->
@@ -682,12 +706,23 @@
 					<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
-						<li>good_opinion(INITIATOR_jobText==Cooking simple meal.)->[cooking_intro] [cooking_start]some nice food!</li>
-						<li>good_opinion(INITIATOR_jobText==Cooking 4 simple meals.)->[cooking_intro] [cooking_start]some nice food!</li>
 						<li>good_opinion(INITIATOR_jobText==Cooking fine meal.)->[cooking_intro] [cooking_start]a fine meal!</li>
 						<li>good_opinion(INITIATOR_jobText==Cooking 4 fine meals.)->[cooking_intro] [cooking_start]a fine meal!</li>
 						<li>good_opinion(INITIATOR_jobText==Cooking lavish meal.)->[cooking_intro] [cooking_start]a lavish meal!</li>
 						<li>good_opinion(INITIATOR_jobText==Cooking 4 lavish meals.)->[cooking_intro] [cooking_start]a lavish meal!</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking carnivore fine meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 carnivore fine meals.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking vegetarian fine meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 vegetarian fine meals.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking lavish meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 lavish meals.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking vegetarian lavish meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 vegetarian lavish meals.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking carnivore lavish meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 carnivore lavish meals.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking survival meal.)->[thought_needfood_hungry0]</li>
+						<li>good_opinion(INITIATOR_jobText==Cooking 4 survival meals.)->[thought_needfood_hungry0]</li>						
+						<li>good_opinion(priority=-1)->[cooking_intro] [cooking_start]some nice food!</li>
 						<li>cooking_intro->Be patient, [RECIPIENT_nameDef]!</li>
 						<li>cooking_intro->Keep your pants on, [RECIPIENT_nameDef]!</li>
 						<li>cooking_intro->Hold your horses, [RECIPIENT_nameDef]!</li>
@@ -950,15 +985,19 @@
 				<!-- ===Good opinion of recipient=== -->
 					<li>r_logentry(INITIATOR_opinion>=-25)->[dream]</li>
 					<li>dream->I was in a [AdjectiveFriendly] [Community] — so nice! [fun_activity]</li>
-						<li>fun_activity->Everybody was dancing and having fun...</li>
-						<li>fun_activity->Everybody was laughing and drinking beer...</li>
+						<li>fun_activity->Everybody was dancing and having fun...[you_in_dream]</li>
+						<li>fun_activity->Everybody was laughing and drinking beer...[you_in_dream]</li>
 						<li>fun_activity->There was this large [color]table filled with [nice_food]...</li>
 						<li>fun_activity->There was this [AdjectiveFriendly] singer, enthralling everybody with her sweet voice...</li>
-					<li>dream->I was flying over a beautiful [color][TerrainFeature] — [description1]. They looked so tiny from up there...</li>
-					<li>description1->crowded by [color][AdjectiveFriendly] [PersonJob]s</li>
-					<li>description1->crawling with [color][AdjectiveFriendly] [Animal]s</li>
-					<li>dream->I peacefully walked in a [AdjectiveLarge] [TreeType] forest. So relaxing...</li>
-					<li>dream->I was on a stage performing a standup show for [AdjectiveFriendly] [color][Animals]s — everybody was drinking beer and laughing hard!</li>
+					<li>dream->I was flying over a beautiful [color][TerrainFeature], [a0]. [a1]</li>
+					<li>a0->crowded by [color][AdjectiveFriendly] [PersonJob]s</li>
+					<li>a0->crawling with [color][AdjectiveFriendly] [Animal]s</li>
+					<li>a1->They looked so tiny from up there...</li>
+					<li>a1->They were all smiling at me, as I flew by...</li>
+					<li>a1->They were singing a nice song about [TalkTopicAny]...</li>
+					<li>a1->They were all happily dancing together, so I landed and joined them...</li>
+					<li>dream->I peacefully walked in a [AdjectiveLarge] [TreeType] forest. So relaxing...[you_in_dream]</li>
+					<li>dream->I was on a stage performing a standup show for [AdjectiveFriendly] [color][Animal]s — everybody was drinking beer and laughing hard![you_in_dream]</li>
 					<li>dream->There was this [AdjectiveFriendly] [PersonJob] who gave me this [color][Apparel] — I wore it, and I instantly felt so happy!</li>
 					<li>dream->I was happily swimming in a pool of [color][Vegetable]s — weird right? But when I ate them, they tasted like [nice_food]!</li>
 					<li>dream->There was this [AdjectiveFriendly] [PersonJob] speaking to me about [TalkTopicAny] — it was so interesting!</li>
@@ -979,6 +1018,8 @@
 					<li>poem_adj->an elegant</li>
 					<li>poem_adj->a beautiful</li>
 					<li>poem_adj->a charming</li>
+					<li>you_in_dream(INITIATOR_opinion>=25)-> you were there too!</li>
+					<li>you_in_dream-></li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>	

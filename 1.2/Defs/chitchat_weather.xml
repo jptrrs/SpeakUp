@@ -414,6 +414,8 @@
 							<li>optimist_pessimist(INITIATOR_trait==sanguine)-> — I obviously prefer making snow angels!</li>
 							<li>optimist_pessimist(INITIATOR_trait==pessimist)-> — in fact, we always end up shoveling...</li>
 							<li>optimist_pessimist(INITIATOR_trait==depressive)-> — in fact, we're all doomed to the shovel...</li>
+							<li>optimist_pessimist(INITIATOR_mood&lt;0.4)-> — today I feel more like shoveling...</li>
+							<li>optimist_pessimist(INITIATOR_mood>=0.4)-> — today I feel more like making snow angels!</li>
 						<li>good_opinion(INITIATOR_trait==night owl)->Snow falling soundlessly in the middle of the night will always fill my heart with sweet clarity.</li>
 						<li>good_opinion(INITIATOR_social_passion!=None)->Snowflakes are one of nature's most fragile things, but just look what they can do when they stick together!</li>
 					<!-- mood (default) === -->				

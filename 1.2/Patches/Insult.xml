@@ -7,13 +7,13 @@
 			<rulesStrings>
 		<!-- == General == -->			
 			<!-- ===Ancestors=== -->
-				<li>r_logentry(p=0.5,tag=Insult_Ancestors)->[insult_ancestors]</li>
+				<li>r_logentry(tag=Insult_Ancestors)->[insult_ancestors]</li>
 				<li>insult_ancestors->Your ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your most beloved ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
 			<!-- ===Miscellaneous=== -->
-				<li>r_logentry(p=2,tag=Insult_generic)->[generic]</li>
+				<li>r_logentry(p=5,tag=Insult_generic)->[generic]</li>
 				<li>generic->You're [insult_adj][insult] — that's what you are, [RECIPIENT_nameDef]!</li>
 				<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
 				<li>generic->I hope a warg shreds you to pieces, [RECIPIENT_nameDef]!</li>
@@ -21,6 +21,8 @@
 				<li>generic->Hey, [RECIPIENT_nameDef] — can you just go die or something?!</li>
 				<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][insult]!</li>
 				<li>generic->[RECIPIENT_nameDef], I will be the first one at your funeral!</li>
+				<li>generic->Your face is like a fist magnet, [RECIPIENT_nameDef]!</li>
+				<li>generic->Your ass is like a foot magnet, [RECIPIENT_nameDef]!</li>
 				<li>generic(p=0.5,INITIATOR_mood&lt;=0.2)->[i_abrasive]</li>
 				<li>generic(INITIATOR_intellectual_level>=5)->I look forward to attending your funeral, [RECIPIENT_nameDef].</li>
 				<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>

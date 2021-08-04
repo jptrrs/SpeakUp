@@ -96,6 +96,57 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
+	<InteractionDef ParentName="SpeakUpReply"><!-- === BeatFireStatic === -->
+		<defName>BeatFireStatic</defName>
+		<label>beat fire — static</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion(priority=-1)->...</li>
+					<li>bad_opinion(INITIATOR_trait==pyromaniac)->*stares in awe*</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_jobDefName==BeatFire,INITIATOR_moving==No)->[beat_static]</li>
+							<li>beat_static->Ok! Ok!</li>
+							<li>beat_static->Right on it!</li>
+							<li>beat_static->I'm going as fast as I can!</li>
+							<li>beat_static->*coughs*</li>
+						<li>good_opinion(INITIATOR_jobDefName==BeatFire,INITIATOR_moving==Yes)->[beat_moving]</li>
+							<li>beat_moving->I'm coming!</li>
+						<li>good_opinion(INITIATOR_jobDefName!=BeatFire)->[no_beat]</li>
+							<li>no_beat(INITIATOR_opinion>=25)->I... I'm sorry, [RECIPIENT_nameDef]... I can't...</li>
+							<li>no_beat(INITIATOR_trait==pyromaniac)->*stares in awe*</li>
+							<li>no_beat->...</li>
+							<li>no_beat->*stares the fire*</li>
+							<li>no_beat->I... I can't...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	<InteractionDef ParentName="SpeakUpReply"><!-- === BeatFireMoving === -->
+		<defName>BeatFireMoving</defName>
+		<label>beat fire — moving</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion(priority=-1)->...</li>
+					<li>bad_opinion(INITIATOR_trait==pyromaniac)->*smiles*</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_jobDefName==BeatFire)->[beat_moving]</li>
+							<li>beat_moving->Let's go!</li>
+							<li>beat_moving->Let's go at once!</li>
+						<li>good_opinion(INITIATOR_jobDefName!=BeatFire)->[no_beat]</li>
+							<li>no_beat(INITIATOR_opinion>=25)->I... I'm sorry, [RECIPIENT_nameDef]... I can't...</li>
+							<li>no_beat(INITIATOR_trait==pyromaniac)->*smiles*</li>
+							<li>no_beat->...</li>
+							<li>no_beat->*stares*</li>
+							<li>no_beat->I... I can't...</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
 	<InteractionDef ParentName="SpeakUpReply"><!-- ===billiards — smart move=== -->
 		<defName>Billiards_smart</defName>
 		<label>billiards — smart move</label>
@@ -950,6 +1001,34 @@
 		</logRulesInitiator>
 	</InteractionDef>
 
+	<InteractionDef ParentName="SpeakUpReply"><!-- ===Drink beer=== -->
+		<defName>DrinkBeer</defName>
+		<label>drink beer</label>
+		<logRulesInitiator>
+			<rulesStrings>
+				<!-- ===Bad opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion&lt;0)->[bad_opinion]</li>
+					<li>bad_opinion(INITIATOR_opinion&lt;-25)->Choke on it, [RECIPIENT_nameDef]!</li>
+					<li>bad_opinion->...</li>
+				<!-- ===Good opinion of recipient=== -->
+					<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(INITIATOR_jobText==Drinking beer.)->Bottoms up!</li>
+						<li>good_opinion(INITIATOR_jobText==Drinking beer.)->Down the hatch!</li>
+						<li>good_opinion(INITIATOR_trait==teetotaler,priority=1)->[teetotaler]</li>
+							<li>teetotaler->Don't overdo it, [RECIPIENT_nameDef] — alcohol addiction is hard to overcome!</li>
+							<li>teetotaler->Always do sober what you said you'd do drunk — that'll teach you to keep your mouth shut.</li>
+							<li>teetotaler->I don't understand why you're drinking. It's just going to make you disoriented and give you a hangover...</li>
+							<li>teetotaler->Drinking brings bad luck. You should stop while you still can.</li>
+							<li>teetotaler->Don't corrupt your soul with that decadence... life is better without beer.</li>
+						<li>good_opinion(INITIATOR_medical_level>=5)->Don't drink too much, [RECIPIENT_nameDef] — you might get cirrhosis.</li>
+						<li>good_opinion(INITIATOR_social_level>=5)->Prosit!</li>
+						<li>good_opinion(INITIATOR_trait==ascetic)->You don't need that beer to be happy, you know?</li>
+						<li>good_opinion->Cheers!</li>
+						<li>good_opinion->Here's to you, [RECIPIENT_nameDef]!</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+	
 	<InteractionDef ParentName="SpeakUpReply"><!-- === stargazing === -->
 		<defName>Stargazing</defName>
 		<label>stargazing</label>
@@ -1374,8 +1453,24 @@
 				<rulesStrings>
 				<!-- ===Since the starting chitchat requires its Initiator to have positive opinion of Recipient, here we certainly have INITIATOR_opinion>=0=== -->
 				<!-- ===It's almost a identical copy of HowAreYou, but with no "bad opinion", [whataboutyou] and "followup" sections.=== -->
+					<li>r_logentry(INITIATOR_thoughtDefName==sick,RECIPIENT_thoughtDefName==sick,priority=3)->[both_sick]</li>
+						<li>both_sick(INITIATOR_mood>=0.7)->I'm not feeling well either, but no big deal.</li>
+						<li>both_sick(priority=-1)->I'm not feeling well either...</li>
+						<li>both_sick(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I'm sick too — and it's quite annoying.</li>
+						<li>both_sick(INITIATOR_mood&lt;0.3)->I'm sick too — and I can't stand it anymore!</li>
+
+					<li>r_logentry(INITIATOR_thoughtDefName==sick,priority=2)->[i_sick]</li>
+						<li>i_sick(INITIATOR_mood>=0.7)->I'm not feeling well, but no big deal.</li>
+						<li>i_sick(priority=-1)->I'm not feeling well...</li>
+						<li>i_sick(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->I'm sick — and it's quite annoying.</li>
+						<li>i_sick(INITIATOR_mood&lt;0.3)->I'm sick — and I can't stand it anymore!</li>
+						
+					<li>r_logentry(INITIATOR_mood>=0.7,RECIPIENT_mood>=0.7,priority=1)->Me too, thank you!</li>
 					<li>r_logentry(INITIATOR_mood>=0.7)->I'm feeling [great], thank you!</li>
+					
+					<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7,RECIPIENT_mood>=0.5,RECIPIENT_mood&lt;0.7,priority=1)->Me too, thanks.</li>
 					<li>r_logentry(INITIATOR_mood>=0.5,INITIATOR_mood&lt;0.7)->I'm [fine], thanks.</li>
+					
 					<li>r_logentry(INITIATOR_mood>=0.3,INITIATOR_mood&lt;0.5)->[not_so_well]</li>
 					<li>r_logentry(INITIATOR_mood&lt;0.3)->[furious]</li>
 					<!-- === WILDCARDS=== -->
@@ -1408,7 +1503,7 @@
 						<li>furious(INITIATOR_intellectual_level>=15)->I'm in high dudgeon!</li>
 						<li>furious(INITIATOR_trait==abrasive)->I'm feeling like shit, OK?!</li>
 						<li>furious(INITIATOR_trait==abrasive)->I just fucking hate my shitty life!</li>
-						<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or I might punch you in the face!</li>
+						<li>furious(INITIATOR_trait==bloodlust)->Stay away from me — or you might regret it!</li>
 						<li>furious(INITIATOR_trait==brawler)->I'm so pissed off! I need something to smash!</li>
 						<li>furious(INITIATOR_trait==pyromaniac)->If my anger could burn things around me, this whole area would turn to a desert wasteland.</li>
 						<li>furious(INITIATOR_trait==tortured artist)->Nobody will ever understand the rough maelstrom swirling inside my tortured soul!</li>
@@ -1547,6 +1642,14 @@
 		<logRulesInitiator>
 			<rulesStrings>
 				<li>r_logentry->At least I have human ancestors, you filthy spawn of worms!</li>
+				<li>r_logentry->My ancestors' souls are well beyond your wicked words!</li>
+				<li>r_logentry->May your ancestors' souls be damned thrice instead!</li>
+				<!-- ===kind=== -->
+				<li>r_logentry(INITIATOR_trait==kind,priority=1)->[kind]</li>
+					<li>kind(RECIPIENT_mood&lt;0.4)->I'm sorry you're so upset, [RECIPIENT_nameDef].</li>
+					<li>kind->If insulting me makes you feel better, I'm always here to help you.</li>
+					<li>kind->My ancestors certainly know you really didn't mean to say that, [RECIPIENT_nameDef] — they forgive you.</li>
+					<li>kind->May my ancestors' souls always smile upon you and your family, [RECIPIENT_nameDef].</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -1707,4 +1810,7 @@
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>
+		
+
+		
 </Defs>
