@@ -7,7 +7,7 @@ using Verse.Grammar;
 
 namespace SpeakUp
 {
-    //Exposes the rules for use downsrtream and warning for invalid keywords found.
+    //Exposes the rules for use downstream and warning for invalid keywords found.
     [HarmonyPatch(typeof(GrammarResolver), nameof(GrammarResolver.RandomPossiblyResolvableEntry))]
     public class GrammarResolver_RandomPossiblyResolvableEntry
     {

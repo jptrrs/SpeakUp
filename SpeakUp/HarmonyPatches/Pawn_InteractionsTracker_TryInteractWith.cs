@@ -5,13 +5,15 @@ using Verse;
 
 namespace SpeakUp
 {
-    //Compile to probe the used InteractionDef
+    using static DialogManager;
+    //Enables reply mechanism when a pawn starts an interaction
     [HarmonyPatch(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith))]
     public static class Pawn_InteractionsTracker_TryInteractWith
     {
         public static void Prefix(Pawn recipient, ref InteractionDef intDef)
         {
-            Log.Message($"interacting with {intDef.defName}");
+            talkBack = true;
+            if (Prefs.LogVerbose) Log.Message($"[SpeakUp] {recipient} is interacting with {intDef.defName}");
         }
     }
 }

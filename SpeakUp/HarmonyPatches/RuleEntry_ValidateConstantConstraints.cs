@@ -21,7 +21,6 @@ namespace SpeakUp
 			var currentRules = GrammarResolver_RandomPossiblyResolvableEntry.CurrentRules;
 			var constants = constraints; //see note above
 			var actualConstraints = __instance.rule.constantConstraints;
-			if (Current.ProgramState != ProgramState.Playing || actualConstraints.NullOrEmpty() || currentRules.NullOrEmpty()) return true;
 			__result = ValidateRulesConstraints(actualConstraints, currentRules, ref ___constantConstraintsChecked, ref ___constantConstraintsValid);
             if (validationFeedback)
             {
