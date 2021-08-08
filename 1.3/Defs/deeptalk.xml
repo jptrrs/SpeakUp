@@ -69,14 +69,14 @@
 						<li>r_logentry(INITIATOR_childhood==TestSubject15)->[test_subject]</li>
 						<li>r_logentry(INITIATOR_childhood==WreckageExplorer93)->[wreckage_explorer]</li>
 						<li>r_logentry(INITIATOR_childhood==ApocalypseSurvivor23)->[apocalypse_survivor]</li>
-						<li>r_logentry(INITIATOR_childhood==CaveworldTender20)->[caveworld_tender]</li>
+						<li>r_logentry(INITIATOR_childhood==CaveworldTender26)->[caveworld_tender]</li>
 						<li>r_logentry(INITIATOR_childhood==CaveworldTunneler48)->[caveworld_tunneler]</li>
 						<li>r_logentry(INITIATOR_childhood==Scout44)->[scout]</li>
 						<li>r_logentry(INITIATOR_childhood==ShelterChild50)->[shelter_child]</li>
 						<li>r_logentry(INITIATOR_childhood==VatgrownSoldier8)->[vatgrown_soldier]</li>
 						<li>r_logentry(INITIATOR_childhood==SicklyChild55)->[sickly_child]</li>
 						<li>r_logentry(INITIATOR_childhood==FrightenedChild43)->[frightened_child]</li>
-						<li>r_logentry(INITIATOR_childhood==ComaChild57)->[coma_child]</li>
+						<li>r_logentry(INITIATOR_childhood==ComaChild93)->[coma_child]</li>
 						<li>r_logentry(INITIATOR_childhood==Pyromaniac18)->[pyromaniac]</li>
 						<li>r_logentry(INITIATOR_childhood==Mute34)->[mute]</li>
 						<li>r_logentry(INITIATOR_childhood==WarRefugee51)->[war_refugee]</li>
@@ -107,6 +107,7 @@
 						<li>r_logentry(INITIATOR_childhood==ServingBoy97)->[servant]</li>
 						<li>r_logentry(INITIATOR_childhood==RoyalBastard3)->[royal_bastard]</li>
 						<li>r_logentry(INITIATOR_childhood==WarBastard60)->[war_bastard]</li>
+						<li>r_logentry(INITIATOR_childhood==FireKeeper44)->[fire_keeper]</li>
 
 					<!-- ===Default=== -->
 						<li>r_logentry(priority=-1)->I wouldn't like to speak about it...</li>
@@ -196,7 +197,7 @@
 						<li>urbworld_urchin->My childhood planet was neglected and avoided by others, used solely for profit and exploitation of our people. There wasn't a single thing I never had to fight for.</li>
 
 					<!-- ===Test Subject=== -->
-						<li>test_subject->I was the test subject of a scientest on an Urbworld, the experiments were torturous, cruel, and unspeakable.</li>
+						<li>test_subject->I was the test subject of a scientist on an Urbworld, the experiments were torturous, cruel, and unspeakable.</li>
 						<li>test_subject->My entire youth was spent participating in experiments by a dreaded Urbworld scientist.</li>
 						<li>test_subject->[RECIPIENT_nameDef], you do not want to know the horrors I faced as a child. Not even the scientist who experimented on me spoke of them after.</li>
 						<li>test_subject->Torture. There is no other word for what I grew up in [RECIPIENT_nameDef]. You would not understand.</li>
