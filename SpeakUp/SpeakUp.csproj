@@ -58,7 +58,7 @@
     <Compile Include="ExtraGrammarUtility.cs" />
     <Compile Include="DialogManager.cs" />
     <None Include="HarmonyPatcher.cs" />
-    <None Include="HarmonyPatches\Pawn_InteractionsTracker_TryInteractWith.cs" />
+    <Compile Include="HarmonyPatches\Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Pawn_InteractionsTracker_InteractionsTrackerTick.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_Resolve.cs" />
     <Compile Include="HarmonyPatches\GrammarResolver_RandomPossiblyResolvableEntry.cs" />
@@ -69,10 +69,10 @@
     <Compile Include="HarmonyPatches\TickManager_DoSingleTick.cs" />
     <Compile Include="ModBaseSpeakUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
     <None Include="Settings.cs" />
     <Compile Include="Talk.cs" />
     <Compile Include="Statement.cs" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -82,8 +82,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.1.1\lib\net472\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp_publicized">

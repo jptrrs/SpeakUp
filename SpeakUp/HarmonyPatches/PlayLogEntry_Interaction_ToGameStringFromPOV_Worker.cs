@@ -6,7 +6,7 @@ using Verse;
 namespace SpeakUp
 {
     using static DialogManager;
-    //Isolate pawn variables for future use
+    //Isolate pawn variables for future use and then reset
     [HarmonyPatch(typeof(PlayLogEntry_Interaction), nameof(PlayLogEntry_Interaction.ToGameStringFromPOV_Worker))]
     public static class PlayLogEntry_Interaction_ToGameStringFromPOV_Worker
     {
@@ -23,6 +23,7 @@ namespace SpeakUp
         {
             Initiator = (Recipient = null);
             RuleEntry_ValidateConstantConstraints.validationFeedback = false;
+            talkBack = false;
         }
     }
 }
