@@ -6,36 +6,39 @@
 		<label>react — meaning of life</label>
 		<logRulesInitiator>
 			<rulesStrings>
-			<li>r_logentry(p=0.1)->42.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==pessimist)->Everything we do is meaningless. So, why care answering that?</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==depressive)->Nothing we do will be remembered, eventually. So, why care answering that?</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==optimist)->Life is what you make of it — so make it good, today!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==teetotaler)->I don't know its meaning — but I know it should be free of drugs.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==chemical interest)->A nice beer and cigarette!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==chemical fascination)->A line of yayo and some psychite tea!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==industrious)->Working hard to achieve all our goals!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==slothful)->I don't know its meaning — but I know it should be on a comfy couch.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==bloodlust)->Meaning?! I live for the kill — that's meaning enough!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==psychopath)->*Cackles maniacally*</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==psychopath)->*Stares in silence*</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==abrasive)->Wouldn't you like to know!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==brawler)->I don't know its meaning — but a good fistfight gives meaning to my life!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==masochist)->I don't know its meaning — but a little bit of pain always makes my life worth living.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==transhumanist)->We must surpass our biological bodies and become the ultimate being!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==body purist)->Life is about making sure we maximize our natual capabilities.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==greedy)->Money, power, sex — these are what give meaning to our lives!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==ascetic)->We live to revere the Cosmos — and the Cosmos lives to give meaning to our existence.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==ascetic)->Freedom from suffering and having clear judgement — this is our ultimate goal.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==gourmand)->I don't know its meaning — but I know food and drink are the purest forms of joy!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==pyromaniac)->Life is about hungrily exploiting all that's around us, like a spreading wild fire!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==tortured artist)->Does any of us really have a meaning to life?</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait==kind)->Making other people's life happy and fulfilled — so that they can make us happy too.</li>
+			<li>r_logentry(INITIATOR_intellectual_level>=10)->42.</li>
+			<li>r_logentry(INITIATOR_trait==pessimist)->Everything we do is meaningless. So, why care answering that?</li>
+			<li>r_logentry(INITIATOR_trait==depressive)->Nothing we do will be remembered, eventually. So, why care answering that?</li>
+			<li>r_logentry(INITIATOR_trait==optimist)->Life is what you make of it — so make it good, today!</li>
+			<li>r_logentry(INITIATOR_trait==teetotaler)->I don't know its meaning — but I know it should be free of drugs.</li>
+			<li>r_logentry(INITIATOR_trait==chemical interest)->A nice beer and smokeleaf!</li>
+			<li>r_logentry(INITIATOR_trait==chemical fascination)->A line of yayo and some psychite tea!</li>
+			<li>r_logentry(INITIATOR_trait==industrious)->Working hard to achieve all our goals!</li>
+			<li>r_logentry(INITIATOR_trait==slothful)->I don't know its meaning — but I know it should be on a comfy couch.</li>
+			<li>r_logentry(INITIATOR_trait==bloodlust)->Meaning?! I live for the kill — that's meaning enough!</li>
+			<li>r_logentry(INITIATOR_trait==psychopath)->*Cackles maniacally*</li>
+			<li>r_logentry(INITIATOR_trait==psychopath)->*Stares in silence*</li>
+			<li>r_logentry(INITIATOR_trait==abrasive)->Wouldn't you like to know!</li>
+			<li>r_logentry(INITIATOR_trait==brawler)->I don't know its meaning — but a good fistfight gives meaning to my life!</li>
+			<li>r_logentry(INITIATOR_trait==masochist)->I don't know its meaning — but a little bit of pain always makes my life worth living.</li>
+			<li>r_logentry(INITIATOR_trait==body modder)->We must surpass our biological bodies and become the ultimate being!</li>
+			<li>r_logentry(INITIATOR_trait==body purist)->Life is about making sure we maximize our natural capabilities.</li>
+			<li>r_logentry(INITIATOR_trait==greedy)->Money, power, sex — these are what give meaning to our lives!</li>
+			<li>r_logentry(INITIATOR_trait==ascetic)->We live to revere the Cosmos — and the Cosmos lives to give meaning to our existence.</li>
+			<li>r_logentry(INITIATOR_trait==ascetic)->Freedom from suffering and having clear judgement — this is our ultimate goal.</li>
+			<li>r_logentry(INITIATOR_trait==gourmand)->I don't know its meaning — but I know food and drink are the purest forms of joy!</li>
+			<li>r_logentry(INITIATOR_trait==pyromaniac)->Life is about hungrily exploiting all that's around us, like a spreading wild fire!</li>
+			<li>r_logentry(INITIATOR_trait==tortured artist)->Does any of us really have a meaning to life?</li>
+			<li>r_logentry(INITIATOR_trait==kind)->Making other people's life happy and fulfilled — so that they can make us happy too.</li>
 			<li>r_logentry(DAYPERIOD==night)->Isn't it a bit too late for a question like that?!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Art and the true expression of oneself give full meaning to our lives.</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->I don't know its meaning — but I know a long conversation and a good drink make it much better!</li>
-			<li>r_logentry(p=0.8,INITIATOR_trait>=10)->Creating lasting works to improve our surroundings and inspire future generations.</li>
-			<li>r_logentry->Why ask me? I have no idea.</li>
-			<li>r_logentry->I haven't the slightest idea.</li>
+			<li>r_logentry(INITIATOR_artistic_passion!=None)->Art and the true expression of oneself give full meaning to our lives.</li>
+			<li>r_logentry(INITIATOR_social_passion!=None)->I don't know its meaning — but I know a long conversation and a good soft drink make it much better!</li>
+			<li>r_logentry(INITIATOR_construction_passion!=None)->Creating lasting works to improve our surroundings and inspire future generations.</li>
+			<li>r_logentry(priority=-1)->Why ask me? I have no idea.</li>
+			<li>r_logentry(priority=-1)->I haven't the slightest idea.</li>
+			
+			<li>r_logentry(INITIATOR_opinion&lt;0)->Figure it out yourself, [RECIPIENT_nameDef]!</li>
+			<li>r_logentry(INITIATOR_opinion&lt;0)->Why do you wonder that, if your life is obviously a meaningless sequence of failed efforts?</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -127,7 +130,7 @@
 						<li>reclusive_child->I wasn't a very social child, [RECIPIENT_nameDef]. I preferred to keep to myself.</li>
 
 					<!-- ===Herder=== -->
-						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals, quiet but honest work.</li>
+						<li>herder->I spent most of my childhood tending to the Muffalo and the sick animals — quiet but honest work.</li>
 						<li>herder->I protected the Muffalo from both predators and nature itself, I had no time for childish games.</li>
 						<li>herder->The Tribe relied on me to keep the Muffalo safe from both sickness and predation.</li>
 						<li>herder->I disliked being around other people, [RECIPIENT_nameDef] — but the Muffalo made great company.</li>
@@ -144,8 +147,8 @@
 
 					<!-- ===Sole Survivor=== -->
 						<li>sole_survivor->After my original Tribe was wiped out, I was adopted by a new Tribe where I mostly farmed and cooked.</li>
-						<li>sole_survivor->I was nearly killed [RECIPIENT_nameDef], and ever since then I spent most of my time tending the crops and helping cook.</li>
-						<li>sole_survivor->I survived a horrific raid on my Tribe, being an only survivor was tough until I found a new Tribe.</li>
+						<li>sole_survivor->I was nearly killed, [RECIPIENT_nameDef] — and ever since then I spent most of my time tending the crops and helping cooking.</li>
+						<li>sole_survivor->I was the sole survived of a horrific raid on my Tribe — it was tough, until I found a new Tribe...</li>
 
 					<!-- ===Vengeful Child=== -->
 						<li>vengeful_child->I swear I will eliminate every last one of those bandits that killed my village.</li>
@@ -163,7 +166,7 @@
 						<li>hideaway->As a child I mostly stayed at home, sheltered from the dangerous world we live in.</li>
 
 					<!-- ===Crash Baby=== -->
-						<li>crash_baby->I crash landed from the stars as a baby. I was extremely lucky to have been found by my Tribe shortly after!.</li>
+						<li>crash_baby->I crash landed from the stars as a baby. I was extremely lucky to have been found by my Tribe shortly after!</li>
 						<li>crash_baby->I was the only survivor of a horrific spacecraft crash as a baby, and luckily a local Tribe took me in.</li>
 						<li>crash_baby->I was adopted by a Tribe as a baby, [RECIPIENT_nameDef]. Surviving the crash of the ship was pure luck.</li>
 
@@ -173,7 +176,7 @@
 						<li>budding_artist->I spent most of my time creating art and talking to socialites about my art.</li>
 
 					<!-- ===Bully=== -->
-						<li>bully->I was forced to join a hunting party as a kid, I think this was because of how I acted around other children.</li>
+						<li>bully->I was forced to join a hunting party as a kid... I think this was because of how I acted around other children.</li>
 						<li>bully->I don't know why [RECIPIENT_nameDef], but for some reason the elders put me on a hunting party at a young age.</li>
 						<li>bully->I spent a majority of my time hunting animals, and when I wasn't hunting animals I was roughing up other kids. *chuckles*</li>
 
@@ -241,7 +244,7 @@
 							
 					<!-- ===Sickly Child=== -->
 						<li>sickly_child->I was born with a rare disease that left me hospital ridden. I didn't have a big social life but I did learn a lot about science and medicine!</li>
-						<li>sickly_child->I had little contact with others throughout my childhood, which led me to be a bit of a recluse [RECIPIENT_nameDef].</li>
+						<li>sickly_child->I had little contact with others throughout my childhood, [RECIPIENT_nameDef]. This led me to be a bit of a recluse...</li>
 						<li>sickly_child->As a child I suffered from a rare disease, leaving me bed-ridden and unable to exercise.</li>
 
 					<!-- ===Frightened Child=== -->
@@ -284,12 +287,12 @@
 					<!-- ===Child Spy=== -->
 						<li>child_spy->I was taught at a very young age the art of espionage. I was then put undercover for many years of my childhood.</li>
 						<li>child_spy->I was a spy, trained in the arts of lying and infiltration, so I really didn't get to have much of a childhood.</li>
-						<li>child_spy->I spent all my time infiltrating and spying for my superiors [RECIPIENT_nameDef]. Do you need me to get some information?</li>
+						<li>child_spy->I spent all my time infiltrating and spying for my superiors, [RECIPIENT_nameDef]. If you need to discreetly obtain information, let me know.</li>
 
 					<!-- ===Shop Kid=== -->
 						<li>shop_kid->I mostly ran the shop for my mom when she would get sick, we sold some interesting artifacts, but I learned far more about trade than the items themselves.</li>
 						<li>shop_kid->My mother was almost always sick, so even as a kid the responsibility of running the family store fell on me.</li>
-						<li>shop_kid->[RECIPIENT_nameDef], I ran my mothers shop most of the time, which let me learn a great deal about a wide variety of exotic artifacts.</li>
+						<li>shop_kid->[RECIPIENT_nameDef], I ran my mother's shop most of the time, which let me learn a great deal about a wide variety of exotic artifacts.</li>
 
 					<!-- ===Organ Farm=== -->
 						<li>organ_farm->I was raised in an organ farm where my body was used to grow implants for wounded mercenaries, and although it is quite gruesome I learned a lot about medicine during it all.</li>
@@ -307,7 +310,7 @@
 						<li>cult_child->I was always told that any illness was solvable through soul-cleansing rituals.</li>
 
 					<!-- ===Story Writer=== -->
-						<li>story_writer->I used to spend all my time at the local library until it closed down. Once that happened I began writing my own books [RECIPIENT_nameDef].</li>
+						<li>story_writer->I used to spend all my time at the local library until it closed down. Once that happened, I began writing my own books.</li>
 						<li>story_writer->Books have always been my addiction, so one day I decided to start making my own!</li>
 						<li>story_writer->I have always loved books, and when I couldn't find more to read I started to create my own.</li>
 
@@ -419,6 +422,21 @@
 							<li>war_bastard_comment2(INITIATOR_trait==bloodlust,priority=1)->She was wrong — about war.</li>
 							<li>war_bastard_comment2->She was totally right.</li>
 
+				</rulesStrings>
+			</logRulesInitiator>
+		</InteractionDef>
+	
+	<!-- ===Dreams=== -->
+		<InteractionDef ParentName="SpeakUpReply">
+			<defName>WhatDream</defName>
+			<label>what dream</label>
+			<logRulesInitiator>
+				<rulesStrings>
+					<!-- ===Bad opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
+					<!-- ===Good opinion of recipient=== -->
+						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<li>good_opinion(tag=Dream_nice)->Oh... And what was this dream about, [RECIPIENT_nameDef]?</li>
 				</rulesStrings>
 			</logRulesInitiator>
 		</InteractionDef>

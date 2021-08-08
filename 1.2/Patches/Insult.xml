@@ -7,23 +7,29 @@
 			<rulesStrings>
 		<!-- == General == -->			
 			<!-- ===Ancestors=== -->
-				<li>r_logentry(p=0.5,tag=Insult_Ancestors)->[insult_ancestors]</li>
+				<li>r_logentry(tag=Insult_Ancestors)->[insult_ancestors]</li>
 				<li>insult_ancestors->Your ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your most beloved ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your eldest ancestors' souls be damned!</li>
 				<li>insult_ancestors->Your [bloody] ancestors' souls be damned!</li>
 			<!-- ===Miscellaneous=== -->
-				<li>r_logentry(p=2,tag=Insult_generic)->[generic]</li>
+				<li>r_logentry(p=5,tag=Insult_generic)->[generic]</li>
 				<li>generic->You're [insult_adj][insult] — that's what you are, [RECIPIENT_nameDef]!</li>
 				<li>generic->I hope Death finds you earlier than expected, [RECIPIENT_nameDef]!</li>
+				<li>generic->I hope a warg shreds you to pieces, [RECIPIENT_nameDef]!</li>
+				<li>generic->I hope a warg feasts on your dead body, [RECIPIENT_nameDef]!</li>
 				<li>generic->Hey, [RECIPIENT_nameDef] — can you just go die or something?!</li>
 				<li>generic->Hey, [RECIPIENT_nameDef]! Check the news — you're [insult_adj][insult]!</li>
 				<li>generic->[RECIPIENT_nameDef], I will be the first one at your funeral!</li>
+				<li>generic->Your face is like a fist magnet, [RECIPIENT_nameDef]!</li>
+				<li>generic->Your ass is like a foot magnet, [RECIPIENT_nameDef]!</li>
+				<li>generic(p=0.5,INITIATOR_mood&lt;=0.2)->[i_abrasive]</li>
 				<li>generic(INITIATOR_intellectual_level>=5)->I look forward to attending your funeral, [RECIPIENT_nameDef].</li>
 				<li>generic(INITIATOR_intellectual_level>=5)->The woman who breastfed you be damned, [RECIPIENT_nameDef]!</li>
 				<li>r_logentry(p=2,tag=Insult_generic)->[generic_short]</li>
-				<li>generic_short->you [bloody] [insult]!</li>
-				<li>generic_short(RECIPIENT_gender==Male)->you [bloody] son of a [bitch]!</li>
+					<li>generic_short->you [bloody] [insult]!</li>
+					<li>generic_short(RECIPIENT_gender==Male)->you [bloody] son of a [bitch]!</li>
+
 		<!-- ===Recipient's trait/parameter=== -->
 			<!-- ===Sickly===  -->
 				<li>r_logentry(RECIPIENT_trait==sickly,tag=Insult_generic)->[trait_sickly]</li>		
@@ -48,9 +54,11 @@
 				<li>r_logentry(RECIPIENT_jobText==vomiting.,priority=4,tag=Insult_generic)->I hope you choke on your vomit, [generic_short]</li>
 		<!-- ===Initiator's trait=== -->
 			<!-- ===Abrasive=== -->
-				<li>r_logentry(INITIATOR_trait==abrasive,tag=Insult_generic)->You took so many cocks in your life that if you put a fence around your [intimate_hole] you'll get a neat chicken coop!</li>
-				<li>intimate_hole(RECIPIENT_gender==Female,priority=1)->pussy</li>
-				<li>intimate_hole->asshole</li>
+				<li>r_logentry(INITIATOR_trait==abrasive,tag=Insult_generic)->[i_abrasive]</li>
+				<li>i_abrasive->Fuck off, [RECIPIENT_nameDef]!</li>
+				<li>i_abrasive->You took so many cocks in your life that if you put a fence around your [intimate_hole] you'll get a neat chicken coop!</li>
+					<li>intimate_hole(RECIPIENT_gender==Female,priority=1)->pussy</li>
+					<li>intimate_hole->asshole</li>
 			<!-- ===Bloodlust=== -->
 				<li>r_logentry(INITIATOR_trait==bloodlust,tag=Insult_generic)->[bloodlust]</li>
 				<li>bloodlust->I wish I could kill you twice!</li>

@@ -7,6 +7,10 @@
 			<label>weather — stuck indoors</label>
 			<logRulesInitiator>
 				<rulesStrings>
+					<!-- ===undergrounder (priority 2)=== -->
+					<li>r_logentry(INITIATOR_opinion>=0,INITIATOR_trait==undergrounder,priority=2)->[i_undergrounder]</li>
+						<li>i_undergrounder(RECIPIENT_trait==undergrounder,priority=1)->I totally agree with you, [RECIPIENT_nameDef]!</li>
+						<li>i_undergrounder->I don't really care about what's the weather like out there, [RECIPIENT_nameDef]...</li>
 					<li>r_logentry(INITIATOR_opinion>=0,INITIATOR_thoughtDefName==NeedOutdoors,priority=1)->Me too, [RECIPIENT_nameDef].</li>
 					<li>r_logentry(INITIATOR_opinion>=0)->I can tell you — we're having a [weather].</li>
 					
@@ -38,6 +42,9 @@
 						<li>r_logentry(INITIATOR_opinion&lt;0)->...</li>
 					<!-- ===Good opinion=== -->
 						<li>r_logentry(INITIATOR_opinion>=0)->[good_opinion]</li>
+						<!-- ===undergrounder indoors (priority 2)=== -->
+							<li>good_opinion(INITIATOR_trait==undergrounder,OUTDOORS==No,priority=2)->[i_undergrounder]</li>
+								<li>i_undergrounder->I don't really care about what's the weather like out there, [RECIPIENT_nameDef]...</li>
 						<!-- ===Entombed (priority 1)=== -->
 							<li>good_opinion(INITIATOR_thoughtDefName==NeedOutdoors,priority=1)->I wish I had a chance to go outside and see it for myself!</li>
 						<!-- ===Not entombed (default)=== -->
@@ -414,6 +421,8 @@
 							<li>optimist_pessimist(INITIATOR_trait==sanguine)-> — I obviously prefer making snow angels!</li>
 							<li>optimist_pessimist(INITIATOR_trait==pessimist)-> — in fact, we always end up shoveling...</li>
 							<li>optimist_pessimist(INITIATOR_trait==depressive)-> — in fact, we're all doomed to the shovel...</li>
+							<li>optimist_pessimist(INITIATOR_mood&lt;0.4)-> — today I feel more like shoveling...</li>
+							<li>optimist_pessimist(INITIATOR_mood>=0.4)-> — today I feel more like making snow angels!</li>
 						<li>good_opinion(INITIATOR_trait==night owl)->Snow falling soundlessly in the middle of the night will always fill my heart with sweet clarity.</li>
 						<li>good_opinion(INITIATOR_social_passion!=None)->Snowflakes are one of nature's most fragile things, but just look what they can do when they stick together!</li>
 					<!-- mood (default) === -->				
