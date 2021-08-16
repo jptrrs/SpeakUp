@@ -88,8 +88,112 @@ namespace SpeakUp
             }
             MakeRule(symbol + "thoughtText", texts.RandomElement());
 
-            //opinion
-            if (other != null) MakeRule(symbol + "opinion", pawn.relations.OpinionOf(other).ToString());
+            if (other != null)
+            {
+                //opinion
+                MakeRule(symbol + "opinion", pawn.relations.OpinionOf(other).ToString());
+
+                //relationships
+                List<DirectPawnRelation> relations = pawn.relations.DirectRelations;
+                String relationType = "None";
+
+                foreach (DirectPawnRelation relate in relations)
+                {
+                    if (relate.otherPawn.ThingID.Equals(other.ThingID))
+                    {
+                        relationType = relate.def.defName;
+                        break;
+                    }
+                }
+
+                switch (relationType)
+                {
+                    case "None":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Bond":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Sibling":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Spouse":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Lover":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Fiance":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "HalfSibling":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Parent":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Child":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Grandparent":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Grandchild":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Stepparent":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Stepchild":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "ParentInLaw":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "ChildInLaw":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "ExSpouse":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "ExLover":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "NephewOrNiece":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "UncleOrAunt":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Cousin":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "GreatGrandparent":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "GreatGrandchild":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "GranduncleOrGrandaunt":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "GrandnephewOrGrandniece":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "CousinOnceRemoved":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "SecondCousin":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    case "Kin":
+                        MakeRule(symbol + "relationship", relationType);
+                        break;
+                    default:
+                        MakeRule(symbol + "relationship", "None");
+                        break;
+                }
+            }
 
             //THE PAWN'S BIO:
 
@@ -120,9 +224,6 @@ namespace SpeakUp
 
             //adulthood
             MakeRule(symbol + "adulthood", pawn.story.adulthood?.identifier);
-
-            //OTHER PAWN SITUATIONS
-            MakeRule(symbol + "moving", pawn.pather.Moving.ToStringYesNo());
 
             //moving?
             MakeRule(symbol + "moving", pawn.pather.Moving.ToStringYesNo());
@@ -187,7 +288,7 @@ namespace SpeakUp
         {
             if (output.NullOrEmpty())
             {
-                if (Prefs.DevMode) Log.Message($"[SpeakUp] Couldn't process {keyword}. Moving on.");
+                if (Prefs.DevMode && ModBaseSpeakUp.ShowGrammarDebug) Log.Message($"[SpeakUp] Couldn't process {keyword}. Moving on.");
                 return;
             }
             tempRules.Add(new Rule_String(keyword, output));

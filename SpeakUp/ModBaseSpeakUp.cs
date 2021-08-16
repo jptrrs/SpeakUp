@@ -1,9 +1,5 @@
 ﻿using HugsLib;
 using HugsLib.Settings;
-using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace SpeakUp
 {
@@ -14,7 +10,8 @@ namespace SpeakUp
             IntervalBetweenLines;
 
         public static SettingHandle<bool>
-            SameRegionRestriction;
+            SameRegionRestriction,
+            ShowGrammarDebug;
 
         public ModBaseSpeakUp()
         {
@@ -28,7 +25,6 @@ namespace SpeakUp
                 return "SpeakUp";
             }
         }
-
         public override void DefsLoaded()
         {
             UpdateSettings();
@@ -43,19 +39,19 @@ namespace SpeakUp
                     String backstory;
                     if (story.Value.slot == BackstorySlot.Childhood)
                     {
-                        backstory = "Childhood: ";
+                        backstory = "|Childhood|";
                     }
                     else
                     {
-                        backstory = "Adulthood: ";
+                        backstory = "|Adulthood|";
                     }
 
-                    backstory += story.Value.identifier + " = ";
+                    backstory += story.Value.identifier + "|";
                     backstory += story.Value.baseDesc;
-                    outputFile.WriteLine(backstory);
-                    outputFile.WriteLine();
+                    outputFile.WriteLine(Regex.Replace(backstory, @"^\s*$\n|\r", String.Empty, RegexOptions.Multiline).Replace("\n", " "));
                 }
-            }*/
+            }
+            */
         }
 
         public void UpdateSettings()
@@ -63,6 +59,7 @@ namespace SpeakUp
             LinesPerConversation = Settings.GetHandle<int>("LinesPerConversation", "LinesPerConversation", null, 3);
             IntervalBetweenLines = Settings.GetHandle<int>("TickBetweenLines", "TicksBetweenLines (60 = 1 sec)", null, 60);
             SameRegionRestriction = Settings.GetHandle<bool>("SameRegionRestriction", "SameRegionRestriction", null, true);
+            ShowGrammarDebug = Settings.GetHandle<bool>("ShowGrammarDebug", "ShowGrammardebug", null, false);
         }
     }
 }
